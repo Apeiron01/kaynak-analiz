@@ -11,4 +11,4 @@ if (menuToggle && navLinks) {
       navLinks.classList.remove("active");
     });
   });
-}
+}s
