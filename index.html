@@ -3,126 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kaynak Analiz | Dijital Güvenlik ve Dolandırıcılık Kontrolü</title>
-  <meta name="description" content="Kaynak Analiz; link kontrolü, güvenlik checkup, parola araçları ve dijital dolandırıcılık risk analizi sunar." />
+  <title>Kaynak Analiz | Dijital Güvenlik Araçları ve Risk Ön İnceleme</title>
+  <meta name="description" content="Kaynak Analiz; ücretsiz güvenlik checkup, link kontrolü, parola araçları ve mail ile manuel dijital risk ön inceleme hizmetleri sunar." />
+  <meta name="theme-color" content="#0b1525" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">Kaynak Analiz</a>
+      <a class="brand" href="index.html" aria-label="Ana sayfa">
+        <span class="brand-badge">KA</span>
+        <span>Kaynak Analiz</span>
+      </a>
+
       <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
         <span></span><span></span><span></span>
       </button>
+
       <nav class="nav-links" id="navLinks">
         <a href="index.html">Ana Sayfa</a>
         <a href="araclar.html">Ücretsiz Araçlar</a>
         <a href="iletisim.html">İletişim</a>
+        <a href="iletisim.html" class="nav-btn">Talep Gönder</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero section">
       <div class="container hero-grid">
-        <div>
+        <div class="fade-up">
           <p class="eyebrow">Türkiye odaklı dijital güvenlik platformu</p>
-          <h1>Dijital riskleri anlaşılır hale getiren ücretsiz araçlar ve analiz hizmetleri</h1>
+          <h1>Dijital riskleri sadeleştiren güvenlik araçları</h1>
           <p class="hero-text">
-            Kaynak Analiz; şüpheli link, mesaj, parola ve temel güvenlik risklerini anlamanıza yardımcı olan ücretsiz araçlar sunar.
-            Daha kapsamlı incelemeler için manuel analiz hizmeti de sağlar.
+            Kaynak Analiz; son kullanıcılar, aileler ve küçük işletmeler için ücretsiz güvenlik araçları sunar.
+            Daha kapsamlı durumlarda ise mail üzerinden manuel dijital risk ön inceleme süreci yürütür.
           </p>
+
           <div class="hero-actions">
             <a class="btn btn-primary" href="araclar.html">Ücretsiz Araçları Aç</a>
-            <a class="btn btn-secondary" href="iletisim.html">Analiz Talebi Gönder</a>
+            <a class="btn btn-secondary" href="iletisim.html">Mail ile Talep Gönder</a>
           </div>
-          <div class="hero-badges">
-            <span>Açık kaynak odaklı</span>
-            <span>Basit ve anlaşılır</span>
-            <span>İlk sürümde backend gerektirmez</span>
+
+          <div class="trust-pills">
+            <span>0 maliyetli altyapı</span>
+            <span>Tarayıcı içinde çalışan araçlar</span>
+            <span>Anlaşılır ve sade arayüz</span>
           </div>
         </div>
 
-        <div class="panel">
-          <h3>Öne çıkan araçlar</h3>
-          <div class="mini-list">
-            <div class="mini-item">
-              <strong>Güvenlik Checkup</strong>
-              <p>Kısa soru-cevap ile kişisel güvenlik skoru çıkarır.</p>
-            </div>
-            <div class="mini-item">
-              <strong>Link Kontrolü</strong>
-              <p>URL yapısı, HTTPS, şüpheli karakter ve kısa link sinyallerini kontrol eder.</p>
-            </div>
-            <div class="mini-item">
-              <strong>Parola Araçları</strong>
-              <p>Parola gücü ölçer ve güçlü parola üretir.</p>
-            </div>
+        <div class="hero-panel fade-up delay-1">
+          <div class="panel-head">
+            <span class="status-dot"></span>
+            <span>Hemen kullanılabilir araçlar</span>
           </div>
+
+          <div class="panel-list">
+            <article class="panel-card">
+              <h3>Güvenlik Checkup</h3>
+              <p>Kısa soru-cevap ile temel güvenlik farkındalığı skoru üretir.</p>
+            </article>
+
+            <article class="panel-card">
+              <h3>Link Kontrolü</h3>
+              <p>URL yapısı, HTTPS, kısa link ve temel risk sinyallerini değerlendirir.</p>
+            </article>
+
+            <article class="panel-card">
+              <h3>Parola Araçları</h3>
+              <p>Parola gücü ölçümü ve güçlü parola üretimi sunar.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft-section">
+      <div class="container">
+        <div class="section-head fade-up">
+          <p class="section-kicker">Yapı</p>
+          <h2>İki katmanlı sade model</h2>
+          <p>
+            Bu site ücretsiz araçlarla ilk temas kurar, daha ileri durumlarda ise manuel inceleme talebine yönlendirir.
+            Böylece hem SEO açısından güçlü görünürlük sağlanır hem de güvenilir bir hizmet akışı korunur.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature-card fade-up">
+            <h3>Ücretsiz araç katmanı</h3>
+            <p>
+              Kullanıcılar güvenlik checkup, link kontrolü ve parola araçlarını anında kullanabilir.
+            </p>
+          </article>
+
+          <article class="feature-card fade-up delay-1">
+            <h3>Güven oluşturan deneyim</h3>
+            <p>
+              Karmaşık güvenlik konularını sadeleştirir ve gereksiz jargon kullanmadan yol gösterir.
+            </p>
+          </article>
+
+          <article class="feature-card fade-up delay-2">
+            <h3>Manuel inceleme akışı</h3>
+            <p>
+              Daha ciddi veya gri alan durumlarda kullanıcı mail üzerinden kontrollü şekilde talep iletir.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <div class="section-head">
-          <p class="section-kicker">Neden bu yapı?</p>
-          <h2>Ücretsiz araçlar trafik getirir, analiz hizmeti güven oluşturur</h2>
-          <p>
-            Bu site iki katmanlı çalışır: ilk katmanda herkesin kullanabileceği ücretsiz araçlar,
-            ikinci katmanda ise manuel ve kapsamlı inceleme talepleri bulunur.
-          </p>
+        <div class="section-head fade-up">
+          <p class="section-kicker">Kimler için</p>
+          <h2>Hedef kullanıcı profili</h2>
         </div>
 
-        <div class="card-grid three">
-          <article class="card">
-            <h3>SEO için güçlü yapı</h3>
-            <p>
-              Her araç ayrı sayfa olduğu için Google’da “link kontrolü”, “parola gücü ölçme”,
-              “güvenlik testi” gibi aramalarda görünme ihtimali artar.
-            </p>
+        <div class="grid-4">
+          <article class="mini-feature fade-up">
+            <h3>Bireyler</h3>
+            <p>Şüpheli link, parola veya genel güvenlik durumunu anlamak isteyen kullanıcılar.</p>
           </article>
-          <article class="card">
-            <h3>Güven inşa eder</h3>
-            <p>
-              İnsanlar önce ücretsiz aracı dener, sonra daha ciddi durumlarda manuel analiz talep eder.
-            </p>
+
+          <article class="mini-feature fade-up delay-1">
+            <h3>Aileler</h3>
+            <p>Özellikle yaşlı yakınlarını dijital dolandırıcılıklardan korumak isteyenler.</p>
           </article>
-          <article class="card">
-            <h3>Düşük maliyetli yayına alınır</h3>
-            <p>
-              GitHub Pages üzerinde tamamen statik olarak çalışır. İlk sürüm için sunucu maliyeti gerekmez.
-            </p>
+
+          <article class="mini-feature fade-up delay-2">
+            <h3>Küçük işletmeler</h3>
+            <p>Temel dijital risk görünürlüğü ve ön kontrol isteyen işletmeler.</p>
+          </article>
+
+          <article class="mini-feature fade-up delay-3">
+            <h3>Markalar</h3>
+            <p>İlk temas ve ön değerlendirme isteyen ekipler için sade giriş noktası.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section soft-bg">
+    <section class="section soft-section">
       <div class="container">
-        <div class="section-head">
-          <p class="section-kicker">Yasal sınır</p>
+        <div class="section-head fade-up">
+          <p class="section-kicker">Yasal çerçeve</p>
           <h2>Ne yapıyoruz, ne yapmıyoruz</h2>
         </div>
 
-        <div class="card-grid two">
-          <article class="card good-card">
+        <div class="grid-2">
+          <article class="policy-card success fade-up">
             <h3>Yaptığımız</h3>
             <ul>
-              <li>Link, parola ve temel güvenlik kontrolü</li>
-              <li>Açık kaynak tabanlı dijital risk değerlendirmesi</li>
-              <li>Şüpheli mesaj ve dijital yapıların yorumlanması</li>
-              <li>Şirket ve bireyler için anlaşılır ön analiz</li>
+              <li>Tarayıcı içinde çalışan güvenlik araçları sunmak</li>
+              <li>Temel link ve parola risklerini görünür kılmak</li>
+              <li>Mail ile manuel ön inceleme talebi almak</li>
+              <li>Açık kaynak mantığıyla sade risk yorumları yapmak</li>
             </ul>
           </article>
 
-          <article class="card warn-card">
+          <article class="policy-card warning fade-up delay-1">
             <h3>Yapmadığımız</h3>
             <ul>
-              <li>Özel bilgi bulma</li>
               <li>Hack, sızma veya hesap ele geçirme</li>
+              <li>Özel bilgi bulma veya gizli veri erişimi</li>
               <li>Taciz, takip veya doxxing amaçlı araştırma</li>
-              <li>Yasadışı veri toplama</li>
+              <li>Backend/API gerektiren ama sitede varmış gibi gösterilen sahte araçlar</li>
             </ul>
           </article>
         </div>
@@ -130,15 +177,17 @@
     </section>
 
     <section class="section">
-      <div class="container cta-box">
-        <div>
-          <p class="section-kicker">Sonraki adım</p>
-          <h2>Ücretsiz araçlarla başlayın, gerekirse manuel incelemeye geçin</h2>
-          <p>
-            Şüpheli link, parola riski, güvenlik seviyesi veya daha kapsamlı dijital tehditler için adım adım ilerleyin.
-          </p>
+      <div class="container">
+        <div class="cta-box fade-up">
+          <div>
+            <p class="section-kicker">Başlangıç noktası</p>
+            <h2>Önce ücretsiz araçları kullanın</h2>
+            <p>
+              Basit ama işe yarayan güvenlik araçlarıyla başlayın. Daha kapsamlı bir durum varsa, mail ile manuel inceleme talebi gönderin.
+            </p>
+          </div>
+          <a class="btn btn-primary" href="araclar.html">Araçlara Git</a>
         </div>
-        <a class="btn btn-primary" href="araclar.html">Araçları Kullan</a>
       </div>
     </section>
   </main>
@@ -147,19 +196,22 @@
     <div class="container footer-grid">
       <div>
         <h3>Kaynak Analiz</h3>
-        <p>Dijital güvenlik araçları ve açık kaynak tabanlı analiz hizmetleri.</p>
+        <p>Dijital güvenlik araçları ve sade risk ön inceleme platformu.</p>
       </div>
+
       <div>
         <h4>Sayfalar</h4>
         <ul>
+          <li><a href="index.html">Ana Sayfa</a></li>
           <li><a href="araclar.html">Ücretsiz Araçlar</a></li>
           <li><a href="iletisim.html">İletişim</a></li>
         </ul>
       </div>
+
       <div>
-        <h4>Not</h4>
+        <h4>Alan adı notu</h4>
         <p>
-          Kod içindeki <code>alanadiniz.com</code> ve e-posta adreslerini gerçek domainine göre değiştireceksin.
+          Kod içindeki <code>BURAYI_DEGISTIR</code> alanlarını gerçek domain ve mail adreslerinle değiştir.
         </p>
       </div>
     </div>
