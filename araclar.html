@@ -10,10 +10,15 @@
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">Kaynak Analiz</a>
+      <a class="brand" href="index.html">
+        <span class="brand-badge">KA</span>
+        <span>Kaynak Analiz</span>
+      </a>
+
       <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
         <span></span><span></span><span></span>
       </button>
+
       <nav class="nav-links" id="navLinks">
         <a href="index.html">Ana Sayfa</a>
         <a href="araclar.html">Ücretsiz Araçlar</a>
@@ -25,30 +30,39 @@
   <main class="page-main">
     <section class="section">
       <div class="container">
-        <div class="section-head">
-          <p class="section-kicker">Ücretsiz araçlar</p>
-          <h1 class="page-title">Hemen kullanabileceğiniz araçlar</h1>
+        <div class="section-head fade-up">
+          <p class="section-kicker">Araçlar</p>
+          <h1 class="page-title">Ücretsiz araçlar</h1>
           <p>
-            Bu araçlar tamamen tarayıcı içinde çalışır. İlk sürümde hızlı, sade ve pratik kullanım için tasarlanmıştır.
+            Bu araçlar tamamen tarayıcı içinde çalışır. İlk sürümde hızlı, sade ve gerçekten çalışan işlevler üzerine kuruludur.
           </p>
         </div>
 
-        <div class="card-grid three">
-          <article class="tool-card">
+        <div class="grid-3">
+          <article class="tool-card fade-up">
+            <div class="tool-icon">01</div>
             <h3>Güvenlik Checkup</h3>
-            <p>Kısa soru-cevap akışı ile temel dijital güvenlik puanınızı ölçer.</p>
+            <p>
+              Kısa soru-cevap akışıyla temel dijital güvenlik seviyenizi ölçer.
+            </p>
             <a class="btn btn-primary small-btn" href="guvenlik-checkup.html">Aracı Aç</a>
           </article>
 
-          <article class="tool-card">
+          <article class="tool-card fade-up delay-1">
+            <div class="tool-icon">02</div>
             <h3>Link Kontrolü</h3>
-            <p>URL yapısı, HTTPS, kısa link ve şüpheli karakter sinyallerini kontrol eder.</p>
+            <p>
+              Girilen URL’nin biçimsel ve görünür risk sinyallerini değerlendirir.
+            </p>
             <a class="btn btn-primary small-btn" href="link-kontrolu.html">Aracı Aç</a>
           </article>
 
-          <article class="tool-card">
+          <article class="tool-card fade-up delay-2">
+            <div class="tool-icon">03</div>
             <h3>Parola Araçları</h3>
-            <p>Parola gücü ölçümü ve güçlü parola üretimi sunar.</p>
+            <p>
+              Parola gücü ölçer ve güçlü parola üretir.
+            </p>
             <a class="btn btn-primary small-btn" href="parola-araclari.html">Aracı Aç</a>
           </article>
         </div>
