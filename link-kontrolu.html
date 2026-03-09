@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link Kontrolü | Kaynak Analiz</title>
+  <meta name="description" content="URL yapısı, HTTPS, kısa link ve temel risk sinyallerini kontrol edin." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">Kaynak Analiz</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="araclar.html">Ücretsiz Araçlar</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
+    </div>
+  </header>
 
+  <main class="page-main">
+    <section class="section">
+      <div class="container narrow">
+        <div class="section-head">
+          <p class="section-kicker">Ücretsiz araç</p>
+          <h1 class="page-title">Link Kontrolü</h1>
+          <p>
+            Bu araç URL yapısını tarayıcı içinde analiz eder. HTTPS, kısa link, IP kullanımı,
+            şüpheli karakter ve alan adı görünümüne göre temel risk sinyalleri üretir.
+          </p>
+          <p class="note">
+            Not: Domain yaşı, blacklist ve gerçek yönlendirme hedefi gibi gelişmiş kontroller için sonraki aşamada backend/API gerekir.
+          </p>
+        </div>
+
+        <div class="form-card">
+          <label for="urlInput">Kontrol edilecek link</label>
+          <input id="urlInput" type="text" placeholder="Örnek: https://example.com" />
+
+          <button id="analyzeUrlBtn" class="btn btn-primary">Linki Analiz Et</button>
+        </div>
+
+        <div id="urlResult" class="result-card hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Kaynak Analiz</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="link-tool.js"></script>
+</body>
+</html>
