@@ -4,16 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Parola Araçları | Kaynak Analiz</title>
-  <meta name="description" content="Parola gücü ölçümü ve güçlü parola oluşturma aracı." />
+  <meta name="description" content="Parola gücü ölçümü ve güçlü parola üretimi aracı." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">Kaynak Analiz</a>
+      <a class="brand" href="index.html">
+        <span class="brand-badge">KA</span>
+        <span>Kaynak Analiz</span>
+      </a>
+
       <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
         <span></span><span></span><span></span>
       </button>
+
       <nav class="nav-links" id="navLinks">
         <a href="index.html">Ana Sayfa</a>
         <a href="araclar.html">Ücretsiz Araçlar</a>
@@ -25,16 +30,16 @@
   <main class="page-main">
     <section class="section">
       <div class="container narrow">
-        <div class="section-head">
+        <div class="section-head fade-up">
           <p class="section-kicker">Ücretsiz araç</p>
           <h1 class="page-title">Parola Araçları</h1>
           <p>
-            Mevcut parolanızın gücünü ölçebilir veya yeni ve daha güçlü bir parola üretebilirsiniz.
+            Mevcut parolanızın gücünü ölçebilir veya yeni ve güçlü bir parola üretebilirsiniz.
           </p>
         </div>
 
-        <div class="card-grid two">
-          <div class="form-card">
+        <div class="grid-2">
+          <div class="form-card fade-up">
             <h3>Parola Gücü Ölçer</h3>
             <label for="passwordInput">Parolanızı girin</label>
             <input id="passwordInput" type="text" placeholder="Parolanızı yazın" />
@@ -44,8 +49,9 @@
             <div id="passwordStrengthText" class="helper-text">Henüz analiz yapılmadı.</div>
           </div>
 
-          <div class="form-card">
+          <div class="form-card fade-up delay-1">
             <h3>Güçlü Parola Üretici</h3>
+
             <label for="passwordLength">Uzunluk</label>
             <input id="passwordLength" type="number" min="8" max="64" value="16" />
 
@@ -59,7 +65,7 @@
             <button id="generatePasswordBtn" class="btn btn-primary">Parola Üret</button>
 
             <input id="generatedPassword" type="text" readonly placeholder="Üretilen parola burada görünecek" />
-            <button id="copyPasswordBtn" class="btn btn-secondary small-btn">Kopyala</button>
+            <button id="copyPasswordBtn" class="btn btn-secondary small-btn" type="button">Kopyala</button>
             <div id="copyStatus" class="helper-text"></div>
           </div>
         </div>
