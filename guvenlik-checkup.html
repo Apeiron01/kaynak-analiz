@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Güvenlik Checkup | Kaynak Analiz</title>
+  <meta name="description" content="Kısa soru-cevap ile dijital güvenlik skorunuzu ölçün." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">Kaynak Analiz</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="araclar.html">Ücretsiz Araçlar</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
+    </div>
+  </header>
 
+  <main class="page-main">
+    <section class="section">
+      <div class="container narrow">
+        <div class="section-head">
+          <p class="section-kicker">Ücretsiz araç</p>
+          <h1 class="page-title">Güvenlik Checkup</h1>
+          <p>
+            Aşağıdaki kısa soruları cevaplayın. Sonuç, genel farkındalık ve dijital güvenlik durumu hakkında yön gösterici bir skor üretir.
+          </p>
+        </div>
+
+        <form id="checkupForm" class="form-card">
+          <div class="question">
+            <label>1. Hesaplarınızda iki adımlı doğrulama kullanıyor musunuz?</label>
+            <select name="q1">
+              <option value="0">Hayır</option>
+              <option value="1">Bazılarında</option>
+              <option value="2">Evet, çoğunda</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>2. Aynı parolayı birden fazla yerde kullanıyor musunuz?</label>
+            <select name="q2">
+              <option value="0">Evet</option>
+              <option value="1">Bazen</option>
+              <option value="2">Hayır</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>3. Şüpheli linkleri tıklamadan önce kontrol eder misiniz?</label>
+            <select name="q3">
+              <option value="0">Hayır</option>
+              <option value="1">Bazen</option>
+              <option value="2">Evet</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>4. Telefonunuza gelen acil ödeme / kargo / banka mesajlarına karşı temkinli misiniz?</label>
+            <select name="q4">
+              <option value="0">Hayır</option>
+              <option value="1">Bazen</option>
+              <option value="2">Evet</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>5. Cihazlarınızın yazılım güncellemelerini düzenli yapar mısınız?</label>
+            <select name="q5">
+              <option value="0">Hayır</option>
+              <option value="1">Bazen</option>
+              <option value="2">Evet</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>6. Bilinmeyen QR kodları veya kısa linklere karşı dikkatli misiniz?</label>
+            <select name="q6">
+              <option value="0">Hayır</option>
+              <option value="1">Bazen</option>
+              <option value="2">Evet</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>7. E-posta ve mesajlarda gönderici adını değil, gerçek kaynağı kontrol eder misiniz?</label>
+            <select name="q7">
+              <option value="0">Hayır</option>
+              <option value="1">Bazen</option>
+              <option value="2">Evet</option>
+            </select>
+          </div>
+
+          <div class="question">
+            <label>8. Önemli hesaplarınız için farklı ve güçlü parolalar kullanıyor musunuz?</label>
+            <select name="q8">
+              <option value="0">Hayır</option>
+              <option value="1">Bazen</option>
+              <option value="2">Evet</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Skorumu Hesapla</button>
+        </form>
+
+        <div id="checkupResult" class="result-card hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Kaynak Analiz</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="checkup.js"></script>
+</body>
+</html>
