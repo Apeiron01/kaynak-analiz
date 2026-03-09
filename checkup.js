@@ -22,15 +22,15 @@ if (checkupForm && checkupResult) {
     if (percent < 45) {
       levelClass = "level-low";
       levelText = "Risk seviyesi yüksek";
-      advice = "Temel güvenlik alışkanlıklarınız zayıf görünüyor. Öncelikle iki adımlı doğrulama, güçlü parola kullanımı ve link kontrolü alışkanlıkları üzerinde çalışın.";
+      advice = "Temel güvenlik alışkanlıklarınız zayıf görünüyor. İki adımlı doğrulama, güçlü parola kullanımı ve link kontrolü alışkanlıklarını güçlendirmeniz gerekir.";
     } else if (percent < 75) {
       levelClass = "level-mid";
       levelText = "Orta seviye güvenlik";
-      advice = "Temel farkındalığınız var ancak bazı alışkanlıklar tutarlı değil. Parola tekrarını azaltın, şüpheli mesajlara karşı daha sistematik olun.";
+      advice = "Genel farkındalığınız var ancak bazı alışkanlıklar tutarlı değil. Parola tekrarını azaltın ve şüpheli mesajlara karşı daha sistematik olun.";
     } else {
       levelClass = "level-good";
       levelText = "İyi seviye güvenlik";
-      advice = "Genel güvenlik farkındalığınız iyi görünüyor. Yine de düzenli parola güncelleme, cihaz güncellemesi ve şüpheli içerik kontrolü sürdürülmeli.";
+      advice = "Genel güvenlik farkındalığınız iyi görünüyor. Bunu sürdürmek için cihaz güncellemeleri, güçlü parola kullanımı ve şüpheli içerik kontrolünü devam ettirin.";
     }
 
     checkupResult.classList.remove("hidden");
@@ -38,7 +38,7 @@ if (checkupForm && checkupResult) {
       <div class="result-score">${percent} / 100</div>
       <div class="result-level ${levelClass}">${levelText}</div>
       <p>${advice}</p>
-      <p>Bu skor yön gösterici bir ön değerlendirmedir. Daha kapsamlı inceleme gerekiyorsa manuel analiz talebi gönderebilirsiniz.</p>
+      <p>Bu sonuç yön gösterici bir ön değerlendirmedir. Daha kapsamlı durumlar için iletişim sayfasından manuel inceleme talebi gönderebilirsiniz.</p>
     `;
   });
 }
