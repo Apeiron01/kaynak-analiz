@@ -49,7 +49,7 @@ function generatePassword() {
   if (includeNumbers.checked) charset += "0123456789";
   if (includeSymbols.checked) charset += "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
-  if (!charset) {
+  if (!charset || Number.isNaN(length) || length < 8 || length > 64) {
     return "";
   }
 
@@ -70,27 +70,27 @@ if (generatePasswordBtn && generatedPassword) {
 
     if (!password) {
       generatedPassword.value = "";
-      copyStatus.textContent = "En az bir karakter grubu seçmelisiniz.";
+      if (copyStatus) copyStatus.textContent = "Geçerli uzunluk ve en az bir karakter grubu seçmelisiniz.";
       return;
     }
 
     generatedPassword.value = password;
-    copyStatus.textContent = "Yeni parola üretildi.";
+    if (copyStatus) copyStatus.textContent = "Yeni parola üretildi.";
   });
 }
 
 if (copyPasswordBtn && generatedPassword) {
   copyPasswordBtn.addEventListener("click", async () => {
     if (!generatedPassword.value) {
-      copyStatus.textContent = "Kopyalanacak parola yok.";
+      if (copyStatus) copyStatus.textContent = "Kopyalanacak parola yok.";
       return;
     }
 
     try {
       await navigator.clipboard.writeText(generatedPassword.value);
-      copyStatus.textContent = "Parola kopyalandı.";
+      if (copyStatus) copyStatus.textContent = "Parola kopyalandı.";
     } catch (error) {
-      copyStatus.textContent = "Kopyalama başarısız oldu.";
+      if (copyStatus) copyStatus.textContent = "Kopyalama başarısız oldu.";
     }
   });
 }
