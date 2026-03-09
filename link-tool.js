@@ -12,13 +12,20 @@ function containsSuspiciousChars(hostname) {
 
 function looksLikeShortener(hostname) {
   const shorteners = [
-    "bit.ly", "t.co", "tinyurl.com", "goo.gl", "ow.ly", "buff.ly",
-    "cutt.ly", "is.gd", "rebrand.ly", "shorturl.at"
+    "bit.ly",
+    "t.co",
+    "tinyurl.com",
+    "ow.ly",
+    "buff.ly",
+    "cutt.ly",
+    "is.gd",
+    "rebrand.ly",
+    "shorturl.at"
   ];
   return shorteners.includes(hostname.toLowerCase());
 }
 
-function scoreUrl(urlObject) {
+function analyzeUrlStructure(urlObject) {
   let risk = 0;
   const notes = [];
 
@@ -31,7 +38,7 @@ function scoreUrl(urlObject) {
 
   if (looksLikeShortener(urlObject.hostname)) {
     risk += 2;
-    notes.push("Kısa link servisi kullanılıyor. Gerçek hedef görünmüyor olabilir.");
+    notes.push("Kısa link servisi kullanılıyor. Nihai hedef doğrudan görünmüyor.");
   }
 
   if (isIpAddress(urlObject.hostname)) {
@@ -41,22 +48,26 @@ function scoreUrl(urlObject) {
 
   if (containsSuspiciousChars(urlObject.hostname)) {
     risk += 2;
-    notes.push("Alan adında olağandışı karakterler bulundu.");
+    notes.push("Alan adında olağandışı karakterler tespit edildi.");
   }
 
   if (urlObject.hostname.split(".").length > 3) {
     risk += 1;
-    notes.push("Alan adı beklenenden fazla alt alan içeriyor.");
+    notes.push("Alan adı çok fazla alt alan içeriyor.");
   }
 
   if (urlObject.pathname.length > 60) {
     risk += 1;
-    notes.push("URL yolu çok uzun görünüyor.");
+    notes.push("URL yolu olağandan uzun görünüyor.");
   }
 
   if (urlObject.search.length > 80) {
     risk += 1;
     notes.push("Sorgu parametreleri uzun ve karmaşık görünüyor.");
+  }
+
+  if (notes.length === 0) {
+    notes.push("Belirgin bir yapısal risk sinyali görülmedi.");
   }
 
   return { risk, notes };
@@ -68,7 +79,7 @@ if (analyzeUrlBtn && urlInput && urlResult) {
 
     if (!rawValue) {
       urlResult.classList.remove("hidden");
-      urlResult.innerHTML = `<p>Lütfen analiz etmek için bir link girin.</p>`;
+      urlResult.innerHTML = `<p>Lütfen analiz etmek için bir bağlantı girin.</p>`;
       return;
     }
 
@@ -79,7 +90,7 @@ if (analyzeUrlBtn && urlInput && urlResult) {
 
     try {
       const parsedUrl = new URL(normalizedUrl);
-      const analysis = scoreUrl(parsedUrl);
+      const analysis = analyzeUrlStructure(parsedUrl);
 
       let levelClass = "";
       let levelText = "";
@@ -98,16 +109,16 @@ if (analyzeUrlBtn && urlInput && urlResult) {
       urlResult.classList.remove("hidden");
       urlResult.innerHTML = `
         <div class="result-level ${levelClass}">${levelText}</div>
-        <p><strong>Host:</strong> ${parsedUrl.hostname}</p>
+        <p><strong>Alan adı:</strong> ${parsedUrl.hostname}</p>
         <p><strong>Protokol:</strong> ${parsedUrl.protocol}</p>
         <p><strong>Yol:</strong> ${parsedUrl.pathname || "/"}</p>
-        <p><strong>Temel değerlendirme:</strong></p>
+        <p><strong>Değerlendirme:</strong></p>
         <ul>
           ${analysis.notes.map((item) => `<li>${item}</li>`).join("")}
         </ul>
         <p class="note">
-          Bu araç yalnızca tarayıcı içinde görülebilen temel sinyalleri değerlendirir.
-          Domain yaşı, blacklist ve gerçek redirect hedefi için gelişmiş servis gerekir.
+          Bu araç yalnızca tarayıcı içinde görülebilen yapısal sinyalleri değerlendirir.
+          Domain yaşı, blacklist ve gerçek yönlendirme hedefi gibi ileri kontroller bu sürümde yoktur.
         </p>
       `;
     } catch (error) {
