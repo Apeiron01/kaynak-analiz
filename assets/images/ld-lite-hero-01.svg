@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-label="Lumina danışmanlık görseli">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f5e8dc"/>
+      <stop offset="100%" stop-color="#ead1be"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6f574e"/>
+      <stop offset="100%" stop-color="#3e312b"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect x="140" y="160" width="1320" height="880" rx="72" fill="#fdf4ec" opacity="0.85"/>
+  <rect x="320" y="300" width="960" height="600" rx="60" fill="#df9f86"/>
+  <circle cx="800" cy="600" r="230" fill="url(#lens)"/>
+  <circle cx="800" cy="600" r="160" fill="#f1dfd4" opacity="0.28"/>
+  <circle cx="770" cy="560" r="34" fill="#ffffff" opacity="0.33"/>
+</svg>

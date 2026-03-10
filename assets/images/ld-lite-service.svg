@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Lumina hizmet görseli">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8ece2"/>
+      <stop offset="100%" stop-color="#e8c9b7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect x="120" y="110" width="960" height="680" rx="58" fill="#fff6ef" opacity="0.85"/>
+  <g fill="#6a5249" opacity="0.88">
+    <circle cx="340" cy="440" r="126"/>
+    <rect x="500" y="328" width="430" height="110" rx="30"/>
+    <rect x="500" y="476" width="330" height="90" rx="24"/>
+  </g>
+  <circle cx="940" cy="240" r="52" fill="#e17d72" opacity="0.86"/>
+</svg>

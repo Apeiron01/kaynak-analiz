@@ -43,6 +43,7 @@ body {
   color: var(--ink);
   font-family: Inter, "Segoe UI Variable Text", "Aptos", "Segoe UI", sans-serif;
   line-height: 1.55;
+  overflow-x: hidden;
 }
 
 a {
@@ -1626,6 +1627,9 @@ body.is-leaving {
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
+}
+
+.ticker-track.ticker-animate {
   animation: tickerMove var(--ticker-duration, 18s) linear infinite;
   animation-play-state: running;
 }
@@ -2681,6 +2685,20 @@ body.is-leaving {
   color: rgba(91, 39, 50, 0.8);
 }
 
+.academy-card,
+.academy-card-content,
+.academy-card-split,
+.academy-track-card {
+  min-width: 0;
+}
+
+.academy-card h2,
+.academy-card h3,
+.academy-card p,
+.academy-card li {
+  overflow-wrap: anywhere;
+}
+
 .academy-card h2 {
   max-width: 13ch;
   margin-bottom: 18px;
@@ -2735,27 +2753,27 @@ body.is-leaving {
 
 .academy-visual-01 {
   min-height: 320px;
-  background: var(--academy-maroon) url("assets/images/akademi-visual-01.svg?v=20260310-02") center / 108% no-repeat;
+  background: var(--academy-maroon) url("assets/images/akademi-visual-lite.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .academy-visual-02 {
   min-height: 260px;
-  background: #eaded2 url("assets/images/akademi-visual-02.svg?v=20260310-01") center / cover no-repeat;
+  background: #eaded2 url("assets/images/akademi-visual-lite.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .academy-visual-03 {
   min-height: 220px;
-  background: #efe4d7 url("assets/images/akademi-visual-03.svg?v=20260310-01") center / cover no-repeat;
+  background: #efe4d7 url("assets/images/akademi-visual-lite.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .academy-visual-04 {
   min-height: 220px;
-  background: #e8dbcf url("assets/images/akademi-visual-04.svg?v=20260310-01") center / cover no-repeat;
+  background: #e8dbcf url("assets/images/akademi-visual-lite.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .academy-visual-05 {
   min-height: 220px;
-  background: #ede0d3 url("assets/images/akademi-visual-05.svg?v=20260310-01") center / cover no-repeat;
+  background: #ede0d3 url("assets/images/akademi-visual-lite.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .academy-mini-grid,
@@ -3152,10 +3170,10 @@ body.is-leaving {
   background-position: 50% center;
   background-repeat: no-repeat;
   background-size: 112%;
-  transition: background-position 760ms cubic-bezier(0.22, 1, 0.36, 1), filter 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1), filter 720ms cubic-bezier(0.22, 1, 0.36, 1);
   transform: scale(1.02);
   transform-origin: center center;
-  will-change: background-position, transform;
+  will-change: transform;
 }
 
 .consulting-showcase-slide.is-active .consulting-showcase-asset {
@@ -3168,7 +3186,6 @@ body.is-leaving {
 .consulting-showcase-slide.is-exiting-forward .consulting-showcase-asset,
 .consulting-showcase-slide.is-exiting-backward .consulting-showcase-asset {
   animation: none;
-  background-position: 50% center;
   transform: scale(1.02);
 }
 
@@ -3178,28 +3195,26 @@ body.is-leaving {
 
 .consulting-showcase-asset-hero-01 {
   background-color: #f2ede4;
-  background-image: url("assets/images/ld-hero-01.svg");
+  background-image: url("assets/images/ld-lite-hero-01.svg?v=20260310-03");
 }
 
 .consulting-showcase-asset-hero-02 {
   background-color: #d58f73;
-  background-image: url("assets/images/ld-hero-02.svg");
+  background-image: url("assets/images/ld-lite-hero-02.svg?v=20260310-03");
 }
 
 .consulting-showcase-asset-hero-03 {
   background-color: #eadfce;
-  background-image: url("assets/images/ld-hero-03.svg?v=20260310-02");
+  background-image: url("assets/images/ld-lite-hero-03.svg?v=20260310-03");
 }
 
 @keyframes consultingAssetDrift {
   from {
-    background-position: 44% center;
-    transform: scale(1.01);
+    transform: scale(1.01) translate3d(-1.25%, 0, 0);
   }
 
   to {
-    background-position: 56% center;
-    transform: scale(1.08);
+    transform: scale(1.06) translate3d(1.25%, 0, 0);
   }
 }
 
@@ -3265,6 +3280,11 @@ body.is-leaving {
 .consulting-showcase-next:focus-visible {
   transform: translateX(2px);
   background: #d96e62;
+}
+
+.consulting-showcase-prev:hover,
+.consulting-showcase-prev:focus-visible {
+  transform: translateX(-2px);
 }
 
 .consulting-placeholder span,
@@ -3448,19 +3468,19 @@ body.is-leaving {
 }
 
 .consulting-placeholder-mosaic-01 {
-  background: #e27d72 url("assets/images/ld-mosaic-01.svg") center / cover no-repeat;
+  background: #e27d72 url("assets/images/ld-lite-mosaic.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .consulting-placeholder-mosaic-02 {
-  background: #e9a095 url("assets/images/ld-mosaic-02.svg") center / cover no-repeat;
+  background: #e9a095 url("assets/images/ld-lite-mosaic.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .consulting-placeholder-mosaic-03 {
-  background: #4e3e36 url("assets/images/ld-mosaic-03.svg") center 38% / cover no-repeat;
+  background: #4e3e36 url("assets/images/ld-lite-mosaic.svg?v=20260310-03") center 38% / cover no-repeat;
 }
 
 .consulting-placeholder-mosaic-04 {
-  background: #dcc8b8 url("assets/images/ld-mosaic-04.svg") center / cover no-repeat;
+  background: #dcc8b8 url("assets/images/ld-lite-mosaic.svg?v=20260310-03") center / cover no-repeat;
 }
 
 .consulting-services {
@@ -3519,23 +3539,23 @@ body.is-leaving {
 }
 
 .consulting-service-asset-01 {
-  background-image: url("assets/images/ld-service-01.svg");
+  background-image: url("assets/images/ld-lite-service.svg?v=20260310-03");
 }
 
 .consulting-service-asset-02 {
-  background-image: url("assets/images/ld-service-02.svg");
+  background-image: url("assets/images/ld-lite-service.svg?v=20260310-03");
 }
 
 .consulting-service-asset-03 {
-  background-image: url("assets/images/ld-service-03.svg");
+  background-image: url("assets/images/ld-lite-service.svg?v=20260310-03");
 }
 
 .consulting-service-asset-04 {
-  background-image: url("assets/images/ld-service-04.svg");
+  background-image: url("assets/images/ld-lite-service.svg?v=20260310-03");
 }
 
 .consulting-service-asset-05 {
-  background-image: url("assets/images/ld-service-05.svg");
+  background-image: url("assets/images/ld-lite-service.svg?v=20260310-03");
 }
 
 .consulting-service-copy h2 {
@@ -3991,9 +4011,16 @@ main > .section + .section {
   .consulting-showcase,
   .consulting-service-row,
   .consulting-awards-grid,
+  .academy-grid,
   .academy-contact-shell,
   .academy-process {
     grid-template-columns: 1fr;
+  }
+
+  .academy-mini-grid,
+  .academy-track-grid,
+  .academy-faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .consulting-page .nav {
@@ -4002,6 +4029,15 @@ main > .section + .section {
 
   .consulting-showcase {
     min-height: 0;
+  }
+
+  .consulting-showcase-visual {
+    min-height: 420px;
+  }
+
+  .consulting-showcase-slide {
+    position: absolute;
+    inset: 0;
   }
 
   .consulting-service-media,
@@ -4123,6 +4159,10 @@ main > .section + .section {
     min-height: auto;
   }
 
+  .consulting-showcase-visual {
+    min-height: 340px;
+  }
+
   .consulting-hero-copy {
     padding: 12px 0 0;
   }
@@ -4139,6 +4179,64 @@ main > .section + .section {
   .consulting-service-copy h2 {
     max-width: none;
     font-size: clamp(2.2rem, 10vw, 3.4rem);
+  }
+
+  .academy-grid,
+  .academy-mini-grid,
+  .academy-track-grid,
+  .academy-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .academy-card {
+    padding: 22px;
+  }
+
+  .academy-visual {
+    min-height: 180px;
+    background-size: cover;
+  }
+
+  .academy-card h2 {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+
+  .academy-process-list article {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 0;
+    padding: 12px 0;
+  }
+
+  .academy-process-list small {
+    grid-column: 2;
+  }
+
+  .consulting-mosaic-card-copy {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .consulting-vertical-label {
+    writing-mode: horizontal-tb;
+    transform: none;
+    justify-self: start;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .consulting-mosaic-card,
+  .consulting-placeholder {
+    min-height: 300px;
+  }
+
+  .consulting-service-asset {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
+    background-size: contain;
+    background-color: #f6e7d8;
   }
 
   .consulting-marquee {

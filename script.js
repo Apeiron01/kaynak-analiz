@@ -4,8 +4,11 @@ const navLinks = document.getElementById("navLinks");
 const nativeFormSubmit = HTMLFormElement.prototype.submit;
 const formsubmitEndpointConfig = window.LUMINA_FORMSUBMIT_ENDPOINTS || {};
 let activeScrollAnimationFrame = null;
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-document.documentElement.style.scrollBehavior = "smooth";
+if (!prefersReducedMotion) {
+  document.documentElement.style.scrollBehavior = "smooth";
+}
 
 document.querySelectorAll('a[target="_blank"]').forEach((link) => {
   const relTokens = new Set((link.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
@@ -158,20 +161,61 @@ const animateWindowScrollTo = (targetTop) => {
   activeScrollAnimationFrame = window.requestAnimationFrame(step);
 };
 
+const normalizePath = (path) => {
+  const trimmed = (path || "").replace(/\/+$/g, "");
+
+  if (trimmed === "" || trimmed === "/" || trimmed.toLowerCase() === "/index.html") {
+    return "/";
+  }
+
+  return trimmed.replace(/\/index\.html$/i, "") || "/";
+};
+
+const getTargetFromHash = (hash) => {
+  if (!hash || hash === "#") {
+    return null;
+  }
+
+  const rawId = hash.startsWith("#") ? hash.slice(1) : hash;
+  if (!rawId) {
+    return null;
+  }
+
+  let decodedId = rawId;
+  try {
+    decodedId = decodeURIComponent(rawId);
+  } catch (_error) {
+    decodedId = rawId;
+  }
+
+  const byId = document.getElementById(decodedId);
+  if (byId) {
+    return byId;
+  }
+
+  try {
+    return document.querySelector(`#${CSS.escape(decodedId)}`);
+  } catch (_error) {
+    return null;
+  }
+};
+
 const scrollToHashTarget = (hash, options = {}) => {
   const { updateHistory = true } = options;
 
-  if (!hash || hash === "#") {
-    return false;
-  }
-
-  const target = document.querySelector(hash);
+  const target = getTargetFromHash(hash);
   if (!target) {
     return false;
   }
 
   const top = window.scrollY + target.getBoundingClientRect().top - getScrollOffset();
-  animateWindowScrollTo(Math.max(0, top));
+  const destination = Math.max(0, top);
+
+  if (prefersReducedMotion) {
+    window.scrollTo(0, destination);
+  } else {
+    animateWindowScrollTo(destination);
+  }
 
   if (updateHistory) {
     history.replaceState(null, "", hash);
@@ -196,7 +240,9 @@ const isSamePageHashLink = (link) => {
   }
 
   const url = new URL(href, window.location.href);
-  const samePath = url.origin === window.location.origin && url.pathname === window.location.pathname;
+  const samePath =
+    url.origin === window.location.origin &&
+    normalizePath(url.pathname) === normalizePath(window.location.pathname);
 
   return {
     isHashLink: samePath && Boolean(url.hash),
@@ -212,6 +258,10 @@ document.addEventListener("click", (event) => {
 
   const { isHashLink, hash } = isSamePageHashLink(link);
   if (!isHashLink) {
+    return;
+  }
+
+  if (!getTargetFromHash(hash)) {
     return;
   }
 
@@ -235,6 +285,9 @@ const syncInitialHashScroll = () => {
 };
 
 window.addEventListener("load", syncInitialHashScroll);
+window.addEventListener("hashchange", () => {
+  scrollToHashTarget(window.location.hash, { updateHistory: false });
+});
 
 document.querySelectorAll(".faq-question").forEach((button) => {
   button.addEventListener("click", () => {
@@ -281,6 +334,41 @@ if (revealItems.length) {
   });
 }
 
+const bindSwipeNavigation = (container, onPrev, onNext) => {
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  container.addEventListener(
+    "touchstart",
+    (event) => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    },
+    { passive: true }
+  );
+
+  container.addEventListener(
+    "touchend",
+    (event) => {
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      if (Math.abs(deltaY) > Math.abs(deltaX) || Math.abs(deltaX) < 32) {
+        return;
+      }
+
+      if (deltaX > 0) {
+        onPrev();
+      } else {
+        onNext();
+      }
+    },
+    { passive: true }
+  );
+};
+
 const heroCarousel = document.querySelector("[data-carousel]");
 if (heroCarousel) {
   const slides = Array.from(heroCarousel.querySelectorAll("[data-slide]"));
@@ -288,25 +376,28 @@ if (heroCarousel) {
   const dots = Array.from(heroCarousel.querySelectorAll(".hero-progress-dot"));
   const prevButton = heroCarousel.querySelector("[data-prev]");
   const nextButton = heroCarousel.querySelector("[data-next]");
-  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
-  let autoplayId = null;
-  let cleanupId = null;
+  if (!slides.length) {
+    // no-op
+  } else {
+    let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+    let autoplayId = null;
+    let cleanupId = null;
 
-  if (activeIndex < 0) {
-    activeIndex = 0;
-  }
+    if (activeIndex < 0) {
+      activeIndex = 0;
+    }
 
-  const clearHeroStates = (slide) => {
-    slide.classList.remove(
-      "is-active",
-      "is-entering-forward",
-      "is-entering-backward",
-      "is-exiting-forward",
-      "is-exiting-backward"
-    );
-  };
+    const clearHeroStates = (slide) => {
+      slide.classList.remove(
+        "is-active",
+        "is-entering-forward",
+        "is-entering-backward",
+        "is-exiting-forward",
+        "is-exiting-backward"
+      );
+    };
 
-  const syncCarousel = (index, direction = 1) => {
+    const syncCarousel = (index, direction = 1) => {
     const previousIndex = activeIndex;
     const previousSlide = slides[previousIndex];
     const nextSlide = slides[index];
@@ -363,23 +454,27 @@ if (heroCarousel) {
       nextSlide.classList.add("is-active");
       cleanupId = null;
     }, 780);
-  };
+    };
 
-  const moveSlide = (direction) => {
-    const nextIndex = (activeIndex + direction + slides.length) % slides.length;
-    syncCarousel(nextIndex, direction);
-  };
+    const moveSlide = (direction) => {
+      if (slides.length < 2) {
+        return;
+      }
 
-  const stopAutoplay = () => {
+      const nextIndex = (activeIndex + direction + slides.length) % slides.length;
+      syncCarousel(nextIndex, direction);
+    };
+
+    const stopAutoplay = () => {
     if (!autoplayId) {
       return;
     }
 
     window.clearInterval(autoplayId);
     autoplayId = null;
-  };
+    };
 
-  const restartAutoplay = () => {
+    const restartAutoplay = () => {
     stopAutoplay();
 
     if (slides.length < 2) {
@@ -389,57 +484,86 @@ if (heroCarousel) {
     autoplayId = window.setInterval(() => {
       moveSlide(1);
     }, 6500);
-  };
+    };
 
-  selectors.forEach((selector, index) => {
-    selector.addEventListener("click", () => {
-      syncCarousel(index);
+    selectors.forEach((selector, index) => {
+      selector.addEventListener("click", () => {
+        syncCarousel(index);
+        restartAutoplay();
+      });
+    });
+
+    prevButton?.addEventListener("click", () => {
+      moveSlide(-1);
       restartAutoplay();
     });
-  });
 
-  prevButton?.addEventListener("click", () => {
-    moveSlide(-1);
+    nextButton?.addEventListener("click", () => {
+      moveSlide(1);
+      restartAutoplay();
+    });
+
+    heroCarousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        moveSlide(-1);
+        restartAutoplay();
+      }
+
+      if (event.key === "ArrowRight") {
+        moveSlide(1);
+        restartAutoplay();
+      }
+    });
+
+    bindSwipeNavigation(
+      heroCarousel,
+      () => {
+        moveSlide(-1);
+        restartAutoplay();
+      },
+      () => {
+        moveSlide(1);
+        restartAutoplay();
+      }
+    );
+
+    heroCarousel.addEventListener("mouseenter", stopAutoplay);
+    heroCarousel.addEventListener("mouseleave", restartAutoplay);
+    heroCarousel.addEventListener("focusin", stopAutoplay);
+    heroCarousel.addEventListener("focusout", restartAutoplay);
+
+    syncCarousel(activeIndex);
     restartAutoplay();
-  });
-
-  nextButton?.addEventListener("click", () => {
-    moveSlide(1);
-    restartAutoplay();
-  });
-
-  heroCarousel.addEventListener("mouseenter", stopAutoplay);
-  heroCarousel.addEventListener("mouseleave", restartAutoplay);
-  heroCarousel.addEventListener("focusin", stopAutoplay);
-  heroCarousel.addEventListener("focusout", restartAutoplay);
-
-  syncCarousel(activeIndex);
-  restartAutoplay();
+  }
 }
 
 const consultingCarousel = document.querySelector("[data-consulting-carousel]");
 if (consultingCarousel) {
   const slides = Array.from(consultingCarousel.querySelectorAll("[data-consulting-slide]"));
+  const prevButton = consultingCarousel.querySelector("[data-consulting-prev]");
   const nextButton = consultingCarousel.querySelector("[data-consulting-next]");
-  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
-  let autoplayId = null;
-  let cleanupId = null;
+  if (!slides.length) {
+    // no-op
+  } else {
+    let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+    let autoplayId = null;
+    let cleanupId = null;
 
-  if (activeIndex < 0) {
-    activeIndex = 0;
-  }
+    if (activeIndex < 0) {
+      activeIndex = 0;
+    }
 
-  const clearConsultingStates = (slide) => {
-    slide.classList.remove(
-      "is-active",
-      "is-entering-forward",
-      "is-entering-backward",
-      "is-exiting-forward",
-      "is-exiting-backward"
-    );
-  };
+    const clearConsultingStates = (slide) => {
+      slide.classList.remove(
+        "is-active",
+        "is-entering-forward",
+        "is-entering-backward",
+        "is-exiting-forward",
+        "is-exiting-backward"
+      );
+    };
 
-  const syncConsultingCarousel = (index, direction = 1) => {
+    const syncConsultingCarousel = (index, direction = 1) => {
     const previousIndex = activeIndex;
     const previousSlide = slides[previousIndex];
     const nextSlide = slides[index];
@@ -485,23 +609,27 @@ if (consultingCarousel) {
       nextSlide.classList.add("is-active");
       cleanupId = null;
     }, 760);
-  };
+    };
 
-  const moveConsultingSlide = (direction = 1) => {
-    const nextIndex = (activeIndex + direction + slides.length) % slides.length;
-    syncConsultingCarousel(nextIndex, direction);
-  };
+    const moveConsultingSlide = (direction = 1) => {
+      if (slides.length < 2) {
+        return;
+      }
 
-  const stopConsultingAutoplay = () => {
+      const nextIndex = (activeIndex + direction + slides.length) % slides.length;
+      syncConsultingCarousel(nextIndex, direction);
+    };
+
+    const stopConsultingAutoplay = () => {
     if (!autoplayId) {
       return;
     }
 
     window.clearInterval(autoplayId);
     autoplayId = null;
-  };
+    };
 
-  const restartConsultingAutoplay = () => {
+    const restartConsultingAutoplay = () => {
     stopConsultingAutoplay();
 
     if (slides.length < 2) {
@@ -511,20 +639,50 @@ if (consultingCarousel) {
     autoplayId = window.setInterval(() => {
       moveConsultingSlide(1);
     }, 5600);
-  };
+    };
 
-  nextButton?.addEventListener("click", () => {
-    moveConsultingSlide(1);
+    prevButton?.addEventListener("click", () => {
+      moveConsultingSlide(-1);
+      restartConsultingAutoplay();
+    });
+
+    nextButton?.addEventListener("click", () => {
+      moveConsultingSlide(1);
+      restartConsultingAutoplay();
+    });
+
+    consultingCarousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        moveConsultingSlide(-1);
+        restartConsultingAutoplay();
+      }
+
+      if (event.key === "ArrowRight") {
+        moveConsultingSlide(1);
+        restartConsultingAutoplay();
+      }
+    });
+
+    bindSwipeNavigation(
+      consultingCarousel,
+      () => {
+        moveConsultingSlide(-1);
+        restartConsultingAutoplay();
+      },
+      () => {
+        moveConsultingSlide(1);
+        restartConsultingAutoplay();
+      }
+    );
+
+    consultingCarousel.addEventListener("mouseenter", stopConsultingAutoplay);
+    consultingCarousel.addEventListener("mouseleave", restartConsultingAutoplay);
+    consultingCarousel.addEventListener("focusin", stopConsultingAutoplay);
+    consultingCarousel.addEventListener("focusout", restartConsultingAutoplay);
+
+    syncConsultingCarousel(activeIndex);
     restartConsultingAutoplay();
-  });
-
-  consultingCarousel.addEventListener("mouseenter", stopConsultingAutoplay);
-  consultingCarousel.addEventListener("mouseleave", restartConsultingAutoplay);
-  consultingCarousel.addEventListener("focusin", stopConsultingAutoplay);
-  consultingCarousel.addEventListener("focusout", restartConsultingAutoplay);
-
-  syncConsultingCarousel(activeIndex);
-  restartConsultingAutoplay();
+  }
 }
 
 const tickerStrips = document.querySelectorAll(".ticker-strip");
@@ -568,9 +726,10 @@ if (tickerStrips.length) {
 
       track.style.setProperty("--ticker-distance", `${distance}px`);
       track.style.setProperty("--ticker-duration", `${duration}s`);
-      track.style.animation = "none";
-      void track.offsetWidth;
-      track.style.animation = "tickerMove var(--ticker-duration, 18s) linear infinite";
+      track.classList.remove("ticker-animate");
+      window.requestAnimationFrame(() => {
+        track.classList.add("ticker-animate");
+      });
     };
 
     measureTicker();
@@ -768,7 +927,73 @@ if (thanksPage) {
     },
   };
 
-  const selectedCopy = copy[source] || copy.iletisim;
+  const localizedCopy = {
+    iletisim: {
+      kicker: "Mesaj Alındı",
+      title: "Teşekkürler, mesajınız ulaştı.",
+      description: "Talebiniz e-posta akışına düştü. Uygunluk ve kapsam kontrolünden sonra sizinle dönüş yapılacaktır.",
+      primaryLabel: "Ana Sayfaya Dön",
+      primaryHref: "siber.html",
+      secondaryLabel: "Yeni Mesaj Gönder",
+      secondaryHref: "iletisim.html",
+      pageTitle: "Teşekkürler | Lumina Siber",
+    },
+    danismanlik: {
+      kicker: "Talep Alındı",
+      title: "Teşekkürler, danışmanlık talebinizi aldık.",
+      description: "Danışmanlık formunuz ekibe ulaştı. Hizmet kapsamınız ve uygun sonraki adım için size geri dönüş yapılacaktır.",
+      primaryLabel: "Danışmanlığa Dön",
+      primaryHref: "index.html",
+      secondaryLabel: "Yeni Talep Gönder",
+      secondaryHref: "index.html#iletisim",
+      pageTitle: "Teşekkürler | Lumina Danışmanlık",
+    },
+    akademi: {
+      kicker: "Talep Alındı",
+      title: "Teşekkürler, eğitim talebinizi aldık.",
+      description: "Akademi formunuz ekibe ulaştı. Size uygun eğitim akışını netleştirmek için en kısa sürede dönüş yapılacaktır.",
+      primaryLabel: "Akademiye Dön",
+      primaryHref: "akademi.html",
+      secondaryLabel: "Formu Yeniden Aç",
+      secondaryHref: "akademi.html#iletisim",
+      pageTitle: "Teşekkürler | Lumina Akademi",
+    },
+  };
+
+  const safeCopy = {
+    iletisim: {
+      kicker: "Mesaj Al\u0131nd\u0131",
+      title: "Te\u015fekk\u00fcrler, mesaj\u0131n\u0131z ula\u015ft\u0131.",
+      description: "Talebiniz e-posta ak\u0131\u015f\u0131na d\u00fc\u015ft\u00fc. Uygunluk ve kapsam kontrol\u00fcnden sonra sizinle d\u00f6n\u00fc\u015f yap\u0131lacakt\u0131r.",
+      primaryLabel: "Ana Sayfaya D\u00f6n",
+      primaryHref: "siber.html",
+      secondaryLabel: "Yeni Mesaj G\u00f6nder",
+      secondaryHref: "iletisim.html",
+      pageTitle: "Te\u015fekk\u00fcrler | Lumina Siber",
+    },
+    danismanlik: {
+      kicker: "Talep Al\u0131nd\u0131",
+      title: "Te\u015fekk\u00fcrler, dan\u0131\u015fmanl\u0131k talebinizi ald\u0131k.",
+      description: "Dan\u0131\u015fmanl\u0131k formunuz ekibe ula\u015ft\u0131. Hizmet kapsam\u0131n\u0131z ve uygun sonraki ad\u0131m i\u00e7in size geri d\u00f6n\u00fc\u015f yap\u0131lacakt\u0131r.",
+      primaryLabel: "Dan\u0131\u015fmanl\u0131\u011fa D\u00f6n",
+      primaryHref: "index.html",
+      secondaryLabel: "Yeni Talep G\u00f6nder",
+      secondaryHref: "index.html#iletisim",
+      pageTitle: "Te\u015fekk\u00fcrler | Lumina Dan\u0131\u015fmanl\u0131k",
+    },
+    akademi: {
+      kicker: "Talep Al\u0131nd\u0131",
+      title: "Te\u015fekk\u00fcrler, e\u011fitim talebinizi ald\u0131k.",
+      description: "Akademi formunuz ekibe ula\u015ft\u0131. Size uygun e\u011fitim ak\u0131\u015f\u0131n\u0131 netle\u015ftirmek i\u00e7in en k\u0131sa s\u00fcrede d\u00f6n\u00fc\u015f yap\u0131lacakt\u0131r.",
+      primaryLabel: "Akademiye D\u00f6n",
+      primaryHref: "akademi.html",
+      secondaryLabel: "Formu Yeniden A\u00e7",
+      secondaryHref: "akademi.html#iletisim",
+      pageTitle: "Te\u015fekk\u00fcrler | Lumina Akademi",
+    },
+  };
+
+  const selectedCopy = safeCopy[source] || safeCopy.iletisim || localizedCopy[source] || localizedCopy.iletisim || copy[source] || copy.iletisim;
   const kicker = thanksPage.querySelector("[data-thanks-kicker]");
   const title = thanksPage.querySelector("[data-thanks-title]");
   const description = thanksPage.querySelector("[data-thanks-description]");
