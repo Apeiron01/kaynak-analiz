@@ -389,6 +389,39 @@ if (heroCarousel) {
       );
     };
 
+    const clearHeroTransitions = (slide) => {
+      slide.classList.remove(
+        "is-entering-forward",
+        "is-entering-backward",
+        "is-exiting-forward",
+        "is-exiting-backward"
+      );
+    };
+
+    const preloadHeroMedia = (index) => {
+      const slide = slides[index];
+
+      if (!slide) {
+        return;
+      }
+
+      slide.querySelectorAll("img").forEach((image) => {
+        if (image.dataset.preloaded === "true") {
+          return;
+        }
+
+        const imageSource = image.currentSrc || image.getAttribute("src");
+        if (!imageSource) {
+          return;
+        }
+
+        const preloadImage = new Image();
+        preloadImage.decoding = "async";
+        preloadImage.src = imageSource;
+        image.dataset.preloaded = "true";
+      });
+    };
+
     const syncCarousel = (index, direction = 1) => {
     const previousIndex = activeIndex;
     const previousSlide = slides[previousIndex];
@@ -399,6 +432,8 @@ if (heroCarousel) {
     }
 
     activeIndex = index;
+    preloadHeroMedia((activeIndex + 1) % slides.length);
+    preloadHeroMedia((activeIndex + 2) % slides.length);
 
     if (cleanupId) {
       window.clearTimeout(cleanupId);
@@ -429,20 +464,22 @@ if (heroCarousel) {
       return;
     }
 
-    clearHeroStates(previousSlide);
-    clearHeroStates(nextSlide);
+    const enteringClass = direction > 0 ? "is-entering-forward" : "is-entering-backward";
+    const exitingClass = direction > 0 ? "is-exiting-forward" : "is-exiting-backward";
 
-    previousSlide.classList.add(direction > 0 ? "is-exiting-forward" : "is-exiting-backward");
-    nextSlide.classList.add(direction > 0 ? "is-entering-forward" : "is-entering-backward");
+    clearHeroTransitions(previousSlide);
+    clearHeroTransitions(nextSlide);
+    nextSlide.classList.add("is-active", enteringClass);
     nextSlide.setAttribute("aria-hidden", "false");
 
     window.requestAnimationFrame(() => {
-      nextSlide.classList.add("is-active");
+      previousSlide.classList.remove("is-active");
+      previousSlide.classList.add(exitingClass);
     });
 
     cleanupId = window.setTimeout(() => {
-      clearHeroStates(previousSlide);
-      nextSlide.classList.remove("is-entering-forward", "is-entering-backward");
+      clearHeroTransitions(previousSlide);
+      nextSlide.classList.remove(enteringClass);
       nextSlide.classList.add("is-active");
       cleanupId = null;
     }, 780);

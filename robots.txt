@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /blog-yayin-plani.html
+Disallow: /blog-yazi-sablonu.html
+Disallow: /gorsel-plani.html
 
 Sitemap: https://luminadigitale.com/sitemap.xml
