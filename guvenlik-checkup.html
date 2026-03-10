@@ -1,131 +1,212 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Güvenlik Checkup | Kaynak Analiz</title>
-  <meta name="description" content="Kısa soru-cevap ile temel dijital güvenlik skorunuzu ölçün." />
+  <title>Güvenlik Kontrol | Lumina Siber</title>
+  <meta
+    name="description"
+    content="Lumina Siber güvenlik kontrol aracı ile temel dijital güvenlik alışkanlıklarınızı ölçün ve zayıf alanları hızlıca görün."
+  />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto: https://formsubmit.co;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/guvenlik-checkup.html" />
+  <meta property="og:title" content="Güvenlik Kontrol | Lumina Siber" />
+  <meta property="og:description" content="Temel dijital güvenlik alışkanlıklarınızı ölçün ve zayıf alanları hızlıca görün." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://luminadigitale.com/guvenlik-checkup.html" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Güvenlik Kontrol | Lumina Siber" />
+  <meta name="twitter:description" content="Dijital güvenlik alışkanlıklarınızı hızlıca puanlayan ücretsiz araç." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">
-        <span class="brand-badge">KA</span>
-        <span>Kaynak Analiz</span>
+      <a class="brand" href="siber.html" aria-label="Lumina Siber ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina logo" width="48" height="48" /></span>
+        <span class="brand-copy">
+          <strong>Lumina</strong>
+          <span>Siber</span>
+        </span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
 
       <nav class="nav-links" id="navLinks">
-        <a href="index.html">Ana Sayfa</a>
-        <a href="araclar.html">Ücretsiz Araçlar</a>
-        <a href="iletisim.html">İletişim</a>
+        <a href="siber.html">Ana Sayfa</a>
+        <a href="blog.html">Blog</a>
+        <a href="hizmetler.html">Hizmetlerimiz</a>
+        <a href="siber.html#sss">SSS</a>
+        <a href="iletisim.html" class="nav-btn">İletişime Geç</a>
       </nav>
     </div>
   </header>
 
   <main class="page-main">
-    <section class="section">
-      <div class="container narrow">
-        <div class="section-head fade-up">
-          <p class="section-kicker">Ücretsiz araç</p>
-          <h1 class="page-title">Güvenlik Checkup</h1>
-          <p>
-            Aşağıdaki kısa sorular, temel dijital güvenlik alışkanlıklarınız hakkında yön gösterici bir skor üretir.
-          </p>
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz Araç</p>
+          <h1 class="page-title">Güvenlik Kontrol</h1>
+          <p>Bu akış, günlük dijital alışkanlıklarınızın ne kadar güvenli olduğunu daha net görmek için tasarlandı.</p>
         </div>
 
-        <form id="checkupForm" class="form-card fade-up delay-1">
-          <div class="question">
-            <label for="q1">1. Hesaplarınızda iki adımlı doğrulama kullanıyor musunuz?</label>
-            <select id="q1" name="q1">
-              <option value="0">Hayır</option>
-              <option value="1">Bazılarında</option>
-              <option value="2">Evet, çoğunda</option>
-            </select>
-          </div>
+        <aside class="page-side-card">
+          <p class="section-kicker">Ne İşe Yarar?</p>
+          <h3>Kullanıcı farkındalığı için hızlı yön tayini</h3>
+          <p>Parola kullanımı, iki adımlı doğrulama, şüpheli link farkındalığı ve güncelleme alışkanlıkları gibi temel başlıklarda seviyenizi görürsünüz.</p>
+        </aside>
+      </div>
+    </section>
 
-          <div class="question">
-            <label for="q2">2. Aynı parolayı birden fazla yerde kullanıyor musunuz?</label>
-            <select id="q2" name="q2">
-              <option value="0">Evet</option>
-              <option value="1">Bazen</option>
-              <option value="2">Hayır</option>
-            </select>
-          </div>
+    <section class="section section-soft">
+      <div class="container narrow">
+        <form id="checkupForm" class="form-card">
+          <label for="q1">1. Hesaplarınızda iki adımlı doğrulama kullanıyor musunuz?</label>
+          <select id="q1" name="q1">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazılarında</option>
+            <option value="2">Evet, çoğunda</option>
+          </select>
 
-          <div class="question">
-            <label for="q3">3. Şüpheli linkleri tıklamadan önce kontrol eder misiniz?</label>
-            <select id="q3" name="q3">
-              <option value="0">Hayır</option>
-              <option value="1">Bazen</option>
-              <option value="2">Evet</option>
-            </select>
-          </div>
+          <label for="q2">2. Aynı parolayı birden fazla yerde kullanıyor musunuz?</label>
+          <select id="q2" name="q2">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Evet</option>
+            <option value="1">Bazen</option>
+            <option value="2">Hayır</option>
+          </select>
 
-          <div class="question">
-            <label for="q4">4. Acil ödeme, kargo veya banka mesajlarına karşı temkinli misiniz?</label>
-            <select id="q4" name="q4">
-              <option value="0">Hayır</option>
-              <option value="1">Bazen</option>
-              <option value="2">Evet</option>
-            </select>
-          </div>
+          <label for="q3">3. Şüpheli linkleri tıklamadan önce kontrol eder misiniz?</label>
+          <select id="q3" name="q3">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
 
-          <div class="question">
-            <label for="q5">5. Cihaz güncellemelerini düzenli yapar mısınız?</label>
-            <select id="q5" name="q5">
-              <option value="0">Hayır</option>
-              <option value="1">Bazen</option>
-              <option value="2">Evet</option>
-            </select>
-          </div>
+          <label for="q4">4. Acil ödeme, kargo veya banka mesajlarına karşı temkinli misiniz?</label>
+          <select id="q4" name="q4">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
 
-          <div class="question">
-            <label for="q6">6. Bilinmeyen QR kodlar ve kısa linklere karşı dikkatli misiniz?</label>
-            <select id="q6" name="q6">
-              <option value="0">Hayır</option>
-              <option value="1">Bazen</option>
-              <option value="2">Evet</option>
-            </select>
-          </div>
+          <label for="q5">5. Cihaz güncellemelerini düzenli yapar mısınız?</label>
+          <select id="q5" name="q5">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
 
-          <div class="question">
-            <label for="q7">7. Mesajlarda görünen ad yerine gerçek kaynağı kontrol eder misiniz?</label>
-            <select id="q7" name="q7">
-              <option value="0">Hayır</option>
-              <option value="1">Bazen</option>
-              <option value="2">Evet</option>
-            </select>
-          </div>
+          <label for="q6">6. Bilinmeyen QR kodlar ve kısa linklere karşı dikkatli misiniz?</label>
+          <select id="q6" name="q6">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
 
-          <div class="question">
-            <label for="q8">8. Önemli hesaplarınız için farklı ve güçlü parolalar kullanıyor musunuz?</label>
-            <select id="q8" name="q8">
-              <option value="0">Hayır</option>
-              <option value="1">Bazen</option>
-              <option value="2">Evet</option>
-            </select>
-          </div>
+          <label for="q7">7. Mesajlarda görünen ad yerine gerçek kaynağı kontrol eder misiniz?</label>
+          <select id="q7" name="q7">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
+
+          <label for="q8">8. Önemli hesaplarınız için farklı ve güçlü parolalar kullanıyor musunuz?</label>
+          <select id="q8" name="q8">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
+
+          <label for="q9">9. Tarayıcınızda veya telefonunuzda kayıtlı parolaları düzenli gözden geçirir misiniz?</label>
+          <select id="q9" name="q9">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
+
+          <label for="q10">10. Sosyal medya veya pazaryeri hesap girişlerinde cihaz bildirimlerini takip eder misiniz?</label>
+          <select id="q10" name="q10">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
+
+          <label for="q11">11. Bilmediğiniz bir satıcıya ödeme yapmadan önce alan adı ve yorum geçmişine bakar mısınız?</label>
+          <select id="q11" name="q11">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
+
+          <label for="q12">12. Şüpheli bir durumda hemen işlem yapmak yerine önce doğrulama yapar mısınız?</label>
+          <select id="q12" name="q12">
+            <option value="" selected disabled>Seçin</option>
+            <option value="0">Hayır</option>
+            <option value="1">Bazen</option>
+            <option value="2">Evet</option>
+          </select>
 
           <button type="submit" class="btn btn-primary">Skorumu Hesapla</button>
         </form>
 
-        <div id="checkupResult" class="result-card hidden fade-up"></div>
+        <div id="checkupResult" class="result-card hidden"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Kaynak Analiz</p>
+    <div class="container footer-grid">
+      <div>
+        <h3>Lumina Siber</h3>
+        <p>Bu araç kullanıcı güvenlik farkındalığını yükselten ücretsiz katmanın bir parçasıdır.</p>
+      </div>
+
+      <div>
+        <h4>Sayfalar</h4>
+        <ul>
+          <li><a href="siber.html">Ana Sayfa</a></li>
+          <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Not</h4>
+        <p>Sonuç yön gösterici bir skor üretir; ileri seviye analiz veya hukuki görüş yerine geçmez.</p>
+        <p><a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">Instagram</a></p>
+      </div>
+    </div>
+      <div class="container footer-bottom">
+      <span>Lumina Siber</span>
+      <span>luminadigitale.com</span>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="checkup.js"></script>
+  <script src="script.js" defer></script>
+  <script src="checkup.js" defer></script>
 </body>
 </html>
+
+

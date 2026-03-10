@@ -20,8 +20,9 @@ function looksLikeShortener(hostname) {
     "cutt.ly",
     "is.gd",
     "rebrand.ly",
-    "shorturl.at"
+    "shorturl.at",
   ];
+
   return shorteners.includes(hostname.toLowerCase());
 }
 
@@ -31,46 +32,101 @@ function analyzeUrlStructure(urlObject) {
 
   if (urlObject.protocol !== "https:") {
     risk += 2;
-    notes.push("Bağlantı HTTPS kullanmıyor.");
+    notes.push("Baglanti HTTPS kullanmiyor.");
   } else {
-    notes.push("Bağlantı HTTPS kullanıyor.");
+    notes.push("Baglanti HTTPS kullaniyor.");
   }
 
   if (looksLikeShortener(urlObject.hostname)) {
     risk += 2;
-    notes.push("Kısa link servisi kullanılıyor. Nihai hedef doğrudan görünmüyor.");
+    notes.push("Kisa link servisi kullaniliyor. Nihai hedef dogrudan gorunmuyor.");
   }
 
   if (isIpAddress(urlObject.hostname)) {
     risk += 2;
-    notes.push("Alan adı yerine IP adresi kullanılıyor.");
+    notes.push("Alan adi yerine IP adresi kullaniliyor.");
   }
 
   if (containsSuspiciousChars(urlObject.hostname)) {
     risk += 2;
-    notes.push("Alan adında olağandışı karakterler tespit edildi.");
+    notes.push("Alan adinda olagandisi karakterler tespit edildi.");
   }
 
   if (urlObject.hostname.split(".").length > 3) {
     risk += 1;
-    notes.push("Alan adı çok fazla alt alan içeriyor.");
+    notes.push("Alan adi cok fazla alt alan iceriyor.");
   }
 
   if (urlObject.pathname.length > 60) {
     risk += 1;
-    notes.push("URL yolu olağandan uzun görünüyor.");
+    notes.push("URL yolu olagandan uzun gorunuyor.");
   }
 
   if (urlObject.search.length > 80) {
     risk += 1;
-    notes.push("Sorgu parametreleri uzun ve karmaşık görünüyor.");
+    notes.push("Sorgu parametreleri uzun ve karmasik gorunuyor.");
   }
 
   if (notes.length === 0) {
-    notes.push("Belirgin bir yapısal risk sinyali görülmedi.");
+    notes.push("Belirgin bir yapisal risk sinyali gorulmedi.");
   }
 
   return { risk, notes };
+}
+
+function createParagraph(text, className = "") {
+  const paragraph = document.createElement("p");
+  paragraph.textContent = text;
+
+  if (className) {
+    paragraph.className = className;
+  }
+
+  return paragraph;
+}
+
+function createLabeledParagraph(label, value) {
+  const paragraph = document.createElement("p");
+  const strong = document.createElement("strong");
+  strong.textContent = `${label}: `;
+  paragraph.appendChild(strong);
+  paragraph.appendChild(document.createTextNode(value));
+  return paragraph;
+}
+
+function renderMessage(text) {
+  urlResult.classList.remove("hidden");
+  urlResult.replaceChildren(createParagraph(text));
+}
+
+function renderAnalysis(levelClass, levelText, parsedUrl, analysis) {
+  urlResult.classList.remove("hidden");
+  urlResult.replaceChildren();
+
+  const levelNode = document.createElement("div");
+  levelNode.className = `result-level ${levelClass}`;
+  levelNode.textContent = levelText;
+  urlResult.appendChild(levelNode);
+
+  urlResult.appendChild(createLabeledParagraph("Alan adi", parsedUrl.hostname));
+  urlResult.appendChild(createLabeledParagraph("Protokol", parsedUrl.protocol));
+  urlResult.appendChild(createLabeledParagraph("Yol", parsedUrl.pathname || "/"));
+  urlResult.appendChild(createLabeledParagraph("Degerlendirme", ""));
+
+  const list = document.createElement("ul");
+  analysis.notes.forEach((item) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = item;
+    list.appendChild(listItem);
+  });
+  urlResult.appendChild(list);
+
+  urlResult.appendChild(
+    createParagraph(
+      "Bu arac yalnizca tarayici icinde gorulebilen yapisal sinyalleri degerlendirir. Domain yasi, blacklist ve gercek yonlendirme hedefi gibi ileri kontroller bu surumde yoktur.",
+      "note"
+    )
+  );
 }
 
 if (analyzeUrlBtn && urlInput && urlResult) {
@@ -78,14 +134,13 @@ if (analyzeUrlBtn && urlInput && urlResult) {
     const rawValue = urlInput.value.trim();
 
     if (!rawValue) {
-      urlResult.classList.remove("hidden");
-      urlResult.innerHTML = `<p>Lütfen analiz etmek için bir bağlantı girin.</p>`;
+      renderMessage("Lutfen analiz etmek icin bir baglanti girin.");
       return;
     }
 
     let normalizedUrl = rawValue;
     if (!/^https?:\/\//i.test(normalizedUrl)) {
-      normalizedUrl = "https://" + normalizedUrl;
+      normalizedUrl = `https://${normalizedUrl}`;
     }
 
     try {
@@ -97,33 +152,18 @@ if (analyzeUrlBtn && urlInput && urlResult) {
 
       if (analysis.risk <= 1) {
         levelClass = "level-good";
-        levelText = "Düşük risk sinyali";
+        levelText = "Dusuk risk sinyali";
       } else if (analysis.risk <= 4) {
         levelClass = "level-mid";
         levelText = "Orta risk sinyali";
       } else {
         levelClass = "level-low";
-        levelText = "Yüksek risk sinyali";
+        levelText = "Yuksek risk sinyali";
       }
 
-      urlResult.classList.remove("hidden");
-      urlResult.innerHTML = `
-        <div class="result-level ${levelClass}">${levelText}</div>
-        <p><strong>Alan adı:</strong> ${parsedUrl.hostname}</p>
-        <p><strong>Protokol:</strong> ${parsedUrl.protocol}</p>
-        <p><strong>Yol:</strong> ${parsedUrl.pathname || "/"}</p>
-        <p><strong>Değerlendirme:</strong></p>
-        <ul>
-          ${analysis.notes.map((item) => `<li>${item}</li>`).join("")}
-        </ul>
-        <p class="note">
-          Bu araç yalnızca tarayıcı içinde görülebilen yapısal sinyalleri değerlendirir.
-          Domain yaşı, blacklist ve gerçek yönlendirme hedefi gibi ileri kontroller bu sürümde yoktur.
-        </p>
-      `;
+      renderAnalysis(levelClass, levelText, parsedUrl, analysis);
     } catch (error) {
-      urlResult.classList.remove("hidden");
-      urlResult.innerHTML = `<p>Geçerli bir link formatı girin.</p>`;
+      renderMessage("Gecerli bir link formati girin.");
     }
   });
 }

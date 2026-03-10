@@ -1,222 +1,470 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kaynak Analiz | Dijital Güvenlik Araçları ve Risk Ön İnceleme</title>
-  <meta name="description" content="Kaynak Analiz; ücretsiz güvenlik checkup, link kontrolü, parola araçları ve mail ile manuel dijital risk ön inceleme hizmetleri sunar." />
-  <meta name="theme-color" content="#0b1525" />
+  <title>Lumina Danışmanlık | E-Ticaret, Web ve Büyüme Danışmanlığı</title>
+  <meta
+    name="description"
+    content="Lumina Danışmanlık; web sitesi yapımı, Shopify kurulumu, Etsy danışmanlığı, reklam yönetimi ve birebir mentor desteğini tek sayfada toplar."
+  />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto: https://formsubmit.co;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/" />
+  <link rel="preload" as="image" href="assets/images/ld-hero-01.svg" type="image/svg+xml" />
+  <meta property="og:title" content="Lumina Danışmanlık | E-Ticaret, Web ve Büyüme Danışmanlığı" />
+  <meta property="og:description" content="Shopify, Etsy, web sitesi kurulumu, reklam yönetimi ve birebir mentor desteği." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://luminadigitale.com/" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lumina Danışmanlık | E-Ticaret, Web ve Büyüme Danışmanlığı" />
+  <meta name="twitter:description" content="Lumina Danışmanlık için editoryal landing: site, mağaza, reklam ve mentor desteği." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="apple-touch-icon" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="consulting-page">
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Ana sayfa">
-        <span class="brand-badge">KA</span>
-        <span>Kaynak Analiz</span>
+      <a class="brand" href="index.html" aria-label="Lumina Danışmanlık ana sayfa">
+        <span class="brand-mark"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="Lumina Danışmanlık logo" width="48" height="48" /></span>
+        <span class="brand-copy">
+          <strong>Lumina</strong>
+          <span>Danışmanlık</span>
+        </span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
 
       <nav class="nav-links" id="navLinks">
-        <a href="index.html">Ana Sayfa</a>
-        <a href="araclar.html">Ücretsiz Araçlar</a>
-        <a href="iletisim.html">İletişim</a>
-        <a href="iletisim.html" class="nav-btn">Talep Gönder</a>
+        <a href="#biz">Biz Kimiz?</a>
+        <a href="#yaklasim">Yaklaşımımız</a>
+        <a href="#hizmetler">Hizmetlerimiz</a>
+        <a href="blog.html">Bloglarımız</a>
+        <a href="#iletisim" class="nav-btn">İletişime Geç</a>
       </nav>
+
+      <div class="site-switcher" data-site-switcher>
+        <button class="site-switcher-toggle" type="button" aria-label="Site değiştir" aria-expanded="false">
+          <img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="34" height="34" />
+        </button>
+        <div class="site-switcher-menu">
+          <a class="site-switcher-link" href="siber.html">
+            <img src="assets/images/brand-mark.svg" alt="" width="28" height="28" />
+            <span>Lumina Siber</span>
+          </a>
+          <a class="site-switcher-link is-active" href="index.html">
+            <img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="28" height="28" />
+            <span>Lumina Danışmanlık</span>
+          </a>
+          <a class="site-switcher-link" href="akademi.html">
+            <img src="assets/images/site-akademi.svg?v=20260310-02" alt="" width="28" height="28" />
+            <span>Lumina Akademi</span>
+          </a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero section">
-      <div class="container hero-grid">
-        <div class="fade-up">
-          <p class="eyebrow">Türkiye odaklı dijital güvenlik platformu</p>
-          <h1>Dijital riskleri sadeleştiren güvenlik araçları</h1>
-          <p class="hero-text">
-            Kaynak Analiz; son kullanıcılar, aileler ve küçük işletmeler için ücretsiz güvenlik araçları sunar.
-            Daha kapsamlı durumlarda ise mail üzerinden manuel dijital risk ön inceleme süreci yürütür.
+  <main class="page-main">
+    <section class="section consulting-stage">
+      <div class="container">
+        <nav class="consulting-anchor-bar reveal" data-reveal aria-label="Danışmanlık iç menü">
+          <a href="#biz">Biz Kimiz?</a>
+          <a href="#yaklasim">Felsefemiz</a>
+          <a href="#iletisim">İletişime Geçin</a>
+          <a href="#hizmetler">Hizmetlerimiz</a>
+          <a href="blog.html">Bloglarımız</a>
+        </nav>
+
+        <section class="consulting-showcase reveal" data-reveal data-consulting-carousel>
+          <div class="consulting-showcase-visual">
+            <article class="consulting-showcase-slide is-active" data-consulting-slide="0">
+              <div class="consulting-showcase-asset consulting-showcase-asset-hero-01"></div>
+            </article>
+
+            <article class="consulting-showcase-slide" data-consulting-slide="1" aria-hidden="true">
+              <div class="consulting-showcase-asset consulting-showcase-asset-hero-02"></div>
+            </article>
+
+            <article class="consulting-showcase-slide" data-consulting-slide="2" aria-hidden="true">
+              <div class="consulting-showcase-asset consulting-showcase-asset-hero-03"></div>
+            </article>
+          </div>
+
+          <div class="consulting-showcase-copy">
+            <h1>Lumina</h1>
+            <p>E-Ticaret ve Büyüme Danışmanlığı</p>
+          </div>
+
+          <aside class="consulting-showcase-rail">
+            <a href="#iletisim">Bize Ulaşın</a>
+            <button class="consulting-showcase-next" type="button" data-consulting-next aria-label="Sonraki görsel">
+              <span>&rsaquo;</span>
+            </button>
+            <span>[ 2024 ]</span>
+          </aside>
+        </section>
+
+        <div class="consulting-quote-strip reveal" data-reveal>
+          <p>"İşletmenizin yalnızca yayına değil, düzenli büyüyen bir sisteme ihtiyacı varsa her adımda yanınızdayız."</p>
+          <a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">[ Instagram ]</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consulting-centered" id="biz">
+      <div class="container narrow reveal" data-reveal>
+        <p class="section-kicker">Biz Kimiz?</p>
+        <h2>Kurulumdan Reklama Kadar Dağınık İşleri Tek Akışta Topluyoruz.</h2>
+        <p>
+          Lumina Danışmanlık; web sitesi yapımı, Shopify kurulumu, Etsy danışmanlığı, reklam yönetimi ve birebir mentor desteğini
+          tek bir çatı altında birleştirir. Amacımız yalnızca “site açmak” ya da “reklam vermek” değil; satışa etki eden parçaların
+          birbirini taşıdığı daha düzenli bir yapı kurmaktır.
+        </p>
+      </div>
+    </section>
+
+    <section class="section consulting-marquee-section">
+      <div class="container">
+        <div class="consulting-marquee ticker-strip reveal" data-reveal aria-hidden="true">
+          <div class="ticker-track">
+            <div class="ticker-row consulting-ticker-row">
+              <span class="consulting-marquee-brand"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="26" height="26" />Lumina</span>
+              <span class="consulting-marquee-icon"><img src="assets/icons/camera-outline.svg" alt="" width="24" height="24" /></span>
+              <span class="consulting-marquee-brand"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="26" height="26" />Lumina</span>
+              <span class="consulting-marquee-icon"><img src="assets/icons/megaphone-outline.svg" alt="" width="24" height="24" /></span>
+              <span class="consulting-marquee-brand"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="26" height="26" />Lumina</span>
+              <span class="consulting-marquee-icon"><img src="assets/icons/cart-outline.svg" alt="" width="24" height="24" /></span>
+            </div>
+            <div class="ticker-row consulting-ticker-row" aria-hidden="true">
+              <span class="consulting-marquee-brand"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="26" height="26" />Lumina</span>
+              <span class="consulting-marquee-icon"><img src="assets/icons/camera-outline.svg" alt="" width="24" height="24" /></span>
+              <span class="consulting-marquee-brand"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="26" height="26" />Lumina</span>
+              <span class="consulting-marquee-icon"><img src="assets/icons/megaphone-outline.svg" alt="" width="24" height="24" /></span>
+              <span class="consulting-marquee-brand"><img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="26" height="26" />Lumina</span>
+              <span class="consulting-marquee-icon"><img src="assets/icons/cart-outline.svg" alt="" width="24" height="24" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consulting-mosaic" id="yaklasim">
+      <div class="container">
+        <div class="consulting-mosaic-grid">
+          <article class="consulting-mosaic-card consulting-mosaic-card-visual reveal" data-reveal>
+            <div class="consulting-placeholder consulting-placeholder-mosaic-01"></div>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-copy reveal" data-reveal>
+            <span class="consulting-vertical-label">Yaklaşımımız / Felsefemiz</span>
+            <p>Güven, sürdürülebilir ilişkilerin temelidir. Bu yüzden tüm süreçlerimizde şeffaf, tutarlı ve sonuç odaklı hareket ederiz.</p>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-copy reveal" data-reveal>
+            <span class="consulting-vertical-label">Yaratıcı Süreç / Kültür</span>
+            <p>Kalite, bir tercihten öte sorumluluktur. Her detayda markanıza uzun vadeli değer katacak düzeni kurarız.</p>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-visual reveal" data-reveal>
+            <div class="consulting-placeholder consulting-placeholder-mosaic-02"></div>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-visual reveal" data-reveal>
+            <div class="consulting-placeholder consulting-placeholder-mosaic-03"></div>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-copy reveal" data-reveal>
+            <span class="consulting-vertical-label">Değerlerimiz / Manifesto</span>
+            <p>Biz, görünmekten fazlasını hedefleriz: anlaşılmak, güven vermek ve hatırlanmak. Bunu da gerçek stratejiyle mümkün kılarız.</p>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-copy reveal" data-reveal>
+            <span class="consulting-vertical-label">Vizyon / Gelecek Hedefi</span>
+            <p>Tasarımın ve iletişimin yalnızca estetikten ibaret olmadığını biliyoruz. Her işimizde ölçülebilir etkiyi temel alırız.</p>
+          </article>
+
+          <article class="consulting-mosaic-card consulting-mosaic-card-visual reveal" data-reveal>
+            <div class="consulting-placeholder consulting-placeholder-mosaic-04"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consulting-services" id="hizmetler">
+      <div class="container">
+        <div class="consulting-service-row reveal" data-reveal>
+          <div class="consulting-service-media">
+            <div class="consulting-service-asset consulting-service-asset-01"></div>
+          </div>
+          <div class="consulting-service-copy">
+            <h2>E-Ticaret Sitesi Kurulumu ve Panel Yönetimi</h2>
+            <p>İşletmenizi dijital dünyaya taşımak için ihtiyaç duyduğunuz teknik altyapıyı kuruyoruz. Shopify ve benzeri yapılarda mağazanızı yalnızca açmıyor, sipariş ve operasyon tarafını da düzenliyoruz.</p>
+            <div class="hero-actions consulting-actions">
+              <a class="btn btn-primary" href="#iletisim">İletişim</a>
+              <a class="btn btn-secondary" href="#sss">Sık Sorulanlar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="consulting-service-row consulting-service-row-reverse reveal" data-reveal>
+          <div class="consulting-service-media">
+            <div class="consulting-service-asset consulting-service-asset-02"></div>
+          </div>
+          <div class="consulting-service-copy">
+            <h2>Etsy Danışmanlığı</h2>
+            <p>Etsy tarafında ürün yerleşimi, mağaza düzeni, açıklama dili ve görünürlük mantığını birlikte kuruyoruz. Amaç yalnızca mağaza açmak değil, aramada bulunan ve satın almaya yaklaşan bir yapı oluşturmaktır.</p>
+            <div class="hero-actions consulting-actions">
+              <a class="btn btn-primary" href="#iletisim">İletişim</a>
+              <a class="btn btn-secondary" href="#sss">Sık Sorulanlar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="consulting-service-row reveal" data-reveal>
+          <div class="consulting-service-media">
+            <div class="consulting-service-asset consulting-service-asset-03"></div>
+          </div>
+          <div class="consulting-service-copy">
+            <h2>Kurumsal ve Tek Sayfa Web Sitesi Kurulumu</h2>
+            <p>Markanızı sade, güven veren ve dönüşüm odaklı bir dijital vitrine taşıyoruz. Kurumsal site ya da tek sayfa yapı fark etmeksizin, ziyaretçinin ne sunduğunuzu birkaç saniyede anlayacağı net bir akış kuruyoruz.</p>
+            <div class="hero-actions consulting-actions">
+              <a class="btn btn-primary" href="#iletisim">İletişim</a>
+              <a class="btn btn-secondary" href="#sss">Sık Sorulanlar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="consulting-service-row consulting-service-row-reverse reveal" data-reveal>
+          <div class="consulting-service-media">
+            <div class="consulting-service-asset consulting-service-asset-04"></div>
+          </div>
+          <div class="consulting-service-copy">
+            <h2>Sosyal Medya Yönetimi ve Yayın Planı</h2>
+            <p>Markanızın dijital vitrini olan sosyal medya tarafında düzenli içerik akışı, yayın planı ve görünürlük mantığı kuruyoruz. Amaç boş paylaşım yapmak değil, ilgiyi doğru yere taşımaktır.</p>
+            <div class="hero-actions consulting-actions">
+              <a class="btn btn-primary" href="#iletisim">İletişim</a>
+              <a class="btn btn-secondary" href="#sss">Sık Sorulanlar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="consulting-service-row reveal" data-reveal>
+          <div class="consulting-service-media">
+            <div class="consulting-service-asset consulting-service-asset-05"></div>
+          </div>
+          <div class="consulting-service-copy">
+            <h2>Reklam Yönetimi, Mentor Desteği ve Büyüme Planı</h2>
+            <p>Meta ve Google reklamları, birebir mentor desteği ve operasyon planı tek başına değil birlikte anlam kazanır. Nerede tıkandığınızı bulur, bütçeyi ve emeği doğru sıraya koyarız.</p>
+            <div class="hero-actions consulting-actions">
+              <a class="btn btn-primary" href="#iletisim">İletişim</a>
+              <a class="btn btn-secondary" href="#sss">Sık Sorulanlar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consulting-faq" id="sss">
+      <div class="container narrow reveal" data-reveal>
+        <div class="section-intro faq-intro consulting-faq-intro">
+          <p class="section-kicker">Sık Sorulan Sorular</p>
+          <h2>Karar vermeden önce en çok bunlar soruluyor.</h2>
+          <p class="faq-lead">
+            Aşağıdaki başlıklar yalnızca danışmanlıkta yer alan hizmetler için hazırlandı. E-ticaret kurulumu, Etsy danışmanlığı, sosyal medya, reklam yönetimi ve tek sayfa site tarafında en çok gelen sorular burada.
           </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="araclar.html">Ücretsiz Araçları Aç</a>
-            <a class="btn btn-secondary" href="iletisim.html">Mail ile Talep Gönder</a>
-          </div>
-
-          <div class="trust-pills">
-            <span>0 maliyetli altyapı</span>
-            <span>Tarayıcı içinde çalışan araçlar</span>
-            <span>Anlaşılır ve sade arayüz</span>
-          </div>
         </div>
 
-        <div class="hero-panel fade-up delay-1">
-          <div class="panel-head">
-            <span class="status-dot"></span>
-            <span>Hemen kullanılabilir araçlar</span>
-          </div>
-
-          <div class="panel-list">
-            <article class="panel-card">
-              <h3>Güvenlik Checkup</h3>
-              <p>Kısa soru-cevap ile temel güvenlik farkındalığı skoru üretir.</p>
-            </article>
-
-            <article class="panel-card">
-              <h3>Link Kontrolü</h3>
-              <p>URL yapısı, HTTPS, kısa link ve temel risk sinyallerini değerlendirir.</p>
-            </article>
-
-            <article class="panel-card">
-              <h3>Parola Araçları</h3>
-              <p>Parola gücü ölçümü ve güçlü parola üretimi sunar.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section soft-section">
-      <div class="container">
-        <div class="section-head fade-up">
-          <p class="section-kicker">Yapı</p>
-          <h2>İki katmanlı sade model</h2>
-          <p>
-            Bu site ücretsiz araçlarla ilk temas kurar, daha ileri durumlarda ise manuel inceleme talebine yönlendirir.
-            Böylece hem SEO açısından güçlü görünürlük sağlanır hem de güvenilir bir hizmet akışı korunur.
-          </p>
-        </div>
-
-        <div class="grid-3">
-          <article class="feature-card fade-up">
-            <h3>Ücretsiz araç katmanı</h3>
-            <p>
-              Kullanıcılar güvenlik checkup, link kontrolü ve parola araçlarını anında kullanabilir.
-            </p>
+        <div class="faq-list consulting-faq-list">
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Sabit bir fiyatlandırma modeliyle mi çalışıyorsunuz?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Hayır, her işin kapsamı farklı. Site kurulumu, mağaza düzeni, reklam yönetimi ya da mentorluk tek kalemde ilerlemediği için ihtiyaç başlıklarını netleştirip buna göre teklif çıkarıyoruz.</p>
+            </div>
           </article>
 
-          <article class="feature-card fade-up delay-1">
-            <h3>Güven oluşturan deneyim</h3>
-            <p>
-              Karmaşık güvenlik konularını sadeleştirir ve gereksiz jargon kullanmadan yol gösterir.
-            </p>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>E-ticaret sitesi kurulumu ne kadar sürer?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Kapsama göre değişir. Tek sayfa yapı daha hızlı tamamlanırken, ürün yerleşimi, ödeme akışı, kargo ve panel kurgusu olan mağaza tarafı daha uzun sürer. İlk görüşmede gerçek zaman planını netleştiriyoruz.</p>
+            </div>
           </article>
 
-          <article class="feature-card fade-up delay-2">
-            <h3>Manuel inceleme akışı</h3>
-            <p>
-              Daha ciddi veya gri alan durumlarda kullanıcı mail üzerinden kontrollü şekilde talep iletir.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head fade-up">
-          <p class="section-kicker">Kimler için</p>
-          <h2>Hedef kullanıcı profili</h2>
-        </div>
-
-        <div class="grid-4">
-          <article class="mini-feature fade-up">
-            <h3>Bireyler</h3>
-            <p>Şüpheli link, parola veya genel güvenlik durumunu anlamak isteyen kullanıcılar.</p>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Sadece kurulumu mu yapıyorsunuz, yoksa yönetimi de sağlıyor musunuz?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>İkisi de mümkün. Bazı markalar yalnızca kurulum ister, bazıları ise panel yönetimi, ürün düzeni, reklam ve içerik tarafında da birlikte devam eder.</p>
+            </div>
           </article>
 
-          <article class="mini-feature fade-up delay-1">
-            <h3>Aileler</h3>
-            <p>Özellikle yaşlı yakınlarını dijital dolandırıcılıklardan korumak isteyenler.</p>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Etsy danışmanlığı tam olarak neleri kapsıyor?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Etsy tarafında mağaza düzeni, ürün başlıkları, açıklama dili, kategori yerleşimi, görsel akış ve ilk görünürlük mantığı üzerinde çalışıyoruz. Amaç mağazayı açmak değil, aramada daha sağlıklı bir zemine oturtmak.</p>
+            </div>
           </article>
 
-          <article class="mini-feature fade-up delay-2">
-            <h3>Küçük işletmeler</h3>
-            <p>Temel dijital risk görünürlüğü ve ön kontrol isteyen işletmeler.</p>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Kurumsal site ile tek sayfa site arasında nasıl karar verilir?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Hizmet sayınız, içerik derinliğiniz ve satış akışınız belirleyici olur. Daha sade ve hızlı bir çıkış gerekiyorsa tek sayfa yapı güçlüdür; daha fazla hizmet ve içerik anlatılacaksa kurumsal site daha doğru olur.</p>
+            </div>
           </article>
 
-          <article class="mini-feature fade-up delay-3">
-            <h3>Markalar</h3>
-            <p>İlk temas ve ön değerlendirme isteyen ekipler için sade giriş noktası.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section soft-section">
-      <div class="container">
-        <div class="section-head fade-up">
-          <p class="section-kicker">Yasal çerçeve</p>
-          <h2>Ne yapıyoruz, ne yapmıyoruz</h2>
-        </div>
-
-        <div class="grid-2">
-          <article class="policy-card success fade-up">
-            <h3>Yaptığımız</h3>
-            <ul>
-              <li>Tarayıcı içinde çalışan güvenlik araçları sunmak</li>
-              <li>Temel link ve parola risklerini görünür kılmak</li>
-              <li>Mail ile manuel ön inceleme talebi almak</li>
-              <li>Açık kaynak mantığıyla sade risk yorumları yapmak</li>
-            </ul>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Sosyal medya yönetimi neleri kapsıyor?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>İçerik yönü, yayın planı, görsel dil, paylaşım ritmi ve markanın dışarıdan nasıl göründüğü birlikte ele alınır. Yani yalnızca paylaşım üretmek değil, görünürlüğü anlamlı hale getirmek hedeflenir.</p>
+            </div>
           </article>
 
-          <article class="policy-card warning fade-up delay-1">
-            <h3>Yapmadığımız</h3>
-            <ul>
-              <li>Hack, sızma veya hesap ele geçirme</li>
-              <li>Özel bilgi bulma veya gizli veri erişimi</li>
-              <li>Taciz, takip veya doxxing amaçlı araştırma</li>
-              <li>Backend/API gerektiren ama sitede varmış gibi gösterilen sahte araçlar</li>
-            </ul>
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Reklam kampanyalarını siz mi yönetiyorsunuz?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Evet, uygun projelerde Meta ve Google reklam tarafını da yönetiyoruz. Burada önemli olan yalnızca kampanya açmak değil, reklamı site ve satış akışıyla aynı hedefe bağlamak.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Mentor desteği kimler için uygundur?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Ne yaptığını bilen ama nerede tıkandığını net göremeyen işletmeler için uygundur. Bütçe, içerik, mağaza düzeni veya reklam tarafında kararları hızlandırmak isteyenler bu modelden daha fazla fayda alır.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Kendi alan adımı ve hostingimi kullanabilir miyim?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Evet. Mevcut alan adı ve altyapınız üzerinden ilerleyebiliriz. Eğer henüz kurulum yoksa buna uygun en temiz yapıyı birlikte seçiyoruz.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Uzun vadeli çalışma mümkün mü?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Evet. Bazı işler yalnızca kurulumla biter, bazıları ise içerik, reklam, optimizasyon ve mentor desteğiyle düzenli ilerler. İhtiyaca göre kısa veya uzun vadeli model kurulabilir.</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="cta-box fade-up">
-          <div>
-            <p class="section-kicker">Başlangıç noktası</p>
-            <h2>Önce ücretsiz araçları kullanın</h2>
-            <p>
-              Basit ama işe yarayan güvenlik araçlarıyla başlayın. Daha kapsamlı bir durum varsa, mail ile manuel inceleme talebi gönderin.
-            </p>
-          </div>
-          <a class="btn btn-primary" href="araclar.html">Araçlara Git</a>
+    <section class="section consulting-awards">
+      <div class="container consulting-awards-grid reveal" data-reveal>
+        <div>
+          <p class="section-kicker">Çalışma Modelimiz</p>
+          <h2>Ne Kuruyoruz?</h2>
+          <p>Türkiye’deki ve global pazardaki e-ticaret işleri için tasarım, yapı ve operasyon tarafını aynı masada topluyoruz. Bu yüzden yalnızca görsel değil, süreç üreten bir danışmanlık modeli kuruyoruz.</p>
         </div>
+
+        <div class="consulting-awards-list">
+          <article><span>01</span><strong>Mağaza ve site yapısı</strong><small>tek yerde toplanır</small></article>
+          <article><span>02</span><strong>Reklam ve içerik dili</strong><small>aynı hedefe bağlanır</small></article>
+          <article><span>03</span><strong>Operasyon ve takip düzeni</strong><small>boşluk bırakmaz</small></article>
+          <article><span>04</span><strong>Mentor desteği</strong><small>tek seferlik değil, süreçlidir</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section consulting-contact" id="iletisim">
+      <div class="container narrow">
+        <div class="consulting-contact-head reveal" data-reveal>
+          <p>Fikrin mi var?</p>
+          <h2>Gel Konuşalım</h2>
+        </div>
+
+        <form class="consulting-contact-form reveal" data-reveal action="https://formsubmit.co/iletisim@luminadigitale.com" method="POST" accept-charset="UTF-8" data-thanks-source="danismanlik" data-formsubmit-endpoint-key="danismanlik">
+          <input type="hidden" name="_subject" value="Lumina Danışmanlık | Yeni Talep" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="true" />
+          <input type="hidden" name="_blacklist" value="viagra,casino,porn,escort,loan,bet,betting,crypto,bitcoin" />
+          <input type="hidden" name="_next" value="https://luminadigitale.com/tesekkurler.html" />
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+
+          <input type="text" name="isim" placeholder="İsim" required />
+          <input type="text" name="soyisim" placeholder="Soyisim" required />
+          <input type="email" name="email" placeholder="Mail Adresi" required />
+          <input type="tel" name="telefon" placeholder="Tel. No" required />
+          <input type="text" name="hizmet" placeholder="Sektörünüz / Almak İstediğiniz Hizmeti Belirtin" required />
+          <textarea name="mesaj" rows="7" placeholder="Mesajınız" required></textarea>
+          <button type="submit" class="btn btn-primary consulting-submit">Gönder</button>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer consulting-footer">
     <div class="container footer-grid">
       <div>
-        <h3>Kaynak Analiz</h3>
-        <p>Dijital güvenlik araçları ve sade risk ön inceleme platformu.</p>
+        <h3>Lumina Danışmanlık</h3>
+        <p>Web, e-ticaret, reklam ve mentor desteğini tek editoryal çatı altında birleştirir.</p>
       </div>
 
       <div>
-        <h4>Sayfalar</h4>
+        <h4>Hızlı Erişim</h4>
         <ul>
-          <li><a href="index.html">Ana Sayfa</a></li>
-          <li><a href="araclar.html">Ücretsiz Araçlar</a></li>
-          <li><a href="iletisim.html">İletişim</a></li>
+          <li><a href="#biz">Biz Kimiz?</a></li>
+          <li><a href="#hizmetler">Hizmetlerimiz</a></li>
+          <li><a href="blog.html">Blog Merkezi</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+          <li><a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">Instagram</a></li>
         </ul>
       </div>
 
       <div>
-        <h4>Alan adı notu</h4>
-        <p>
-          Kod içindeki <code>BURAYI_DEGISTIR</code> alanlarını gerçek domain ve mail adreslerinle değiştir.
-        </p>
+        <h4>İletişim</h4>
+        <p><a href="#iletisim">Danışmanlık formu</a></p>
+        <p><a href="iletisim.html">Genel iletişim merkezi</a></p>
+        <p><a href="politikalar.html">Yasal ve uyum</a></p>
+        <p><a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">@luminadigitale</a></p>
       </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>Lumina Danışmanlık</span>
+      <span>luminadigitale.com</span>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="formsubmit-endpoints.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
+

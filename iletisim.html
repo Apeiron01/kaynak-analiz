@@ -1,80 +1,242 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>İletişim | Kaynak Analiz</title>
-  <meta name="description" content="Kaynak Analiz iletişim ve manuel inceleme talepleri." />
+  <title>İletişim ve İnceleme Talebi | Lumina Siber</title>
+  <meta
+    name="description"
+    content="Lumina Siber iletişim sayfası: şüpheli satıcı, riskli link, hesap sızıntısı veya işletme güvenliği konularında inceleme talebi oluşturun."
+  />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto: https://formsubmit.co;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/iletisim.html" />
+  <meta property="og:title" content="İletişim ve İnceleme Talebi | Lumina Siber" />
+  <meta property="og:description" content="Form, e-posta adresleri ve talep kapsamı ile Lumina Siber inceleme akışına doğrudan giriş sayfası." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://luminadigitale.com/iletisim.html" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="İletişim ve İnceleme Talebi | Lumina Siber" />
+  <meta name="twitter:description" content="Şüpheli site, dolandırıcı satıcı, riskli link veya marka güvenliği talebinizi doğrudan iletin." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Lumina Siber İletişim",
+      "url": "https://luminadigitale.com/iletisim.html",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Lumina Siber"
+      }
+    }
+  </script>
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">
-        <span class="brand-badge">KA</span>
-        <span>Kaynak Analiz</span>
+      <a class="brand" href="siber.html" aria-label="Lumina Siber ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina logo" width="48" height="48" /></span>
+        <span class="brand-copy">
+          <strong>Lumina</strong>
+          <span>Siber</span>
+        </span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
 
       <nav class="nav-links" id="navLinks">
-        <a href="index.html">Ana Sayfa</a>
-        <a href="araclar.html">Ücretsiz Araçlar</a>
-        <a href="iletisim.html">İletişim</a>
+        <a href="siber.html#vaka">Vaka Tipleri</a>
+        <a href="siber.html#neden">Nasıl çalışır</a>
+        <a href="blog.html">Blog</a>
+        <a href="hizmetler.html">Hizmetlerimiz</a>
+        <a href="siber.html#sss">SSS</a>
+        <a href="iletisim.html" class="nav-btn">İletişime Geç</a>
       </nav>
+
+      <div class="site-switcher" data-site-switcher>
+        <button class="site-switcher-toggle" type="button" aria-label="Site değiştir" aria-expanded="false">
+          <img src="assets/images/brand-mark.svg" alt="" width="34" height="34" />
+        </button>
+        <div class="site-switcher-menu">
+          <a class="site-switcher-link is-active" href="siber.html">
+            <img src="assets/images/brand-mark.svg" alt="" width="28" height="28" />
+            <span>Lumina Siber</span>
+          </a>
+          <a class="site-switcher-link" href="index.html">
+            <img src="assets/images/site-danismanlik.svg?v=20260310-01" alt="" width="28" height="28" />
+            <span>Lumina Danışmanlık</span>
+          </a>
+          <a class="site-switcher-link" href="akademi.html">
+            <img src="assets/images/site-akademi.svg?v=20260310-02" alt="" width="28" height="28" />
+            <span>Lumina Akademi</span>
+          </a>
+        </div>
+      </div>
     </div>
   </header>
 
   <main class="page-main">
-    <section class="section">
-      <div class="container narrow">
-        <div class="section-head fade-up">
-          <p class="section-kicker">İletişim</p>
-          <h1 class="page-title">Manuel inceleme talebi</h1>
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">İnceleme Talebi</p>
+          <h1 class="page-title">Durumu birkaç net başlıkla iletin, doğru inceleme akışını kuralım.</h1>
           <p>
-            Ücretsiz araçların ötesinde daha kapsamlı bir durum varsa, mail ile talep iletebilirsiniz.
+            Şüpheli satıcı, sahte site, riskli ödeme talebi, kurum mesajı, hesap sızıntısı veya marka güvenliği gibi
+            başlıklarda talebinizi hızlıca iletebilirsiniz. Form doğrudan e-posta akışına düşer.
           </p>
-        </div>
-
-        <div class="form-card fade-up delay-1">
-          <h3>İletişim adresleri</h3>
-          <p><strong>Genel iletişim:</strong> <a href="mailto:iletisim@BURAYI_DEGISTIR.com">iletisim@BURAYI_DEGISTIR.com</a></p>
-          <p><strong>Talep adresi:</strong> <a href="mailto:talep@BURAYI_DEGISTIR.com">talep@BURAYI_DEGISTIR.com</a></p>
-          <p><strong>Yasal/uyum:</strong> <a href="mailto:legal@BURAYI_DEGISTIR.com">legal@BURAYI_DEGISTIR.com</a></p>
-        </div>
-
-        <div class="form-card fade-up delay-2">
-          <h3>Örnek mail formatı</h3>
-          <div class="code-box">Konu: Analiz Talebi - Şüpheli Dijital Durum
-
-İçerik:
-- İncelenecek konu:
-- Kısa açıklama:
-- Aciliyet durumu:
-- Varsa ilgili link / ekran görüntüsü / metin:
+          <div class="pill-list">
+            <span>İletişim modeliyle ilerler</span>
+            <span>Yasal çerçevede değerlendirilir</span>
+            <span>Açık kaynak ve doğrulama odaklıdır</span>
           </div>
         </div>
 
-        <div class="form-card fade-up delay-3">
-          <h3>Önemli not</h3>
-          <ul>
-            <li>Tüm talepler manuel incelenir.</li>
-            <li>Uygun olmayan veya yasal sınırı aşan talepler reddedilir.</li>
-            <li>Bu hizmet hack, hesap ele geçirme veya özel bilgi toplama amacı taşımaz.</li>
+        <aside class="page-side-card">
+          <p class="section-kicker">Hızlı Uygunluk Kontrolü</p>
+          <h3>Hangi talepler uygundur?</h3>
+          <ul class="bullet-list">
+            <li>Şüpheli e-ticaret sitesi veya satıcı araştırması</li>
+            <li>Mesaj, link veya kurum doğrulama ihtiyacı</li>
+            <li>Marka, domain veya işletme risk görünürlüğü</li>
+            <li>Hesap sızıntısı ve parola güvenliği yönlendirmesi</li>
           </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container grid-2">
+        <article class="form-card">
+          <h3>İletişim yolları</h3>
+          <p><strong>Genel iletişim:</strong> bu form üzerinden ilerler.</p>
+          <p><strong>İnceleme talebi:</strong> aşağıdaki talep formuna düşer.</p>
+          <p><strong>Yasal ve uyum:</strong> <a href="politikalar.html">politikalar merkezi</a> üzerinden yönlendirilir.</p>
+          <p class="note">Kısa bir özet, ilgili link ve varsa ekran görüntüsü ilk inceleme için yeterlidir.</p>
+        </article>
+
+        <article class="form-card">
+          <h3>İlk mesajda ne olmalı?</h3>
+          <div class="code-box">Konu: Lumina Siber inceleme talebi
+
+- Konu başlığı
+- Şüpheli görünen unsur
+- İlgili link / kullanıcı adı / telefon / e-posta
+- Olayın kısa özeti
+- Aciliyet durumu
+- Varsa ekran görüntüsü / belge / ek bilgi</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <article class="form-card">
+          <p class="section-kicker">Form</p>
+          <h3>Mesajınızı doğrudan iletin</h3>
+          <form action="https://formsubmit.co/iletisim@luminadigitale.com" method="POST" accept-charset="UTF-8" data-thanks-source="iletisim" data-formsubmit-endpoint-key="iletisim">
+            <input type="hidden" name="_subject" value="Lumina Siber | Yeni Talep" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="true" />
+            <input type="hidden" name="_blacklist" value="viagra,casino,porn,escort,loan,bet,betting,crypto,bitcoin" />
+            <input type="hidden" name="_next" value="https://luminadigitale.com/tesekkurler.html" />
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+
+            <label for="name">Adınız</label>
+            <input id="name" type="text" name="isim" placeholder="Ad Soyad" required />
+
+            <label for="email">E-posta</label>
+            <input id="email" type="email" name="eposta" placeholder="ornek@eposta.com" required />
+
+            <label for="phone">Telefon</label>
+            <input id="phone" type="text" name="telefon" placeholder="05xx xxx xx xx" required />
+
+            <label for="topic">Konu</label>
+            <select id="topic" name="konu" required>
+              <option value="">Konu seçin</option>
+              <option value="Şüpheli site">Şüpheli site</option>
+              <option value="Şüpheli satıcı">Şüpheli satıcı</option>
+              <option value="Riskli link veya mesaj">Riskli link veya mesaj</option>
+              <option value="Marka / domain güvenliği">Marka / domain güvenliği</option>
+              <option value="Hesap sızıntısı">Hesap sızıntısı</option>
+              <option value="Diğer">Diğer</option>
+            </select>
+
+            <label for="details">Mesajınız</label>
+            <textarea id="details" name="mesaj" placeholder="Durumu kısaca anlatın" required></textarea>
+
+            <button type="submit" class="btn btn-primary">Gönder</button>
+          </form>
+          <p class="note">Teknik detayları ilk mesajda kusursuz yazmanız gerekmez. Konuyu kısa ve net anlatmanız yeterli.</p>
+        </article>
+
+        <div class="grid-3 single-column-grid">
+          <article class="feature-card">
+            <p class="section-kicker">Uygun Talepler</p>
+            <h3>Kullanıcı güvenliği ve doğrulama odaklı işler</h3>
+            <p>Dolandırıcılık şüphesi, sahte mağaza, mesaj doğrulama, domain riski ve dijital görünürlük analizi gibi başlıklarda ilerlenir.</p>
+          </article>
+
+          <article class="feature-card">
+            <p class="section-kicker">Uygun Olmayan Talepler</p>
+            <h3>Hukuka aykırı veya gizlilik ihlali yaratan istekler</h3>
+            <p>Hack, hesap ele geçirme, özel bilgi toplama, izinsiz takip veya doxxing amaçlı talepler değerlendirilmez.</p>
+          </article>
+
+          <article class="feature-card">
+            <p class="section-kicker">Süreç</p>
+            <h3>Ön bilgi, kapsam teyidi ve geri dönüş</h3>
+            <p>Talep geldikten sonra konu kapsamı, uygunluk durumu ve gerekirse sonraki adımlar netleştirilir.</p>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Kaynak Analiz</p>
-    </div>
-  </footer>
+    <div class="container footer-grid">
+      <div>
+        <h3>Lumina Siber</h3>
+        <p>İletişim sayfası doğrudan dönüşüm için kurgulandı; hızlı araçlardan gelen kullanıcı burada net bir çıkış bulur.</p>
+      </div>
 
-  <script src="script.js"></script>
+      <div>
+        <h4>Hızlı Erişim</h4>
+        <ul>
+          <li><a href="siber.html">Ana Sayfa</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+
+    <div>
+      <h4>Yasal Not</h4>
+      <p>Bu yapı yalnızca meşru doğrulama, açık kaynak araştırma ve kullanıcı güvenliği ekseninde çalışır.</p>
+      <p><a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">Instagram</a></p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>Lumina Siber</span>
+    <span>luminadigitale.com</span>
+  </div>
+</footer>
+
+  <script src="formsubmit-endpoints.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
+
+
+
+

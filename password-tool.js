@@ -1,4 +1,4 @@
-const passwordInput = document.getElementById("passwordInput");
+﻿const passwordInput = document.getElementById("passwordInput");
 const passwordMeterBar = document.getElementById("passwordMeterBar");
 const passwordStrengthText = document.getElementById("passwordStrengthText");
 
@@ -94,3 +94,4 @@ if (copyPasswordBtn && generatedPassword) {
     }
   });
 }
+

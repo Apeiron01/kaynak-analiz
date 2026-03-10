@@ -1,65 +1,118 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Link Kontrolü | Kaynak Analiz</title>
-  <meta name="description" content="URL yapısı, HTTPS ve temel görünür risk sinyallerini kontrol edin." />
+  <title>Şüpheli Link Kontrolü | Lumina Siber</title>
+  <meta
+    name="description"
+    content="Lumina Siber link kontrolü aracı ile URL yapısı, HTTPS kullanımı ve görünür risk sinyallerini hızlıca değerlendirin."
+  />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self' mailto: https://formsubmit.co;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/link-kontrolu.html" />
+  <meta property="og:title" content="Şüpheli Link Kontrolü | Lumina Siber" />
+  <meta property="og:description" content="URL yapısı, HTTPS kullanımı ve görünür risk sinyallerini hızlıca değerlendirin." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://luminadigitale.com/link-kontrolu.html" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Şüpheli Link Kontrolü | Lumina Siber" />
+  <meta name="twitter:description" content="Riskli linkler için hızlı görünürlük sağlayan ücretsiz kontrol aracı." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.svg" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="index.html">
-        <span class="brand-badge">KA</span>
-        <span>Kaynak Analiz</span>
+      <a class="brand" href="siber.html" aria-label="Lumina Siber ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina logo" width="48" height="48" /></span>
+        <span class="brand-copy">
+          <strong>Lumina</strong>
+          <span>Siber</span>
+        </span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
 
       <nav class="nav-links" id="navLinks">
-        <a href="index.html">Ana Sayfa</a>
-        <a href="araclar.html">Ücretsiz Araçlar</a>
-        <a href="iletisim.html">İletişim</a>
+        <a href="siber.html">Ana Sayfa</a>
+        <a href="blog.html">Blog</a>
+        <a href="hizmetler.html">Hizmetlerimiz</a>
+        <a href="siber.html#sss">SSS</a>
+        <a href="iletisim.html" class="nav-btn">İletişime Geç</a>
       </nav>
     </div>
   </header>
 
   <main class="page-main">
-    <section class="section">
-      <div class="container narrow">
-        <div class="section-head fade-up">
-          <p class="section-kicker">Ücretsiz araç</p>
-          <h1 class="page-title">Link Kontrolü</h1>
-          <p>
-            Bu araç, girilen bağlantının yapısal ve görünür risk sinyallerini tarayıcı içinde değerlendirir.
-            HTTPS, kısa link kullanımı, IP tabanlı açılış, olağandışı karakterler ve URL karmaşıklığı gibi temel unsurları kontrol eder.
-          </p>
-          <p class="note">
-            Bu sürüm domain yaşı, blacklist veya gerçek yönlendirme hedefi gibi backend gerektiren kontrolleri içermez.
-          </p>
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz Araç</p>
+          <h1 class="page-title">Şüpheli Link Kontrolü</h1>
+          <p>Kargo mesajı, banka bildirimi, sahte kampanya veya bilinmeyen bir satıcıdan gelen bağlantının görünür risk sinyallerini hızlıca kontrol edin.</p>
         </div>
 
-        <div class="form-card fade-up delay-1">
+        <aside class="page-side-card">
+          <p class="section-kicker">Kontrol Katmanları</p>
+          <h3>Neleri kontrol eder?</h3>
+          <p>HTTPS varlığı, kısa link kullanımı, IP ile açılan adresler, olağandışı karakterler ve yapısal karmaşıklık gibi temel sinyallere bakar.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container narrow">
+        <div class="form-card">
           <label for="urlInput">Kontrol edilecek link</label>
           <input id="urlInput" type="text" placeholder="Örnek: https://example.com" />
           <button id="analyzeUrlBtn" class="btn btn-primary">Linki Analiz Et</button>
         </div>
 
-        <div id="urlResult" class="result-card hidden fade-up"></div>
+        <div id="urlResult" class="result-card hidden"></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>© 2026 Kaynak Analiz</p>
+    <div class="container footer-grid">
+      <div>
+        <h3>Lumina Siber</h3>
+        <p>Link doğrulama aracı, sahte mesaj ve phishing senaryoları için hızlı ön görünürlük sağlar.</p>
+      </div>
+
+      <div>
+        <h4>Sayfalar</h4>
+        <ul>
+          <li><a href="siber.html">Ana Sayfa</a></li>
+          <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Not</h4>
+        <p>Görünür sinyal analizi yapar; hukuki değerlendirme veya tam zararlı yazılım taraması sunmaz.</p>
+        <p><a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">Instagram</a></p>
+      </div>
+    </div>
+      <div class="container footer-bottom">
+      <span>Lumina Siber</span>
+      <span>luminadigitale.com</span>
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="link-tool.js"></script>
+  <script src="script.js" defer></script>
+  <script src="link-tool.js" defer></script>
 </body>
 </html>
+
+

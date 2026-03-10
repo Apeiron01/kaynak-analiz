@@ -1,14 +1,801 @@
+const body = document.body;
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
+const nativeFormSubmit = HTMLFormElement.prototype.submit;
+const formsubmitEndpointConfig = window.LUMINA_FORMSUBMIT_ENDPOINTS || {};
+let activeScrollAnimationFrame = null;
+
+document.documentElement.style.scrollBehavior = "smooth";
+
+document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+  const relTokens = new Set((link.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
+  relTokens.add("noopener");
+  relTokens.add("noreferrer");
+  link.setAttribute("rel", Array.from(relTokens).join(" "));
+});
+
+document.querySelectorAll("img").forEach((image) => {
+  if (!image.hasAttribute("decoding")) {
+    image.decoding = "async";
+  }
+
+  const isCriticalImage = Boolean(
+    image.closest(".site-header, .home-hero, .consulting-stage, .page-hero, .hero-carousel, .consulting-showcase, .article-hero, .blog-hub-hero, .thanks-card")
+  );
+
+  if (!isCriticalImage && !image.hasAttribute("loading")) {
+    image.loading = "lazy";
+  }
+
+  if (!isCriticalImage && !image.hasAttribute("fetchpriority")) {
+    image.fetchPriority = "low";
+  }
+});
+
+requestAnimationFrame(() => {
+  body.classList.add("is-ready");
+});
+
+const closeNavigation = () => {
+  if (!menuToggle || !navLinks) {
+    return;
+  }
+
+  navLinks.classList.remove("active");
+  menuToggle.setAttribute("aria-expanded", "false");
+};
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
+    const isOpen = navLinks.classList.toggle("active");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
 
   navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeNavigation);
+  });
+}
+
+document.querySelectorAll("[data-site-switcher]").forEach((switcher) => {
+  const toggle = switcher.querySelector(".site-switcher-toggle");
+
+  if (!toggle) {
+    return;
+  }
+
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const isOpen = switcher.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  switcher.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      navLinks.classList.remove("active");
+      switcher.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
     });
   });
-}s
+});
+
+document.addEventListener("click", (event) => {
+  document.querySelectorAll("[data-site-switcher].is-open").forEach((switcher) => {
+    if (!switcher.contains(event.target)) {
+      switcher.classList.remove("is-open");
+      const toggle = switcher.querySelector(".site-switcher-toggle");
+      toggle?.setAttribute("aria-expanded", "false");
+    }
+  });
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") {
+    return;
+  }
+
+  closeNavigation();
+
+  document.querySelectorAll("[data-site-switcher].is-open").forEach((switcher) => {
+    switcher.classList.remove("is-open");
+    const toggle = switcher.querySelector(".site-switcher-toggle");
+    toggle?.setAttribute("aria-expanded", "false");
+  });
+});
+
+const getScrollOffset = () => {
+  const header = document.querySelector(".site-header");
+  const nav = document.querySelector(".nav");
+  const headerHeight = header ? header.getBoundingClientRect().height : 0;
+  const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+
+  return Math.max(headerHeight, navHeight) + 24;
+};
+
+const easeInOutCubic = (progress) => {
+  if (progress < 0.5) {
+    return 4 * progress * progress * progress;
+  }
+
+  return 1 - Math.pow(-2 * progress + 2, 3) / 2;
+};
+
+const animateWindowScrollTo = (targetTop) => {
+  if (activeScrollAnimationFrame) {
+    window.cancelAnimationFrame(activeScrollAnimationFrame);
+    activeScrollAnimationFrame = null;
+  }
+
+  const startTop = window.scrollY;
+  const distance = targetTop - startTop;
+
+  if (Math.abs(distance) < 2) {
+    window.scrollTo(0, targetTop);
+    return;
+  }
+
+  const duration = Math.min(920, Math.max(420, Math.abs(distance) * 0.6));
+  let startTime = null;
+
+  const step = (timestamp) => {
+    if (startTime === null) {
+      startTime = timestamp;
+    }
+
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(1, elapsed / duration);
+    const nextTop = startTop + distance * easeInOutCubic(progress);
+
+    window.scrollTo(0, nextTop);
+
+    if (progress < 1) {
+      activeScrollAnimationFrame = window.requestAnimationFrame(step);
+      return;
+    }
+
+    activeScrollAnimationFrame = null;
+    window.scrollTo(0, targetTop);
+  };
+
+  activeScrollAnimationFrame = window.requestAnimationFrame(step);
+};
+
+const scrollToHashTarget = (hash, options = {}) => {
+  const { updateHistory = true } = options;
+
+  if (!hash || hash === "#") {
+    return false;
+  }
+
+  const target = document.querySelector(hash);
+  if (!target) {
+    return false;
+  }
+
+  const top = window.scrollY + target.getBoundingClientRect().top - getScrollOffset();
+  animateWindowScrollTo(Math.max(0, top));
+
+  if (updateHistory) {
+    history.replaceState(null, "", hash);
+  }
+
+  return true;
+};
+
+const isSamePageHashLink = (link) => {
+  const href = link.getAttribute("href");
+
+  if (!href || href === "#") {
+    return { isHashLink: false, hash: "" };
+  }
+
+  if (href.startsWith("#")) {
+    return { isHashLink: true, hash: href };
+  }
+
+  if (!href.includes("#")) {
+    return { isHashLink: false, hash: "" };
+  }
+
+  const url = new URL(href, window.location.href);
+  const samePath = url.origin === window.location.origin && url.pathname === window.location.pathname;
+
+  return {
+    isHashLink: samePath && Boolean(url.hash),
+    hash: samePath ? url.hash : "",
+  };
+};
+
+document.addEventListener("click", (event) => {
+  const link = event.target.closest('a[href]');
+  if (!link) {
+    return;
+  }
+
+  const { isHashLink, hash } = isSamePageHashLink(link);
+  if (!isHashLink) {
+    return;
+  }
+
+  event.preventDefault();
+
+  if (!scrollToHashTarget(hash)) {
+    return;
+  }
+
+  closeNavigation();
+});
+
+const syncInitialHashScroll = () => {
+  if (!window.location.hash) {
+    return;
+  }
+
+  window.requestAnimationFrame(() => {
+    scrollToHashTarget(window.location.hash, { updateHistory: false });
+  });
+};
+
+window.addEventListener("load", syncInitialHashScroll);
+
+document.querySelectorAll(".faq-question").forEach((button) => {
+  button.addEventListener("click", () => {
+    const answer = button.nextElementSibling;
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+    button.setAttribute("aria-expanded", String(!isExpanded));
+
+    if (answer) {
+      answer.hidden = isExpanded;
+    }
+
+    const icon = button.querySelector(".faq-icon");
+    if (icon) {
+      icon.textContent = isExpanded ? "+" : "-";
+    }
+  });
+});
+
+const revealItems = document.querySelectorAll("[data-reveal]");
+if (revealItems.length) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  revealItems.forEach((item) => {
+    const rect = item.getBoundingClientRect();
+    const isAboveFold = rect.top < window.innerHeight * 1.08;
+
+    if (isAboveFold) {
+      item.classList.add("is-visible");
+      return;
+    }
+
+    revealObserver.observe(item);
+  });
+}
+
+const heroCarousel = document.querySelector("[data-carousel]");
+if (heroCarousel) {
+  const slides = Array.from(heroCarousel.querySelectorAll("[data-slide]"));
+  const selectors = Array.from(document.querySelectorAll("[data-selector]"));
+  const dots = Array.from(heroCarousel.querySelectorAll(".hero-progress-dot"));
+  const prevButton = heroCarousel.querySelector("[data-prev]");
+  const nextButton = heroCarousel.querySelector("[data-next]");
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+  let autoplayId = null;
+  let cleanupId = null;
+
+  if (activeIndex < 0) {
+    activeIndex = 0;
+  }
+
+  const clearHeroStates = (slide) => {
+    slide.classList.remove(
+      "is-active",
+      "is-entering-forward",
+      "is-entering-backward",
+      "is-exiting-forward",
+      "is-exiting-backward"
+    );
+  };
+
+  const syncCarousel = (index, direction = 1) => {
+    const previousIndex = activeIndex;
+    const previousSlide = slides[previousIndex];
+    const nextSlide = slides[index];
+
+    if (!nextSlide) {
+      return;
+    }
+
+    activeIndex = index;
+
+    if (cleanupId) {
+      window.clearTimeout(cleanupId);
+      cleanupId = null;
+    }
+
+    slides.forEach((slide, slideIndex) => {
+      const isActive = slideIndex === activeIndex;
+      slide.setAttribute("aria-hidden", String(!isActive));
+
+      if (slideIndex !== previousIndex && slideIndex !== activeIndex) {
+        clearHeroStates(slide);
+      }
+    });
+
+    selectors.forEach((selector, selectorIndex) => {
+      selector.classList.toggle("is-active", selectorIndex === activeIndex);
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === activeIndex);
+    });
+
+    if (!previousSlide || previousSlide === nextSlide) {
+      slides.forEach(clearHeroStates);
+      nextSlide.classList.add("is-active");
+      nextSlide.setAttribute("aria-hidden", "false");
+      return;
+    }
+
+    clearHeroStates(previousSlide);
+    clearHeroStates(nextSlide);
+
+    previousSlide.classList.add(direction > 0 ? "is-exiting-forward" : "is-exiting-backward");
+    nextSlide.classList.add(direction > 0 ? "is-entering-forward" : "is-entering-backward");
+    nextSlide.setAttribute("aria-hidden", "false");
+
+    window.requestAnimationFrame(() => {
+      nextSlide.classList.add("is-active");
+    });
+
+    cleanupId = window.setTimeout(() => {
+      clearHeroStates(previousSlide);
+      nextSlide.classList.remove("is-entering-forward", "is-entering-backward");
+      nextSlide.classList.add("is-active");
+      cleanupId = null;
+    }, 780);
+  };
+
+  const moveSlide = (direction) => {
+    const nextIndex = (activeIndex + direction + slides.length) % slides.length;
+    syncCarousel(nextIndex, direction);
+  };
+
+  const stopAutoplay = () => {
+    if (!autoplayId) {
+      return;
+    }
+
+    window.clearInterval(autoplayId);
+    autoplayId = null;
+  };
+
+  const restartAutoplay = () => {
+    stopAutoplay();
+
+    if (slides.length < 2) {
+      return;
+    }
+
+    autoplayId = window.setInterval(() => {
+      moveSlide(1);
+    }, 6500);
+  };
+
+  selectors.forEach((selector, index) => {
+    selector.addEventListener("click", () => {
+      syncCarousel(index);
+      restartAutoplay();
+    });
+  });
+
+  prevButton?.addEventListener("click", () => {
+    moveSlide(-1);
+    restartAutoplay();
+  });
+
+  nextButton?.addEventListener("click", () => {
+    moveSlide(1);
+    restartAutoplay();
+  });
+
+  heroCarousel.addEventListener("mouseenter", stopAutoplay);
+  heroCarousel.addEventListener("mouseleave", restartAutoplay);
+  heroCarousel.addEventListener("focusin", stopAutoplay);
+  heroCarousel.addEventListener("focusout", restartAutoplay);
+
+  syncCarousel(activeIndex);
+  restartAutoplay();
+}
+
+const consultingCarousel = document.querySelector("[data-consulting-carousel]");
+if (consultingCarousel) {
+  const slides = Array.from(consultingCarousel.querySelectorAll("[data-consulting-slide]"));
+  const nextButton = consultingCarousel.querySelector("[data-consulting-next]");
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+  let autoplayId = null;
+  let cleanupId = null;
+
+  if (activeIndex < 0) {
+    activeIndex = 0;
+  }
+
+  const clearConsultingStates = (slide) => {
+    slide.classList.remove(
+      "is-active",
+      "is-entering-forward",
+      "is-entering-backward",
+      "is-exiting-forward",
+      "is-exiting-backward"
+    );
+  };
+
+  const syncConsultingCarousel = (index, direction = 1) => {
+    const previousIndex = activeIndex;
+    const previousSlide = slides[previousIndex];
+    const nextSlide = slides[index];
+
+    if (!nextSlide) {
+      return;
+    }
+
+    activeIndex = index;
+
+    if (cleanupId) {
+      window.clearTimeout(cleanupId);
+      cleanupId = null;
+    }
+
+    slides.forEach((slide, slideIndex) => {
+      slide.setAttribute("aria-hidden", String(slideIndex !== activeIndex));
+      if (slideIndex !== previousIndex && slideIndex !== activeIndex) {
+        clearConsultingStates(slide);
+      }
+    });
+
+    if (!previousSlide || previousSlide === nextSlide) {
+      slides.forEach(clearConsultingStates);
+      nextSlide.classList.add("is-active");
+      nextSlide.setAttribute("aria-hidden", "false");
+      return;
+    }
+
+    clearConsultingStates(previousSlide);
+    clearConsultingStates(nextSlide);
+
+    previousSlide.classList.add(direction > 0 ? "is-exiting-forward" : "is-exiting-backward");
+    nextSlide.classList.add(direction > 0 ? "is-entering-forward" : "is-entering-backward");
+
+    window.requestAnimationFrame(() => {
+      nextSlide.classList.add("is-active");
+    });
+
+    cleanupId = window.setTimeout(() => {
+      clearConsultingStates(previousSlide);
+      nextSlide.classList.remove("is-entering-forward", "is-entering-backward");
+      nextSlide.classList.add("is-active");
+      cleanupId = null;
+    }, 760);
+  };
+
+  const moveConsultingSlide = (direction = 1) => {
+    const nextIndex = (activeIndex + direction + slides.length) % slides.length;
+    syncConsultingCarousel(nextIndex, direction);
+  };
+
+  const stopConsultingAutoplay = () => {
+    if (!autoplayId) {
+      return;
+    }
+
+    window.clearInterval(autoplayId);
+    autoplayId = null;
+  };
+
+  const restartConsultingAutoplay = () => {
+    stopConsultingAutoplay();
+
+    if (slides.length < 2) {
+      return;
+    }
+
+    autoplayId = window.setInterval(() => {
+      moveConsultingSlide(1);
+    }, 5600);
+  };
+
+  nextButton?.addEventListener("click", () => {
+    moveConsultingSlide(1);
+    restartConsultingAutoplay();
+  });
+
+  consultingCarousel.addEventListener("mouseenter", stopConsultingAutoplay);
+  consultingCarousel.addEventListener("mouseleave", restartConsultingAutoplay);
+  consultingCarousel.addEventListener("focusin", stopConsultingAutoplay);
+  consultingCarousel.addEventListener("focusout", restartConsultingAutoplay);
+
+  syncConsultingCarousel(activeIndex);
+  restartConsultingAutoplay();
+}
+
+const tickerStrips = document.querySelectorAll(".ticker-strip");
+if (tickerStrips.length) {
+  const tickerMeasures = [];
+  const refreshAllTickers = () => {
+    tickerMeasures.forEach((measure) => measure());
+  };
+
+  tickerStrips.forEach((strip) => {
+    const track = strip.querySelector(".ticker-track");
+    const rows = track ? Array.from(track.querySelectorAll(".ticker-row")) : [];
+    const firstRow = rows[0];
+    const baseRowCount = rows.length;
+
+    if (!track || !firstRow) {
+      return;
+    }
+
+    const resetTickerLoop = () => {
+      while (track.children.length > baseRowCount) {
+        track.removeChild(track.lastElementChild);
+      }
+    };
+
+    const ensureTickerLoop = () => {
+      resetTickerLoop();
+      const visibleWidth = strip.getBoundingClientRect().width;
+
+      while (track.scrollWidth < visibleWidth * 3) {
+        const clone = firstRow.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+      }
+    };
+
+    const measureTicker = () => {
+      ensureTickerLoop();
+      const distance = Math.ceil(firstRow.getBoundingClientRect().width);
+      const duration = Math.max(14, distance / 140);
+
+      track.style.setProperty("--ticker-distance", `${distance}px`);
+      track.style.setProperty("--ticker-duration", `${duration}s`);
+      track.style.animation = "none";
+      void track.offsetWidth;
+      track.style.animation = "tickerMove var(--ticker-duration, 18s) linear infinite";
+    };
+
+    measureTicker();
+    tickerMeasures.push(measureTicker);
+
+    track.querySelectorAll("img").forEach((image) => {
+      if (!image.complete) {
+        image.addEventListener("load", measureTicker, { once: true });
+      }
+    });
+  });
+
+  let resizeTimeout = null;
+  window.addEventListener("resize", () => {
+    window.clearTimeout(resizeTimeout);
+    resizeTimeout = window.setTimeout(() => {
+      refreshAllTickers();
+    }, 120);
+  });
+
+  window.addEventListener("load", () => {
+    refreshAllTickers();
+  });
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(refreshAllTickers).catch(() => {});
+  }
+
+  window.setTimeout(refreshAllTickers, 180);
+}
+
+const getCurrentPageName = () => {
+  const fileName = window.location.pathname.split("/").pop() || "index.html";
+  return fileName.replace(/\.html$/i, "") || "index";
+};
+
+const getThanksRedirectUrl = (form) => {
+  const thanksUrl = new URL("tesekkurler.html", window.location.href);
+  const source = form.dataset.thanksSource || getCurrentPageName();
+
+  thanksUrl.searchParams.set("kaynak", source);
+  return thanksUrl.toString();
+};
+
+const resolveFormsubmitEndpoint = (form) => {
+  const endpointKey = form.dataset.formsubmitEndpointKey;
+  const configuredEndpoint = endpointKey ? formsubmitEndpointConfig[endpointKey] : "";
+  const fallbackEndpoint = form.getAttribute("action") || "";
+
+  if (typeof configuredEndpoint === "string" && configuredEndpoint.trim()) {
+    return configuredEndpoint.trim();
+  }
+
+  return fallbackEndpoint.trim();
+};
+
+const formsubmitForms = Array.from(
+  document.querySelectorAll('form[action*="formsubmit.co"], form[data-formsubmit-endpoint-key]')
+);
+formsubmitForms.forEach((form) => {
+  const nextInput = form.querySelector('input[name="_next"]');
+  const captchaInput = form.querySelector('input[name="_captcha"]');
+  const applyDynamicRedirect = () => {
+    const redirectUrl = getThanksRedirectUrl(form);
+
+    if (nextInput) {
+      nextInput.value = redirectUrl;
+    }
+
+    return redirectUrl;
+  };
+
+  const applyEndpoint = () => {
+    const resolvedEndpoint = resolveFormsubmitEndpoint(form);
+
+    if (resolvedEndpoint) {
+      form.setAttribute("action", resolvedEndpoint);
+    }
+
+    return resolvedEndpoint;
+  };
+
+  const isAjaxEligible = () => {
+    const captchaDisabled = captchaInput?.value === "false";
+    return captchaDisabled && form.dataset.formsubmitAjax === "true";
+  };
+
+  applyDynamicRedirect();
+  applyEndpoint();
+
+  form.addEventListener("submit", async (event) => {
+    if (form.dataset.submitting === "true") {
+      event.preventDefault();
+      return;
+    }
+
+    const redirectUrl = applyDynamicRedirect();
+    const resolvedEndpoint = applyEndpoint();
+    const submitButton = event.submitter instanceof HTMLElement ? event.submitter : form.querySelector('[type="submit"]');
+
+    form.dataset.submitting = "true";
+    submitButton?.setAttribute("disabled", "disabled");
+    submitButton?.setAttribute("aria-busy", "true");
+
+    if (!resolvedEndpoint || !isAjaxEligible()) {
+      return;
+    }
+
+    event.preventDefault();
+    const ajaxAction = resolvedEndpoint.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/");
+
+    try {
+      const response = await fetch(ajaxAction, {
+        method: (form.getAttribute("method") || "POST").toUpperCase(),
+        headers: {
+          Accept: "application/json",
+        },
+        body: new FormData(form),
+      });
+
+      const rawBody = await response.text();
+      let payload = {};
+
+      if (rawBody) {
+        try {
+          payload = JSON.parse(rawBody);
+        } catch (error) {
+          payload = {};
+        }
+      }
+
+      const isSuccess =
+        response.ok &&
+        (payload.success === undefined || payload.success === true || payload.success === "true");
+
+      if (isSuccess) {
+        window.location.href = redirectUrl;
+        return;
+      }
+
+      throw new Error("FormSubmit AJAX request failed.");
+    } catch (error) {
+      nativeFormSubmit.call(form);
+    } finally {
+      form.dataset.submitting = "false";
+      submitButton?.removeAttribute("disabled");
+      submitButton?.removeAttribute("aria-busy");
+    }
+  });
+});
+
+window.addEventListener("pageshow", () => {
+  formsubmitForms.forEach((form) => {
+    form.dataset.submitting = "false";
+    form.querySelectorAll('[type="submit"]').forEach((button) => {
+      button.removeAttribute("disabled");
+      button.removeAttribute("aria-busy");
+    });
+  });
+});
+
+const thanksPage = document.querySelector("[data-thanks-page]");
+if (thanksPage) {
+  const source = new URLSearchParams(window.location.search).get("kaynak") || "iletisim";
+  const copy = {
+    iletisim: {
+      kicker: "Mesaj Alındı",
+      title: "Teşekkürler, mesajınız ulaştı.",
+      description: "Talebiniz e-posta akışına düştü. Uygunluk ve kapsam kontrolünden sonra sizinle dönüş yapılacaktır.",
+      primaryLabel: "Ana Sayfaya Dön",
+      primaryHref: "siber.html",
+      secondaryLabel: "Yeni Mesaj Gönder",
+      secondaryHref: "iletisim.html",
+      pageTitle: "Teşekkürler | Lumina Siber",
+    },
+    danismanlik: {
+      kicker: "Talep Alındı",
+      title: "Teşekkürler, danışmanlık talebinizi aldık.",
+      description: "Danışmanlık formunuz ekibe ulaştı. Hizmet kapsamınız ve uygun sonraki adım için size geri dönüş yapılacaktır.",
+      primaryLabel: "Danışmanlığa Dön",
+      primaryHref: "index.html",
+      secondaryLabel: "Yeni Talep Gönder",
+      secondaryHref: "index.html#iletisim",
+      pageTitle: "Teşekkürler | Lumina Danışmanlık",
+    },
+    akademi: {
+      kicker: "Talep Alındı",
+      title: "Teşekkürler, eğitim talebinizi aldık.",
+      description: "Akademi formunuz ekibe ulaştı. Size uygun eğitim akışını netleştirmek için en kısa sürede dönüş yapılacaktır.",
+      primaryLabel: "Akademiye Dön",
+      primaryHref: "akademi.html",
+      secondaryLabel: "Formu Yeniden Aç",
+      secondaryHref: "akademi.html#iletisim",
+      pageTitle: "Teşekkürler | Lumina Akademi",
+    },
+  };
+
+  const selectedCopy = copy[source] || copy.iletisim;
+  const kicker = thanksPage.querySelector("[data-thanks-kicker]");
+  const title = thanksPage.querySelector("[data-thanks-title]");
+  const description = thanksPage.querySelector("[data-thanks-description]");
+  const primaryLink = thanksPage.querySelector("[data-thanks-primary]");
+  const secondaryLink = thanksPage.querySelector("[data-thanks-secondary]");
+
+  document.title = selectedCopy.pageTitle;
+
+  if (kicker) {
+    kicker.textContent = selectedCopy.kicker;
+  }
+
+  if (title) {
+    title.textContent = selectedCopy.title;
+  }
+
+  if (description) {
+    description.textContent = selectedCopy.description;
+  }
+
+  if (primaryLink) {
+    primaryLink.textContent = selectedCopy.primaryLabel;
+    primaryLink.setAttribute("href", selectedCopy.primaryHref);
+  }
+
+  if (secondaryLink) {
+    secondaryLink.textContent = selectedCopy.secondaryLabel;
+    secondaryLink.setAttribute("href", selectedCopy.secondaryHref);
+  }
+}

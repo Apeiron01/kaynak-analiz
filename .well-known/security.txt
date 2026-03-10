@@ -1,0 +1,7 @@
+Contact: mailto:legal@luminadigitale.com
+Contact: mailto:iletisim@luminadigitale.com
+Expires: 2027-03-09T00:00:00.000Z
+Preferred-Languages: tr, en
+Canonical: https://luminadigitale.com/.well-known/security.txt
+Policy: https://luminadigitale.com/iletisim.html
+Hiring: https://luminadigitale.com/
