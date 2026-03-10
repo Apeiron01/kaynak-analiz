@@ -322,14 +322,6 @@ if (revealItems.length) {
   );
 
   revealItems.forEach((item) => {
-    const rect = item.getBoundingClientRect();
-    const isAboveFold = rect.top < window.innerHeight * 1.08;
-
-    if (isAboveFold) {
-      item.classList.add("is-visible");
-      return;
-    }
-
     revealObserver.observe(item);
   });
 }
@@ -710,9 +702,12 @@ if (tickerStrips.length) {
 
     const ensureTickerLoop = () => {
       resetTickerLoop();
-      const visibleWidth = strip.getBoundingClientRect().width;
+      const visibleWidth = strip.clientWidth;
+      const baseWidth = Math.max(1, firstRow.getBoundingClientRect().width);
+      const targetRows = Math.max(2, Math.ceil((visibleWidth * 3) / baseWidth));
+      const clonesNeeded = Math.max(0, targetRows - baseRowCount);
 
-      while (track.scrollWidth < visibleWidth * 3) {
+      for (let index = 0; index < clonesNeeded; index += 1) {
         const clone = firstRow.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
         track.appendChild(clone);
