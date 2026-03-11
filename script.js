@@ -812,7 +812,6 @@ const formsubmitForms = Array.from(
 );
 formsubmitForms.forEach((form) => {
   const nextInput = form.querySelector('input[name="_next"]');
-  const captchaInput = form.querySelector('input[name="_captcha"]');
   const applyDynamicRedirect = () => {
     const redirectUrl = getThanksRedirectUrl(form);
 
@@ -834,8 +833,7 @@ formsubmitForms.forEach((form) => {
   };
 
   const isAjaxEligible = () => {
-    const captchaDisabled = captchaInput?.value === "false";
-    return captchaDisabled && form.dataset.formsubmitAjax === "true";
+    return form.dataset.formsubmitAjax === "true";
   };
 
   applyDynamicRedirect();
@@ -985,7 +983,7 @@ if (thanksPage) {
     iletisim: {
       kicker: "Mesaj Al\u0131nd\u0131",
       title: "Te\u015fekk\u00fcrler, mesaj\u0131n\u0131z ula\u015ft\u0131.",
-      description: "Talebiniz e-posta ak\u0131\u015f\u0131na d\u00fc\u015ft\u00fc. Uygunluk ve kapsam kontrol\u00fcnden sonra sizinle d\u00f6n\u00fc\u015f yap\u0131lacakt\u0131r.",
+      description: "Talebiniz e-posta ak\u0131\u015f\u0131na d\u00fc\u015ft\u00fc. Uygunluk ve kapsam kontrol\u00fcnden sonra size d\u00f6n\u00fc\u015f yap\u0131lacakt\u0131r.",
       primaryLabel: "Ana Sayfaya D\u00f6n",
       primaryHref: "siber.html",
       secondaryLabel: "Yeni Mesaj G\u00f6nder",
