@@ -469,10 +469,11 @@ if (heroCarousel) {
 
     clearHeroTransitions(previousSlide);
     clearHeroTransitions(nextSlide);
-    nextSlide.classList.add("is-active", enteringClass);
+    nextSlide.classList.add(enteringClass);
     nextSlide.setAttribute("aria-hidden", "false");
 
     window.requestAnimationFrame(() => {
+      nextSlide.classList.add("is-active");
       previousSlide.classList.remove("is-active");
       previousSlide.classList.add(exitingClass);
     });
@@ -482,7 +483,7 @@ if (heroCarousel) {
       nextSlide.classList.remove(enteringClass);
       nextSlide.classList.add("is-active");
       cleanupId = null;
-    }, 780);
+    }, 560);
     };
 
     const moveSlide = (direction) => {
