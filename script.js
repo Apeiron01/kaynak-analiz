@@ -564,7 +564,6 @@ if (heroCarousel) {
 const consultingCarousel = document.querySelector("[data-consulting-carousel]");
 if (consultingCarousel) {
   const slides = Array.from(consultingCarousel.querySelectorAll("[data-consulting-slide]"));
-  const prevButton = consultingCarousel.querySelector("[data-consulting-prev]");
   const nextButton = consultingCarousel.querySelector("[data-consulting-next]");
   if (!slides.length) {
     // no-op
@@ -664,11 +663,6 @@ if (consultingCarousel) {
       moveConsultingSlide(1);
     }, 5600);
     };
-
-    prevButton?.addEventListener("click", () => {
-      moveConsultingSlide(-1);
-      restartConsultingAutoplay();
-    });
 
     nextButton?.addEventListener("click", () => {
       moveConsultingSlide(1);

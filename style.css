@@ -3384,6 +3384,7 @@ body.is-leaving {
   background: #e27d72;
   color: #fdebdc;
   cursor: pointer;
+  box-shadow: 0 8px 18px rgba(5, 5, 5, 0.3);
   transition: transform var(--transition), background var(--transition);
 }
 
@@ -3393,11 +3394,6 @@ body.is-leaving {
   background: #d96e62;
 }
 
-.consulting-showcase-prev:hover,
-.consulting-showcase-prev:focus-visible {
-  transform: translateX(-2px);
-}
-
 .consulting-placeholder span,
 .consulting-service-asset span {
   display: none;
@@ -3405,9 +3401,13 @@ body.is-leaving {
 
 .consulting-showcase-next span {
   display: block;
-  font-size: 1.55rem;
+  font-size: 1.38rem;
   line-height: 1;
-  transform: translateY(-1px);
+  transform: translateY(-1px) rotate(8deg);
+}
+
+.consulting-showcase-control:active {
+  transform: translateX(2px) scale(0.97);
 }
 
 .consulting-quote-strip {
