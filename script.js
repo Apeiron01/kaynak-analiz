@@ -6,9 +6,7 @@ const formsubmitEndpointConfig = window.LUMINA_FORMSUBMIT_ENDPOINTS || {};
 let activeScrollAnimationFrame = null;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (!prefersReducedMotion) {
-  document.documentElement.style.scrollBehavior = "smooth";
-}
+document.documentElement.style.scrollBehavior = "smooth";
 
 document.querySelectorAll('a[target="_blank"]').forEach((link) => {
   const relTokens = new Set((link.getAttribute("rel") || "").split(/\s+/).filter(Boolean));
@@ -211,11 +209,7 @@ const scrollToHashTarget = (hash, options = {}) => {
   const top = window.scrollY + target.getBoundingClientRect().top - getScrollOffset();
   const destination = Math.max(0, top);
 
-  if (prefersReducedMotion) {
-    window.scrollTo(0, destination);
-  } else {
-    animateWindowScrollTo(destination);
-  }
+  animateWindowScrollTo(destination);
 
   if (updateHistory) {
     history.replaceState(null, "", hash);
