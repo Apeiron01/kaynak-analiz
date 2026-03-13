@@ -28,6 +28,61 @@ const shorteners = new Set([
 
 const isIpAddress = (hostname) => /^(?:\d{1,3}\.){3}\d{1,3}$/.test(hostname);
 const containsSuspiciousChars = (hostname) => /[^a-zA-Z0-9.-]/.test(hostname);
+const loadingLogoPath = "assets/images/brand-mark.svg";
+
+const renderToolLoading = (container, loadingText) => {
+  if (!container) {
+    return;
+  }
+
+  container.classList.remove("hidden");
+  container.innerHTML = `
+    <div class="tool-loading-card" aria-live="polite">
+      <div class="tool-loading-mark">
+        <img src="${loadingLogoPath}" alt="Lumina logo" width="64" height="64" />
+      </div>
+      <strong>${loadingText}</strong>
+      <p>Arka planda sinyaller taraniyor, sonuc katmani hazirlaniyor.</p>
+      <div class="tool-loading-dots" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  `;
+};
+
+const attachToolAction = (buttonId, resultId, loadingText, handler) => {
+  const button = document.getElementById(buttonId);
+  const result = document.getElementById(resultId);
+
+  if (!button || !result) {
+    return;
+  }
+
+  button.addEventListener("click", () => {
+    if (button.dataset.loading === "true") {
+      return;
+    }
+
+    button.dataset.loading = "true";
+    button.setAttribute("disabled", "disabled");
+    button.setAttribute("aria-busy", "true");
+
+    renderToolLoading(result, loadingText);
+
+    const delay = Math.floor(Math.random() * 1000) + 2200;
+    window.setTimeout(() => {
+      try {
+        handler(result);
+      } finally {
+        button.dataset.loading = "false";
+        button.removeAttribute("disabled");
+        button.removeAttribute("aria-busy");
+      }
+    }, delay);
+  });
+};
 
 const renderToolResult = ({
   container,
@@ -176,8 +231,7 @@ const getRoasState = () => {
   };
 };
 
-const analyzeRoas = () => {
-  const result = document.getElementById("roasResult");
+const analyzeRoas = (result) => {
   const state = getRoasState();
 
   if (!state) {
@@ -326,8 +380,7 @@ const getSeoState = () => {
   };
 };
 
-const analyzeSeo = () => {
-  const result = document.getElementById("seoResult");
+const analyzeSeo = (result) => {
   const state = getSeoState();
 
   if (!state) {
@@ -442,8 +495,7 @@ const getAcademyState = () => {
   };
 };
 
-const analyzeAcademy = () => {
-  const result = document.getElementById("academyResult");
+const analyzeAcademy = (result) => {
   const state = getAcademyState();
 
   renderToolResult({
@@ -563,8 +615,7 @@ const getCyberState = () => {
   };
 };
 
-const analyzeCyber = () => {
-  const result = document.getElementById("cyberResult");
+const analyzeCyber = (result) => {
   const state = getCyberState();
 
   if (!state) {
@@ -622,7 +673,7 @@ const analyzeCyber = () => {
   });
 };
 
-document.getElementById("roasAnalyzeBtn")?.addEventListener("click", analyzeRoas);
-document.getElementById("seoAnalyzeBtn")?.addEventListener("click", analyzeSeo);
-document.getElementById("academyAnalyzeBtn")?.addEventListener("click", analyzeAcademy);
-document.getElementById("cyberAnalyzeBtn")?.addEventListener("click", analyzeCyber);
+attachToolAction("roasAnalyzeBtn", "roasResult", "Karlilik analizi hazirlaniyor", analyzeRoas);
+attachToolAction("seoAnalyzeBtn", "seoResult", "Teknik SEO taramasi hazirlaniyor", analyzeSeo);
+attachToolAction("academyAnalyzeBtn", "academyResult", "Seviye testi yorumlaniyor", analyzeAcademy);
+attachToolAction("cyberAnalyzeBtn", "cyberResult", "Risk sinyalleri taraniyor", analyzeCyber);
