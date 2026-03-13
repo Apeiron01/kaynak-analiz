@@ -1086,7 +1086,7 @@ if (thanksPage) {
 
 const getRandomItem = (items) => items[Math.floor(Math.random() * items.length)];
 
-const buildSocialProofMessage = () => {
+const buildSocialProofMessageLegacy = () => {
   const names = [
     "Ayşe",
     "Fatma",
@@ -1263,14 +1263,166 @@ const buildSocialProofMessage = () => {
   return getRandomItem(templates);
 };
 
+const buildSocialProofMessage = () => {
+  const names = [
+    "Ayse",
+    "Fatma",
+    "Zeynep",
+    "Elif",
+    "Merve",
+    "Esra",
+    "Busra",
+    "Sila",
+    "Ceren",
+    "Ece",
+    "Melis",
+    "Beyza",
+    "Aleyna",
+    "Nazli",
+    "Derya",
+    "Gizem",
+    "Seda",
+    "Selin",
+    "Yagmur",
+    "Yasemin",
+    "Ahmet",
+    "Mehmet",
+    "Ali",
+    "Mustafa",
+    "Murat",
+    "Can",
+    "Emre",
+    "Burak",
+    "Oguz",
+    "Kerem",
+    "Tolga",
+    "Hakan",
+    "Onur",
+    "Eren",
+    "Serkan",
+    "Baris",
+    "Kaan",
+    "Arda",
+    "Deniz",
+    "Yusuf",
+  ];
+
+  const cities = [
+    "Istanbul",
+    "Ankara",
+    "Izmir",
+    "Bursa",
+    "Antalya",
+    "Kocaeli",
+    "Adana",
+    "Konya",
+    "Gaziantep",
+    "Mersin",
+    "Kayseri",
+    "Eskisehir",
+    "Samsun",
+    "Trabzon",
+    "Diyarbakir",
+    "Tekirdag",
+    "Sakarya",
+    "Denizli",
+    "Balikesir",
+    "Mugla",
+  ];
+
+  const pageNames = {
+    "siber.html": "Lumina Siber",
+    "hizmetler.html": "Lumina Siber",
+    "index.html": "Lumina Danismanlik",
+    "danismanlik-hizmetleri.html": "Lumina Danismanlik",
+    "akademi.html": "Lumina Akademi",
+    "akademi-egitimleri.html": "Lumina Akademi",
+    "araclar.html": "Lumina Lab",
+    "roas-hesaplayici.html": "ROAS Hesaplayici",
+    "seo-teknik-analiz.html": "SEO Acik Analizi",
+    "dijital-pazarlama-seviye-testi.html": "Seviye Testi",
+    "site-risk-analizi.html": "Site Risk Analizi",
+    "indirim-hesaplayici.html": "Indirim Hesaplayici",
+    "blog.html": "Blog Merkezi",
+  };
+
+  const pathname = window.location.pathname.split("/").pop() || "index.html";
+  const currentPageName = pageNames[pathname] || "Lumina";
+  const currentVisitors = Math.floor(Math.random() * 6) + 3;
+  const dailyToolUsers = Math.floor(Math.random() * 38) + 27;
+  const name = getRandomItem(names);
+  const city = getRandomItem(cities);
+  const timeLabel = getRandomItem(["Az once", "2 dakika once", "5 dakika once", "Biraz once", "Su anda", "Bugun"]);
+
+  const consultingMessages = [
+    { title: timeLabel, body: `${name}, Shopify danismanligi sayfasini inceledi.` },
+    { title: `${city}'den talep`, body: `${city}'den bir ziyaretci Etsy danismanligi icin on gorusme birakti.` },
+    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
+    { title: "Arac kullanimi", body: `${name}, ucretsiz ROAS ve karlilik hesaplayicisini kullandi.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi danismanlik on analiz araclarini kullandi.` },
+  ];
+
+  const academyMessages = [
+    { title: timeLabel, body: `${name}, dijital pazarlama seviye testini cozmeye basladi.` },
+    { title: `${city}'den ilgi`, body: `${city}'den bir ziyaretci Etsy egitimi sayfasini inceledi.` },
+    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
+    { title: "Program ilgisi", body: `${name}, Meta Ads ve Google Ads egitim programina goz atti.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi akademi araclarini kullandi.` },
+  ];
+
+  const cyberMessages = [
+    { title: timeLabel, body: `${name}, supheli link kontrolu sayfasini acti.` },
+    { title: `${city}'den guvenlik talebi`, body: `${city}'den bir ziyaretci site ve link risk analizini kullandi.` },
+    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
+    { title: "Araclara ilgi var", body: `${name}, guvenlik kontrolu aracina goz atti.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi siber araclari kullandi.` },
+  ];
+
+  const labMessages = [
+    { title: timeLabel, body: `${name}, ucretsiz indirim hesaplayiciyi kullandi.` },
+    { title: "Kategori gecisi", body: `${city}'den bir ziyaretci araclar merkezinden bir analiz sayfasi acti.` },
+    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi Lumina Lab araclarini kullandi.` },
+  ];
+
+  if (
+    pathname.includes("siber") ||
+    pathname.includes("risk") ||
+    pathname.includes("link-kontrolu") ||
+    pathname.includes("guvenlik-checkup") ||
+    pathname.includes("parola")
+  ) {
+    return getRandomItem(cyberMessages);
+  }
+
+  if (
+    pathname.includes("akademi") ||
+    pathname.includes("egitimi") ||
+    pathname.includes("seviye-testi")
+  ) {
+    return getRandomItem(academyMessages);
+  }
+
+  if (
+    pathname.includes("araclar") ||
+    pathname.includes("hesaplayici") ||
+    pathname.includes("analiz")
+  ) {
+    return getRandomItem(labMessages);
+  }
+
+  return getRandomItem(consultingMessages);
+};
+
 const initSocialProofWidget = () => {
   if (thanksPage) {
     return;
   }
 
+  const proofDismissKey = "lumina-proof-dismissed-v2";
   let widgetDismissed = false;
   try {
-    widgetDismissed = sessionStorage.getItem("lumina-proof-dismissed") === "1";
+    widgetDismissed = sessionStorage.getItem(proofDismissKey) === "1";
   } catch (_error) {
     widgetDismissed = false;
   }
@@ -1367,13 +1519,13 @@ const initSocialProofWidget = () => {
     wrapper.remove();
 
     try {
-      sessionStorage.setItem("lumina-proof-dismissed", "1");
+      sessionStorage.setItem(proofDismissKey, "1");
     } catch (_error) {
       // Session storage is optional.
     }
   });
 
-  scheduleNext(Math.floor(Math.random() * 2000) + 2500);
+  scheduleNext(Math.floor(Math.random() * 1200) + 1400);
 };
 
 initSocialProofWidget();

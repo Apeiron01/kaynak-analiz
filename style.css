@@ -4509,6 +4509,10 @@ main > .section + .section {
   margin-bottom: 24px;
 }
 
+.consulting-lab-actions {
+  justify-content: flex-start;
+}
+
 .consulting-lab-grid,
 .tools-map-grid {
   display: grid;
