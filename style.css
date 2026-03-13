@@ -875,6 +875,11 @@ li,
   padding-top: 42px;
 }
 
+.consulting-listing-page .page-hero,
+.academy-listing-page .page-hero {
+  padding-top: 132px;
+}
+
 .page-shell {
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
   align-items: start;
@@ -2785,6 +2790,40 @@ body.is-leaving {
 
 .academy-page .section-soft {
   background: #f1e4d5;
+}
+
+.consulting-listing-page {
+  background: #f7e9db;
+}
+
+.consulting-listing-page .page-main {
+  background: linear-gradient(180deg, #f7e9db 0%, #f4e6d8 100%);
+}
+
+.consulting-listing-page .consulting-listing-hero .page-shell {
+  padding: 34px;
+  border-radius: 28px;
+  border: 1px solid rgba(78, 62, 54, 0.16);
+  background: linear-gradient(135deg, rgba(253, 235, 220, 0.98), rgba(247, 230, 215, 0.98));
+  box-shadow: 0 24px 48px rgba(78, 62, 54, 0.08);
+}
+
+.consulting-listing-page .page-side-card {
+  background: rgba(255, 250, 246, 0.9);
+  border-color: rgba(78, 62, 54, 0.12);
+}
+
+.academy-listing-page {
+  background: #efe1d2;
+}
+
+.academy-listing-page .page-main {
+  background: linear-gradient(180deg, #efe1d2 0%, #ead9c8 100%);
+}
+
+.academy-listing-page .academy-listing-hero .blog-hub-hero {
+  min-height: auto;
+  padding-right: clamp(36px, 7vw, 96px);
 }
 
 .academy-page .section-kicker {
