@@ -170,13 +170,15 @@ const getRoasState = () => {
   const margin = revenue > 0 ? (netProfit / revenue) * 100 : 0;
   const breakevenRoas = contributionBeforeAds > 0 ? revenue / contributionBeforeAds : 0;
   const maxCpa = contributionBeforeAds > 0 ? contributionBeforeAds / Math.max(revenue / 1000, 1) : 0;
+  const adShare = revenue > 0 ? (adSpend / revenue) * 100 : 0;
+  const breakEvenAdBudget = Math.max(0, contributionBeforeAds);
 
   const leaks = [
-    { label: "Ürün maliyeti", value: cogs },
-    { label: "Reklam harcaması", value: adSpend },
+    { label: "Urun maliyeti", value: cogs },
+    { label: "Reklam harcamasi", value: adSpend },
     { label: "Kargo / operasyon", value: shipping },
     { label: "Komisyon", value: fees },
-    { label: "İade kaybı", value: returnLoss },
+    { label: "Iade kaybi", value: returnLoss },
     { label: "Sabit gider", value: fixed },
   ]
     .sort((left, right) => right.value - left.value)
@@ -184,50 +186,60 @@ const getRoasState = () => {
 
   const visibleNotes = [];
   if (netProfit < 0) {
-    visibleNotes.push("Net tabloda zarar görünür. Yüksek ROAS tek başına sağlıklı görünüm vermiyor.");
+    visibleNotes.push("Net tabloda zarar gorunuyor. Yuksek ROAS tek basina saglikli bir tablo kurmuyor.");
   } else {
-    visibleNotes.push("Net tabloda kâr kalıyor. Ölçekleme öncesi marjı korumak kritik.");
+    visibleNotes.push("Net tabloda kar kaliyor. Olcekleme oncesi marji korumak kritik.");
   }
 
   if (margin < 8) {
-    visibleNotes.push("Kâr marjı dar. Reklam büyürken küçük sapmalar bile kârlılığı silebilir.");
+    visibleNotes.push("Kar marji dar. Reklam buyurken kucuk sapmalar bile karliligi silebilir.");
   } else if (margin < 18) {
-    visibleNotes.push("Marj orta seviyede. Kanal bazlı optimizasyonla rahatlama alanı var.");
+    visibleNotes.push("Marj orta seviyede. Kanal bazli optimizasyonla rahatlama alani var.");
   } else {
-    visibleNotes.push("Marj güvenli bölgede. Bütçe artışı için kontrol listesiyle ilerlemek mantıklı.");
+    visibleNotes.push("Marj guvenli bolgede. Butce artisi oncesi olcek disiplini kurmak mantikli.");
   }
 
   if (actualRoas < 2) {
-    visibleNotes.push("ROAS düşük. Teklif, kreatif ve ürün katkı payı birlikte ele alınmalı.");
+    visibleNotes.push("ROAS dusuk. Teklif, kreatif ve urun katki payi birlikte ele alinmali.");
   } else if (actualRoas < 3.5) {
-    visibleNotes.push("ROAS fena değil ama maliyet tarafı sıkı yönetilmezse kâr kolay erir.");
+    visibleNotes.push("ROAS fena degil ama maliyet tarafi siki yonetilmezse kar kolay erir.");
   } else {
-    visibleNotes.push("ROAS güçlü görünüyor. Asıl soru bunun sürdürülebilir kâr üretip üretmediği.");
+    visibleNotes.push("ROAS guclu gorunuyor. Asil soru bunun surdurulebilir kar uretip uretmedigi.");
+  }
+
+  if (adShare > 30) {
+    visibleNotes.push("Reklam payi ciroya gore cok yuksek. Olcekleme oncesi teklif yapisi ve sepet katkisi yeniden bakilmali.");
+  } else if (adShare > 18) {
+    visibleNotes.push("Reklam gideri ciro tarafinda hissedilir baski kuruyor. Karlilik oncesi dikkatli buyume gerekir.");
+  } else {
+    visibleNotes.push("Reklam payi kontrollu gorunuyor; asil belirleyici urun ve operasyon maliyetleri oluyor.");
   }
 
   const advancedNotes = [
-    `Başabaş ROAS eşiği yaklaşık ${formatNumber(breakevenRoas, 2)}. Bunun altına düşen kampanya kârlılığı hızla aşındırır.`,
-    `Maksimum güvenli edinme baskısı yaklaşık ${formatTry(maxCpa)} seviyesinde. Kanal bazlı CPO bundan sapıyorsa bütçe revizyonu gerekir.`,
-    `En büyük kâr sızıntıları: ${leaks.map((item) => `${item.label} (${formatTry(item.value)})`).join(", ")}.`,
+    `Basabas ROAS esigi yaklasik ${formatNumber(breakevenRoas, 2)}. Bunun alti kampanya karliligini hizla asindirir.`,
+    `Basabas reklam tavani yaklasik ${formatTry(breakEvenAdBudget)} seviyesinde. Bunun ustu kari eritmeye baslar.`,
+    `Maksimum guvenli edinme baskisi yaklasik ${formatTry(maxCpa)} seviyesinde. Kanal bazli CPO bundan sapiyorsa butce revizyonu gerekir.`,
+    `En buyuk kar sizintilari: ${leaks.map((item) => `${item.label} (${formatTry(item.value)})`).join(", ")}.`,
     margin < 10
-      ? "Ölçekleme yerine önce teklif, ürün sepeti ve operasyon maliyetlerini optimize etmeniz gerekir."
-      : "Ölçekleme mümkün, ancak kanal bazlı kârlılık kırılımı ve iade etkisiyle birlikte izlenmelidir.",
+      ? "Olcekleme yerine once teklif, urun sepeti ve operasyon maliyetlerini optimize etmeniz gerekir."
+      : "Olcekleme mumkun, ancak kanal bazli karlilik kirilimi ve iade etkisiyle birlikte izlenmelidir.",
     returnRate > 5
-      ? "İade oranı yükselmiş görünüyor. Kreatif vaatleri ve ürün sayfası beklentisini hizalamak kritik."
-      : "İade tarafı şu an kontrol altında; asıl baskı reklam veya ürün maliyetinde yoğunlaşıyor.",
+      ? "Iade orani yukselmis gorunuyor. Kreatif vaatleri ve urun sayfasi beklentisini hizalamak kritik."
+      : "Iade tarafi su an kontrol altinda; asil baski reklam veya urun maliyetinde yogunlasiyor.",
   ];
 
   return {
     summaryClass: netProfit >= 0 ? "is-good" : "is-alert",
-    summaryValue: netProfit >= 0 ? "Kârlılık var" : "Kritik kâr baskısı",
-    intro: `Ciro ${formatTry(revenue)}, reklam harcaması ${formatTry(adSpend)} ve tüm temel giderler birlikte ele alındığında net sonuç ${formatTry(netProfit)} çıkıyor.`,
+    summaryValue: netProfit >= 0 ? "Karlilik var" : "Kritik kar baskisi",
+    intro: `Ciro ${formatTry(revenue)}, reklam harcamasi ${formatTry(adSpend)} ve tum temel giderler birlikte ele alindiginda net sonuc ${formatTry(netProfit)} cikiyor.`,
     metrics: [
-      { label: "Gerçekleşen ROAS", value: formatNumber(actualRoas, 2) },
-      { label: "Net kâr", value: formatTry(netProfit) },
-      { label: "Kâr marjı", value: `%${formatNumber(margin, 1)}` },
+      { label: "Gerceklesen ROAS", value: formatNumber(actualRoas, 2) },
+      { label: "Net kar", value: formatTry(netProfit) },
+      { label: "Kar marji", value: `%${formatNumber(margin, 1)}` },
+      { label: "Reklam payi", value: `%${formatNumber(adShare, 1)}` },
     ],
-    visibleItems: visibleNotes,
-    lockedItems: advancedNotes,
+    visibleItems: visibleNotes.slice(0, 4),
+    lockedItems: advancedNotes.slice(0, 5),
   };
 };
 
@@ -295,87 +307,104 @@ const getSeoState = () => {
   let score = 100;
   const visibleNotes = [];
   const criticalIssues = [];
+  const hasPath = /https?:\/\/[^/]+\/.+/i.test(rawDomain) || /^[^/]+\/.+/.test(rawDomain);
+  const usesPunycode = hostname.includes("xn--");
+  const indexHealth = indexedPages > 0 ? Math.max(0, 100 - (brokenPages / indexedPages) * 100) : 0;
 
   if (loadTime > 5) {
     score -= 28;
-    criticalIssues.push("Mobil yüklenme süresi 5 saniyenin üstünde. Bu durum hem sıralama hem dönüşüm tarafını zorluyor.");
+    criticalIssues.push("Mobil yuklenme suresi 5 saniyenin ustunde. Bu durum hem siralama hem donusum tarafini zorluyor.");
   } else if (loadTime > 3.5) {
     score -= 14;
-    visibleNotes.push("Mobil hız iyileştirmeye açık. 3.5 saniye üstü kullanıcı kaybını artırır.");
+    visibleNotes.push("Mobil hiz iyilestirmeye acik. 3.5 saniye ustu kullanici kaybini artirir.");
   } else {
-    visibleNotes.push("Mobil hız temel eşik içinde görünüyor.");
+    visibleNotes.push("Mobil hiz temel esik icinde gorunuyor.");
   }
 
   if (indexedPages < 10) {
     score -= 16;
-    criticalIssues.push("İndeksli sayfa görünürlüğü zayıf. İçerik ve teknik keşif akışı yeniden ele alınmalı.");
+    criticalIssues.push("Indeksli sayfa gorunurlugu zayif. Icerik ve teknik kesif akisi yeniden ele alinmali.");
   } else {
-    visibleNotes.push(`İndeks tarafında en az ${formatNumber(indexedPages, 0)} sayfalık görünürlük sinyali var.`);
+    visibleNotes.push(`Indeks tarafinda en az ${formatNumber(indexedPages, 0)} sayfalik gorunurluk sinyali var.`);
   }
 
   if (brokenPages > 5) {
     score -= 16;
-    criticalIssues.push("Kırık sayfa veya hata sayısı yüksek. Tarama bütçesi ve güven sinyali bu noktada zayıflar.");
+    criticalIssues.push("Kirik sayfa veya hata sayisi yuksek. Tarama butcesi ve guven sinyali bu noktada zayiflar.");
   } else if (brokenPages > 0) {
     score -= 8;
-    visibleNotes.push("Birkaç hata sayfası tespit edilmiş. Kullanıcı akışı ve yönlendirme kontrolü gerekli.");
+    visibleNotes.push("Birkac hata sayfasi tespit edildi. Kullanici akisi ve yonlendirme kontrolu gerekli.");
   }
 
   if (titleCoverage < 70) {
     score -= 18;
-    criticalIssues.push("Başlık ve meta kapsama oranı düşük. Arama görünürlüğü sistematik biçimde kaçıyor.");
+    criticalIssues.push("Baslik ve meta kapsama orani dusuk. Arama gorunurlugu sistematik bicimde kaciyor.");
   } else if (titleCoverage < 90) {
     score -= 8;
-    visibleNotes.push("Başlık/meta kapsaması orta seviyede. Şablon düzeni toparlanırsa hızlı kazanım gelir.");
+    visibleNotes.push("Baslik ve meta kapsama orta seviyede. Sablon duzeni toparlanirsa hizli kazanim gelir.");
   } else {
-    visibleNotes.push("Başlık/meta kapsaması güçlü görünüyor.");
+    visibleNotes.push("Baslik ve meta kapsama guclu gorunuyor.");
   }
 
   if (schema === "none") {
     score -= 10;
-    criticalIssues.push("Schema kullanımı yok. SERP görünürlüğü için yapısal veri katmanı eksik.");
+    criticalIssues.push("Schema kullanimi yok. SERP gorunurlugu icin yapisal veri katmani eksik.");
   } else if (schema === "partial") {
     score -= 4;
-    visibleNotes.push("Schema kısmi. Kritik sayfalarda genişletme alanı var.");
+    visibleNotes.push("Schema kismi. Kritik sayfalarda genisletme alani var.");
   }
 
   if (gsc === "no") {
     score -= 8;
-    criticalIssues.push("Google Search Console aktif görünmüyor. Teknik karar için veri tabanı eksik kalır.");
+    criticalIssues.push("Google Search Console aktif gorunmuyor. Teknik karar icin veri tabani eksik kaliyor.");
   }
 
   if (https === "no") {
     score -= 22;
-    criticalIssues.push("HTTPS aktif değil. Bu doğrudan güven ve SEO problemi yaratır.");
+    criticalIssues.push("HTTPS aktif degil. Bu dogrudan guven ve SEO problemi yaratir.");
+  }
+
+  if (usesPunycode) {
+    score -= 8;
+    criticalIssues.push("Alan adinda punycode gorunuyor. Marka guveni ve kullanici algisi ayrica kontrol edilmeli.");
   }
 
   if (hostname.includes("-")) {
-    visibleNotes.push("Alan adında tire kullanımı var. Markalaşma ve hatırlanabilirlik tarafı ayrıca değerlendirilmeli.");
+    visibleNotes.push("Alan adinda tire kullanimi var. Markalasma ve hatirlanabilirlik tarafi ayrica degerlendirilmeli.");
   }
 
   if (hostname.split(".").length > 3) {
-    visibleNotes.push("Alt alan yapısı karmaşık görünüyor. Teknik yönlendirme zinciri kontrol edilmeli.");
+    visibleNotes.push("Alt alan yapisi karmasik gorunuyor. Teknik yonlendirme zinciri kontrol edilmeli.");
+  }
+
+  if (hasPath) {
+    visibleNotes.push("Analize ana alan adi yerine tam URL girildi. Audit tarafinda sayfa tipi bazli ayri okuma gerekebilir.");
+  }
+
+  if (hostname.length > 28) {
+    visibleNotes.push("Alan adi uzun gorunuyor. Arama sonucu tiklanabilirligi ve markalasma acisindan ayrica degerlendirilmeli.");
   }
 
   score = Math.max(12, Math.min(100, score));
 
-  const summaryValue = score >= 80 ? "Sağlam temel" : score >= 55 ? "Geliştirilebilir yapı" : "Teknik açıklar yüksek";
+  const summaryValue = score >= 80 ? "Saglam temel" : score >= 55 ? "Gelistirilebilir yapi" : "Teknik aciklar yuksek";
   const summaryClass = score >= 80 ? "is-good" : score >= 55 ? "is-mid" : "is-alert";
 
   while (criticalIssues.length < 5) {
-    criticalIssues.push("Derin audit katmanında açılan ek teknik kontroller burada blur ile gizlenir.");
+    criticalIssues.push("Derin audit katmaninda acilan ek teknik kontroller burada blur ile gizlenir.");
   }
 
   return {
     summaryValue,
     summaryClass,
-    intro: `${hostname} için oluşturulan teknik hazırlık skoru ${formatNumber(score, 0)}/100 seviyesinde. Bu skor doğrudan tarama, hız ve görünürlük sinyallerinin birleşimidir.`,
+    intro: `${hostname} icin olusturulan teknik hazirlik skoru ${formatNumber(score, 0)}/100 seviyesinde. Bu skor tarama, hiz ve gorunurluk sinyallerinin birlesimidir.`,
     metrics: [
-      { label: "SEO hazırlık skoru", value: `${formatNumber(score, 0)} / 100` },
-      { label: "Mobil yüklenme", value: `${formatNumber(loadTime, 1)} sn` },
+      { label: "SEO hazirlik skoru", value: `${formatNumber(score, 0)} / 100` },
+      { label: "Mobil yuklenme", value: `${formatNumber(loadTime, 1)} sn` },
       { label: "Meta kapsama", value: `%${formatNumber(titleCoverage, 0)}` },
+      { label: "Indeks sagligi", value: indexedPages > 0 ? `%${formatNumber(indexHealth, 0)}` : "Veri yok" },
     ],
-    visibleItems: visibleNotes.slice(0, 3),
+    visibleItems: visibleNotes.slice(0, 4),
     lockedItems: criticalIssues.slice(0, 5),
   };
 };
@@ -434,43 +463,52 @@ const getAcademyState = () => {
   let level = "";
   let summaryClass = "";
   let nextTrack = "";
+  let recommendedProgram = "Dijital pazarlama temeli";
 
   if (score <= 8) {
     level = "Temel seviye";
     summaryClass = "is-alert";
-    nextTrack = "Önce temel mağaza ve reklam mantığı oturmalı.";
+    nextTrack = "Once temel magaza ve reklam mantigi oturmali.";
   } else if (score <= 16) {
-    level = "Gelişen seviye";
+    level = "Gelisen seviye";
     summaryClass = "is-mid";
-    nextTrack = "Sistem kurulduktan sonra ölçüm ve kreatif tekrarına geçilmesi gerekir.";
+    nextTrack = "Sistem kurulduktan sonra olcum ve kreatif tekrarina gecilmesi gerekir.";
   } else {
     level = "Uygulayan seviye";
     summaryClass = "is-good";
-    nextTrack = "İleri modülde rapor okuma, optimizasyon ve ölçekleme katmanı açılabilir.";
+    nextTrack = "Ileri modulde rapor okuma, optimizasyon ve olcekleme katmani acilabilir.";
+  }
+
+  if (values[0] + values[4] <= 4) {
+    recommendedProgram = "Etsy veya Shopify temeli";
+  } else if (values[1] + values[2] <= 4) {
+    recommendedProgram = "Meta Ads ve Google Ads";
+  } else if (values[3] <= 2) {
+    recommendedProgram = "Kreatif ve teklif uygulamasi";
   }
 
   const gaps = [];
-  if (values[0] <= 2) gaps.push("Mağaza veya proje temeli");
+  if (values[0] <= 2) gaps.push("Magaza veya proje temeli");
   if (values[1] <= 2) gaps.push("Reklam paneli ve kampanya kurgusu");
-  if (values[2] <= 2) gaps.push("Ölçümleme ve rapor okuma");
-  if (values[3] <= 2) gaps.push("Kreatif üretim ve test sistemi");
-  if (values[4] <= 2) gaps.push("Ürün / katalog düzeni");
-  if (values[5] <= 2) gaps.push("Haftalık uygulama disiplini");
+  if (values[2] <= 2) gaps.push("Olcumleme ve rapor okuma");
+  if (values[3] <= 2) gaps.push("Kreatif uretim ve test sistemi");
+  if (values[4] <= 2) gaps.push("Urun / katalog duzeni");
+  if (values[5] <= 2) gaps.push("Haftalik uygulama disiplini");
 
   while (gaps.length < 3) {
-    gaps.push("Bir üst seviyede optimizasyon modülü");
+    gaps.push("Bir ust seviyede optimizasyon modulu");
   }
 
   const strengths = [];
-  if (values[0] >= 4) strengths.push("Mağaza veya operasyon temeliniz hazır.");
-  if (values[1] >= 4) strengths.push("Reklam panelinde temel kararları okuyabiliyorsunuz.");
-  if (values[2] >= 4) strengths.push("Metrik okuma farkındalığınız oluşmuş.");
-  if (values[3] >= 4) strengths.push("Kreatif tekrar disiplini kurulmuş.");
-  if (values[4] >= 4) strengths.push("Ürün ve teklif yapınız düzenli görünüyor.");
-  if (values[5] >= 4) strengths.push("Süreklilik tarafı güçlü görünüyor.");
+  if (values[0] >= 4) strengths.push("Magaza veya operasyon temeliniz hazir.");
+  if (values[1] >= 4) strengths.push("Reklam panelinde temel kararlari okuyabiliyorsunuz.");
+  if (values[2] >= 4) strengths.push("Metrik okuma farkindaliginiz olusmus.");
+  if (values[3] >= 4) strengths.push("Kreatif tekrar disiplini kurulmus.");
+  if (values[4] >= 4) strengths.push("Urun ve teklif yapiniz duzenli gorunuyor.");
+  if (values[5] >= 4) strengths.push("Sureklilik tarafi guclu gorunuyor.");
 
   if (strengths.length === 0) {
-    strengths.push("Başlangıç seviyesi için doğru yerdesiniz; en büyük avantajınız temel akışı sıfırdan düzgün kurabilecek olmanız.");
+    strengths.push("Baslangic seviyesi icin dogru yerdesiniz; en buyuk avantajiniz temel akis kurabilecek olmaniz.");
   }
 
   return {
@@ -479,18 +517,20 @@ const getAcademyState = () => {
     intro: `Toplam skorunuz ${formatNumber(score, 0)}/24. ${nextTrack}`,
     metrics: [
       { label: "Seviye skoru", value: `${formatNumber(score, 0)} / 24` },
-      { label: "Hazır olunan katman", value: level },
-      { label: "Önerilen yön", value: score <= 16 ? "Temel + uygulama" : "Uygulama + optimizasyon" },
+      { label: "Hazir olunan katman", value: level },
+      { label: "Onerilen yon", value: score <= 16 ? "Temel + uygulama" : "Uygulama + optimizasyon" },
+      { label: "Ilk oneri", value: recommendedProgram },
     ],
     visibleItems: strengths.slice(0, 3),
     lockedItems: [
-      `Eksik olduğunuz ilk 3 konu: ${gaps.slice(0, 3).join(", ")}.`,
+      `Eksik oldugunuz ilk 3 konu: ${gaps.slice(0, 3).join(", ")}.`,
+      `Ilk bakista size en yakin baslangic programi: ${recommendedProgram}.`,
       score <= 8
-        ? "Önerilen müfredat sırası: mağaza temeli, içerik dili, reklam mantığı, temel metrikler."
+        ? "Onerilen mufredat sirasi: magaza temeli, icerik dili, reklam mantigi, temel metrikler."
         : score <= 16
-        ? "Önerilen müfredat sırası: katalog düzeni, ölçümleme, kreatif test, reklam optimizasyonu."
-        : "Önerilen müfredat sırası: veri okuma, teklif optimizasyonu, kreatif rotasyonu, ölçekleme disiplini.",
-      "Canlı ders ve tekrar izlenebilir modül akışı bu seviyeye göre kişiselleştirilir.",
+        ? "Onerilen mufredat sirasi: katalog duzeni, olcumleme, kreatif test, reklam optimizasyonu."
+        : "Onerilen mufredat sirasi: veri okuma, teklif optimizasyonu, kreatif rotasyonu, olcekleme disiplini.",
+      "Canli ders ve tekrar izlenebilir modul akisi bu seviyeye gore kisisellestirilir.",
     ],
   };
 };
@@ -537,60 +577,89 @@ const getCyberState = () => {
   let risk = payment + whatsapp + docs + urgency;
   const visibleNotes = [];
   const lockedNotes = [];
+  const urlFingerprint = `${parsedUrl.hostname}${parsedUrl.pathname}${parsedUrl.search}`.toLowerCase();
+  const suspiciousKeywordPattern = /(login|signin|verify|wallet|account|secure|bank|payment|checkout|odeme|kargo|cargo|confirm|auth|gift|claim)/i;
+  const riskyTlds = [".xyz", ".top", ".click", ".live", ".shop", ".site"];
+  const queryParamCount = Array.from(parsedUrl.searchParams.keys()).length;
 
   if (parsedUrl.protocol !== "https:") {
     risk += 3;
-    lockedNotes.push("Bağlantı HTTPS kullanmıyor. Bu, güven sinyalini doğrudan zayıflatır.");
+    lockedNotes.push("Baglanti HTTPS kullanmiyor. Bu, guven sinyalini dogrudan zayiflatiyor.");
   } else {
-    visibleNotes.push("Bağlantı HTTPS kullanıyor; bu tek başına güvenli olduğu anlamına gelmez.");
+    visibleNotes.push("Baglanti HTTPS kullaniyor; bu tek basina guvenli oldugu anlamina gelmez.");
   }
 
   if (shorteners.has(parsedUrl.hostname.toLowerCase())) {
     risk += 3;
-    lockedNotes.push("Kısa link servisi kullanılıyor. Nihai hedef kullanıcıdan saklanıyor olabilir.");
+    lockedNotes.push("Kisa link servisi kullaniliyor. Nihai hedef kullanicidan saklaniyor olabilir.");
   }
 
   if (isIpAddress(parsedUrl.hostname)) {
     risk += 3;
-    lockedNotes.push("Alan adı yerine IP adresi kullanılıyor. Bu davranış normal kurumsal akışlarda nadir görülür.");
+    lockedNotes.push("Alan adi yerine IP adresi kullaniliyor. Bu davranis normal kurumsal akista nadir gorulur.");
   }
 
   if (containsSuspiciousChars(parsedUrl.hostname)) {
     risk += 3;
-    lockedNotes.push("Hostname içinde olağandışı karakterler var. Taklit veya gizleme girişimi olabilir.");
+    lockedNotes.push("Hostname icinde olagandisi karakterler var. Taklit veya gizleme girisimi olabilir.");
+  }
+
+  if (parsedUrl.hostname.includes("xn--")) {
+    risk += 2;
+    lockedNotes.push("Alan adinda punycode kullanimi var. Taklit veya maskeleme ihtimali ayrica degerlendirilmeli.");
+  }
+
+  if (parsedUrl.username || parsedUrl.password) {
+    risk += 3;
+    lockedNotes.push("URL icinde kullanici adi veya parola bilgisi geciyor. Bu yuksek risk sinyalidir.");
+  }
+
+  if (suspiciousKeywordPattern.test(urlFingerprint)) {
+    risk += 2;
+    lockedNotes.push("URL yapisi giris, dogrulama veya odeme baskisi kuran anahtar kelimeler iceriyor.");
+  }
+
+  if (riskyTlds.some((suffix) => parsedUrl.hostname.endsWith(suffix))) {
+    risk += 2;
+    lockedNotes.push("Alan adi uzantisi yuksek riskli vakalarda sik gorulen bir gruba yakin.");
   }
 
   if (parsedUrl.hostname.split(".").length > 3) {
     risk += 1;
-    visibleNotes.push("Alan adı yapısı fazla katmanlı. Yönlendirme zinciri ayrıca kontrol edilmeli.");
+    visibleNotes.push("Alan adi yapisi fazla katmanli. Yonlendirme zinciri ayrica kontrol edilmeli.");
   }
 
   if (parsedUrl.pathname.length > 48 || parsedUrl.search.length > 70) {
     risk += 1;
-    visibleNotes.push("URL yapısı normalden karmaşık görünüyor.");
+    visibleNotes.push("URL yapisi normalden karmasik gorunuyor.");
+  }
+
+  if (queryParamCount >= 5) {
+    risk += 1;
+    visibleNotes.push("Baglanti cok sayida parametre iceriyor. Yonlendirme ve izleme davranisi kontrol edilmeli.");
   }
 
   if (payment >= 4) {
-    visibleNotes.push("Ödeme talebi bulunduğu için risk değerlendirmesi daha kritik hale gelir.");
+    visibleNotes.push("Odeme talebi bulundugu icin risk degerlendirmesi daha kritik hale geliyor.");
   }
 
   if (whatsapp >= 2) {
-    lockedNotes.push("WhatsApp veya DM yönlendirmesi, kullanıcıyı platform dışına çekme sinyali üretiyor.");
+    lockedNotes.push("WhatsApp veya DM yonlendirmesi, kullaniciyi platform disina cekme sinyali uretiyor.");
   }
 
   if (docs >= 3) {
-    lockedNotes.push("Kimlik veya kart görseli talebi var. Bu, dolandırıcılık vakalarında sık görülen yüksek risk göstergesi.");
+    lockedNotes.push("Kimlik veya kart gorseli talebi var. Bu, dolandiricilik vakalarinda sik gorulen yuksek risk gostergesi.");
   }
 
   if (urgency >= 4) {
-    lockedNotes.push("Dil tonu acele ve baskı içeriyor. Bu, phishing ve sahte tahsilat senaryolarında sık görülür.");
+    lockedNotes.push("Dil tonu acele ve baski iceriyor. Bu, phishing ve sahte tahsilat senaryolarinda sik gorulur.");
   }
 
-  let summaryValue = "Düşük risk sinyali";
+  let summaryValue = "Dusuk risk sinyali";
   let summaryClass = "is-good";
 
   if (risk >= 12) {
-    summaryValue = "Yüksek risk sinyali";
+    summaryValue = "Yuksek risk sinyali";
     summaryClass = "is-alert";
   } else if (risk >= 6) {
     summaryValue = "Orta risk sinyali";
@@ -598,19 +667,20 @@ const getCyberState = () => {
   }
 
   while (lockedNotes.length < 4) {
-    lockedNotes.push("Detaylı port, altyapı ve davranışsal güvenlik katmanı uzman incelemede açılır.");
+    lockedNotes.push("Detayli port, altyapi ve davranissal guvenlik katmani uzman incelemede acilir.");
   }
 
   return {
     summaryValue,
     summaryClass,
-    intro: `${parsedUrl.hostname} için oluşturulan ön tarama skoru ${formatNumber(risk, 0)} risk puanı üretti. Bu sonuç görünür URL ve davranış sinyallerine dayanır.`,
+    intro: `${parsedUrl.hostname} icin olusturulan on tarama skoru ${formatNumber(risk, 0)} risk puani uretti. Bu sonuc gorunur URL ve davranis sinyallerine dayaniyor.`,
     metrics: [
-      { label: "Risk puanı", value: `${formatNumber(risk, 0)} / 20+` },
-      { label: "Alan adı", value: parsedUrl.hostname },
+      { label: "Risk puani", value: `${formatNumber(risk, 0)} / 20+` },
+      { label: "Alan adi", value: parsedUrl.hostname },
       { label: "Protokol", value: parsedUrl.protocol.replace(":", "").toUpperCase() },
+      { label: "Parametre sayisi", value: `${queryParamCount}` },
     ],
-    visibleItems: visibleNotes.slice(0, 3),
+    visibleItems: visibleNotes.slice(0, 4),
     lockedItems: lockedNotes.slice(0, 4),
   };
 };
@@ -703,31 +773,39 @@ const getDiscountState = () => {
   }
 
   const savings = basePrice - discountedPrice;
+  const calculationMode =
+    originalPrice <= 0
+      ? "Indirimliden indirimsiz fiyat"
+      : salePrice <= 0
+      ? "Indirimsizden indirimli fiyat"
+      : "Iki fiyat arasindan oran";
 
   return {
-    summaryValue: discountPercent >= 40 ? "Güçlü kampanya" : discountPercent >= 15 ? "Standart indirim" : "Düşük indirim",
+    summaryValue: discountPercent >= 40 ? "Guclu kampanya" : discountPercent >= 15 ? "Standart indirim" : "Dusuk indirim",
     summaryClass: discountPercent >= 40 ? "is-good" : discountPercent >= 15 ? "is-mid" : "is-alert",
-    intro: `İndirimsiz fiyat ${formatTry(basePrice)}, indirimli fiyat ${formatTry(discountedPrice)} ve hesaplanan oran %${formatNumber(discountPercent, 1)}.`,
+    intro: `Indirimsiz fiyat ${formatTry(basePrice)}, indirimli fiyat ${formatTry(discountedPrice)} ve hesaplanan oran %${formatNumber(discountPercent, 1)}.`,
     metrics: [
-      { label: "İndirimsiz fiyat", value: formatTry(basePrice) },
-      { label: "İndirimli fiyat", value: formatTry(discountedPrice) },
-      { label: "İndirim oranı", value: `%${formatNumber(discountPercent, 1)}` },
+      { label: "Indirimsiz fiyat", value: formatTry(basePrice) },
+      { label: "Indirimli fiyat", value: formatTry(discountedPrice) },
+      { label: "Indirim orani", value: `%${formatNumber(discountPercent, 1)}` },
+      { label: "Tasarruf", value: formatTry(savings) },
     ],
     visibleItems: [
-      `Toplam indirim tutarı ${formatTry(savings)} seviyesinde.`,
+      `Toplam indirim tutari ${formatTry(savings)} seviyesinde.`,
+      `Hesap modu: ${calculationMode}.`,
       discountPercent >= 40
-        ? "Kampanya algısı güçlü görünüyor; marj tarafını ayrıca kontrol etmek gerekir."
-        : "Fiyat farkı kullanıcıya görünür, ancak teklif mesajı ile desteklenirse daha iyi çalışır.",
+        ? "Kampanya algisi guclu gorunuyor; marj tarafini ayrica kontrol etmek gerekir."
+        : "Fiyat farki kullaniciya gorunur, ancak teklif mesaji ile desteklenirse daha iyi calisir.",
       originalPrice <= 0
-        ? "İndirimli fiyattan indirimsiz fiyat geriye doğru hesaplandı."
+        ? "Indirimli fiyattan indirimsiz fiyat geriye dogru hesaplandi."
         : salePrice <= 0
-        ? "İndirimsiz fiyat ve oran üzerinden yeni fiyat hesaplandı."
-        : "İki fiyat üzerinden indirim oranı netleştirildi.",
+        ? "Indirimsiz fiyat ve oran uzerinden yeni fiyat hesaplandi."
+        : "Iki fiyat uzerinden indirim orani netlesti.",
     ],
     lockedItems: [
-      "Kademeli kampanya önerisi ve eşik fiyat yorumu tam analizde açılır.",
-      "Ürün marjı ve reklam maliyeti ile birlikte değerlendirilince daha doğru karar verilir.",
-      "Aynı teklif için psikolojik fiyat kırılımı ve paketleme önerileri ayrı raporda sunulur.",
+      "Kademeli kampanya onerisi ve esik fiyat yorumu tam analizde acilir.",
+      "Urun marji ve reklam maliyeti ile birlikte degerlendirilince daha dogru karar verilir.",
+      "Ayni teklif icin psikolojik fiyat kirilimi ve paketleme onerileri ayri raporda sunulur.",
     ],
   };
 };

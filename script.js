@@ -1265,25 +1265,25 @@ const buildSocialProofMessageLegacy = () => {
 
 const buildSocialProofMessage = () => {
   const names = [
-    "Ayse",
+    "Ayşe",
     "Fatma",
     "Zeynep",
     "Elif",
     "Merve",
     "Esra",
-    "Busra",
-    "Sila",
+    "Büşra",
+    "Sıla",
     "Ceren",
     "Ece",
     "Melis",
     "Beyza",
     "Aleyna",
-    "Nazli",
+    "Nazlı",
     "Derya",
     "Gizem",
     "Seda",
     "Selin",
-    "Yagmur",
+    "Yağmur",
     "Yasemin",
     "Ahmet",
     "Mehmet",
@@ -1293,14 +1293,14 @@ const buildSocialProofMessage = () => {
     "Can",
     "Emre",
     "Burak",
-    "Oguz",
+    "Oğuz",
     "Kerem",
     "Tolga",
     "Hakan",
     "Onur",
     "Eren",
     "Serkan",
-    "Baris",
+    "Barış",
     "Kaan",
     "Arda",
     "Deniz",
@@ -1308,9 +1308,9 @@ const buildSocialProofMessage = () => {
   ];
 
   const cities = [
-    "Istanbul",
+    "İstanbul",
     "Ankara",
-    "Izmir",
+    "İzmir",
     "Bursa",
     "Antalya",
     "Kocaeli",
@@ -1319,70 +1319,70 @@ const buildSocialProofMessage = () => {
     "Gaziantep",
     "Mersin",
     "Kayseri",
-    "Eskisehir",
+    "Eskişehir",
     "Samsun",
     "Trabzon",
-    "Diyarbakir",
-    "Tekirdag",
+    "Diyarbakır",
+    "Tekirdağ",
     "Sakarya",
     "Denizli",
-    "Balikesir",
-    "Mugla",
+    "Balıkesir",
+    "Muğla",
   ];
 
   const pageNames = {
     "siber.html": "Lumina Siber",
     "hizmetler.html": "Lumina Siber",
-    "index.html": "Lumina Danismanlik",
-    "danismanlik-hizmetleri.html": "Lumina Danismanlik",
+    "index.html": "Lumina Danışmanlık",
+    "danismanlik-hizmetleri.html": "Lumina Danışmanlık",
     "akademi.html": "Lumina Akademi",
     "akademi-egitimleri.html": "Lumina Akademi",
     "araclar.html": "Lumina Lab",
-    "roas-hesaplayici.html": "ROAS Hesaplayici",
-    "seo-teknik-analiz.html": "SEO Acik Analizi",
+    "roas-hesaplayici.html": "ROAS Hesaplayıcı",
+    "seo-teknik-analiz.html": "SEO Açık Analizi",
     "dijital-pazarlama-seviye-testi.html": "Seviye Testi",
     "site-risk-analizi.html": "Site Risk Analizi",
-    "indirim-hesaplayici.html": "Indirim Hesaplayici",
+    "indirim-hesaplayici.html": "İndirim Hesaplayıcı",
     "blog.html": "Blog Merkezi",
   };
 
   const pathname = window.location.pathname.split("/").pop() || "index.html";
   const currentPageName = pageNames[pathname] || "Lumina";
-  const currentVisitors = Math.floor(Math.random() * 6) + 3;
-  const dailyToolUsers = Math.floor(Math.random() * 38) + 27;
+  const currentVisitors = Math.floor(Math.random() * 5) + 3;
+  const dailyToolUsers = Math.floor(Math.random() * 29) + 31;
   const name = getRandomItem(names);
   const city = getRandomItem(cities);
-  const timeLabel = getRandomItem(["Az once", "2 dakika once", "5 dakika once", "Biraz once", "Su anda", "Bugun"]);
+  const timeLabel = getRandomItem(["Az önce", "2 dakika önce", "5 dakika önce", "Biraz önce", "Şu anda", "Bugün"]);
 
   const consultingMessages = [
-    { title: timeLabel, body: `${name}, Shopify danismanligi sayfasini inceledi.` },
-    { title: `${city}'den talep`, body: `${city}'den bir ziyaretci Etsy danismanligi icin on gorusme birakti.` },
-    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
-    { title: "Arac kullanimi", body: `${name}, ucretsiz ROAS ve karlilik hesaplayicisini kullandi.` },
-    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi danismanlik on analiz araclarini kullandi.` },
+    { title: timeLabel, body: `${name}, ücretsiz ROAS ve kârlılık hesaplayıcıyı kullandı.` },
+    { title: `${city} kaynaklı ilgi`, body: `${city}'den bir ziyaretçi Shopify danışmanlığı sayfasını inceledi.` },
+    { title: "Canlı ilgi", body: `Şu anda ${currentPageName} sayfasında ${currentVisitors} kişi geziniyor.` },
+    { title: "Bugün", body: `${name}, ücretsiz indirim hesaplayıcıdan sonra danışmanlık sayfasına geçti.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kişi danışmanlık ön analiz araçlarını kullandı.` },
   ];
 
   const academyMessages = [
-    { title: timeLabel, body: `${name}, dijital pazarlama seviye testini cozmeye basladi.` },
-    { title: `${city}'den ilgi`, body: `${city}'den bir ziyaretci Etsy egitimi sayfasini inceledi.` },
-    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
-    { title: "Program ilgisi", body: `${name}, Meta Ads ve Google Ads egitim programina goz atti.` },
-    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi akademi araclarini kullandi.` },
+    { title: timeLabel, body: `${name}, dijital pazarlama seviye testini tamamladı.` },
+    { title: `${city}'den ilgi`, body: `${city}'den bir ziyaretçi Shopify eğitimi sayfasını inceledi.` },
+    { title: "Canlı ilgi", body: `Şu anda ${currentPageName} sayfasında ${currentVisitors} kişi geziniyor.` },
+    { title: "Program incelemesi", body: `${name}, Meta Ads ve Google Ads eğitim programına göz attı.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kişi akademi araçlarını kullandı.` },
   ];
 
   const cyberMessages = [
-    { title: timeLabel, body: `${name}, supheli link kontrolu sayfasini acti.` },
-    { title: `${city}'den guvenlik talebi`, body: `${city}'den bir ziyaretci site ve link risk analizini kullandi.` },
-    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
-    { title: "Araclara ilgi var", body: `${name}, guvenlik kontrolu aracina goz atti.` },
-    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi siber araclari kullandi.` },
+    { title: timeLabel, body: `${name}, şüpheli link kontrolü aracını kullandı.` },
+    { title: `${city}'den kontrol`, body: `${city}'den bir ziyaretçi site ve link risk analizini açtı.` },
+    { title: "Canlı ilgi", body: `Şu anda ${currentPageName} sayfasında ${currentVisitors} kişi geziniyor.` },
+    { title: "Güvenlik incelemesi", body: `${name}, parola araçları sayfasına göz attı.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kişi siber kontrol araçlarını kullandı.` },
   ];
 
   const labMessages = [
-    { title: timeLabel, body: `${name}, ucretsiz indirim hesaplayiciyi kullandi.` },
-    { title: "Kategori gecisi", body: `${city}'den bir ziyaretci araclar merkezinden bir analiz sayfasi acti.` },
-    { title: "Canli trafik", body: `Su anda ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.` },
-    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kisi Lumina Lab araclarini kullandi.` },
+    { title: timeLabel, body: `${name}, ücretsiz indirim hesaplayıcıyı kullandı.` },
+    { title: "Araç kullanımı", body: `${city}'den bir ziyaretçi ücretsiz teknik SEO açık analizini açtı.` },
+    { title: "Canlı ilgi", body: `Şu anda ${currentPageName} sayfasında ${currentVisitors} kişi geziniyor.` },
+    { title: "Son 24 saat", body: `Son 24 saatte ${dailyToolUsers} kişi Lumina Lab araçlarını kullandı.` },
   ];
 
   if (
@@ -1419,7 +1419,7 @@ const initSocialProofWidget = () => {
     return;
   }
 
-  const proofDismissKey = "lumina-proof-dismissed-v2";
+  const proofDismissKey = "lumina-proof-dismissed-v3";
   let widgetDismissed = false;
   try {
     widgetDismissed = sessionStorage.getItem(proofDismissKey) === "1";
@@ -1438,8 +1438,8 @@ const initSocialProofWidget = () => {
     <div class="lumina-proof-card">
       <span class="lumina-proof-live" aria-hidden="true"></span>
       <div class="lumina-proof-copy">
-        <strong data-proof-title>Canlı hareket</strong>
-        <p data-proof-body>Sitedeki güncel ilgi burada görünür.</p>
+        <strong data-proof-title>Canlı ilgi</strong>
+        <p data-proof-body>Bu sayfadaki güncel ilgi burada görünür.</p>
       </div>
       <button class="lumina-proof-close" type="button" aria-label="Bildirimi kapat">x</button>
     </div>
@@ -1475,7 +1475,7 @@ const initSocialProofWidget = () => {
     wrapper.classList.remove("is-visible");
     wrapper.classList.add("is-leaving");
 
-    scheduleNext(Math.floor(Math.random() * 5000) + 10000);
+    scheduleNext(Math.floor(Math.random() * 30000) + 45000);
   };
 
   const showMessage = () => {
@@ -1510,7 +1510,7 @@ const initSocialProofWidget = () => {
     }
 
     clearScheduled();
-    timeoutId = window.setTimeout(hideMessage, Math.floor(Math.random() * 2000) + 5000);
+    timeoutId = window.setTimeout(hideMessage, Math.floor(Math.random() * 1500) + 6000);
   };
 
   closeButton?.addEventListener("click", () => {
@@ -1525,7 +1525,7 @@ const initSocialProofWidget = () => {
     }
   });
 
-  scheduleNext(Math.floor(Math.random() * 1200) + 1400);
+  scheduleNext(Math.floor(Math.random() * 4000) + 8000);
 };
 
 initSocialProofWidget();
