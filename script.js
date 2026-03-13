@@ -20,6 +20,21 @@ document.querySelectorAll("img").forEach((image) => {
     image.decoding = "async";
   }
 
+  const markImageReady = () => {
+    image.dataset.mediaReady = "true";
+    const visualWrapper = image.closest(".hero-visual");
+    if (visualWrapper) {
+      visualWrapper.dataset.visualReady = "true";
+    }
+  };
+
+  if (image.complete) {
+    markImageReady();
+  } else {
+    image.addEventListener("load", markImageReady, { once: true });
+    image.addEventListener("error", markImageReady, { once: true });
+  }
+
   const isCriticalImage = Boolean(
     image.closest(".site-header, .home-hero, .consulting-stage, .page-hero, .hero-carousel, .consulting-showcase, .article-hero, .blog-hub-hero, .thanks-card")
   );
@@ -412,7 +427,31 @@ if (heroCarousel) {
         const preloadImage = new Image();
         preloadImage.decoding = "async";
         preloadImage.src = imageSource;
+        if (typeof preloadImage.decode === "function") {
+          preloadImage.decode().catch(() => {});
+        }
         image.dataset.preloaded = "true";
+      });
+    };
+
+    const warmHeroMedia = () => {
+      slides.forEach((slide) => {
+        slide.querySelectorAll("img").forEach((image) => {
+          if (image.dataset.warmed === "true") {
+            return;
+          }
+
+          image.loading = "eager";
+          if (!image.fetchPriority) {
+            image.fetchPriority = "high";
+          }
+
+          if (typeof image.decode === "function") {
+            image.decode().catch(() => {});
+          }
+
+          image.dataset.warmed = "true";
+        });
       });
     };
 
@@ -557,6 +596,7 @@ if (heroCarousel) {
     heroCarousel.addEventListener("focusout", restartAutoplay);
 
     syncCarousel(activeIndex);
+    warmHeroMedia();
     restartAutoplay();
   }
 }
