@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teknik SEO Açık Analizi | Lumina Lab</title>
+  <meta name="description" content="Ücretsiz teknik SEO açık analizi ile mobil hız, HTTPS, indekslenme ve meta kapsamasını tek ekranda puanlayın." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/seo-teknik-analiz.html" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="tools-page">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="araclar.html" aria-label="Lumina Lab ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina Lab logo" width="48" height="48" /></span>
+        <span class="brand-copy"><strong>Lumina</strong><span>Lab</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="araclar.html#seo-web">Araç Kategorileri</a>
+        <a href="roas-hesaplayici.html">ROAS Hesaplayıcı</a>
+        <a href="index.html#iletisim" class="nav-btn">SEO Audit Sor</a>
+      </nav>
+    </div>
+  </header>
+  <main class="page-main">
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz SEO Aracı</p>
+          <h1 class="page-title">Teknik SEO Açık Analizi</h1>
+          <p>Mobil hız, indekslenme, schema ve temel teknik kurulum eksiklerini hızlıca puanlayın. İlk teknik resmi çıkarıp açıkları görün.</p>
+        </div>
+        <aside class="page-side-card">
+          <p class="section-kicker">Hangi Sorulara Cevap Verir?</p>
+          <h3>Site trafiği neden kırılgan kalıyor?</h3>
+          <p>Arama görünürlüğü öncesinde teknik hazırlığı görmek isteyen marka siteleri ve e-ticaret projeleri için ön değerlendirme katmanıdır.</p>
+        </aside>
+      </div>
+    </section>
+    <section class="section section-soft">
+      <div class="container">
+        <div class="conversion-tool-shell reveal is-visible">
+          <div class="conversion-tool-form">
+            <div class="conversion-tool-badge">SEO audit öncesi hızlı teknik filtre</div>
+            <label for="seoDomain">Site adresi</label>
+            <input id="seoDomain" type="text" placeholder="Örn: https://ornekdomain.com" />
+            <label for="seoLoadTime">Mobil yüklenme süresi (saniye)</label>
+            <input id="seoLoadTime" type="number" min="0" step="0.1" placeholder="Örn: 3.8" />
+            <label for="seoIndexedPages">İndeksli sayfa sayısı</label>
+            <input id="seoIndexedPages" type="number" min="0" step="1" placeholder="Örn: 125" />
+            <label for="seoBrokenPages">Bilinen kırık sayfa / hata sayısı</label>
+            <input id="seoBrokenPages" type="number" min="0" step="1" placeholder="Örn: 6" />
+            <label for="seoTitleCoverage">Başlık ve meta açıklama kapsama oranı (%)</label>
+            <input id="seoTitleCoverage" type="number" min="0" max="100" step="1" placeholder="Örn: 74" />
+            <label for="seoSchema">Yapısal veri / schema kullanımı</label>
+            <select id="seoSchema"><option value="none">Yok</option><option value="partial">Kısmi</option><option value="full">Var</option></select>
+            <label for="seoGsc">Google Search Console aktif mi?</label>
+            <select id="seoGsc"><option value="no">Hayır</option><option value="yes">Evet</option></select>
+            <label for="seoHttps">HTTPS aktif mi?</label>
+            <select id="seoHttps"><option value="yes">Evet</option><option value="no">Hayır</option></select>
+            <button class="btn btn-primary" type="button" id="seoAnalyzeBtn">SEO Skorunu Oluştur</button>
+          </div>
+          <div class="conversion-tool-result hidden" id="seoResult"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><h3>Lumina Lab</h3><p>SEO araçları ilk teknik görünürlüğü verir; detaylı audit ve uygulama planı için danışmanlığa geçilir.</p></div>
+      <div><h4>Sayfalar</h4><ul><li><a href="araclar.html">Araç Kategorileri</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div><h4>Geçiş</h4><p><a href="index.html#iletisim">SEO danışmanlığı sor</a></p></div>
+    </div>
+    <div class="container footer-bottom"><span>Lumina Lab</span><span>luminadigitale.com</span></div>
+  </footer>
+  <script src="script.js" defer></script>
+  <script src="tools.js" defer></script>
+</body>
+</html>

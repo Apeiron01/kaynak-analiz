@@ -1088,25 +1088,25 @@ const getRandomItem = (items) => items[Math.floor(Math.random() * items.length)]
 
 const buildSocialProofMessage = () => {
   const names = [
-    "Ayse",
+    "Ayşe",
     "Fatma",
     "Zeynep",
     "Elif",
     "Merve",
     "Esra",
-    "Busra",
-    "Sila",
+    "Büşra",
+    "Sıla",
     "Ceren",
     "Ece",
     "Melis",
     "Beyza",
     "Aleyna",
-    "Nazli",
+    "Nazlı",
     "Derya",
     "Gizem",
     "Seda",
     "Selin",
-    "Yagmur",
+    "Yağmur",
     "Yasemin",
     "Ahmet",
     "Mehmet",
@@ -1116,14 +1116,14 @@ const buildSocialProofMessage = () => {
     "Can",
     "Emre",
     "Burak",
-    "Oguz",
+    "Oğuz",
     "Kerem",
     "Tolga",
     "Hakan",
     "Onur",
     "Eren",
     "Serkan",
-    "Baris",
+    "Barış",
     "Kaan",
     "Arda",
     "Deniz",
@@ -1131,9 +1131,9 @@ const buildSocialProofMessage = () => {
   ];
 
   const cities = [
-    "Istanbul",
+    "İstanbul",
     "Ankara",
-    "Izmir",
+    "İzmir",
     "Bursa",
     "Antalya",
     "Kocaeli",
@@ -1142,73 +1142,79 @@ const buildSocialProofMessage = () => {
     "Gaziantep",
     "Mersin",
     "Kayseri",
-    "Eskisehir",
+    "Eskişehir",
     "Samsun",
     "Trabzon",
-    "Diyarbakir",
-    "Tekirdag",
+    "Diyarbakır",
+    "Tekirdağ",
     "Sakarya",
     "Denizli",
-    "Balikesir",
-    "Mugla",
+    "Balıkesir",
+    "Muğla",
   ];
 
   const services = [
-    "SEO danismanligi",
+    "SEO danışmanlığını",
     "Shopify kurulumu",
-    "Etsy danismanligi",
-    "Meta Ads yonetimi",
-    "Google Ads destegi",
-    "siber inceleme",
-    "teknik SEO audit",
-    "e-ticaret buyume danismanligi",
-    "marka guvenligi analizi",
-    "egitim gorusmesi",
+    "Etsy danışmanlığını",
+    "Meta Ads yönetimini",
+    "Google Ads desteğini",
+    "siber incelemeyi",
+    "teknik SEO analizini",
+    "e-ticaret büyüme danışmanlığını",
+    "marka güvenliği analizini",
+    "eğitim görüşmesini",
   ];
 
   const toolNames = [
-    "Ucretsiz ROAS Hesaplayici",
-    "Ucretsiz Teknik SEO Acik Analizi",
-    "Ucretsiz Dijital Pazarlama Seviye Testi",
-    "Ucretsiz Site ve Link Risk Analizi",
-    "Supheli Link Kontrolu",
-    "Guvenlik Kontrolu",
-    "Parola Araclari",
+    "Ücretsiz ROAS Hesaplayıcı",
+    "Ücretsiz Teknik SEO Açık Analizi",
+    "Ücretsiz Dijital Pazarlama Seviye Testi",
+    "Ücretsiz Site ve Link Risk Analizi",
+    "Şüpheli Link Kontrolü",
+    "Güvenlik Kontrolü",
+    "Parola Araçları",
+    "İndirim Hesaplayıcı",
   ];
 
   const courses = [
-    "Shopify Kurulum ve Yonetim",
-    "Etsy Egitim Programi",
+    "Shopify Kurulum ve Yönetim",
+    "Etsy Eğitim Programı",
     "Meta Ads ve Google Ads",
     "Dijital Pazarlama Temelleri",
-    "ROAS ve Karlilik Okuma",
+    "ROAS ve Karlılık Okuma",
     "Teknik SEO Temelleri",
   ];
 
-  const resources = [
-    "SEO ve reklam rehberine",
-    "ucretsiz araclar merkezine",
-    "siber risk bloguna",
-    "Shopify kurulum icerigine",
-    "Etsy egitim sayfasina",
-    "danismanlik formuna",
+  const pages = [
+    "ücretsiz araçlar sayfasını",
+    "SEO analiz sayfasını",
+    "indirim hesaplayıcıyı",
+    "site risk analizi sayfasını",
+    "Shopify eğitim sayfasını",
+    "iletişim formunu",
   ];
 
   const pageNames = {
     "siber.html": "Lumina Siber",
-    "index.html": "Lumina Danismanlik",
+    "index.html": "Lumina Danışmanlık",
     "akademi.html": "Lumina Akademi",
     "araclar.html": "Lumina Lab",
+    "roas-hesaplayici.html": "ROAS Hesaplayıcı",
+    "seo-teknik-analiz.html": "SEO Açık Analizi",
+    "dijital-pazarlama-seviye-testi.html": "Seviye Testi",
+    "site-risk-analizi.html": "Site Risk Analizi",
+    "indirim-hesaplayici.html": "İndirim Hesaplayıcı",
     "blog.html": "Blog Merkezi",
   };
 
   const timeLabels = [
-    "Az once",
-    "2 dakika once",
-    "5 dakika once",
-    "Biraz once",
-    "Su anda",
-    "Bugun",
+    "Az önce",
+    "2 dakika önce",
+    "5 dakika önce",
+    "Biraz önce",
+    "Şu anda",
+    "Bugün",
   ];
 
   const pathname = window.location.pathname.split("/").pop() || "index.html";
@@ -1221,36 +1227,36 @@ const buildSocialProofMessage = () => {
   const name = getRandomItem(names);
   const city = getRandomItem(cities);
   const timeLabel = getRandomItem(timeLabels);
-  const resource = getRandomItem(resources);
+  const page = getRandomItem(pages);
 
   const templates = [
     {
       title: timeLabel,
-      body: `${name}, "${tool}" aracini kullandi.`,
+      body: `${name}, "${tool}" aracını kullandı.`,
     },
     {
-      title: `${city} kaynakli talep`,
-      body: `${city}'den bir ziyaretci ${service} icin on gorusme birakti.`,
+      title: `${city}'den ilgi var`,
+      body: `${city}'den bir ziyaretçi ${service} inceledi.`,
     },
     {
-      title: "Canli trafik",
-      body: `Su an ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.`,
+      title: "Canlı trafik",
+      body: `Şu anda ${currentPageName} sayfasında ${currentVisitors} kişi geziyor.`,
     },
     {
       title: "Son 24 saat",
-      body: `Son 24 saatte ${dailyToolUsers} kisi ucretsiz araclari kullandi.`,
+      body: `Son 24 saatte ${dailyToolUsers} kişi ücretsiz araçları kullandı.`,
     },
     {
       title: `${timeLabel}`,
-      body: `${name}, ${course} egitim sayfasini inceledi.`,
+      body: `${name}, ${course} eğitim sayfasını inceledi.`,
     },
     {
-      title: "Yeni gecis",
-      body: `${city}'den bir kullanici ${resource} gecti.`,
+      title: "Araçlara ilgi var",
+      body: `${city}'den bir ziyaretçi ${page} açtı.`,
     },
     {
-      title: "Funnel hareketi",
-      body: `${name}, analizden sonra ${service} sayfasina gecti.`,
+      title: "Şu anda ilgi artıyor",
+      body: `${name}, ${tool} sayfasına göz attı.`,
     },
   ];
 
@@ -1280,8 +1286,8 @@ const initSocialProofWidget = () => {
     <div class="lumina-proof-card">
       <span class="lumina-proof-live" aria-hidden="true"></span>
       <div class="lumina-proof-copy">
-        <strong data-proof-title>Canli bildirim</strong>
-        <p data-proof-body>Yeni ziyaretci hareketleri burada gorunur.</p>
+        <strong data-proof-title>Canlı hareket</strong>
+        <p data-proof-body>Sitedeki güncel ilgi burada görünür.</p>
       </div>
       <button class="lumina-proof-close" type="button" aria-label="Bildirimi kapat">x</button>
     </div>

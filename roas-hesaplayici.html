@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROAS ve Karlılık Hesaplayıcı | Lumina Lab</title>
+  <meta name="description" content="Ücretsiz ROAS ve kârlılık hesaplayıcı ile reklam harcaması, ürün maliyeti ve iade oranını birlikte hesaplayın." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/roas-hesaplayici.html" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="tools-page">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="araclar.html" aria-label="Lumina Lab ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina Lab logo" width="48" height="48" /></span>
+        <span class="brand-copy"><strong>Lumina</strong><span>Lab</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="araclar.html#eticaret">Araç Kategorileri</a>
+        <a href="indirim-hesaplayici.html">İndirim Hesaplayıcı</a>
+        <a href="index.html#iletisim" class="nav-btn">Danışmanlığa Geç</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz Hesaplayıcı</p>
+          <h1 class="page-title">ROAS ve Kârlılık Hesaplayıcı</h1>
+          <p>Reklam harcaması iyi görünebilir; asıl soru bunun gerçek kâra dönüp dönmediğidir. Bu araç ciro, maliyet ve iadeyi birlikte değerlendirir.</p>
+        </div>
+        <aside class="page-side-card">
+          <p class="section-kicker">Kimler İçin?</p>
+          <h3>Shopify, Etsy ve reklam yöneten mağazalar</h3>
+          <p>Meta Ads veya Google Ads kullanan mağazalar için bütçe baskısını ve gerçek kârlılığı hızlıca görünür hale getirir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="conversion-tool-shell reveal is-visible">
+          <div class="conversion-tool-form">
+            <div class="conversion-tool-badge">Shopify / Etsy / Meta Ads / Google Ads</div>
+            <label for="roasRevenue">Aylık ciro (TL)</label>
+            <input id="roasRevenue" type="number" min="0" step="100" placeholder="Örn: 250000" />
+            <label for="roasAdSpend">Aylık reklam harcaması (TL)</label>
+            <input id="roasAdSpend" type="number" min="0" step="50" placeholder="Örn: 60000" />
+            <label for="roasCogs">Ürün maliyeti toplamı (TL)</label>
+            <input id="roasCogs" type="number" min="0" step="100" placeholder="Örn: 95000" />
+            <label for="roasShipping">Kargo + operasyon gideri (TL)</label>
+            <input id="roasShipping" type="number" min="0" step="50" placeholder="Örn: 18000" />
+            <label for="roasFees">Platform / ödeme komisyonu (%)</label>
+            <input id="roasFees" type="number" min="0" max="100" step="0.1" placeholder="Örn: 6.5" />
+            <label for="roasReturns">İade / iptal oranı (%)</label>
+            <input id="roasReturns" type="number" min="0" max="100" step="0.1" placeholder="Örn: 4" />
+            <label for="roasFixed">Sabit giderler (TL)</label>
+            <input id="roasFixed" type="number" min="0" step="50" placeholder="Örn: 15000" />
+            <button class="btn btn-primary" type="button" id="roasAnalyzeBtn">Kârlılığı Hesapla</button>
+          </div>
+          <div class="conversion-tool-result hidden" id="roasResult"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="services-category-head reveal is-visible">
+          <p class="section-kicker">İlgili Araçlar</p>
+          <h2>Aynı kategori içindeki diğer hesaplayıcılar</h2>
+          <p>Kârlılığı gördükten sonra fiyat ve teklif tarafını da hızlıca netleştirebilirsiniz.</p>
+        </div>
+        <div class="tools-map-grid">
+          <a class="tools-map-card" href="indirim-hesaplayici.html">
+            <span class="tools-map-index">01</span>
+            <h3>İndirim Hesaplayıcı</h3>
+            <p>İndirimsiz fiyat, indirimli fiyat ve oran arasında çift yönlü hesap yapar.</p>
+          </a>
+          <a class="tools-map-card" href="seo-teknik-analiz.html">
+            <span class="tools-map-index">02</span>
+            <h3>Teknik SEO Açık Analizi</h3>
+            <p>Trafik almadan önce sitenin teknik hazırlığını ölçer.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><h3>Lumina Lab</h3><p>Ücretsiz hesaplayıcılar ile ilk resmi çıkarır, derin çözüm gerektiğinde danışmanlık akışına taşır.</p></div>
+      <div><h4>Sayfalar</h4><ul><li><a href="araclar.html">Araç Kategorileri</a></li><li><a href="index.html">Danışmanlık</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+      <div><h4>Geçiş</h4><p><a href="index.html#iletisim">Danışmanlık formu</a></p><p><a href="akademi.html#iletisim">Eğitim görüşmesi</a></p></div>
+    </div>
+    <div class="container footer-bottom"><span>Lumina Lab</span><span>luminadigitale.com</span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="tools.js" defer></script>
+</body>
+</html>

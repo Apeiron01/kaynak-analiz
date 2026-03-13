@@ -42,7 +42,7 @@ const renderToolLoading = (container, loadingText) => {
         <img src="${loadingLogoPath}" alt="Lumina logo" width="64" height="64" />
       </div>
       <strong>${loadingText}</strong>
-      <p>Arka planda sinyaller taraniyor, sonuc katmani hazirlaniyor.</p>
+      <p>Arka planda sinyaller taranıyor, sonuç katmanı hazırlanıyor.</p>
       <div class="tool-loading-dots" aria-hidden="true">
         <span></span>
         <span></span>
@@ -673,7 +673,141 @@ const analyzeCyber = (result) => {
   });
 };
 
-attachToolAction("roasAnalyzeBtn", "roasResult", "Karlilik analizi hazirlaniyor", analyzeRoas);
-attachToolAction("seoAnalyzeBtn", "seoResult", "Teknik SEO taramasi hazirlaniyor", analyzeSeo);
-attachToolAction("academyAnalyzeBtn", "academyResult", "Seviye testi yorumlaniyor", analyzeAcademy);
-attachToolAction("cyberAnalyzeBtn", "cyberResult", "Risk sinyalleri taraniyor", analyzeCyber);
+const getDiscountState = () => {
+  const originalPrice = getNumericValue("discountOriginalPrice");
+  const salePrice = getNumericValue("discountSalePrice");
+  const percent = getNumericValue("discountPercent");
+
+  if (originalPrice <= 0 && salePrice <= 0 && percent <= 0) {
+    return null;
+  }
+
+  let basePrice = originalPrice;
+  let discountedPrice = salePrice;
+  let discountPercent = percent;
+
+  if (basePrice > 0 && discountPercent > 0 && discountedPrice <= 0) {
+    discountedPrice = basePrice * (1 - discountPercent / 100);
+  } else if (discountedPrice > 0 && discountPercent > 0 && basePrice <= 0 && discountPercent < 100) {
+    basePrice = discountedPrice / (1 - discountPercent / 100);
+  } else if (basePrice > 0 && discountedPrice > 0 && discountPercent <= 0 && discountedPrice <= basePrice) {
+    discountPercent = ((basePrice - discountedPrice) / basePrice) * 100;
+  } else if (basePrice > 0 && discountedPrice > 0 && discountPercent > 0) {
+    discountPercent = ((basePrice - discountedPrice) / basePrice) * 100;
+  } else {
+    return { invalid: true };
+  }
+
+  if (!Number.isFinite(basePrice) || !Number.isFinite(discountedPrice) || !Number.isFinite(discountPercent) || basePrice <= 0 || discountedPrice < 0) {
+    return { invalid: true };
+  }
+
+  const savings = basePrice - discountedPrice;
+
+  return {
+    summaryValue: discountPercent >= 40 ? "Güçlü kampanya" : discountPercent >= 15 ? "Standart indirim" : "Düşük indirim",
+    summaryClass: discountPercent >= 40 ? "is-good" : discountPercent >= 15 ? "is-mid" : "is-alert",
+    intro: `İndirimsiz fiyat ${formatTry(basePrice)}, indirimli fiyat ${formatTry(discountedPrice)} ve hesaplanan oran %${formatNumber(discountPercent, 1)}.`,
+    metrics: [
+      { label: "İndirimsiz fiyat", value: formatTry(basePrice) },
+      { label: "İndirimli fiyat", value: formatTry(discountedPrice) },
+      { label: "İndirim oranı", value: `%${formatNumber(discountPercent, 1)}` },
+    ],
+    visibleItems: [
+      `Toplam indirim tutarı ${formatTry(savings)} seviyesinde.`,
+      discountPercent >= 40
+        ? "Kampanya algısı güçlü görünüyor; marj tarafını ayrıca kontrol etmek gerekir."
+        : "Fiyat farkı kullanıcıya görünür, ancak teklif mesajı ile desteklenirse daha iyi çalışır.",
+      originalPrice <= 0
+        ? "İndirimli fiyattan indirimsiz fiyat geriye doğru hesaplandı."
+        : salePrice <= 0
+        ? "İndirimsiz fiyat ve oran üzerinden yeni fiyat hesaplandı."
+        : "İki fiyat üzerinden indirim oranı netleştirildi.",
+    ],
+    lockedItems: [
+      "Kademeli kampanya önerisi ve eşik fiyat yorumu tam analizde açılır.",
+      "Ürün marjı ve reklam maliyeti ile birlikte değerlendirilince daha doğru karar verilir.",
+      "Aynı teklif için psikolojik fiyat kırılımı ve paketleme önerileri ayrı raporda sunulur.",
+    ],
+  };
+};
+
+const analyzeDiscount = (result) => {
+  const state = getDiscountState();
+
+  if (!state) {
+    renderToolResult({
+      container: result,
+      summaryLabel: "Durum",
+      summaryValue: "Hesap için veri bekleniyor",
+      summaryClass: "is-mid",
+      intro: "İndirimsiz fiyat, indirimli fiyat veya indirim oranı alanlarından en az ikisini doldurun. Araç eksik üçüncü değeri hesaplar.",
+      metrics: [],
+      visibleTitle: "Ne hesaplar?",
+      visibleItems: [
+        "İndirimsiz fiyattan indirimli fiyatı",
+        "İndirimli fiyattan eski fiyatı",
+        "İki fiyat arasındaki indirim oranını",
+      ],
+      lockedTitle: "Kilitli kampanya yorumu",
+      lockedItems: [
+        "Marj baskısı yorumu",
+        "Psikolojik fiyat eşiği",
+        "Teklif metni önerisi",
+      ],
+      ctaLabel: "Lumina Danışmanlık",
+      ctaText: "Hesap sonucunu kampanya kurgusuna çevirmek için danışmanlık katmanına geçebilirsiniz.",
+      ctaHref: "index.html#iletisim",
+    });
+    return;
+  }
+
+  if (state.invalid) {
+    renderToolResult({
+      container: result,
+      summaryLabel: "Durum",
+      summaryValue: "Geçersiz kombinasyon",
+      summaryClass: "is-alert",
+      intro: "Lütfen anlamlı bir hesap kombinasyonu girin. İndirimli fiyat, indirimsiz fiyattan yüksek olamaz ve oran %100'e ulaşamaz.",
+      metrics: [],
+      visibleTitle: "Geçerli örnekler",
+      visibleItems: [
+        "1.200 TL + %25",
+        "1.200 TL + 899 TL",
+        "899 TL + %25",
+      ],
+      lockedTitle: "Kilitli kampanya yorumu",
+      lockedItems: [
+        "Marj baskısı yorumu",
+        "Fiyat eşiği analizi",
+        "Teklif metni önerisi",
+      ],
+      ctaLabel: "Lumina Danışmanlık",
+      ctaText: "Geçerli fiyat kombinasyonu girildiğinde kampanya çıktısı açılır.",
+      ctaHref: "index.html#iletisim",
+    });
+    return;
+  }
+
+  renderToolResult({
+    container: result,
+    summaryLabel: "Hesap özeti",
+    summaryValue: state.summaryValue,
+    summaryClass: state.summaryClass,
+    intro: state.intro,
+    metrics: state.metrics,
+    visibleTitle: "Açık sonuçlar",
+    visibleItems: state.visibleItems,
+    lockedTitle: "Kilitli kampanya katmanı",
+    lockedItems: state.lockedItems,
+    ctaLabel: "E-Ticaret Danışmanlığı",
+    ctaText: "Fiyatı yalnız hesaplamak değil, satışa dönen teklif yapısına çevirmek için birlikte ilerleyebiliriz.",
+    ctaHref: "index.html#iletisim",
+  });
+};
+
+attachToolAction("roasAnalyzeBtn", "roasResult", "Karlılık analizi hazırlanıyor", analyzeRoas);
+attachToolAction("seoAnalyzeBtn", "seoResult", "Teknik SEO taraması hazırlanıyor", analyzeSeo);
+attachToolAction("academyAnalyzeBtn", "academyResult", "Seviye testi yorumlanıyor", analyzeAcademy);
+attachToolAction("cyberAnalyzeBtn", "cyberResult", "Risk sinyalleri taranıyor", analyzeCyber);
+attachToolAction("discountAnalyzeBtn", "discountResult", "İndirim hesabı hazırlanıyor", analyzeDiscount);
