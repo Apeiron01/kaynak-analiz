@@ -1043,3 +1043,291 @@ if (thanksPage) {
     secondaryLink.setAttribute("href", selectedCopy.secondaryHref);
   }
 }
+
+const getRandomItem = (items) => items[Math.floor(Math.random() * items.length)];
+
+const buildSocialProofMessage = () => {
+  const names = [
+    "Ayse",
+    "Fatma",
+    "Zeynep",
+    "Elif",
+    "Merve",
+    "Esra",
+    "Busra",
+    "Sila",
+    "Ceren",
+    "Ece",
+    "Melis",
+    "Beyza",
+    "Aleyna",
+    "Nazli",
+    "Derya",
+    "Gizem",
+    "Seda",
+    "Selin",
+    "Yagmur",
+    "Yasemin",
+    "Ahmet",
+    "Mehmet",
+    "Ali",
+    "Mustafa",
+    "Murat",
+    "Can",
+    "Emre",
+    "Burak",
+    "Oguz",
+    "Kerem",
+    "Tolga",
+    "Hakan",
+    "Onur",
+    "Eren",
+    "Serkan",
+    "Baris",
+    "Kaan",
+    "Arda",
+    "Deniz",
+    "Yusuf",
+  ];
+
+  const cities = [
+    "Istanbul",
+    "Ankara",
+    "Izmir",
+    "Bursa",
+    "Antalya",
+    "Kocaeli",
+    "Adana",
+    "Konya",
+    "Gaziantep",
+    "Mersin",
+    "Kayseri",
+    "Eskisehir",
+    "Samsun",
+    "Trabzon",
+    "Diyarbakir",
+    "Tekirdag",
+    "Sakarya",
+    "Denizli",
+    "Balikesir",
+    "Mugla",
+  ];
+
+  const services = [
+    "SEO danismanligi",
+    "Shopify kurulumu",
+    "Etsy danismanligi",
+    "Meta Ads yonetimi",
+    "Google Ads destegi",
+    "siber inceleme",
+    "teknik SEO audit",
+    "e-ticaret buyume danismanligi",
+    "marka guvenligi analizi",
+    "egitim gorusmesi",
+  ];
+
+  const toolNames = [
+    "Ucretsiz ROAS Hesaplayici",
+    "Ucretsiz Teknik SEO Acik Analizi",
+    "Ucretsiz Dijital Pazarlama Seviye Testi",
+    "Ucretsiz Site ve Link Risk Analizi",
+    "Supheli Link Kontrolu",
+    "Guvenlik Kontrolu",
+    "Parola Araclari",
+  ];
+
+  const courses = [
+    "Shopify Kurulum ve Yonetim",
+    "Etsy Egitim Programi",
+    "Meta Ads ve Google Ads",
+    "Dijital Pazarlama Temelleri",
+    "ROAS ve Karlilik Okuma",
+    "Teknik SEO Temelleri",
+  ];
+
+  const resources = [
+    "SEO ve reklam rehberine",
+    "ucretsiz araclar merkezine",
+    "siber risk bloguna",
+    "Shopify kurulum icerigine",
+    "Etsy egitim sayfasina",
+    "danismanlik formuna",
+  ];
+
+  const pageNames = {
+    "siber.html": "Lumina Siber",
+    "index.html": "Lumina Danismanlik",
+    "akademi.html": "Lumina Akademi",
+    "araclar.html": "Lumina Lab",
+    "blog.html": "Blog Merkezi",
+  };
+
+  const timeLabels = [
+    "Az once",
+    "2 dakika once",
+    "5 dakika once",
+    "Biraz once",
+    "Su anda",
+    "Bugun",
+  ];
+
+  const pathname = window.location.pathname.split("/").pop() || "index.html";
+  const currentPageName = pageNames[pathname] || "Lumina";
+  const currentVisitors = Math.floor(Math.random() * 6) + 3;
+  const dailyToolUsers = Math.floor(Math.random() * 38) + 27;
+  const tool = getRandomItem(toolNames);
+  const service = getRandomItem(services);
+  const course = getRandomItem(courses);
+  const name = getRandomItem(names);
+  const city = getRandomItem(cities);
+  const timeLabel = getRandomItem(timeLabels);
+  const resource = getRandomItem(resources);
+
+  const templates = [
+    {
+      title: timeLabel,
+      body: `${name}, "${tool}" aracini kullandi.`,
+    },
+    {
+      title: `${city} kaynakli talep`,
+      body: `${city}'den bir ziyaretci ${service} icin on gorusme birakti.`,
+    },
+    {
+      title: "Canli trafik",
+      body: `Su an ${currentPageName} sayfasinda ${currentVisitors} kisi geziyor.`,
+    },
+    {
+      title: "Son 24 saat",
+      body: `Son 24 saatte ${dailyToolUsers} kisi ucretsiz araclari kullandi.`,
+    },
+    {
+      title: `${timeLabel}`,
+      body: `${name}, ${course} egitim sayfasini inceledi.`,
+    },
+    {
+      title: "Yeni gecis",
+      body: `${city}'den bir kullanici ${resource} gecti.`,
+    },
+    {
+      title: "Funnel hareketi",
+      body: `${name}, analizden sonra ${service} sayfasina gecti.`,
+    },
+  ];
+
+  return getRandomItem(templates);
+};
+
+const initSocialProofWidget = () => {
+  if (thanksPage) {
+    return;
+  }
+
+  let widgetDismissed = false;
+  try {
+    widgetDismissed = sessionStorage.getItem("lumina-proof-dismissed") === "1";
+  } catch (_error) {
+    widgetDismissed = false;
+  }
+
+  if (widgetDismissed) {
+    return;
+  }
+
+  const wrapper = document.createElement("aside");
+  wrapper.className = "lumina-proof-widget";
+  wrapper.setAttribute("aria-live", "polite");
+  wrapper.innerHTML = `
+    <div class="lumina-proof-card">
+      <span class="lumina-proof-live" aria-hidden="true"></span>
+      <div class="lumina-proof-copy">
+        <strong data-proof-title>Canli bildirim</strong>
+        <p data-proof-body>Yeni ziyaretci hareketleri burada gorunur.</p>
+      </div>
+      <button class="lumina-proof-close" type="button" aria-label="Bildirimi kapat">x</button>
+    </div>
+  `;
+
+  document.body.appendChild(wrapper);
+
+  const titleNode = wrapper.querySelector("[data-proof-title]");
+  const bodyNode = wrapper.querySelector("[data-proof-body]");
+  const closeButton = wrapper.querySelector(".lumina-proof-close");
+
+  let timeoutId = null;
+  let intervalStopped = false;
+  let previousBody = "";
+
+  const clearScheduled = () => {
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
+
+  const scheduleNext = (delay) => {
+    clearScheduled();
+    timeoutId = window.setTimeout(showMessage, delay);
+  };
+
+  const hideMessage = () => {
+    if (intervalStopped) {
+      return;
+    }
+
+    wrapper.classList.remove("is-visible");
+    wrapper.classList.add("is-leaving");
+
+    scheduleNext(Math.floor(Math.random() * 5000) + 10000);
+  };
+
+  const showMessage = () => {
+    if (intervalStopped) {
+      return;
+    }
+
+    wrapper.classList.remove("is-leaving");
+
+    let nextMessage = buildSocialProofMessage();
+    let guard = 0;
+    while (nextMessage.body === previousBody && guard < 4) {
+      nextMessage = buildSocialProofMessage();
+      guard += 1;
+    }
+
+    previousBody = nextMessage.body;
+    if (titleNode) {
+      titleNode.textContent = nextMessage.title;
+    }
+
+    if (bodyNode) {
+      bodyNode.textContent = nextMessage.body;
+    }
+
+    if (prefersReducedMotion) {
+      wrapper.classList.add("is-visible");
+    } else {
+      requestAnimationFrame(() => {
+        wrapper.classList.add("is-visible");
+      });
+    }
+
+    clearScheduled();
+    timeoutId = window.setTimeout(hideMessage, Math.floor(Math.random() * 2000) + 5000);
+  };
+
+  closeButton?.addEventListener("click", () => {
+    intervalStopped = true;
+    clearScheduled();
+    wrapper.remove();
+
+    try {
+      sessionStorage.setItem("lumina-proof-dismissed", "1");
+    } catch (_error) {
+      // Session storage is optional.
+    }
+  });
+
+  scheduleNext(Math.floor(Math.random() * 2000) + 2500);
+};
+
+initSocialProofWidget();
