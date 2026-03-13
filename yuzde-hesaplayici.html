@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ücretsiz Yüzde Hesaplayıcı | Lumina Lab</title>
+  <meta name="description" content="Ücretsiz yüzde hesaplayıcı ile bir sayının yüzdesini, yüzde artış-azalışı ve bir sayının diğer sayının yüzde kaçı olduğunu hesaplayın." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/yuzde-hesaplayici.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ücretsiz Yüzde Hesaplayıcı | Lumina Lab" />
+  <meta property="og:description" content="Bir sayının yüzdesini, yüzde artış-azalışı ve oran hesabını tek ekranda yapın." />
+  <meta property="og:url" content="https://luminadigitale.com/yuzde-hesaplayici.html" />
+  <meta property="og:site_name" content="Lumina Lab" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/images/brand-mark.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Ücretsiz Yüzde Hesaplayıcı | Lumina Lab" />
+  <meta name="twitter:description" content="Yüzde hesabını hızlıca yapın: oran, artış ve azalış tek sayfada." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/images/brand-mark.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/brand-mark.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ücretsiz Yüzde Hesaplayıcı",
+      "url": "https://luminadigitale.com/yuzde-hesaplayici.html",
+      "applicationCategory": "CalculatorApplication",
+      "operatingSystem": "All",
+      "description": "Bir sayının yüzdesini, bir sayının diğer sayının yüzde kaçı olduğunu ve yüzde artış-azalışı hesaplayan ücretsiz araç.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lumina Lab"
+      }
+    }
+  </script>
+</head>
+<body class="tools-page">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="araclar.html" aria-label="Lumina Lab ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina Lab logo" width="48" height="48" /></span>
+        <span class="brand-copy"><strong>Lumina</strong><span>Lab</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="araclar.html#genel">Genel Araçlar</a>
+        <a href="kdv-hesaplayici.html">KDV Hesaplayıcı</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#iletisim" class="nav-btn">İletişime Geç</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz Hesaplayıcı</p>
+          <h1 class="page-title">Ücretsiz Yüzde Hesaplayıcı</h1>
+          <p>Bir sayının yüzdesini bulun, yüzde artış ve azalış hesabı yapın ya da bir değerin diğer sayının yüzde kaçı olduğunu tek ekranda görün.</p>
+        </div>
+        <aside class="page-side-card">
+          <p class="section-kicker">Nerede Kullanılır?</p>
+          <h3>İndirim, zam, hedef ve oran hesabı</h3>
+          <p>Günlük hesaplardan ticari fiyat kararlarına kadar en sık yapılan yüzde işlemlerini hızlıca netleştirir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="conversion-tool-shell reveal is-visible">
+          <div class="conversion-tool-form">
+            <div class="conversion-tool-badge">Oran, artış ve azalış hesabı</div>
+            <label for="percentageMode">Hesap modu</label>
+            <select id="percentageMode">
+              <option value="part">Bir sayının yüzdesi</option>
+              <option value="ratio">Bir sayı diğer sayının yüzde kaçı</option>
+              <option value="change">Yüzde artış / azalış</option>
+            </select>
+            <label for="percentageValueA">İlk değer</label>
+            <input id="percentageValueA" type="number" min="0" step="0.01" placeholder="Örn: 1200" />
+            <label for="percentageValueB">İkinci değer / yüzde oranı</label>
+            <input id="percentageValueB" type="number" min="0" step="0.01" placeholder="Örn: 25" />
+            <label for="percentageDirection">Artış mı azalış mı?</label>
+            <select id="percentageDirection">
+              <option value="increase">Artış</option>
+              <option value="decrease">Azalış</option>
+            </select>
+            <button class="btn btn-primary" type="button" id="percentageAnalyzeBtn">Yüzdeyi Hesapla</button>
+          </div>
+          <div class="conversion-tool-result hidden" id="percentageResult"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><h3>Lumina Lab</h3><p>Yüzde hesaplayıcı; oran, artış ve azalış ihtiyacını tek araçta toplar.</p></div>
+      <div><h4>Sayfalar</h4><ul><li><a href="araclar.html#genel">Genel Araçlar</a></li><li><a href="kdv-hesaplayici.html">KDV Hesaplayıcı</a></li></ul></div>
+      <div><h4>Geçiş</h4><p><a href="index.html#iletisim">Danışmanlık formu</a></p></div>
+    </div>
+    <div class="container footer-bottom"><span>Lumina Lab</span><span>luminadigitale.com</span></div>
+  </footer>
+
+  <script src="lab-shell.js" defer></script>
+  <script src="tools.js" defer></script>
+</body>
+</html>

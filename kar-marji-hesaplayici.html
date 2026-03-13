@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ücretsiz Kar Marjı Hesaplayıcı | Lumina Lab</title>
+  <meta name="description" content="Ücretsiz kar marjı hesaplayıcı ile satış fiyatı, maliyet, birim kar, kar marjı ve markup oranını hesaplayın." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/kar-marji-hesaplayici.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ücretsiz Kar Marjı Hesaplayıcı | Lumina Lab" />
+  <meta property="og:description" content="Satış fiyatı ve maliyete göre birim kar, kar marjı ve markup oranını hızlıca bulun." />
+  <meta property="og:url" content="https://luminadigitale.com/kar-marji-hesaplayici.html" />
+  <meta property="og:site_name" content="Lumina Lab" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/images/brand-mark.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Ücretsiz Kar Marjı Hesaplayıcı | Lumina Lab" />
+  <meta name="twitter:description" content="Birim kar, kar marjı ve markup hesabını tek sayfada görün." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/images/brand-mark.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/brand-mark.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Ücretsiz Kar Marjı Hesaplayıcı",
+      "url": "https://luminadigitale.com/kar-marji-hesaplayici.html",
+      "applicationCategory": "CalculatorApplication",
+      "operatingSystem": "All",
+      "description": "Satış fiyatı ve maliyet verisiyle kar marjı, birim kar ve markup hesabı yapan ücretsiz araç.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lumina Lab"
+      }
+    }
+  </script>
+</head>
+<body class="tools-page">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="araclar.html" aria-label="Lumina Lab ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina Lab logo" width="48" height="48" /></span>
+        <span class="brand-copy"><strong>Lumina</strong><span>Lab</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="araclar.html#genel">Genel Araçlar</a>
+        <a href="komisyon-hesaplayici.html">Komisyon Hesaplayıcı</a>
+        <a href="blog.html">Blog</a>
+        <a href="index.html#iletisim" class="nav-btn">İletişime Geç</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz Hesaplayıcı</p>
+          <h1 class="page-title">Ücretsiz Kar Marjı Hesaplayıcı</h1>
+          <p>Satış fiyatı ile maliyeti karşılaştırın, birim kârı görün ve kar marjı ile markup oranını tek ekranda hesaplayın.</p>
+        </div>
+        <aside class="page-side-card">
+          <p class="section-kicker">Ne Sağlar?</p>
+          <h3>Fiyatın gerçekten kâr bırakıp bırakmadığını görün</h3>
+          <p>Ürün, teklif ve kanal kararlarından önce brüt fiyatın değil, gerçek marjın nasıl göründüğünü anlaşılır hale getirir.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="conversion-tool-shell reveal is-visible">
+          <div class="conversion-tool-form">
+            <div class="conversion-tool-badge">Birim kar, marj ve markup hesabı</div>
+            <label for="marginSalePrice">Satış fiyatı (TL)</label>
+            <input id="marginSalePrice" type="number" min="0" step="0.01" placeholder="Örn: 1499" />
+            <label for="marginCostPrice">Ürün maliyeti (TL)</label>
+            <input id="marginCostPrice" type="number" min="0" step="0.01" placeholder="Örn: 780" />
+            <label for="marginExtraCost">Ek giderler (TL)</label>
+            <input id="marginExtraCost" type="number" min="0" step="0.01" placeholder="Örn: 95" />
+            <button class="btn btn-primary" type="button" id="marginAnalyzeBtn">Marjı Hesapla</button>
+          </div>
+          <div class="conversion-tool-result hidden" id="marginResult"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><h3>Lumina Lab</h3><p>Kar marjı hesaplayıcı; fiyatın kâra dönüp dönmediğini ilk katmanda netleştirir.</p></div>
+      <div><h4>Sayfalar</h4><ul><li><a href="araclar.html#genel">Genel Araçlar</a></li><li><a href="roas-hesaplayici.html">ROAS Hesaplayıcı</a></li></ul></div>
+      <div><h4>Geçiş</h4><p><a href="index.html#iletisim">Danışmanlık formu</a></p></div>
+    </div>
+    <div class="container footer-bottom"><span>Lumina Lab</span><span>luminadigitale.com</span></div>
+  </footer>
+
+  <script src="lab-shell.js" defer></script>
+  <script src="tools.js" defer></script>
+</body>
+</html>

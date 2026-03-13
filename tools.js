@@ -884,8 +884,422 @@ const analyzeDiscount = (result) => {
   });
 };
 
+const getPercentageState = () => {
+  const mode = getValue("percentageMode") || "part";
+  const valueA = getNumericValue("percentageValueA");
+  const valueB = getNumericValue("percentageValueB");
+  const direction = getValue("percentageDirection") || "increase";
+
+  if (valueA <= 0 || valueB <= 0) {
+    return null;
+  }
+
+  if (mode === "part") {
+    const result = (valueA * valueB) / 100;
+    return {
+      summaryValue: "Yuzde hesabi hazir",
+      summaryClass: "is-good",
+      intro: `${formatNumber(valueA, 2)} sayisinin %${formatNumber(valueB, 2)} degeri ${formatNumber(result, 2)} olarak hesaplandi.`,
+      metrics: [
+        { label: "Ana sayi", value: formatNumber(valueA, 2) },
+        { label: "Yuzde orani", value: `%${formatNumber(valueB, 2)}` },
+        { label: "Sonuc", value: formatNumber(result, 2) },
+      ],
+      visibleItems: [
+        `Hesap modu: bir sayinin yuzdesi.`,
+        `Sonuc dogrudan ${formatNumber(result, 2)} seviyesinde.`,
+        valueB >= 50
+          ? "Yuzde orani yuksek oldugu icin sonuc ana sayinin buyuk kismini temsil ediyor."
+          : "Yuzde orani orta veya dusuk oldugu icin sonuc ana sayinin bir alt dilimini gosteriyor.",
+      ],
+      lockedItems: [
+        "Fiyat kirilimi ve teklif dili yorumu detayli analizde acilir.",
+        "Bu oran kampanya, zam veya indirim kurgusuna nasil doner ayrica planlanir.",
+        "Ticari sayfalarda psikolojik esik kontrolu ayrica yorumlanir.",
+      ],
+    };
+  }
+
+  if (mode === "ratio") {
+    const result = valueB === 0 ? 0 : (valueA / valueB) * 100;
+    return {
+      summaryValue: "Oran hesabi hazir",
+      summaryClass: result <= 100 ? "is-good" : "is-mid",
+      intro: `${formatNumber(valueA, 2)} degeri, ${formatNumber(valueB, 2)} sayisinin yaklasik %${formatNumber(result, 2)} karsiligina denk geliyor.`,
+      metrics: [
+        { label: "Ilk deger", value: formatNumber(valueA, 2) },
+        { label: "Ikinci deger", value: formatNumber(valueB, 2) },
+        { label: "Yuzde sonucu", value: `%${formatNumber(result, 2)}` },
+      ],
+      visibleItems: [
+        "Hesap modu: bir sayi diger sayinin yuzde kaci.",
+        result > 100
+          ? "Ilk deger ikinci degerden buyuk oldugu icin oran %100'u asti."
+          : "Ilk deger ikinci degerin altinda kaldigi icin oran %100'un altinda.",
+        "Oran hesabi teklif, tamamlama ve hedef takibinde dogrudan kullanilabilir.",
+      ],
+      lockedItems: [
+        "Oran yorumunun satis hedefiyle eslestirilmis surumu detayli katmanda acilir.",
+        "Yuzde sonucunun kampanya ya da fiyatlandirma etkisi ayrica planlanir.",
+        "Hedef tamamlama veya KPI esik yorumu profesyonel katmanda acilir.",
+      ],
+    };
+  }
+
+  const delta = (valueA * valueB) / 100;
+  const result = direction === "decrease" ? valueA - delta : valueA + delta;
+
+  return {
+    summaryValue: direction === "decrease" ? "Azalis hesabi hazir" : "Artis hesabi hazir",
+    summaryClass: "is-good",
+    intro: `${formatNumber(valueA, 2)} degeri, %${formatNumber(valueB, 2)} ${direction === "decrease" ? "azalis" : "artis"} ile ${formatNumber(result, 2)} oluyor.`,
+    metrics: [
+      { label: "Baslangic", value: formatNumber(valueA, 2) },
+      { label: "Degisim", value: `%${formatNumber(valueB, 2)}` },
+      { label: "Yeni deger", value: formatNumber(result, 2) },
+    ],
+    visibleItems: [
+      `Hesap modu: yuzde ${direction === "decrease" ? "azalis" : "artis"}.`,
+      `Sayisal fark ${formatNumber(delta, 2)} seviyesinde.`,
+      direction === "decrease"
+        ? "Bu cikti indirim, kayip veya dusus hesaplarinda kullanilabilir."
+        : "Bu cikti zam, artis veya hedef buyume hesaplarinda kullanilabilir.",
+    ],
+    lockedItems: [
+      "Yeni degerin fiyat algisina etkisi detayli yorum katmaninda acilir.",
+      "Oran buyudukce talep etkisi ve donusum farki ayrica degerlendirilir.",
+      "Ticari senaryolarda kar marji uyumu ek katmanda incelenir.",
+    ],
+  };
+};
+
+const analyzePercentage = (result) => {
+  const state = getPercentageState();
+
+  if (!state) {
+    renderToolResult({
+      container: result,
+      summaryLabel: "Durum",
+      summaryValue: "Veri bekleniyor",
+      summaryClass: "is-mid",
+      intro: "Yuzde hesabi icin iki alan doldurun. Arac; bir sayinin yuzdesi, oran veya artis-azalis hesabini yapar.",
+      metrics: [],
+      visibleTitle: "Ne hesaplar?",
+      visibleItems: [
+        "Bir sayinin yuzdesini bulur.",
+        "Bir sayinin diger sayinin yuzde kaci oldugunu hesaplar.",
+        "Yuzde artis ve azalis sonucunu netlestirir.",
+      ],
+      lockedTitle: "Kilitli yorum katmani",
+      lockedItems: [
+        "Fiyatlama ve teklif etkisi",
+        "Hedef tamamlama yorumu",
+        "Psikolojik esik kontrolu",
+      ],
+      ctaLabel: "Lumina Danismanlik",
+      ctaText: "Yuzde sonucu ticari bir karara donusecekse detayli yorum katmanina gecilebilir.",
+      ctaHref: "index.html#iletisim",
+    });
+    return;
+  }
+
+  renderToolResult({
+    container: result,
+    summaryLabel: "Hesap ozeti",
+    summaryValue: state.summaryValue,
+    summaryClass: state.summaryClass,
+    intro: state.intro,
+    metrics: state.metrics,
+    visibleTitle: "Acik sonuclar",
+    visibleItems: state.visibleItems,
+    lockedTitle: "Kilitli yorum katmani",
+    lockedItems: state.lockedItems,
+    ctaLabel: "Lumina Lab Pro",
+    ctaText: "Sonucu fiyat, teklif veya buyume kararina cevirmek icin detayli katman acilabilir.",
+    ctaHref: "index.html#iletisim",
+  });
+};
+
+const getVatState = () => {
+  const mode = getValue("vatMode") || "net-to-gross";
+  const amount = getNumericValue("vatAmount");
+  const rate = getNumericValue("vatRate");
+
+  if (amount <= 0 || rate <= 0) {
+    return null;
+  }
+
+  let netAmount = amount;
+  let grossAmount = amount;
+  let vatAmount = 0;
+
+  if (mode === "net-to-gross") {
+    vatAmount = amount * (rate / 100);
+    grossAmount = amount + vatAmount;
+  } else {
+    netAmount = amount / (1 + rate / 100);
+    vatAmount = amount - netAmount;
+  }
+
+  return {
+    summaryValue: "KDV hesabi hazir",
+    summaryClass: "is-good",
+    intro:
+      mode === "net-to-gross"
+        ? `KDV haric ${formatTry(netAmount)} tutar icin %${formatNumber(rate, 0)} oraninda KDV eklendiginde toplam ${formatTry(grossAmount)} oluyor.`
+        : `KDV dahil ${formatTry(grossAmount)} tutarin icinde %${formatNumber(rate, 0)} oraninda yaklasik ${formatTry(vatAmount)} KDV bulunuyor.`,
+    metrics: [
+      { label: "KDV haric", value: formatTry(netAmount) },
+      { label: "KDV tutari", value: formatTry(vatAmount) },
+      { label: "KDV dahil", value: formatTry(grossAmount) },
+    ],
+    visibleItems: [
+      `Secilen KDV orani %${formatNumber(rate, 0)} olarak uygulandi.`,
+      mode === "net-to-gross"
+        ? "Bu hesap net fiyata KDV eklenmis son tutari verir."
+        : "Bu hesap toplam tutarin icindeki vergi kirilimini ayirir.",
+      "Fatura, teklif ve fiyat etiketi hazirlarken dogrudan kullanilabilir.",
+    ],
+    lockedItems: [
+      "KDV dahil fiyat algisi ve teklif etkisi detayli yorum katmaninda acilir.",
+      "Brut-net gecislerinin marj etkisi birlikte yorumlanir.",
+      "KDV oranina gore listeleme ve teklif stratejisi ayrica planlanir.",
+    ],
+  };
+};
+
+const analyzeVat = (result) => {
+  const state = getVatState();
+
+  if (!state) {
+    renderToolResult({
+      container: result,
+      summaryLabel: "Durum",
+      summaryValue: "Veri bekleniyor",
+      summaryClass: "is-mid",
+      intro: "KDV haric ya da KDV dahil tutari ve KDV oranini girin. Arac net, vergi ve brut tutari otomatik hesaplar.",
+      metrics: [],
+      visibleTitle: "Ne hesaplar?",
+      visibleItems: [
+        "KDV haricten KDV dahil tutari",
+        "KDV dahil tutarin vergi kirilimini",
+        "Net, KDV ve toplam tutari birlikte",
+      ],
+      lockedTitle: "Kilitli yorum katmani",
+      lockedItems: [
+        "Fiyat algisi yorumu",
+        "Marj etkisi analizi",
+        "Teklif kurgusu onerisi",
+      ],
+      ctaLabel: "Lumina Danismanlik",
+      ctaText: "KDV sonucunu teklif ve satis kararina cevirmek icin detayli katman acilabilir.",
+      ctaHref: "index.html#iletisim",
+    });
+    return;
+  }
+
+  renderToolResult({
+    container: result,
+    summaryLabel: "Vergi ozeti",
+    summaryValue: state.summaryValue,
+    summaryClass: state.summaryClass,
+    intro: state.intro,
+    metrics: state.metrics,
+    visibleTitle: "Acik sonuclar",
+    visibleItems: state.visibleItems,
+    lockedTitle: "Kilitli yorum katmani",
+    lockedItems: state.lockedItems,
+    ctaLabel: "Fiyatlandirma Danismanligi",
+    ctaText: "Vergi dahil fiyat yapisinin satisa etkisini birlikte netlestirebiliriz.",
+    ctaHref: "index.html#iletisim",
+  });
+};
+
+const getMarginState = () => {
+  const salePrice = getNumericValue("marginSalePrice");
+  const costPrice = getNumericValue("marginCostPrice");
+  const extraCost = getNumericValue("marginExtraCost");
+
+  if (salePrice <= 0 || costPrice <= 0) {
+    return null;
+  }
+
+  const totalCost = costPrice + extraCost;
+  const profit = salePrice - totalCost;
+  const margin = salePrice > 0 ? (profit / salePrice) * 100 : 0;
+  const markup = totalCost > 0 ? (profit / totalCost) * 100 : 0;
+
+  return {
+    summaryValue: profit >= 0 ? "Marj gorunuyor" : "Zarar gorunuyor",
+    summaryClass: profit >= 0 ? (margin >= 20 ? "is-good" : "is-mid") : "is-alert",
+    intro: `Satis fiyati ${formatTry(salePrice)} ve toplam maliyet ${formatTry(totalCost)} icin birim sonuc ${formatTry(profit)} seviyesinde.`,
+    metrics: [
+      { label: "Toplam maliyet", value: formatTry(totalCost) },
+      { label: "Birim kar", value: formatTry(profit) },
+      { label: "Kar marji", value: `%${formatNumber(margin, 1)}` },
+      { label: "Markup", value: `%${formatNumber(markup, 1)}` },
+    ],
+    visibleItems: [
+      profit < 0
+        ? "Satis fiyati maliyeti karsilamiyor; bu urun zararla ilerliyor."
+        : "Satis fiyati maliyeti karsiliyor; asil konu marjin yeterli olup olmadigi.",
+      margin < 10
+        ? "Kar marji dar. Reklam ve operasyon sapmasi karliligi hizla silebilir."
+        : margin < 20
+        ? "Kar marji orta seviyede. Kanal maliyetleriyle birlikte takip edilmeli."
+        : "Kar marji guvenli bolgede gorunuyor.",
+      extraCost > 0
+        ? "Ek maliyet girildigi icin sonuc operasyon giderlerini de hesaba katiyor."
+        : "Ek maliyet alani bos; paketleme veya operasyon gideri varsa dahil etmek gerekir.",
+    ],
+    lockedItems: [
+      "Reklam maliyeti eklendiginde net marj kirilimi detayli katmanda acilir.",
+      "Psikolojik fiyat esigi ve bundle etkisi ayrica yorumlanir.",
+      "Bu marj yapisinin kanal bazli buyume kapasitesi ayrica planlanir.",
+    ],
+  };
+};
+
+const analyzeMargin = (result) => {
+  const state = getMarginState();
+
+  if (!state) {
+    renderToolResult({
+      container: result,
+      summaryLabel: "Durum",
+      summaryValue: "Veri bekleniyor",
+      summaryClass: "is-mid",
+      intro: "Satis fiyati ve maliyeti girin. Arac; birim kar, kar marji ve markup hesabini birlikte yapar.",
+      metrics: [],
+      visibleTitle: "Ne hesaplar?",
+      visibleItems: [
+        "Birim kar tutarini",
+        "Kar marji yuzdesini",
+        "Markup oranini",
+      ],
+      lockedTitle: "Kilitli yorum katmani",
+      lockedItems: [
+        "Reklam maliyeti etkisi",
+        "Fiyat esigi yorumu",
+        "Buyume uygunlugu analizi",
+      ],
+      ctaLabel: "E-Ticaret Danismanligi",
+      ctaText: "Marj hesabini urun ve reklam kararina cevirmek icin detayli katman acilabilir.",
+      ctaHref: "index.html#iletisim",
+    });
+    return;
+  }
+
+  renderToolResult({
+    container: result,
+    summaryLabel: "Marj ozeti",
+    summaryValue: state.summaryValue,
+    summaryClass: state.summaryClass,
+    intro: state.intro,
+    metrics: state.metrics,
+    visibleTitle: "Acik sonuclar",
+    visibleItems: state.visibleItems,
+    lockedTitle: "Kilitli stratejik katman",
+    lockedItems: state.lockedItems,
+    ctaLabel: "Lumina Danismanlik",
+    ctaText: "Marj sonucunu fiyatlandirma ve reklam stratejisine birlikte cevirebiliriz.",
+    ctaHref: "index.html#iletisim",
+  });
+};
+
+const getCommissionState = () => {
+  const saleAmount = getNumericValue("commissionSaleAmount");
+  const rate = getNumericValue("commissionRate");
+  const fixedFee = getNumericValue("commissionFixedFee");
+
+  if (saleAmount <= 0 || rate <= 0) {
+    return null;
+  }
+
+  const commissionAmount = saleAmount * (rate / 100) + fixedFee;
+  const netAmount = saleAmount - commissionAmount;
+  const effectiveRate = saleAmount > 0 ? (commissionAmount / saleAmount) * 100 : 0;
+
+  return {
+    summaryValue: netAmount >= 0 ? "Komisyon hesabi hazir" : "Tutar kontrol edilmeli",
+    summaryClass: netAmount >= 0 ? "is-good" : "is-alert",
+    intro: `${formatTry(saleAmount)} satis uzerinden toplam kesinti ${formatTry(commissionAmount)} ve elde kalan tutar ${formatTry(netAmount)} olarak hesaplandi.`,
+    metrics: [
+      { label: "Satis tutari", value: formatTry(saleAmount) },
+      { label: "Toplam komisyon", value: formatTry(commissionAmount) },
+      { label: "Elde kalan", value: formatTry(netAmount) },
+      { label: "Efektif oran", value: `%${formatNumber(effectiveRate, 2)}` },
+    ],
+    visibleItems: [
+      fixedFee > 0
+        ? "Sabit kesinti de dahil edilerek efektif komisyon orani hesaplandi."
+        : "Hesap yalnizca yuzdelik komisyon uzerinden yapildi.",
+      effectiveRate > rate
+        ? "Sabit kesinti nedeniyle efektif oran liste oranindan yukari cikti."
+        : "Efektif oran komisyon oranina yakin gorunuyor.",
+      "Pazaryeri, odeme altyapisi veya temsilci komisyonu icin dogrudan kullanilabilir.",
+    ],
+    lockedItems: [
+      "Komisyon sonrasi net marjin yeterli olup olmadigi detayli katmanda acilir.",
+      "Pazaryeri ve site satisi arasindaki farkli senaryo karsilastirmasi ayrica planlanir.",
+      "Kesinti azaltma ve fiyat revizyon stratejisi profesyonel katmanda yorumlanir.",
+    ],
+  };
+};
+
+const analyzeCommission = (result) => {
+  const state = getCommissionState();
+
+  if (!state) {
+    renderToolResult({
+      container: result,
+      summaryLabel: "Durum",
+      summaryValue: "Veri bekleniyor",
+      summaryClass: "is-mid",
+      intro: "Satis tutari ve komisyon oranini girin. Sabit kesinti varsa ekleyin; arac net elinize kalan tutari hesaplar.",
+      metrics: [],
+      visibleTitle: "Ne hesaplar?",
+      visibleItems: [
+        "Toplam komisyon kesintisini",
+        "Net elinize kalan tutari",
+        "Efektif komisyon oranini",
+      ],
+      lockedTitle: "Kilitli yorum katmani",
+      lockedItems: [
+        "Net marj yorumu",
+        "Kanal karsilastirmasi",
+        "Fiyat revizyon onerisi",
+      ],
+      ctaLabel: "Lumina Danismanlik",
+      ctaText: "Komisyon yukunu fiyat ve kanal stratejisine cevirmek icin detayli katman acilabilir.",
+      ctaHref: "index.html#iletisim",
+    });
+    return;
+  }
+
+  renderToolResult({
+    container: result,
+    summaryLabel: "Kesinti ozeti",
+    summaryValue: state.summaryValue,
+    summaryClass: state.summaryClass,
+    intro: state.intro,
+    metrics: state.metrics,
+    visibleTitle: "Acik sonuclar",
+    visibleItems: state.visibleItems,
+    lockedTitle: "Kilitli stratejik katman",
+    lockedItems: state.lockedItems,
+    ctaLabel: "Fiyat ve Kanal Danismanligi",
+    ctaText: "Komisyon etkisini fiyatlandirma ve kanal secimine birlikte baglayabiliriz.",
+    ctaHref: "index.html#iletisim",
+  });
+};
+
 attachToolAction("roasAnalyzeBtn", "roasResult", "Karlılık analizi hazırlanıyor", analyzeRoas);
 attachToolAction("seoAnalyzeBtn", "seoResult", "Teknik SEO taraması hazırlanıyor", analyzeSeo);
 attachToolAction("academyAnalyzeBtn", "academyResult", "Seviye testi yorumlanıyor", analyzeAcademy);
 attachToolAction("cyberAnalyzeBtn", "cyberResult", "Risk sinyalleri taranıyor", analyzeCyber);
 attachToolAction("discountAnalyzeBtn", "discountResult", "İndirim hesabı hazırlanıyor", analyzeDiscount);
+attachToolAction("percentageAnalyzeBtn", "percentageResult", "Yuzde hesabi hazirlaniyor", analyzePercentage);
+attachToolAction("vatAnalyzeBtn", "vatResult", "KDV hesabi hazirlaniyor", analyzeVat);
+attachToolAction("marginAnalyzeBtn", "marginResult", "Kar marji hesabi hazirlaniyor", analyzeMargin);
+attachToolAction("commissionAnalyzeBtn", "commissionResult", "Komisyon hesabi hazirlaniyor", analyzeCommission);
