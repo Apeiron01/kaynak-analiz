@@ -383,6 +383,7 @@ if (heroCarousel) {
     let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
     let autoplayId = null;
     let cleanupId = null;
+    let isHeroTransitioning = false;
 
     if (activeIndex < 0) {
       activeIndex = 0;
@@ -405,6 +406,19 @@ if (heroCarousel) {
         "is-exiting-forward",
         "is-exiting-backward"
       );
+    };
+
+    const normalizeHeroSlides = () => {
+      slides.forEach((slide, slideIndex) => {
+        if (slideIndex === activeIndex) {
+          clearHeroTransitions(slide);
+          slide.classList.add("is-active");
+          slide.setAttribute("aria-hidden", "false");
+        } else {
+          clearHeroStates(slide);
+          slide.setAttribute("aria-hidden", "true");
+        }
+      });
     };
 
     const preloadHeroMedia = (index) => {
@@ -455,6 +469,12 @@ if (heroCarousel) {
       });
     };
 
+    const finalizeHeroTransition = () => {
+      normalizeHeroSlides();
+      isHeroTransitioning = false;
+      cleanupId = null;
+    };
+
     const syncCarousel = (index, direction = 1) => {
     const previousIndex = activeIndex;
     const previousSlide = slides[previousIndex];
@@ -464,13 +484,17 @@ if (heroCarousel) {
       return;
     }
 
+    if (isHeroTransitioning && index !== activeIndex) {
+      return;
+    }
+
     activeIndex = index;
     preloadHeroMedia((activeIndex + 1) % slides.length);
     preloadHeroMedia((activeIndex + 2) % slides.length);
 
     if (cleanupId) {
       window.clearTimeout(cleanupId);
-      cleanupId = null;
+      finalizeHeroTransition();
     }
 
     slides.forEach((slide, slideIndex) => {
@@ -499,28 +523,26 @@ if (heroCarousel) {
 
     const enteringClass = direction > 0 ? "is-entering-forward" : "is-entering-backward";
     const exitingClass = direction > 0 ? "is-exiting-forward" : "is-exiting-backward";
+    isHeroTransitioning = true;
 
     clearHeroTransitions(previousSlide);
     clearHeroTransitions(nextSlide);
-    nextSlide.classList.add(enteringClass);
+    nextSlide.classList.add("is-active", enteringClass);
     nextSlide.setAttribute("aria-hidden", "false");
+    previousSlide.classList.add("is-active", exitingClass);
 
     window.requestAnimationFrame(() => {
-      nextSlide.classList.add("is-active");
+      nextSlide.classList.remove(enteringClass);
       previousSlide.classList.remove("is-active");
-      previousSlide.classList.add(exitingClass);
     });
 
     cleanupId = window.setTimeout(() => {
-      clearHeroTransitions(previousSlide);
-      nextSlide.classList.remove(enteringClass);
-      nextSlide.classList.add("is-active");
-      cleanupId = null;
-    }, 560);
+      finalizeHeroTransition();
+    }, 620);
     };
 
     const moveSlide = (direction) => {
-      if (slides.length < 2) {
+      if (slides.length < 2 || isHeroTransitioning) {
         return;
       }
 
@@ -551,6 +573,9 @@ if (heroCarousel) {
 
     selectors.forEach((selector, index) => {
       selector.addEventListener("click", () => {
+        if (index === activeIndex || isHeroTransitioning) {
+          return;
+        }
         syncCarousel(index);
         restartAutoplay();
       });
