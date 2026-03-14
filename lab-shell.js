@@ -1,5 +1,10 @@
+const labBody = document.body;
 const labMenuToggle = document.getElementById("menuToggle");
 const labNavLinks = document.getElementById("navLinks");
+
+requestAnimationFrame(() => {
+  labBody?.classList.add("is-ready");
+});
 
 if (labMenuToggle && labNavLinks) {
   labMenuToggle.addEventListener("click", () => {
