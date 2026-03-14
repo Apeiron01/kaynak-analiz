@@ -50,6 +50,32 @@ const renderToolLoading = (container, loadingText) => {
       </div>
     </div>
   `;
+
+  if (extraCtaHref) {
+    const cta = container.querySelector(".tool-result-cta");
+
+    if (cta) {
+      const extraWrap = document.createElement("div");
+      extraWrap.className = "tool-result-extra-actions";
+
+      const extraButton = document.createElement("a");
+      extraButton.className = "btn btn-secondary";
+      extraButton.href = extraCtaHref;
+      extraButton.target = "_blank";
+      extraButton.rel = "noreferrer";
+      extraButton.textContent = extraCtaButtonText;
+      extraWrap.appendChild(extraButton);
+
+      if (extraCtaText) {
+        const extraText = document.createElement("p");
+        extraText.className = "tool-result-extra-cta";
+        extraText.textContent = extraCtaText;
+        extraWrap.appendChild(extraText);
+      }
+
+      cta.appendChild(extraWrap);
+    }
+  }
 };
 
 const attachToolAction = (buttonId, resultId, loadingText, handler) => {
@@ -84,6 +110,21 @@ const attachToolAction = (buttonId, resultId, loadingText, handler) => {
   });
 };
 
+const calculatorAppCta = {
+  extraCtaText: "Daha fazla hesaplama aracina mi ihtiyaciniz var? Marjory uygulamasini indirerek ek hesaplara hizli ulasabilirsiniz.",
+  extraCtaHref: "https://play.google.com/store/apps/details?id=com.marjory.app",
+  extraCtaButtonText: "Uygulamayi Indir",
+};
+
+const calculatorResultIds = new Set([
+  "roasResult",
+  "discountResult",
+  "percentageResult",
+  "vatResult",
+  "marginResult",
+  "commissionResult",
+]);
+
 const renderToolResult = ({
   container,
   summaryLabel,
@@ -98,12 +139,19 @@ const renderToolResult = ({
   ctaLabel,
   ctaText,
   ctaHref,
+  extraCtaText = "",
+  extraCtaHref = "",
+  extraCtaButtonText = "Uygulamayi Indir",
 }) => {
   if (!container) {
     return;
   }
 
   const safeVisibleItems = visibleItems.length ? visibleItems : ["Bu katmanda ek bir sinyal bulunmuyor."];
+  const showCalculatorAppCta = calculatorResultIds.has(container.id);
+  const resolvedExtraCtaHref = extraCtaHref || (showCalculatorAppCta ? calculatorAppCta.extraCtaHref : "");
+  const resolvedExtraCtaText = extraCtaText || (showCalculatorAppCta ? calculatorAppCta.extraCtaText : "");
+  const resolvedExtraCtaButtonText = extraCtaButtonText || calculatorAppCta.extraCtaButtonText;
   const safeLockedItems = lockedItems.length ? lockedItems : ["Detaylı analiz katmanı uzman incelemede açılır."];
 
   const metricsHtml = metrics
@@ -146,6 +194,32 @@ const renderToolResult = ({
       </section>
     </div>
   `;
+
+  if (resolvedExtraCtaHref) {
+    const cta = container.querySelector(".tool-result-cta");
+
+    if (cta) {
+      const extraWrap = document.createElement("div");
+      extraWrap.className = "tool-result-extra-actions";
+
+      const extraButton = document.createElement("a");
+      extraButton.className = "btn btn-secondary";
+      extraButton.href = resolvedExtraCtaHref;
+      extraButton.target = "_blank";
+      extraButton.rel = "noreferrer";
+      extraButton.textContent = resolvedExtraCtaButtonText;
+      extraWrap.appendChild(extraButton);
+
+      if (resolvedExtraCtaText) {
+        const extraText = document.createElement("p");
+        extraText.className = "tool-result-extra-cta";
+        extraText.textContent = resolvedExtraCtaText;
+        extraWrap.appendChild(extraText);
+      }
+
+      cta.appendChild(extraWrap);
+    }
+  }
 };
 
 const getRoasState = () => {
