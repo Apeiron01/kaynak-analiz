@@ -101,97 +101,102 @@
     <section class="home-hero">
       <div class="container">
         <section class="hero-carousel reveal" data-carousel data-reveal aria-label="Lumina Siber hero">
-          <button class="hero-arrow hero-arrow-prev" type="button" data-prev aria-label="Önceki slide">
-            <span>&larr;</span>
-          </button>
-          <button class="hero-arrow hero-arrow-next" type="button" data-next aria-label="Sonraki slide">
-            <span>&rarr;</span>
-          </button>
+          <div class="hero-viewport">
+            <div class="hero-track" data-carousel-track>
+              <article class="hero-slide is-active" data-slide="0">
+                <div class="hero-visual hero-visual-01">
+                  <img
+                    class="hero-media hero-media-main"
+                    src="assets/images/ls-01-hero.webp?v=20260310-04"
+                    alt="Lumina Siber ana hero görseli"
+                    width="1200"
+                    height="1500"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                </div>
 
-          <article class="hero-slide is-active" data-slide="0">
-            <div class="hero-visual hero-visual-01">
-              <img
-                class="hero-media hero-media-main"
-                src="assets/images/ls-01-hero.webp?v=20260310-04"
-                alt="Lumina Siber ana hero görseli"
-                width="1200"
-                height="1500"
-                fetchpriority="high"
-                decoding="async"
-              />
+                <div class="hero-copy">
+                  <p class="hero-kicker">Şüpheli site, sahte satıcı, ödeme öncesi risk</p>
+                  <h1>Ödeme Yapmadan Önce Siteye Birlikte Bakalım.</h1>
+                  <p class="hero-lead">
+                    Mağaza gerçek görünebilir. Yine de domain yapısı, satıcı izi ve ödeme akışı bazı şeyleri ele verir.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-primary" href="iletisim.html">İnceleme iste</a>
+                    <a class="btn btn-secondary" href="site-risk-analizi.html">Ücretsiz aracı aç</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="hero-slide" data-slide="1" aria-hidden="true">
+                <div class="hero-visual hero-visual-02">
+                  <div class="hero-phone-shell">
+                    <img
+                      class="hero-media hero-media-phone"
+                      src="assets/images/ls-02-link-mesaj.webp?v=20260310-04"
+                      alt="Link ve mesaj güvenliği görseli"
+                      width="1200"
+                      height="1500"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+
+                <div class="hero-copy">
+                  <p class="hero-kicker">Kargo SMS'i, banka mesajı, şüpheli bağlantı</p>
+                  <h1>Bu Mesaj Gerçekten Bankadan mı?</h1>
+                  <p class="hero-lead">
+                    SMS, e-posta ya da WhatsApp fark etmez. Link yapısı, yönlendirme ve dil tonu phishing sinyali veriyorsa bunu birlikte ayıklarız.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-primary" href="site-risk-analizi.html">Linki kontrol et</a>
+                    <a class="btn btn-secondary" href="iletisim.html">Mesajı ilet</a>
+                  </div>
+                </div>
+              </article>
+
+              <article class="hero-slide" data-slide="2" aria-hidden="true">
+                <div class="hero-visual hero-visual-03">
+                  <img
+                    class="hero-media hero-media-grid"
+                    src="assets/images/ls-03-marka-guvenligi.webp?v=20260310-04"
+                    alt="Marka güvenliği görseli"
+                    width="1200"
+                    height="900"
+                    decoding="async"
+                  />
+                </div>
+
+                <div class="hero-copy">
+                  <p class="hero-kicker">Marka, domain, dijital itibar, görünür riskler</p>
+                  <h1>Markanızın Etrafındaki Riskleri Erken Görün.</h1>
+                  <p class="hero-lead">
+                    Typosquatting, taklit hesaplar ve itibar aşınmasına yol açan izler büyümeden görünür hale gelir.
+                  </p>
+                  <div class="hero-actions">
+                    <a class="btn btn-primary" href="iletisim.html">İncelemeyi başlat</a>
+                    <a class="btn btn-secondary" href="hizmetler.html">Hizmet akışı</a>
+                  </div>
+                </div>
+              </article>
             </div>
+          </div>
 
-            <div class="hero-copy">
-              <p class="hero-kicker">Şüpheli site, sahte satıcı, ödeme öncesi risk</p>
-              <h1>Ödeme Yapmadan Önce Siteye Birlikte Bakalım.</h1>
-              <p class="hero-lead">
-                Mağaza gerçek görünebilir. Yine de domain yapısı, satıcı izi ve ödeme akışı bazı şeyleri ele verir.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="iletisim.html">İnceleme iste</a>
-                <a class="btn btn-secondary" href="site-risk-analizi.html">Ücretsiz aracı aç</a>
-              </div>
+          <div class="hero-carousel-footer">
+            <div class="hero-progress" aria-label="Slide seçimi">
+              <button class="hero-progress-dot is-active" type="button" data-slide-to="0" aria-label="1. slide"></button>
+              <button class="hero-progress-dot" type="button" data-slide-to="1" aria-label="2. slide"></button>
+              <button class="hero-progress-dot" type="button" data-slide-to="2" aria-label="3. slide"></button>
             </div>
-          </article>
-
-          <article class="hero-slide" data-slide="1" aria-hidden="true">
-            <div class="hero-visual hero-visual-02">
-              <div class="hero-phone-shell">
-                <img
-                  class="hero-media hero-media-phone"
-                  src="assets/images/ls-02-link-mesaj.webp?v=20260310-04"
-                  alt="Link ve mesaj güvenliği görseli"
-                  width="1200"
-                  height="1500"
-                  fetchpriority="high"
-                  decoding="async"
-                />
-              </div>
+            <div class="hero-controls">
+              <button class="hero-arrow hero-arrow-prev" type="button" data-prev aria-label="Önceki slide">
+                <span>&larr;</span>
+              </button>
+              <button class="hero-arrow hero-arrow-next" type="button" data-next aria-label="Sonraki slide">
+                <span>&rarr;</span>
+              </button>
             </div>
-
-            <div class="hero-copy">
-              <p class="hero-kicker">Kargo SMS'i, banka mesajı, şüpheli bağlantı</p>
-              <h1>Bu Mesaj Gerçekten Bankadan mı?</h1>
-              <p class="hero-lead">
-                SMS, e-posta ya da WhatsApp fark etmez. Link yapısı, yönlendirme ve dil tonu phishing sinyali veriyorsa bunu birlikte ayıklarız.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="site-risk-analizi.html">Linki kontrol et</a>
-                <a class="btn btn-secondary" href="iletisim.html">Mesajı ilet</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="hero-slide" data-slide="2" aria-hidden="true">
-            <div class="hero-visual hero-visual-03">
-              <img
-                class="hero-media hero-media-grid"
-                src="assets/images/ls-03-marka-guvenligi.webp?v=20260310-04"
-                alt="Marka güvenliği görseli"
-                width="1200"
-                height="900"
-                fetchpriority="high"
-                decoding="async"
-              />
-            </div>
-
-            <div class="hero-copy">
-              <p class="hero-kicker">Marka, domain, dijital itibar, görünür riskler</p>
-              <h1>Markanızın Etrafındaki Riskleri Erken Görün.</h1>
-              <p class="hero-lead">
-                Typosquatting, taklit hesaplar ve itibar aşınmasına yol açan izler büyümeden görünür hale gelir.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="iletisim.html">İncelemeyi başlat</a>
-                <a class="btn btn-secondary" href="hizmetler.html">Hizmet akışı</a>
-              </div>
-            </div>
-          </article>
-
-          <div class="hero-progress" aria-hidden="true">
-            <span class="hero-progress-dot is-active"></span>
-            <span class="hero-progress-dot"></span>
-            <span class="hero-progress-dot"></span>
           </div>
         </section>
       </div>
