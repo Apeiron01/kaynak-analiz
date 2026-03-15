@@ -6,6 +6,14 @@ const formsubmitEndpointConfig = window.LUMINA_FORMSUBMIT_ENDPOINTS || {};
 let activeScrollAnimationFrame = null;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+if (menuToggle && menuToggle.querySelectorAll("span").length < 3) {
+  const missingCount = 3 - menuToggle.querySelectorAll("span").length;
+
+  for (let index = 0; index < missingCount; index += 1) {
+    menuToggle.append(document.createElement("span"));
+  }
+}
+
 document.documentElement.style.scrollBehavior = "smooth";
 
 document.querySelectorAll('a[target="_blank"]').forEach((link) => {

@@ -188,42 +188,79 @@ code {
 }
 
 .menu-toggle {
+  --menu-toggle-bg: rgba(255, 255, 255, 0.04);
+  --menu-toggle-border: rgba(255, 255, 255, 0.12);
+  --menu-toggle-bg-active: rgba(255, 255, 255, 0.08);
+  --menu-toggle-border-active: var(--accent);
+  --menu-toggle-icon: var(--white);
   display: none;
-  flex: 0 0 46px;
-  width: 46px;
-  height: 46px;
+  position: relative;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--white);
+  border: 1px solid var(--menu-toggle-border);
+  border-radius: 16px;
+  background: var(--menu-toggle-bg);
+  color: var(--menu-toggle-icon);
   box-shadow: 0 10px 20px rgba(6, 18, 38, 0.12);
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  appearance: none;
+  -webkit-appearance: none;
+  overflow: hidden;
   transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .menu-toggle span {
-  display: none;
-}
-
-.menu-toggle::before {
-  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
   display: block;
   width: 20px;
   height: 2px;
+  margin-top: 0;
   border-radius: 999px;
   background: currentColor;
-  box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 220ms ease, margin-top 220ms ease, opacity 160ms ease, background 160ms ease;
+}
+
+.menu-toggle span:nth-child(1) {
+  margin-top: -7px;
+}
+
+.menu-toggle span:nth-child(3) {
+  margin-top: 7px;
+}
+
+.menu-toggle::before {
+  content: none;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  margin-top: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(0.6);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  margin-top: 0;
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .menu-toggle:hover,
 .menu-toggle:focus-visible,
 .menu-toggle[aria-expanded="true"] {
   transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--accent);
+  background: var(--menu-toggle-bg-active);
+  border-color: var(--menu-toggle-border-active);
   box-shadow: 0 14px 26px rgba(6, 18, 38, 0.18);
 }
 
@@ -2670,15 +2707,18 @@ body.is-leaving {
 }
 
 .placeholder-page .menu-toggle {
-  background: rgba(47, 93, 159, 0.14);
-  border-color: rgba(47, 93, 159, 0.34);
+  --menu-toggle-bg: rgba(47, 93, 159, 0.14);
+  --menu-toggle-border: rgba(47, 93, 159, 0.34);
+  --menu-toggle-bg-active: rgba(47, 93, 159, 0.22);
+  --menu-toggle-border-active: rgba(47, 93, 159, 0.5);
+  --menu-toggle-icon: #f8fbff;
 }
 
 .placeholder-page .menu-toggle:hover,
 .placeholder-page .menu-toggle:focus-visible,
 .placeholder-page .menu-toggle[aria-expanded="true"] {
-  background: rgba(47, 93, 159, 0.22);
-  border-color: rgba(47, 93, 159, 0.5);
+  background: var(--menu-toggle-bg-active);
+  border-color: var(--menu-toggle-border-active);
 }
 
 .placeholder-page .blog-hub-hero h1 {
@@ -2747,8 +2787,11 @@ body.is-leaving {
 }
 
 .academy-page .menu-toggle {
-  background: rgba(255, 248, 242, 0.08);
-  border-color: rgba(122, 86, 71, 0.78);
+  --menu-toggle-bg: rgba(255, 248, 242, 0.08);
+  --menu-toggle-border: rgba(122, 86, 71, 0.78);
+  --menu-toggle-bg-active: rgba(122, 86, 71, 0.16);
+  --menu-toggle-border-active: rgba(122, 86, 71, 0.98);
+  --menu-toggle-icon: #fff8f2;
 }
 
 .academy-page .nav-btn:hover,
@@ -3298,8 +3341,11 @@ body.is-leaving {
 }
 
 .consulting-page .menu-toggle {
-  background: rgba(253, 235, 220, 0.08);
-  border-color: rgba(226, 125, 114, 0.56);
+  --menu-toggle-bg: rgba(253, 235, 220, 0.08);
+  --menu-toggle-border: rgba(226, 125, 114, 0.56);
+  --menu-toggle-bg-active: rgba(253, 235, 220, 0.12);
+  --menu-toggle-border-active: rgba(226, 125, 114, 0.92);
+  --menu-toggle-icon: #fdebdc;
 }
 
 .consulting-page .site-switcher-toggle {
@@ -4746,15 +4792,18 @@ main > .section + .section {
 }
 
 .tools-page .menu-toggle {
-  background: rgba(47, 93, 159, 0.14);
-  border-color: rgba(47, 93, 159, 0.34);
+  --menu-toggle-bg: rgba(47, 93, 159, 0.14);
+  --menu-toggle-border: rgba(47, 93, 159, 0.34);
+  --menu-toggle-bg-active: rgba(47, 93, 159, 0.22);
+  --menu-toggle-border-active: rgba(47, 93, 159, 0.5);
+  --menu-toggle-icon: #f8fbff;
 }
 
 .tools-page .menu-toggle:hover,
 .tools-page .menu-toggle:focus-visible,
 .tools-page .menu-toggle[aria-expanded="true"] {
-  background: rgba(47, 93, 159, 0.22);
-  border-color: rgba(47, 93, 159, 0.5);
+  background: var(--menu-toggle-bg-active);
+  border-color: var(--menu-toggle-border-active);
 }
 
 .tools-hero {
