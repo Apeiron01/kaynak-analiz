@@ -189,13 +189,16 @@ code {
 
 .menu-toggle {
   display: none;
+  flex: 0 0 46px;
   width: 46px;
   height: 46px;
   padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 10px 20px rgba(6, 18, 38, 0.12);
   cursor: pointer;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .menu-toggle span {
@@ -204,6 +207,15 @@ code {
   margin: 6px 0;
   border-radius: 999px;
   background: var(--white);
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible,
+.menu-toggle[aria-expanded="true"] {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 14px 26px rgba(6, 18, 38, 0.18);
 }
 
 h1,
@@ -1211,6 +1223,18 @@ textarea::placeholder {
 }
 
 @media (max-width: 760px) {
+  .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand,
+  .brand-copy {
+    min-width: 0;
+  }
+
   .section {
     padding: 64px 0;
   }
@@ -1220,7 +1244,13 @@ textarea::placeholder {
   }
 
   .menu-toggle {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    width: 48px;
+    height: 48px;
+    padding: 12px;
   }
 
   .nav-links {
@@ -2633,6 +2663,18 @@ body.is-leaving {
   margin-top: 24px;
 }
 
+.placeholder-page .menu-toggle {
+  background: rgba(47, 93, 159, 0.14);
+  border-color: rgba(47, 93, 159, 0.34);
+}
+
+.placeholder-page .menu-toggle:hover,
+.placeholder-page .menu-toggle:focus-visible,
+.placeholder-page .menu-toggle[aria-expanded="true"] {
+  background: rgba(47, 93, 159, 0.22);
+  border-color: rgba(47, 93, 159, 0.5);
+}
+
 .placeholder-page .blog-hub-hero h1 {
   max-width: 20ch;
   font-size: clamp(2.6rem, 5.8vw, 5rem);
@@ -2698,8 +2740,16 @@ body.is-leaving {
   background: rgba(255, 248, 242, 0.04);
 }
 
+.academy-page .menu-toggle {
+  background: rgba(255, 248, 242, 0.08);
+  border-color: rgba(122, 86, 71, 0.78);
+}
+
 .academy-page .nav-btn:hover,
 .academy-page .nav-btn:focus-visible,
+.academy-page .menu-toggle:hover,
+.academy-page .menu-toggle:focus-visible,
+.academy-page .menu-toggle[aria-expanded="true"],
 .academy-page .site-switcher-toggle:hover,
 .academy-page .site-switcher-toggle:focus-visible {
   border-color: rgba(122, 86, 71, 0.98);
@@ -3232,10 +3282,18 @@ body.is-leaving {
 
 .consulting-page .nav-btn:hover,
 .consulting-page .nav-btn:focus-visible,
+.consulting-page .menu-toggle:hover,
+.consulting-page .menu-toggle:focus-visible,
+.consulting-page .menu-toggle[aria-expanded="true"],
 .consulting-page .site-switcher-toggle:hover,
 .consulting-page .site-switcher-toggle:focus-visible {
   border-color: rgba(226, 125, 114, 0.92);
   background: rgba(253, 235, 220, 0.08);
+}
+
+.consulting-page .menu-toggle {
+  background: rgba(253, 235, 220, 0.08);
+  border-color: rgba(226, 125, 114, 0.56);
 }
 
 .consulting-page .site-switcher-toggle {
@@ -4300,7 +4358,9 @@ main > .section + .section {
 
 @media (max-width: 760px) {
   .site-switcher {
-    margin-left: auto;
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-left: 0;
   }
 
   .blog-hub-hero,
@@ -4329,14 +4389,26 @@ main > .section + .section {
   }
 
   .site-switcher-menu {
-    min-width: 210px;
+    left: 0;
+    right: 0;
+    min-width: 0;
   }
 
   .site-switcher-toggle {
-    min-width: 118px;
-    width: auto;
-    padding: 0 12px 0 8px;
-    justify-content: flex-start;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 12px 0 10px;
+    justify-content: center;
+  }
+
+  .site-switcher-toggle::after {
+    font-size: 0.78rem;
+  }
+
+  .site-switcher-toggle img {
+    width: 30px;
+    height: 30px;
   }
 
   .article-hero {
@@ -4649,6 +4721,18 @@ main > .section + .section {
   background:
     radial-gradient(circle at top left, rgba(198, 167, 92, 0.1), transparent 24%),
     linear-gradient(180deg, #f8fafc 0%, #eef3f9 100%);
+}
+
+.tools-page .menu-toggle {
+  background: rgba(47, 93, 159, 0.14);
+  border-color: rgba(47, 93, 159, 0.34);
+}
+
+.tools-page .menu-toggle:hover,
+.tools-page .menu-toggle:focus-visible,
+.tools-page .menu-toggle[aria-expanded="true"] {
+  background: rgba(47, 93, 159, 0.22);
+  border-color: rgba(47, 93, 159, 0.5);
 }
 
 .tools-hero {
