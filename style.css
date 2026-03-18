@@ -5076,29 +5076,96 @@ main > .section + .section {
 
 .tool-result-panel-locked {
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   background:
     linear-gradient(180deg, rgba(11, 31, 59, 0.03), rgba(11, 31, 59, 0.05)),
     #fff;
 }
 
 .tool-result-blur {
-  height: 100%;
-  padding-bottom: 170px;
-  filter: none;
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(11, 31, 59, 0.03), rgba(62, 142, 126, 0.08));
   user-select: text;
   pointer-events: auto;
-  opacity: 1;
+}
+
+.tool-result-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.tool-result-mask span {
+  position: absolute;
+  width: 92px;
+  height: 92px;
+  border-radius: 22px;
+  border: 1px solid rgba(11, 31, 59, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(62, 142, 126, 0.18));
+  filter: blur(12px);
+  opacity: 0.5;
+  animation: tool-result-mask-float 8s ease-in-out infinite;
+}
+
+.tool-result-mask span:nth-child(1) {
+  top: 18px;
+  right: 20px;
+}
+
+.tool-result-mask span:nth-child(2) {
+  top: 84px;
+  left: 10%;
+  animation-delay: -2s;
+}
+
+.tool-result-mask span:nth-child(3) {
+  right: 24%;
+  bottom: 56px;
+  animation-delay: -4s;
+}
+
+.tool-result-mask span:nth-child(4) {
+  bottom: 16px;
+  left: 24px;
+  animation-delay: -6s;
+}
+
+.tool-result-panel-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.tool-result-panel-note {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 .tool-result-cta {
-  position: absolute;
-  inset: auto 18px 18px;
+  position: relative;
   z-index: 1;
   padding: 18px;
   border-radius: 18px;
   border: 1px solid rgba(11, 31, 59, 0.1);
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 16px 30px rgba(11, 31, 59, 0.12);
+}
+
+.tool-result-cta .btn {
+  width: fit-content;
+}
+
+.tool-result-cta-inline {
+  margin-top: auto;
 }
 
 .tool-result-cta-label {
@@ -5126,6 +5193,16 @@ main > .section + .section {
   color: var(--ink-soft);
   font-size: 0.92rem;
   line-height: 1.55;
+}
+
+@keyframes tool-result-mask-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(10px, -12px, 0) scale(1.08);
+  }
 }
 
 .tool-page-cta {
@@ -5425,6 +5502,11 @@ main > .section + .section {
   }
 
   .tool-page-cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tool-result-cta .btn {
     width: 100%;
     justify-content: center;
   }

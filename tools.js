@@ -99,6 +99,16 @@ const calculatorResultIds = new Set([
   "commissionResult",
 ]);
 
+const normalizeSecondaryTitle = (title = "") => {
+  const normalized = title.trim().toLowerCase();
+
+  if (!normalized || normalized.includes("blur") || normalized.includes("kilitli")) {
+    return "Ek degerlendirme notlari";
+  }
+
+  return title;
+};
+
 const renderToolResult = ({
   container,
   summaryLabel,
@@ -126,7 +136,8 @@ const renderToolResult = ({
   const resolvedExtraCtaHref = extraCtaHref || (showCalculatorAppCta ? calculatorAppCta.extraCtaHref : "");
   const resolvedExtraCtaText = extraCtaText || (showCalculatorAppCta ? calculatorAppCta.extraCtaText : "");
   const resolvedExtraCtaButtonText = extraCtaButtonText || calculatorAppCta.extraCtaButtonText;
-  const safeLockedItems = lockedItems.length ? lockedItems : ["Detaylı analiz katmanı uzman incelemede açılır."];
+  const normalizedLockedTitle = normalizeSecondaryTitle(lockedTitle);
+  const safeLockedItems = [...new Set((lockedItems.length ? lockedItems : ["Bu panel sonucu ikinci katman notlariyla gruplar; ek gizli veri bulunmaz."]).filter(Boolean))];
 
   const metricsHtml = metrics
     .map(
@@ -157,13 +168,22 @@ const renderToolResult = ({
       </section>
       <section class="tool-result-panel tool-result-panel-locked">
         <div class="tool-result-blur">
-          <h3>${lockedTitle}</h3>
-          <ul class="tool-result-list">${lockedHtml}</ul>
+          <div class="tool-result-mask" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="tool-result-panel-copy">
+            <h3>${normalizedLockedTitle}</h3>
+            <p class="tool-result-panel-note">Bu alanda ek gizli bilgi yok. Sonuc ayni container icinde ikinci katman notlariyla gosteriliyor.</p>
+            <ul class="tool-result-list">${lockedHtml}</ul>
+          </div>
         </div>
-        <div class="tool-result-cta">
+        <div class="tool-result-cta tool-result-cta-inline">
           <p class="tool-result-cta-label">${ctaLabel}</p>
           <p>${ctaText}</p>
-          <a class="btn btn-primary" href="${ctaHref}">Detaylı Analizi Aç</a>
+          <a class="btn btn-primary" href="${ctaHref}">Inceleme Talebi Olustur</a>
         </div>
       </section>
     </div>
@@ -438,8 +458,8 @@ const getSeoState = () => {
   const summaryValue = score >= 80 ? "Saglam temel" : score >= 55 ? "Gelistirilebilir yapi" : "Teknik aciklar yuksek";
   const summaryClass = score >= 80 ? "is-good" : score >= 55 ? "is-mid" : "is-alert";
 
-  while (criticalIssues.length < 5) {
-    criticalIssues.push("Derin audit katmaninda acilan ek teknik kontroller burada blur ile gizlenir.");
+  if (!criticalIssues.length) {
+    criticalIssues.push("Teknik tarafta acik bir kritik hata sinyali yok; yine de sayfa tipi bazli audit ayri okunabilir.");
   }
 
   return {
@@ -714,8 +734,8 @@ const getCyberState = () => {
     summaryClass = "is-mid";
   }
 
-  while (lockedNotes.length < 4) {
-    lockedNotes.push("Detayli port, altyapi ve davranissal guvenlik katmani uzman incelemede acilir.");
+  if (!lockedNotes.length) {
+    lockedNotes.push("URL tarafinda ek risk sinyali yakalanmadi; karar yine alan adi, talep tipi ve yonlendirme baglamiyla okunmali.");
   }
 
   return {
