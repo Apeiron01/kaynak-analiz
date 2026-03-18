@@ -103,7 +103,7 @@ const normalizeSecondaryTitle = (title = "") => {
   const normalized = title.trim().toLowerCase();
 
   if (!normalized || normalized.includes("blur") || normalized.includes("kilitli")) {
-    return "Ek degerlendirme notlari";
+    return "Değerlendirme Notları";
   }
 
   return title;
@@ -137,7 +137,7 @@ const renderToolResult = ({
   const resolvedExtraCtaText = extraCtaText || (showCalculatorAppCta ? calculatorAppCta.extraCtaText : "");
   const resolvedExtraCtaButtonText = extraCtaButtonText || calculatorAppCta.extraCtaButtonText;
   const normalizedLockedTitle = normalizeSecondaryTitle(lockedTitle);
-  const safeLockedItems = [...new Set((lockedItems.length ? lockedItems : ["Bu panel sonucu ikinci katman notlariyla gruplar; ek gizli veri bulunmaz."]).filter(Boolean))];
+  const safeLockedItems = [...new Set(lockedItems.filter(Boolean))];
 
   const metricsHtml = metrics
     .map(
@@ -151,7 +151,9 @@ const renderToolResult = ({
     .join("");
 
   const visibleHtml = safeVisibleItems.map((item) => `<li>${item}</li>`).join("");
-  const lockedHtml = safeLockedItems.map((item) => `<li>${item}</li>`).join("");
+  const lockedHtml = safeLockedItems.length
+    ? `<ul class="tool-result-list">${safeLockedItems.map((item) => `<li>${item}</li>`).join("")}</ul>`
+    : "";
 
   container.classList.remove("hidden");
   container.innerHTML = `
@@ -176,8 +178,7 @@ const renderToolResult = ({
           </div>
           <div class="tool-result-panel-copy">
             <h3>${normalizedLockedTitle}</h3>
-            <p class="tool-result-panel-note">Bu alanda ek gizli bilgi yok. Sonuc ayni container icinde ikinci katman notlariyla gosteriliyor.</p>
-            <ul class="tool-result-list">${lockedHtml}</ul>
+            ${lockedHtml}
           </div>
         </div>
         <div class="tool-result-cta tool-result-cta-inline">
