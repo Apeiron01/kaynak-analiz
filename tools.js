@@ -50,32 +50,6 @@ const renderToolLoading = (container, loadingText) => {
       </div>
     </div>
   `;
-
-  if (extraCtaHref) {
-    const cta = container.querySelector(".tool-result-cta");
-
-    if (cta) {
-      const extraWrap = document.createElement("div");
-      extraWrap.className = "tool-result-extra-actions";
-
-      const extraButton = document.createElement("a");
-      extraButton.className = "btn btn-secondary";
-      extraButton.href = extraCtaHref;
-      extraButton.target = "_blank";
-      extraButton.rel = "noreferrer";
-      extraButton.textContent = extraCtaButtonText;
-      extraWrap.appendChild(extraButton);
-
-      if (extraCtaText) {
-        const extraText = document.createElement("p");
-        extraText.className = "tool-result-extra-cta";
-        extraText.textContent = extraCtaText;
-        extraWrap.appendChild(extraText);
-      }
-
-      cta.appendChild(extraWrap);
-    }
-  }
 };
 
 const attachToolAction = (buttonId, resultId, loadingText, handler) => {
