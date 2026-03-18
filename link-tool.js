@@ -32,43 +32,43 @@ function analyzeUrlStructure(urlObject) {
 
   if (urlObject.protocol !== "https:") {
     risk += 2;
-    notes.push("Baglanti HTTPS kullanmiyor.");
+    notes.push("Bağlantı HTTPS kullanmıyor.");
   } else {
-    notes.push("Baglanti HTTPS kullaniyor.");
+    notes.push("Bağlantı HTTPS kullanıyor.");
   }
 
   if (looksLikeShortener(urlObject.hostname)) {
     risk += 2;
-    notes.push("Kisa link servisi kullaniliyor. Nihai hedef dogrudan gorunmuyor.");
+    notes.push("Kısa link servisi kullanılıyor. Nihai hedef doğrudan görünmüyor.");
   }
 
   if (isIpAddress(urlObject.hostname)) {
     risk += 2;
-    notes.push("Alan adi yerine IP adresi kullaniliyor.");
+    notes.push("Alan adı yerine IP adresi kullanılıyor.");
   }
 
   if (containsSuspiciousChars(urlObject.hostname)) {
     risk += 2;
-    notes.push("Alan adinda olagandisi karakterler tespit edildi.");
+    notes.push("Alan adında olağandışı karakterler tespit edildi.");
   }
 
   if (urlObject.hostname.split(".").length > 3) {
     risk += 1;
-    notes.push("Alan adi cok fazla alt alan iceriyor.");
+    notes.push("Alan adı çok fazla alt alan içeriyor.");
   }
 
   if (urlObject.pathname.length > 60) {
     risk += 1;
-    notes.push("URL yolu olagandan uzun gorunuyor.");
+    notes.push("URL yolu olağandan uzun görünüyor.");
   }
 
   if (urlObject.search.length > 80) {
     risk += 1;
-    notes.push("Sorgu parametreleri uzun ve karmasik gorunuyor.");
+    notes.push("Sorgu parametreleri uzun ve karmaşık görünüyor.");
   }
 
   if (notes.length === 0) {
-    notes.push("Belirgin bir yapisal risk sinyali gorulmedi.");
+    notes.push("Belirgin bir yapısal risk sinyali görülmedi.");
   }
 
   return { risk, notes };
@@ -108,10 +108,10 @@ function renderAnalysis(levelClass, levelText, parsedUrl, analysis) {
   levelNode.textContent = levelText;
   urlResult.appendChild(levelNode);
 
-  urlResult.appendChild(createLabeledParagraph("Alan adi", parsedUrl.hostname));
+  urlResult.appendChild(createLabeledParagraph("Alan adı", parsedUrl.hostname));
   urlResult.appendChild(createLabeledParagraph("Protokol", parsedUrl.protocol));
   urlResult.appendChild(createLabeledParagraph("Yol", parsedUrl.pathname || "/"));
-  urlResult.appendChild(createLabeledParagraph("Degerlendirme", ""));
+  urlResult.appendChild(createLabeledParagraph("Değerlendirme", ""));
 
   const list = document.createElement("ul");
   analysis.notes.forEach((item) => {
@@ -123,7 +123,7 @@ function renderAnalysis(levelClass, levelText, parsedUrl, analysis) {
 
   urlResult.appendChild(
     createParagraph(
-      "Bu arac yalnizca tarayici icinde gorulebilen yapisal sinyalleri degerlendirir. Domain yasi, blacklist ve gercek yonlendirme hedefi gibi ileri kontroller bu surumde yoktur.",
+      "Bu araç yalnızca tarayıcı içinde görülebilen yapısal sinyalleri değerlendirir. Domain yaşı, blacklist ve gerçek yönlendirme hedefi gibi ileri kontroller bu sürümde yoktur.",
       "note"
     )
   );
@@ -134,7 +134,7 @@ if (analyzeUrlBtn && urlInput && urlResult) {
     const rawValue = urlInput.value.trim();
 
     if (!rawValue) {
-      renderMessage("Lutfen analiz etmek icin bir baglanti girin.");
+      renderMessage("Lütfen analiz etmek için bir bağlantı girin.");
       return;
     }
 
@@ -152,18 +152,18 @@ if (analyzeUrlBtn && urlInput && urlResult) {
 
       if (analysis.risk <= 1) {
         levelClass = "level-good";
-        levelText = "Dusuk risk sinyali";
+        levelText = "Düşük risk sinyali";
       } else if (analysis.risk <= 4) {
         levelClass = "level-mid";
         levelText = "Orta risk sinyali";
       } else {
         levelClass = "level-low";
-        levelText = "Yuksek risk sinyali";
+        levelText = "Yüksek risk sinyali";
       }
 
       renderAnalysis(levelClass, levelText, parsedUrl, analysis);
-    } catch (error) {
-      renderMessage("Gecerli bir link formati girin.");
+    } catch (_error) {
+      renderMessage("Geçerli bir link formatı girin.");
     }
   });
 }

@@ -85,7 +85,7 @@ const attachToolAction = (buttonId, resultId, loadingText, handler) => {
 };
 
 const calculatorAppCta = {
-  extraCtaText: "Daha fazla hesaplama aracina mi ihtiyaciniz var? Marjory uygulamasini indirerek ek hesaplara hizli ulasabilirsiniz.",
+  extraCtaText: "Daha fazla hesaplama aracına mı ihtiyacınız var? Marjory uygulamasını indirerek ek hesaplara hızlı ulaşabilirsiniz.",
   extraCtaHref: "https://play.google.com/store/apps/details?id=com.marjory.app",
   extraCtaButtonText: "Uygulamayı İndir",
 };
@@ -243,11 +243,11 @@ const getRoasState = () => {
   const breakEvenAdBudget = Math.max(0, contributionBeforeAds);
 
   const leaks = [
-    { label: "Urun maliyeti", value: cogs },
-    { label: "Reklam harcamasi", value: adSpend },
+    { label: "Ürün maliyeti", value: cogs },
+    { label: "Reklam harcaması", value: adSpend },
     { label: "Kargo / operasyon", value: shipping },
     { label: "Komisyon", value: fees },
-    { label: "Iade kaybi", value: returnLoss },
+    { label: "İade kaybı", value: returnLoss },
     { label: "Sabit gider", value: fixed },
   ]
     .sort((left, right) => right.value - left.value)
@@ -385,7 +385,7 @@ const getSeoState = () => {
     criticalIssues.push("Mobil yuklenme suresi 5 saniyenin ustunde. Bu durum hem siralama hem donusum tarafini zorluyor.");
   } else if (loadTime > 3.5) {
     score -= 14;
-    visibleNotes.push("Mobil hiz iyilestirmeye acik. 3.5 saniye ustu kullanici kaybini artirir.");
+    visibleNotes.push("Mobil hız iyileştirmeye açık. 3.5 saniye üstü kullanıcı kaybını artırır.");
   } else {
     visibleNotes.push("Mobil hız temel eşik içinde görünüyor.");
   }
@@ -399,10 +399,10 @@ const getSeoState = () => {
 
   if (brokenPages > 5) {
     score -= 16;
-    criticalIssues.push("Kirik sayfa veya hata sayisi yuksek. Tarama butcesi ve guven sinyali bu noktada zayiflar.");
+    criticalIssues.push("Kırık sayfa veya hata sayısı yüksek. Tarama bütçesi ve güven sinyali bu noktada zayıflar.");
   } else if (brokenPages > 0) {
     score -= 8;
-    visibleNotes.push("Birkac hata sayfasi tespit edildi. Kullanici akisi ve yonlendirme kontrolu gerekli.");
+    visibleNotes.push("Birkaç hata sayfası tespit edildi. Kullanıcı akışı ve yönlendirme kontrolü gerekli.");
   }
 
   if (titleCoverage < 70) {
@@ -410,7 +410,7 @@ const getSeoState = () => {
     criticalIssues.push("Başlık ve meta kapsama oranı düşük. Arama görünürlüğü sistematik biçimde kaçıyor.");
   } else if (titleCoverage < 90) {
     score -= 8;
-    visibleNotes.push("Baslik ve meta kapsama orta seviyede. Sablon duzeni toparlanirsa hizli kazanim gelir.");
+    visibleNotes.push("Başlık ve meta kapsama orta seviyede. Şablon düzeni toparlanırsa hızlı kazanım gelir.");
   } else {
     visibleNotes.push("Başlık ve meta kapsama güçlü görünüyor.");
   }
@@ -420,12 +420,12 @@ const getSeoState = () => {
     criticalIssues.push("Schema kullanımı yok. SERP görünürlüğü için yapısal veri katmanı eksik.");
   } else if (schema === "partial") {
     score -= 4;
-    visibleNotes.push("Schema kismi. Kritik sayfalarda genisletme alani var.");
+    visibleNotes.push("Schema kısmi. Kritik sayfalarda genişletme alanı var.");
   }
 
   if (gsc === "no") {
     score -= 8;
-    criticalIssues.push("Google Search Console aktif gorunmuyor. Teknik karar icin veri tabani eksik kaliyor.");
+    criticalIssues.push("Google Search Console aktif görünmüyor. Teknik karar için veri tabanı eksik kalıyor.");
   }
 
   if (https === "no") {
@@ -539,13 +539,13 @@ const getAcademyState = () => {
     summaryClass = "is-alert";
     nextTrack = "Önce temel mağaza ve reklam mantığı oturmalı.";
   } else if (score <= 16) {
-    level = "Gelisen seviye";
+    level = "Gelişen seviye";
     summaryClass = "is-mid";
-    nextTrack = "Sistem kurulduktan sonra olcum ve kreatif tekrarina gecilmesi gerekir.";
+    nextTrack = "Sistem kurulduktan sonra ölçüm ve kreatif tekrarına geçilmesi gerekir.";
   } else {
     level = "Uygulayan seviye";
     summaryClass = "is-good";
-    nextTrack = "Ileri modulde rapor okuma, optimizasyon ve olcekleme katmani acilabilir.";
+    nextTrack = "İleri modülde rapor okuma, optimizasyon ve ölçekleme katmanı açılabilir.";
   }
 
   if (values[0] + values[4] <= 4) {
@@ -553,26 +553,26 @@ const getAcademyState = () => {
   } else if (values[1] + values[2] <= 4) {
     recommendedProgram = "Meta Ads ve Google Ads";
   } else if (values[3] <= 2) {
-    recommendedProgram = "Kreatif ve teklif uygulamasi";
+    recommendedProgram = "Kreatif ve teklif uygulaması";
   }
 
   const gaps = [];
-  if (values[0] <= 2) gaps.push("Magaza veya proje temeli");
+  if (values[0] <= 2) gaps.push("Mağaza veya proje temeli");
   if (values[1] <= 2) gaps.push("Reklam paneli ve kampanya kurgusu");
-  if (values[2] <= 2) gaps.push("Olcumleme ve rapor okuma");
-  if (values[3] <= 2) gaps.push("Kreatif uretim ve test sistemi");
-  if (values[4] <= 2) gaps.push("Urun / katalog duzeni");
-  if (values[5] <= 2) gaps.push("Haftalik uygulama disiplini");
+  if (values[2] <= 2) gaps.push("Ölçümleme ve rapor okuma");
+  if (values[3] <= 2) gaps.push("Kreatif üretim ve test sistemi");
+  if (values[4] <= 2) gaps.push("Ürün / katalog düzeni");
+  if (values[5] <= 2) gaps.push("Haftalık uygulama disiplini");
 
   while (gaps.length < 3) {
-    gaps.push("Bir ust seviyede optimizasyon modulu");
+    gaps.push("Bir üst seviyede optimizasyon modülü");
   }
 
   const strengths = [];
   if (values[0] >= 4) strengths.push("Mağaza veya operasyon temeliniz hazır.");
-  if (values[1] >= 4) strengths.push("Reklam panelinde temel kararlari okuyabiliyorsunuz.");
-  if (values[2] >= 4) strengths.push("Metrik okuma farkindaliginiz olusmus.");
-  if (values[3] >= 4) strengths.push("Kreatif tekrar disiplini kurulmus.");
+  if (values[1] >= 4) strengths.push("Reklam panelinde temel kararları okuyabiliyorsunuz.");
+  if (values[2] >= 4) strengths.push("Metrik okuma farkındalığınız oluşmuş.");
+  if (values[3] >= 4) strengths.push("Kreatif tekrar disiplini kurulmuş.");
   if (values[4] >= 4) strengths.push("Ürün ve teklif yapınız düzenli görünüyor.");
   if (values[5] >= 4) strengths.push("Süreklilik tarafı güçlü görünüyor.");
 
@@ -660,17 +660,17 @@ const getCyberState = () => {
 
   if (shorteners.has(parsedUrl.hostname.toLowerCase())) {
     risk += 3;
-    lockedNotes.push("Kisa link servisi kullaniliyor. Nihai hedef kullanicidan saklaniyor olabilir.");
+    lockedNotes.push("Kısa link servisi kullanılıyor. Nihai hedef kullanıcıdan saklanıyor olabilir.");
   }
 
   if (isIpAddress(parsedUrl.hostname)) {
     risk += 3;
-    lockedNotes.push("Alan adi yerine IP adresi kullaniliyor. Bu davranis normal kurumsal akista nadir gorulur.");
+    lockedNotes.push("Alan adı yerine IP adresi kullanılıyor. Bu davranış normal kurumsal akışta nadir görülür.");
   }
 
   if (containsSuspiciousChars(parsedUrl.hostname)) {
     risk += 3;
-    lockedNotes.push("Hostname icinde olagandisi karakterler var. Taklit veya gizleme girisimi olabilir.");
+    lockedNotes.push("Hostname içinde olağandışı karakterler var. Taklit veya gizleme girişimi olabilir.");
   }
 
   if (parsedUrl.hostname.includes("xn--")) {
@@ -680,7 +680,7 @@ const getCyberState = () => {
 
   if (parsedUrl.username || parsedUrl.password) {
     risk += 3;
-    lockedNotes.push("URL icinde kullanici adi veya parola bilgisi geciyor. Bu yuksek risk sinyalidir.");
+    lockedNotes.push("URL içinde kullanıcı adı veya parola bilgisi geçiyor. Bu yüksek risk sinyalidir.");
   }
 
   if (suspiciousKeywordPattern.test(urlFingerprint)) {
@@ -690,7 +690,7 @@ const getCyberState = () => {
 
   if (riskyTlds.some((suffix) => parsedUrl.hostname.endsWith(suffix))) {
     risk += 2;
-    lockedNotes.push("Alan adi uzantisi yuksek riskli vakalarda sik gorulen bir gruba yakin.");
+    lockedNotes.push("Alan adı uzantısı yüksek riskli vakalarda sık görülen bir gruba yakın.");
   }
 
   if (parsedUrl.hostname.split(".").length > 3) {
@@ -705,23 +705,23 @@ const getCyberState = () => {
 
   if (queryParamCount >= 5) {
     risk += 1;
-    visibleNotes.push("Baglanti cok sayida parametre iceriyor. Yonlendirme ve izleme davranisi kontrol edilmeli.");
+    visibleNotes.push("Bağlantı çok sayıda parametre içeriyor. Yönlendirme ve izleme davranışı kontrol edilmeli.");
   }
 
   if (payment >= 4) {
-    visibleNotes.push("Odeme talebi bulundugu icin risk degerlendirmesi daha kritik hale geliyor.");
+    visibleNotes.push("Ödeme talebi bulunduğu için risk değerlendirmesi daha kritik hale geliyor.");
   }
 
   if (whatsapp >= 2) {
-    lockedNotes.push("WhatsApp veya DM yonlendirmesi, kullaniciyi platform disina cekme sinyali uretiyor.");
+    lockedNotes.push("WhatsApp veya DM yönlendirmesi, kullanıcıyı platform dışına çekme sinyali üretiyor.");
   }
 
   if (docs >= 3) {
-    lockedNotes.push("Kimlik veya kart gorseli talebi var. Bu, dolandiricilik vakalarinda sik gorulen yuksek risk gostergesi.");
+    lockedNotes.push("Kimlik veya kart görseli talebi var. Bu, dolandırıcılık vakalarında sık görülen yüksek risk göstergesi.");
   }
 
   if (urgency >= 4) {
-    lockedNotes.push("Dil tonu acele ve baski iceriyor. Bu, phishing ve sahte tahsilat senaryolarinda sik gorulur.");
+    lockedNotes.push("Dil tonu acele ve baskı içeriyor. Bu, phishing ve sahte tahsilat senaryolarında sık görülür.");
   }
 
   let summaryValue = "Düşük risk sinyali";
@@ -736,7 +736,7 @@ const getCyberState = () => {
   }
 
   if (!lockedNotes.length) {
-    lockedNotes.push("URL tarafinda ek risk sinyali yakalanmadi; karar yine alan adi, talep tipi ve yonlendirme baglamiyla okunmali.");
+    lockedNotes.push("URL tarafında ek risk sinyali yakalanmadı; karar yine alan adı, talep tipi ve yönlendirme bağlamıyla okunmalı.");
   }
 
   return {
@@ -744,10 +744,10 @@ const getCyberState = () => {
     summaryClass,
     intro: `${parsedUrl.hostname} için oluşturulan ön tarama skoru ${formatNumber(risk, 0)} risk puanı üretti. Bu sonuç görünür URL ve davranış sinyallerine dayanıyor.`,
     metrics: [
-      { label: "Risk puani", value: `${formatNumber(risk, 0)} / 20+` },
-      { label: "Alan adi", value: parsedUrl.hostname },
+      { label: "Risk puanı", value: `${formatNumber(risk, 0)} / 20+` },
+      { label: "Alan adı", value: parsedUrl.hostname },
       { label: "Protokol", value: parsedUrl.protocol.replace(":", "").toUpperCase() },
-      { label: "Parametre sayisi", value: `${queryParamCount}` },
+      { label: "Parametre sayısı", value: `${queryParamCount}` },
     ],
     visibleItems: visibleNotes.slice(0, 4),
     lockedItems: lockedNotes.slice(0, 4),
