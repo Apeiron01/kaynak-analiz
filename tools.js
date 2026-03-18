@@ -1,4 +1,4 @@
-const formatTry = (value) =>
+﻿const formatTry = (value) =>
   new Intl.NumberFormat("tr-TR", {
     style: "currency",
     currency: "TRY",
@@ -87,7 +87,7 @@ const attachToolAction = (buttonId, resultId, loadingText, handler) => {
 const calculatorAppCta = {
   extraCtaText: "Daha fazla hesaplama aracina mi ihtiyaciniz var? Marjory uygulamasini indirerek ek hesaplara hizli ulasabilirsiniz.",
   extraCtaHref: "https://play.google.com/store/apps/details?id=com.marjory.app",
-  extraCtaButtonText: "Uygulamayi Indir",
+  extraCtaButtonText: "Uygulamayı İndir",
 };
 
 const calculatorResultIds = new Set([
@@ -125,7 +125,7 @@ const renderToolResult = ({
   ctaHref,
   extraCtaText = "",
   extraCtaHref = "",
-  extraCtaButtonText = "Uygulamayi Indir",
+  extraCtaButtonText = "Uygulamayı İndir",
 }) => {
   if (!container) {
     return;
@@ -254,57 +254,57 @@ const getRoasState = () => {
 
   const visibleNotes = [];
   if (netProfit < 0) {
-    visibleNotes.push("Net tabloda zarar gorunuyor. Yuksek ROAS tek basina saglikli bir tablo kurmuyor.");
+    visibleNotes.push("Net tabloda zarar görünüyor. Yüksek ROAS tek başına sağlıklı bir tablo kurmuyor.");
   } else {
-    visibleNotes.push("Net tabloda kar kaliyor. Olcekleme oncesi marji korumak kritik.");
+    visibleNotes.push("Net tabloda kâr kalıyor. Ölçekleme öncesi marjı korumak kritik.");
   }
 
   if (margin < 8) {
-    visibleNotes.push("Kar marji dar. Reklam buyurken kucuk sapmalar bile karliligi silebilir.");
+    visibleNotes.push("Kâr marjı dar. Reklam büyürken küçük sapmalar bile kârlılığı silebilir.");
   } else if (margin < 18) {
-    visibleNotes.push("Marj orta seviyede. Kanal bazli optimizasyonla rahatlama alani var.");
+    visibleNotes.push("Marj orta seviyede. Kanal bazlı optimizasyonla rahatlama alanı var.");
   } else {
-    visibleNotes.push("Marj guvenli bolgede. Butce artisi oncesi olcek disiplini kurmak mantikli.");
+    visibleNotes.push("Marj güvenli bölgede. Bütçe artışı öncesi ölçek disiplini kurmak mantıklı.");
   }
 
   if (actualRoas < 2) {
-    visibleNotes.push("ROAS dusuk. Teklif, kreatif ve urun katki payi birlikte ele alinmali.");
+    visibleNotes.push("ROAS düşük. Teklif, kreatif ve ürün katkı payı birlikte ele alınmalı.");
   } else if (actualRoas < 3.5) {
-    visibleNotes.push("ROAS fena degil ama maliyet tarafi siki yonetilmezse kar kolay erir.");
+    visibleNotes.push("ROAS fena değil ama maliyet tarafı sıkı yönetilmezse kâr kolay erir.");
   } else {
-    visibleNotes.push("ROAS guclu gorunuyor. Asil soru bunun surdurulebilir kar uretip uretmedigi.");
+    visibleNotes.push("ROAS güçlü görünüyor. Asıl soru bunun sürdürülebilir kâr üretip üretmediği.");
   }
 
   if (adShare > 30) {
-    visibleNotes.push("Reklam payi ciroya gore cok yuksek. Olcekleme oncesi teklif yapisi ve sepet katkisi yeniden bakilmali.");
+    visibleNotes.push("Reklam payı ciroya göre çok yüksek. Ölçekleme öncesi teklif yapısı ve sepet katkısı yeniden bakılmalı.");
   } else if (adShare > 18) {
-    visibleNotes.push("Reklam gideri ciro tarafinda hissedilir baski kuruyor. Karlilik oncesi dikkatli buyume gerekir.");
+    visibleNotes.push("Reklam gideri ciro tarafında hissedilir baskı kuruyor. Kârlılık öncesi dikkatli büyüme gerekir.");
   } else {
-    visibleNotes.push("Reklam payi kontrollu gorunuyor; asil belirleyici urun ve operasyon maliyetleri oluyor.");
+    visibleNotes.push("Reklam payı kontrollü görünüyor; asıl belirleyici ürün ve operasyon maliyetleri oluyor.");
   }
 
   const advancedNotes = [
-    `Basabas ROAS esigi yaklasik ${formatNumber(breakevenRoas, 2)}. Bunun alti kampanya karliligini hizla asindirir.`,
-    `Basabas reklam tavani yaklasik ${formatTry(breakEvenAdBudget)} seviyesinde. Bunun ustu kari eritmeye baslar.`,
-    `Maksimum guvenli edinme baskisi yaklasik ${formatTry(maxCpa)} seviyesinde. Kanal bazli CPO bundan sapiyorsa butce revizyonu gerekir.`,
-    `En buyuk kar sizintilari: ${leaks.map((item) => `${item.label} (${formatTry(item.value)})`).join(", ")}.`,
+    `Başabaş ROAS eşiği yaklaşık ${formatNumber(breakevenRoas, 2)}. Bunun altı kampanya kârlılığını hızla aşındırır.`,
+    `Başabaş reklam tavanı yaklaşık ${formatTry(breakEvenAdBudget)} seviyesinde. Bunun üstü kârı eritmeye başlar.`,
+    `Maksimum güvenli edinme baskısı yaklaşık ${formatTry(maxCpa)} seviyesinde. Kanal bazlı CPO bundan sapıyorsa bütçe revizyonu gerekir.`,
+    `En büyük kâr sızıntıları: ${leaks.map((item) => `${item.label} (${formatTry(item.value)})`).join(", ")}.`,
     margin < 10
-      ? "Olcekleme yerine once teklif, urun sepeti ve operasyon maliyetlerini optimize etmeniz gerekir."
-      : "Olcekleme mumkun, ancak kanal bazli karlilik kirilimi ve iade etkisiyle birlikte izlenmelidir.",
+      ? "Ölçekleme yerine önce teklif, ürün sepeti ve operasyon maliyetlerini optimize etmeniz gerekir."
+      : "Ölçekleme mümkün, ancak kanal bazlı kârlılık kırılımı ve iade etkisiyle birlikte izlenmelidir.",
     returnRate > 5
-      ? "Iade orani yukselmis gorunuyor. Kreatif vaatleri ve urun sayfasi beklentisini hizalamak kritik."
-      : "Iade tarafi su an kontrol altinda; asil baski reklam veya urun maliyetinde yogunlasiyor.",
+      ? "İade oranı yükselmiş görünüyor. Kreatif vaatleri ve ürün sayfası beklentisini hizalamak kritik."
+      : "İade tarafı şu an kontrol altında; asıl baskı reklam veya ürün maliyetinde yoğunlaşıyor.",
   ];
 
   return {
     summaryClass: netProfit >= 0 ? "is-good" : "is-alert",
-    summaryValue: netProfit >= 0 ? "Karlilik var" : "Kritik kar baskisi",
-    intro: `Ciro ${formatTry(revenue)}, reklam harcamasi ${formatTry(adSpend)} ve tum temel giderler birlikte ele alindiginda net sonuc ${formatTry(netProfit)} cikiyor.`,
+    summaryValue: netProfit >= 0 ? "Kârlılık var" : "Kritik kâr baskısı",
+    intro: `Ciro ${formatTry(revenue)}, reklam harcaması ${formatTry(adSpend)} ve tüm temel giderler birlikte ele alındığında net sonuç ${formatTry(netProfit)} çıkıyor.`,
     metrics: [
-      { label: "Gerceklesen ROAS", value: formatNumber(actualRoas, 2) },
-      { label: "Net kar", value: formatTry(netProfit) },
-      { label: "Kar marji", value: `%${formatNumber(margin, 1)}` },
-      { label: "Reklam payi", value: `%${formatNumber(adShare, 1)}` },
+      { label: "Gerçekleşen ROAS", value: formatNumber(actualRoas, 2) },
+      { label: "Net kâr", value: formatTry(netProfit) },
+      { label: "Kâr marjı", value: `%${formatNumber(margin, 1)}` },
+      { label: "Reklam payı", value: `%${formatNumber(adShare, 1)}` },
     ],
     visibleItems: visibleNotes.slice(0, 4),
     lockedItems: advancedNotes.slice(0, 5),
@@ -386,14 +386,14 @@ const getSeoState = () => {
     score -= 14;
     visibleNotes.push("Mobil hiz iyilestirmeye acik. 3.5 saniye ustu kullanici kaybini artirir.");
   } else {
-    visibleNotes.push("Mobil hiz temel esik icinde gorunuyor.");
+    visibleNotes.push("Mobil hız temel eşik içinde görünüyor.");
   }
 
   if (indexedPages < 10) {
     score -= 16;
-    criticalIssues.push("Indeksli sayfa gorunurlugu zayif. Icerik ve teknik kesif akisi yeniden ele alinmali.");
+    criticalIssues.push("İndeksli sayfa görünürlüğü zayıf. İçerik ve teknik keşif akışı yeniden ele alınmalı.");
   } else {
-    visibleNotes.push(`Indeks tarafinda en az ${formatNumber(indexedPages, 0)} sayfalik gorunurluk sinyali var.`);
+    visibleNotes.push(`İndeks tarafında en az ${formatNumber(indexedPages, 0)} sayfalık görünürlük sinyali var.`);
   }
 
   if (brokenPages > 5) {
@@ -406,17 +406,17 @@ const getSeoState = () => {
 
   if (titleCoverage < 70) {
     score -= 18;
-    criticalIssues.push("Baslik ve meta kapsama orani dusuk. Arama gorunurlugu sistematik bicimde kaciyor.");
+    criticalIssues.push("Başlık ve meta kapsama oranı düşük. Arama görünürlüğü sistematik biçimde kaçıyor.");
   } else if (titleCoverage < 90) {
     score -= 8;
     visibleNotes.push("Baslik ve meta kapsama orta seviyede. Sablon duzeni toparlanirsa hizli kazanim gelir.");
   } else {
-    visibleNotes.push("Baslik ve meta kapsama guclu gorunuyor.");
+    visibleNotes.push("Başlık ve meta kapsama güçlü görünüyor.");
   }
 
   if (schema === "none") {
     score -= 10;
-    criticalIssues.push("Schema kullanimi yok. SERP gorunurlugu icin yapisal veri katmani eksik.");
+    criticalIssues.push("Schema kullanımı yok. SERP görünürlüğü için yapısal veri katmanı eksik.");
   } else if (schema === "partial") {
     score -= 4;
     visibleNotes.push("Schema kismi. Kritik sayfalarda genisletme alani var.");
@@ -429,48 +429,48 @@ const getSeoState = () => {
 
   if (https === "no") {
     score -= 22;
-    criticalIssues.push("HTTPS aktif degil. Bu dogrudan guven ve SEO problemi yaratir.");
+    criticalIssues.push("HTTPS aktif değil. Bu doğrudan güven ve SEO problemi yaratır.");
   }
 
   if (usesPunycode) {
     score -= 8;
-    criticalIssues.push("Alan adinda punycode gorunuyor. Marka guveni ve kullanici algisi ayrica kontrol edilmeli.");
+    criticalIssues.push("Alan adında punycode görünüyor. Marka güveni ve kullanıcı algısı ayrıca kontrol edilmeli.");
   }
 
   if (hostname.includes("-")) {
-    visibleNotes.push("Alan adinda tire kullanimi var. Markalasma ve hatirlanabilirlik tarafi ayrica degerlendirilmeli.");
+    visibleNotes.push("Alan adında tire kullanımı var. Markalaşma ve hatırlanabilirlik tarafı ayrıca değerlendirilmelidir.");
   }
 
   if (hostname.split(".").length > 3) {
-    visibleNotes.push("Alt alan yapisi karmasik gorunuyor. Teknik yonlendirme zinciri kontrol edilmeli.");
+    visibleNotes.push("Alt alan yapısı karmaşık görünüyor. Teknik yönlendirme zinciri kontrol edilmeli.");
   }
 
   if (hasPath) {
-    visibleNotes.push("Analize ana alan adi yerine tam URL girildi. Audit tarafinda sayfa tipi bazli ayri okuma gerekebilir.");
+    visibleNotes.push("Analize ana alan adı yerine tam URL girildi. Audit tarafında sayfa tipi bazlı ayrı okuma gerekebilir.");
   }
 
   if (hostname.length > 28) {
-    visibleNotes.push("Alan adi uzun gorunuyor. Arama sonucu tiklanabilirligi ve markalasma acisindan ayrica degerlendirilmeli.");
+    visibleNotes.push("Alan adı uzun görünüyor. Arama sonucu tıklanabilirliği ve markalaşma açısından ayrıca değerlendirilmelidir.");
   }
 
   score = Math.max(12, Math.min(100, score));
 
-  const summaryValue = score >= 80 ? "Saglam temel" : score >= 55 ? "Gelistirilebilir yapi" : "Teknik aciklar yuksek";
+  const summaryValue = score >= 80 ? "Sağlam temel" : score >= 55 ? "Geliştirilebilir yapı" : "Teknik açıklar yüksek";
   const summaryClass = score >= 80 ? "is-good" : score >= 55 ? "is-mid" : "is-alert";
 
   if (!criticalIssues.length) {
-    criticalIssues.push("Teknik tarafta acik bir kritik hata sinyali yok; yine de sayfa tipi bazli audit ayri okunabilir.");
+    criticalIssues.push("Teknik tarafta açık bir kritik hata sinyali yok; yine de sayfa tipi bazlı audit ayrı okunabilir.");
   }
 
   return {
     summaryValue,
     summaryClass,
-    intro: `${hostname} icin olusturulan teknik hazirlik skoru ${formatNumber(score, 0)}/100 seviyesinde. Bu skor tarama, hiz ve gorunurluk sinyallerinin birlesimidir.`,
+    intro: `${hostname} için oluşturulan teknik hazırlık skoru ${formatNumber(score, 0)}/100 seviyesinde. Bu skor tarama, hız ve görünürlük sinyallerinin birleşimidir.`,
     metrics: [
-      { label: "SEO hazirlik skoru", value: `${formatNumber(score, 0)} / 100` },
-      { label: "Mobil yuklenme", value: `${formatNumber(loadTime, 1)} sn` },
+      { label: "SEO hazırlık skoru", value: `${formatNumber(score, 0)} / 100` },
+      { label: "Mobil yüklenme", value: `${formatNumber(loadTime, 1)} sn` },
       { label: "Meta kapsama", value: `%${formatNumber(titleCoverage, 0)}` },
-      { label: "Indeks sagligi", value: indexedPages > 0 ? `%${formatNumber(indexHealth, 0)}` : "Veri yok" },
+      { label: "İndeks sağlığı", value: indexedPages > 0 ? `%${formatNumber(indexHealth, 0)}` : "Veri yok" },
     ],
     visibleItems: visibleNotes.slice(0, 4),
     lockedItems: criticalIssues.slice(0, 5),
@@ -536,7 +536,7 @@ const getAcademyState = () => {
   if (score <= 8) {
     level = "Temel seviye";
     summaryClass = "is-alert";
-    nextTrack = "Once temel magaza ve reklam mantigi oturmali.";
+    nextTrack = "Önce temel mağaza ve reklam mantığı oturmalı.";
   } else if (score <= 16) {
     level = "Gelisen seviye";
     summaryClass = "is-mid";
@@ -568,15 +568,15 @@ const getAcademyState = () => {
   }
 
   const strengths = [];
-  if (values[0] >= 4) strengths.push("Magaza veya operasyon temeliniz hazir.");
+  if (values[0] >= 4) strengths.push("Mağaza veya operasyon temeliniz hazır.");
   if (values[1] >= 4) strengths.push("Reklam panelinde temel kararlari okuyabiliyorsunuz.");
   if (values[2] >= 4) strengths.push("Metrik okuma farkindaliginiz olusmus.");
   if (values[3] >= 4) strengths.push("Kreatif tekrar disiplini kurulmus.");
-  if (values[4] >= 4) strengths.push("Urun ve teklif yapiniz duzenli gorunuyor.");
-  if (values[5] >= 4) strengths.push("Sureklilik tarafi guclu gorunuyor.");
+  if (values[4] >= 4) strengths.push("Ürün ve teklif yapınız düzenli görünüyor.");
+  if (values[5] >= 4) strengths.push("Süreklilik tarafı güçlü görünüyor.");
 
   if (strengths.length === 0) {
-    strengths.push("Baslangic seviyesi icin dogru yerdesiniz; en buyuk avantajiniz temel akis kurabilecek olmaniz.");
+    strengths.push("Başlangıç seviyesi için doğru yerdesiniz; en büyük avantajınız temel akış kurabilecek olmanız.");
   }
 
   return {
@@ -585,20 +585,20 @@ const getAcademyState = () => {
     intro: `Toplam skorunuz ${formatNumber(score, 0)}/24. ${nextTrack}`,
     metrics: [
       { label: "Seviye skoru", value: `${formatNumber(score, 0)} / 24` },
-      { label: "Hazir olunan katman", value: level },
-      { label: "Onerilen yon", value: score <= 16 ? "Temel + uygulama" : "Uygulama + optimizasyon" },
-      { label: "Ilk oneri", value: recommendedProgram },
+      { label: "Hazır olunan katman", value: level },
+      { label: "Önerilen yön", value: score <= 16 ? "Temel + uygulama" : "Uygulama + optimizasyon" },
+      { label: "İlk öneri", value: recommendedProgram },
     ],
     visibleItems: strengths.slice(0, 3),
     lockedItems: [
-      `Eksik oldugunuz ilk 3 konu: ${gaps.slice(0, 3).join(", ")}.`,
-      `Ilk bakista size en yakin baslangic programi: ${recommendedProgram}.`,
+      `Eksik olduğunuz ilk 3 konu: ${gaps.slice(0, 3).join(", ")}.`,
+      `İlk bakışta size en yakın başlangıç programı: ${recommendedProgram}.`,
       score <= 8
-        ? "Onerilen mufredat sirasi: magaza temeli, icerik dili, reklam mantigi, temel metrikler."
+        ? "Önerilen müfredat sırası: mağaza temeli, içerik dili, reklam mantığı, temel metrikler."
         : score <= 16
-        ? "Onerilen mufredat sirasi: katalog duzeni, olcumleme, kreatif test, reklam optimizasyonu."
-        : "Onerilen mufredat sirasi: veri okuma, teklif optimizasyonu, kreatif rotasyonu, olcekleme disiplini.",
-      "Canli ders ve tekrar izlenebilir modul akisi bu seviyeye gore kisisellestirilir.",
+        ? "Önerilen müfredat sırası: katalog düzeni, ölçümleme, kreatif test, reklam optimizasyonu."
+        : "Önerilen müfredat sırası: veri okuma, teklif optimizasyonu, kreatif rotasyonu, ölçekleme disiplini.",
+      "Canlı ders ve tekrar izlenebilir modül akışı bu seviyeye göre kişiselleştirilir.",
     ],
   };
 };
@@ -652,9 +652,9 @@ const getCyberState = () => {
 
   if (parsedUrl.protocol !== "https:") {
     risk += 3;
-    lockedNotes.push("Baglanti HTTPS kullanmiyor. Bu, guven sinyalini dogrudan zayiflatiyor.");
+    lockedNotes.push("Bağlantı HTTPS kullanmıyor. Bu, güven sinyalini doğrudan zayıflatıyor.");
   } else {
-    visibleNotes.push("Baglanti HTTPS kullaniyor; bu tek basina guvenli oldugu anlamina gelmez.");
+    visibleNotes.push("Bağlantı HTTPS kullanıyor; bu tek başına güvenli olduğu anlamına gelmez.");
   }
 
   if (shorteners.has(parsedUrl.hostname.toLowerCase())) {
@@ -674,7 +674,7 @@ const getCyberState = () => {
 
   if (parsedUrl.hostname.includes("xn--")) {
     risk += 2;
-    lockedNotes.push("Alan adinda punycode kullanimi var. Taklit veya maskeleme ihtimali ayrica degerlendirilmeli.");
+    lockedNotes.push("Alan adında punycode kullanımı var. Taklit veya maskeleme ihtimali ayrıca değerlendirilmelidir.");
   }
 
   if (parsedUrl.username || parsedUrl.password) {
@@ -684,7 +684,7 @@ const getCyberState = () => {
 
   if (suspiciousKeywordPattern.test(urlFingerprint)) {
     risk += 2;
-    lockedNotes.push("URL yapisi giris, dogrulama veya odeme baskisi kuran anahtar kelimeler iceriyor.");
+    lockedNotes.push("URL yapısı giriş, doğrulama veya ödeme baskısı kuran anahtar kelimeler içeriyor.");
   }
 
   if (riskyTlds.some((suffix) => parsedUrl.hostname.endsWith(suffix))) {
@@ -694,12 +694,12 @@ const getCyberState = () => {
 
   if (parsedUrl.hostname.split(".").length > 3) {
     risk += 1;
-    visibleNotes.push("Alan adi yapisi fazla katmanli. Yonlendirme zinciri ayrica kontrol edilmeli.");
+    visibleNotes.push("Alan adı yapısı fazla katmanlı. Yönlendirme zinciri ayrıca kontrol edilmeli.");
   }
 
   if (parsedUrl.pathname.length > 48 || parsedUrl.search.length > 70) {
     risk += 1;
-    visibleNotes.push("URL yapisi normalden karmasik gorunuyor.");
+    visibleNotes.push("URL yapısı normalden karmaşık görünüyor.");
   }
 
   if (queryParamCount >= 5) {
@@ -723,11 +723,11 @@ const getCyberState = () => {
     lockedNotes.push("Dil tonu acele ve baski iceriyor. Bu, phishing ve sahte tahsilat senaryolarinda sik gorulur.");
   }
 
-  let summaryValue = "Dusuk risk sinyali";
+  let summaryValue = "Düşük risk sinyali";
   let summaryClass = "is-good";
 
   if (risk >= 12) {
-    summaryValue = "Yuksek risk sinyali";
+    summaryValue = "Yüksek risk sinyali";
     summaryClass = "is-alert";
   } else if (risk >= 6) {
     summaryValue = "Orta risk sinyali";
@@ -741,7 +741,7 @@ const getCyberState = () => {
   return {
     summaryValue,
     summaryClass,
-    intro: `${parsedUrl.hostname} icin olusturulan on tarama skoru ${formatNumber(risk, 0)} risk puani uretti. Bu sonuc gorunur URL ve davranis sinyallerine dayaniyor.`,
+    intro: `${parsedUrl.hostname} için oluşturulan ön tarama skoru ${formatNumber(risk, 0)} risk puanı üretti. Bu sonuç görünür URL ve davranış sinyallerine dayanıyor.`,
     metrics: [
       { label: "Risk puani", value: `${formatNumber(risk, 0)} / 20+` },
       { label: "Alan adi", value: parsedUrl.hostname },
@@ -843,37 +843,37 @@ const getDiscountState = () => {
   const savings = basePrice - discountedPrice;
   const calculationMode =
     originalPrice <= 0
-      ? "Indirimliden indirimsiz fiyat"
+      ? "İndirimliden indirimsiz fiyat"
       : salePrice <= 0
-      ? "Indirimsizden indirimli fiyat"
-      : "Iki fiyat arasindan oran";
+      ? "İndirimsizden indirimli fiyat"
+      : "İki fiyat arasından oran";
 
   return {
-    summaryValue: discountPercent >= 40 ? "Guclu kampanya" : discountPercent >= 15 ? "Standart indirim" : "Dusuk indirim",
+    summaryValue: discountPercent >= 40 ? "Güçlü kampanya" : discountPercent >= 15 ? "Standart indirim" : "Düşük indirim",
     summaryClass: discountPercent >= 40 ? "is-good" : discountPercent >= 15 ? "is-mid" : "is-alert",
-    intro: `Indirimsiz fiyat ${formatTry(basePrice)}, indirimli fiyat ${formatTry(discountedPrice)} ve hesaplanan oran %${formatNumber(discountPercent, 1)}.`,
+    intro: `İndirimsiz fiyat ${formatTry(basePrice)}, indirimli fiyat ${formatTry(discountedPrice)} ve hesaplanan oran %${formatNumber(discountPercent, 1)}.`,
     metrics: [
-      { label: "Indirimsiz fiyat", value: formatTry(basePrice) },
-      { label: "Indirimli fiyat", value: formatTry(discountedPrice) },
-      { label: "Indirim orani", value: `%${formatNumber(discountPercent, 1)}` },
+      { label: "İndirimsiz fiyat", value: formatTry(basePrice) },
+      { label: "İndirimli fiyat", value: formatTry(discountedPrice) },
+      { label: "İndirim oranı", value: `%${formatNumber(discountPercent, 1)}` },
       { label: "Tasarruf", value: formatTry(savings) },
     ],
     visibleItems: [
-      `Toplam indirim tutari ${formatTry(savings)} seviyesinde.`,
+      `Toplam indirim tutarı ${formatTry(savings)} seviyesinde.`,
       `Hesap modu: ${calculationMode}.`,
       discountPercent >= 40
-        ? "Kampanya algisi guclu gorunuyor; marj tarafini ayrica kontrol etmek gerekir."
-        : "Fiyat farki kullaniciya gorunur, ancak teklif mesaji ile desteklenirse daha iyi calisir.",
+        ? "Kampanya algısı güçlü görünüyor; marj tarafını ayrıca kontrol etmek gerekir."
+        : "Fiyat farkı kullanıcıya görünür, ancak teklif mesajı ile desteklenirse daha iyi çalışır.",
       originalPrice <= 0
-        ? "Indirimli fiyattan indirimsiz fiyat geriye dogru hesaplandi."
+        ? "İndirimli fiyattan indirimsiz fiyat geriye doğru hesaplandı."
         : salePrice <= 0
-        ? "Indirimsiz fiyat ve oran uzerinden yeni fiyat hesaplandi."
-        : "Iki fiyat uzerinden indirim orani netlesti.",
+        ? "İndirimsiz fiyat ve oran üzerinden yeni fiyat hesaplandı."
+        : "İki fiyat üzerinden indirim oranı netleşti.",
     ],
     lockedItems: [
-      "Kademeli kampanya onerisi ve esik fiyat yorumu tam analizde acilir.",
-      "Urun marji ve reklam maliyeti ile birlikte degerlendirilince daha dogru karar verilir.",
-      "Ayni teklif icin psikolojik fiyat kirilimi ve paketleme onerileri ayri raporda sunulur.",
+      "Kademeli kampanya önerisi ve eşik fiyat yorumu tam analizde açılır.",
+      "Ürün marjı ve reklam maliyeti ile birlikte değerlendirilince daha doğru karar verilir.",
+      "Aynı teklif için psikolojik fiyat kırılımı ve paketleme önerileri ayrı raporda sunulur.",
     ],
   };
 };
@@ -965,25 +965,25 @@ const getPercentageState = () => {
   if (mode === "part") {
     const result = (valueA * valueB) / 100;
     return {
-      summaryValue: "Yuzde hesabi hazir",
+      summaryValue: "Yüzde hesabı hazır",
       summaryClass: "is-good",
-      intro: `${formatNumber(valueA, 2)} sayisinin %${formatNumber(valueB, 2)} degeri ${formatNumber(result, 2)} olarak hesaplandi.`,
+      intro: `${formatNumber(valueA, 2)} sayısının %${formatNumber(valueB, 2)} değeri ${formatNumber(result, 2)} olarak hesaplandı.`,
       metrics: [
-        { label: "Ana sayi", value: formatNumber(valueA, 2) },
-        { label: "Yuzde orani", value: `%${formatNumber(valueB, 2)}` },
-        { label: "Sonuc", value: formatNumber(result, 2) },
+        { label: "Ana sayı", value: formatNumber(valueA, 2) },
+        { label: "Yüzde oranı", value: `%${formatNumber(valueB, 2)}` },
+        { label: "Sonuç", value: formatNumber(result, 2) },
       ],
       visibleItems: [
-        `Hesap modu: bir sayinin yuzdesi.`,
-        `Sonuc dogrudan ${formatNumber(result, 2)} seviyesinde.`,
+        `Hesap modu: bir sayının yüzdesi.`,
+        `Sonuç doğrudan ${formatNumber(result, 2)} seviyesinde.`,
         valueB >= 50
-          ? "Yuzde orani yuksek oldugu icin sonuc ana sayinin buyuk kismini temsil ediyor."
-          : "Yuzde orani orta veya dusuk oldugu icin sonuc ana sayinin bir alt dilimini gosteriyor.",
+          ? "Yüzde oranı yüksek olduğu için sonuç ana sayının büyük kısmını temsil ediyor."
+          : "Yüzde oranı orta veya düşük olduğu için sonuç ana sayının bir alt dilimini gösteriyor.",
       ],
       lockedItems: [
-        "Fiyat kirilimi ve teklif dili yorumu detayli analizde acilir.",
-        "Bu oran kampanya, zam veya indirim kurgusuna nasil doner ayrica planlanir.",
-        "Ticari sayfalarda psikolojik esik kontrolu ayrica yorumlanir.",
+        "Fiyat kırılımı ve teklif dili yorumu detaylı analizde açılır.",
+        "Bu oran kampanya, zam veya indirim kurgusuna nasıl döner ayrıca planlanır.",
+        "Ticari sayfalarda psikolojik eşik kontrolü ayrıca yorumlanır.",
       ],
     };
   }
@@ -991,25 +991,25 @@ const getPercentageState = () => {
   if (mode === "ratio") {
     const result = valueB === 0 ? 0 : (valueA / valueB) * 100;
     return {
-      summaryValue: "Oran hesabi hazir",
+      summaryValue: "Oran hesabı hazır",
       summaryClass: result <= 100 ? "is-good" : "is-mid",
-      intro: `${formatNumber(valueA, 2)} degeri, ${formatNumber(valueB, 2)} sayisinin yaklasik %${formatNumber(result, 2)} karsiligina denk geliyor.`,
+      intro: `${formatNumber(valueA, 2)} değeri, ${formatNumber(valueB, 2)} sayısının yaklaşık %${formatNumber(result, 2)} karşılığına denk geliyor.`,
       metrics: [
-        { label: "Ilk deger", value: formatNumber(valueA, 2) },
-        { label: "Ikinci deger", value: formatNumber(valueB, 2) },
-        { label: "Yuzde sonucu", value: `%${formatNumber(result, 2)}` },
+        { label: "İlk değer", value: formatNumber(valueA, 2) },
+        { label: "İkinci değer", value: formatNumber(valueB, 2) },
+        { label: "Yüzde sonucu", value: `%${formatNumber(result, 2)}` },
       ],
       visibleItems: [
-        "Hesap modu: bir sayi diger sayinin yuzde kaci.",
+        "Hesap modu: bir sayı diğer sayının yüzde kaçı.",
         result > 100
-          ? "Ilk deger ikinci degerden buyuk oldugu icin oran %100'u asti."
-          : "Ilk deger ikinci degerin altinda kaldigi icin oran %100'un altinda.",
-        "Oran hesabi teklif, tamamlama ve hedef takibinde dogrudan kullanilabilir.",
+          ? "İlk değer ikinci değerden büyük olduğu için oran %100'ü aştı."
+          : "İlk değer ikinci değerin altında kaldığı için oran %100'ün altında.",
+        "Oran hesabı teklif, tamamlama ve hedef takibinde doğrudan kullanılabilir.",
       ],
       lockedItems: [
-        "Oran yorumunun satis hedefiyle eslestirilmis surumu detayli katmanda acilir.",
-        "Yuzde sonucunun kampanya ya da fiyatlandirma etkisi ayrica planlanir.",
-        "Hedef tamamlama veya KPI esik yorumu profesyonel katmanda acilir.",
+        "Oran yorumunun satış hedefiyle eşleştirilmiş sürümü detaylı katmanda açılır.",
+        "Yüzde sonucunun kampanya ya da fiyatlandırma etkisi ayrıca planlanır.",
+        "Hedef tamamlama veya KPI eşik yorumu profesyonel katmanda açılır.",
       ],
     };
   }
@@ -1018,25 +1018,25 @@ const getPercentageState = () => {
   const result = direction === "decrease" ? valueA - delta : valueA + delta;
 
   return {
-    summaryValue: direction === "decrease" ? "Azalis hesabi hazir" : "Artis hesabi hazir",
+    summaryValue: direction === "decrease" ? "Azalış hesabı hazır" : "Artış hesabı hazır",
     summaryClass: "is-good",
-    intro: `${formatNumber(valueA, 2)} degeri, %${formatNumber(valueB, 2)} ${direction === "decrease" ? "azalis" : "artis"} ile ${formatNumber(result, 2)} oluyor.`,
+    intro: `${formatNumber(valueA, 2)} değeri, %${formatNumber(valueB, 2)} ${direction === "decrease" ? "azalış" : "artış"} ile ${formatNumber(result, 2)} oluyor.`,
     metrics: [
-      { label: "Baslangic", value: formatNumber(valueA, 2) },
-      { label: "Degisim", value: `%${formatNumber(valueB, 2)}` },
-      { label: "Yeni deger", value: formatNumber(result, 2) },
+      { label: "Başlangıç", value: formatNumber(valueA, 2) },
+      { label: "Değişim", value: `%${formatNumber(valueB, 2)}` },
+      { label: "Yeni değer", value: formatNumber(result, 2) },
     ],
     visibleItems: [
-      `Hesap modu: yuzde ${direction === "decrease" ? "azalis" : "artis"}.`,
-      `Sayisal fark ${formatNumber(delta, 2)} seviyesinde.`,
+      `Hesap modu: yüzde ${direction === "decrease" ? "azalış" : "artış"}.`,
+      `Sayısal fark ${formatNumber(delta, 2)} seviyesinde.`,
       direction === "decrease"
-        ? "Bu cikti indirim, kayip veya dusus hesaplarinda kullanilabilir."
-        : "Bu cikti zam, artis veya hedef buyume hesaplarinda kullanilabilir.",
+        ? "Bu çıktı indirim, kayıp veya düşüş hesaplarında kullanılabilir."
+        : "Bu çıktı zam, artış veya hedef büyüme hesaplarında kullanılabilir.",
     ],
     lockedItems: [
-      "Yeni degerin fiyat algisina etkisi detayli yorum katmaninda acilir.",
-      "Oran buyudukce talep etkisi ve donusum farki ayrica degerlendirilir.",
-      "Ticari senaryolarda kar marji uyumu ek katmanda incelenir.",
+      "Yeni değerin fiyat algısına etkisi detaylı yorum katmanında açılır.",
+      "Oran büyüdükçe talep etkisi ve dönüşüm farkı ayrıca değerlendirilir.",
+      "Ticari senaryolarda kâr marjı uyumu ek katmanda incelenir.",
     ],
   };
 };
@@ -1050,22 +1050,22 @@ const analyzePercentage = (result) => {
       summaryLabel: "Durum",
       summaryValue: "Veri bekleniyor",
       summaryClass: "is-mid",
-      intro: "Yuzde hesabi icin iki alan doldurun. Arac; bir sayinin yuzdesi, oran veya artis-azalis hesabini yapar.",
+      intro: "Yüzde hesabı için iki alan doldurun. Araç; bir sayının yüzdesi, oran veya artış-azalış hesabını yapar.",
       metrics: [],
       visibleTitle: "Ne hesaplar?",
       visibleItems: [
-        "Bir sayinin yuzdesini bulur.",
-        "Bir sayinin diger sayinin yuzde kaci oldugunu hesaplar.",
-        "Yuzde artis ve azalis sonucunu netlestirir.",
+        "Bir sayının yüzdesini bulur.",
+        "Bir sayının diğer sayının yüzde kaçı olduğunu hesaplar.",
+        "Yüzde artış ve azalış sonucunu netleştirir.",
       ],
-      lockedTitle: "Kilitli yorum katmani",
+      lockedTitle: "Kilitli yorum katmanı",
       lockedItems: [
         "Fiyatlama ve teklif etkisi",
         "Hedef tamamlama yorumu",
-        "Psikolojik esik kontrolu",
+        "Psikolojik eşik kontrolü",
       ],
-      ctaLabel: "Lumina Danismanlik",
-      ctaText: "Yuzde sonucu ticari bir karara donusecekse detayli yorum katmanina gecilebilir.",
+      ctaLabel: "Lumina Danışmanlık",
+      ctaText: "Yüzde sonucu ticari bir karara dönüşecekse detaylı yorum katmanına geçilebilir.",
       ctaHref: "index.html#iletisim",
     });
     return;
@@ -1073,17 +1073,17 @@ const analyzePercentage = (result) => {
 
   renderToolResult({
     container: result,
-    summaryLabel: "Hesap ozeti",
+    summaryLabel: "Hesap özeti",
     summaryValue: state.summaryValue,
     summaryClass: state.summaryClass,
     intro: state.intro,
     metrics: state.metrics,
-    visibleTitle: "Acik sonuclar",
+    visibleTitle: "Açık sonuçlar",
     visibleItems: state.visibleItems,
-    lockedTitle: "Kilitli yorum katmani",
+    lockedTitle: "Kilitli yorum katmanı",
     lockedItems: state.lockedItems,
     ctaLabel: "Lumina Lab Pro",
-    ctaText: "Sonucu fiyat, teklif veya buyume kararina cevirmek icin detayli katman acilabilir.",
+    ctaText: "Sonucu fiyat, teklif veya büyüme kararına çevirmek için detaylı katman açılabilir.",
     ctaHref: "index.html#iletisim",
   });
 };
@@ -1110,28 +1110,28 @@ const getVatState = () => {
   }
 
   return {
-    summaryValue: "KDV hesabi hazir",
+    summaryValue: "KDV hesabı hazır",
     summaryClass: "is-good",
     intro:
       mode === "net-to-gross"
-        ? `KDV haric ${formatTry(netAmount)} tutar icin %${formatNumber(rate, 0)} oraninda KDV eklendiginde toplam ${formatTry(grossAmount)} oluyor.`
-        : `KDV dahil ${formatTry(grossAmount)} tutarin icinde %${formatNumber(rate, 0)} oraninda yaklasik ${formatTry(vatAmount)} KDV bulunuyor.`,
+        ? `KDV hariç ${formatTry(netAmount)} tutar için %${formatNumber(rate, 0)} oranında KDV eklendiğinde toplam ${formatTry(grossAmount)} oluyor.`
+        : `KDV dahil ${formatTry(grossAmount)} tutarın içinde %${formatNumber(rate, 0)} oranında yaklaşık ${formatTry(vatAmount)} KDV bulunuyor.`,
     metrics: [
-      { label: "KDV haric", value: formatTry(netAmount) },
-      { label: "KDV tutari", value: formatTry(vatAmount) },
+      { label: "KDV hariç", value: formatTry(netAmount) },
+      { label: "KDV tutarı", value: formatTry(vatAmount) },
       { label: "KDV dahil", value: formatTry(grossAmount) },
     ],
     visibleItems: [
-      `Secilen KDV orani %${formatNumber(rate, 0)} olarak uygulandi.`,
+      `Seçilen KDV oranı %${formatNumber(rate, 0)} olarak uygulandı.`,
       mode === "net-to-gross"
-        ? "Bu hesap net fiyata KDV eklenmis son tutari verir."
-        : "Bu hesap toplam tutarin icindeki vergi kirilimini ayirir.",
-      "Fatura, teklif ve fiyat etiketi hazirlarken dogrudan kullanilabilir.",
+        ? "Bu hesap net fiyata KDV eklenmiş son tutarı verir."
+        : "Bu hesap toplam tutarın içindeki vergi kırılımını ayırır.",
+      "Fatura, teklif ve fiyat etiketi hazırlarken doğrudan kullanılabilir.",
     ],
     lockedItems: [
-      "KDV dahil fiyat algisi ve teklif etkisi detayli yorum katmaninda acilir.",
-      "Brut-net gecislerinin marj etkisi birlikte yorumlanir.",
-      "KDV oranina gore listeleme ve teklif stratejisi ayrica planlanir.",
+      "KDV dahil fiyat algısı ve teklif etkisi detaylı yorum katmanında açılır.",
+      "Brüt-net geçişlerinin marj etkisi birlikte yorumlanır.",
+      "KDV oranına göre listeleme ve teklif stratejisi ayrıca planlanır.",
     ],
   };
 };
@@ -1145,22 +1145,22 @@ const analyzeVat = (result) => {
       summaryLabel: "Durum",
       summaryValue: "Veri bekleniyor",
       summaryClass: "is-mid",
-      intro: "KDV haric ya da KDV dahil tutari ve KDV oranini girin. Arac net, vergi ve brut tutari otomatik hesaplar.",
+      intro: "KDV hariç ya da KDV dahil tutarı ve KDV oranını girin. Araç net, vergi ve brüt tutarı otomatik hesaplar.",
       metrics: [],
       visibleTitle: "Ne hesaplar?",
       visibleItems: [
-        "KDV haricten KDV dahil tutari",
-        "KDV dahil tutarin vergi kirilimini",
-        "Net, KDV ve toplam tutari birlikte",
+        "KDV hariçten KDV dahil tutarı",
+        "KDV dahil tutarın vergi kırılımını",
+        "Net, KDV ve toplam tutarı birlikte",
       ],
-      lockedTitle: "Kilitli yorum katmani",
+      lockedTitle: "Kilitli yorum katmanı",
       lockedItems: [
-        "Fiyat algisi yorumu",
+        "Fiyat algısı yorumu",
         "Marj etkisi analizi",
-        "Teklif kurgusu onerisi",
+        "Teklif kurgusu önerisi",
       ],
-      ctaLabel: "Lumina Danismanlik",
-      ctaText: "KDV sonucunu teklif ve satis kararina cevirmek icin detayli katman acilabilir.",
+      ctaLabel: "Lumina Danışmanlık",
+      ctaText: "KDV sonucunu teklif ve satış kararına çevirmek için detaylı katman açılabilir.",
       ctaHref: "index.html#iletisim",
     });
     return;
@@ -1168,17 +1168,17 @@ const analyzeVat = (result) => {
 
   renderToolResult({
     container: result,
-    summaryLabel: "Vergi ozeti",
+    summaryLabel: "Vergi özeti",
     summaryValue: state.summaryValue,
     summaryClass: state.summaryClass,
     intro: state.intro,
     metrics: state.metrics,
-    visibleTitle: "Acik sonuclar",
+    visibleTitle: "Açık sonuçlar",
     visibleItems: state.visibleItems,
-    lockedTitle: "Kilitli yorum katmani",
+    lockedTitle: "Kilitli yorum katmanı",
     lockedItems: state.lockedItems,
-    ctaLabel: "Fiyatlandirma Danismanligi",
-    ctaText: "Vergi dahil fiyat yapisinin satisa etkisini birlikte netlestirebiliriz.",
+    ctaLabel: "Fiyatlandırma Danışmanlığı",
+    ctaText: "Vergi dahil fiyat yapısının satışa etkisini birlikte netleştirebiliriz.",
     ctaHref: "index.html#iletisim",
   });
 };
@@ -1198,32 +1198,32 @@ const getMarginState = () => {
   const markup = totalCost > 0 ? (profit / totalCost) * 100 : 0;
 
   return {
-    summaryValue: profit >= 0 ? "Marj gorunuyor" : "Zarar gorunuyor",
+    summaryValue: profit >= 0 ? "Marj görünüyor" : "Zarar görünüyor",
     summaryClass: profit >= 0 ? (margin >= 20 ? "is-good" : "is-mid") : "is-alert",
-    intro: `Satis fiyati ${formatTry(salePrice)} ve toplam maliyet ${formatTry(totalCost)} icin birim sonuc ${formatTry(profit)} seviyesinde.`,
+    intro: `Satış fiyatı ${formatTry(salePrice)} ve toplam maliyet ${formatTry(totalCost)} için birim sonuç ${formatTry(profit)} seviyesinde.`,
     metrics: [
       { label: "Toplam maliyet", value: formatTry(totalCost) },
-      { label: "Birim kar", value: formatTry(profit) },
-      { label: "Kar marji", value: `%${formatNumber(margin, 1)}` },
+      { label: "Birim kâr", value: formatTry(profit) },
+      { label: "Kâr marjı", value: `%${formatNumber(margin, 1)}` },
       { label: "Markup", value: `%${formatNumber(markup, 1)}` },
     ],
     visibleItems: [
       profit < 0
-        ? "Satis fiyati maliyeti karsilamiyor; bu urun zararla ilerliyor."
-        : "Satis fiyati maliyeti karsiliyor; asil konu marjin yeterli olup olmadigi.",
+        ? "Satış fiyatı maliyeti karşılamıyor; bu ürün zararla ilerliyor."
+        : "Satış fiyatı maliyeti karşılıyor; asıl konu marjın yeterli olup olmadığı.",
       margin < 10
-        ? "Kar marji dar. Reklam ve operasyon sapmasi karliligi hizla silebilir."
+        ? "Kâr marjı dar. Reklam ve operasyon sapması kârlılığı hızla silebilir."
         : margin < 20
-        ? "Kar marji orta seviyede. Kanal maliyetleriyle birlikte takip edilmeli."
-        : "Kar marji guvenli bolgede gorunuyor.",
+        ? "Kâr marjı orta seviyede. Kanal maliyetleriyle birlikte takip edilmeli."
+        : "Kâr marjı güvenli bölgede görünüyor.",
       extraCost > 0
-        ? "Ek maliyet girildigi icin sonuc operasyon giderlerini de hesaba katiyor."
-        : "Ek maliyet alani bos; paketleme veya operasyon gideri varsa dahil etmek gerekir.",
+        ? "Ek maliyet girildiği için sonuç operasyon giderlerini de hesaba katıyor."
+        : "Ek maliyet alanı boş; paketleme veya operasyon gideri varsa dahil etmek gerekir.",
     ],
     lockedItems: [
-      "Reklam maliyeti eklendiginde net marj kirilimi detayli katmanda acilir.",
-      "Psikolojik fiyat esigi ve bundle etkisi ayrica yorumlanir.",
-      "Bu marj yapisinin kanal bazli buyume kapasitesi ayrica planlanir.",
+      "Reklam maliyeti eklendiğinde net marj kırılımı detaylı katmanda açılır.",
+      "Psikolojik fiyat eşiği ve bundle etkisi ayrıca yorumlanır.",
+      "Bu marj yapısının kanal bazlı büyüme kapasitesi ayrıca planlanır.",
     ],
   };
 };
@@ -1237,22 +1237,22 @@ const analyzeMargin = (result) => {
       summaryLabel: "Durum",
       summaryValue: "Veri bekleniyor",
       summaryClass: "is-mid",
-      intro: "Satis fiyati ve maliyeti girin. Arac; birim kar, kar marji ve markup hesabini birlikte yapar.",
+      intro: "Satış fiyatı ve maliyeti girin. Araç; birim kâr, kâr marjı ve markup hesabını birlikte yapar.",
       metrics: [],
       visibleTitle: "Ne hesaplar?",
       visibleItems: [
-        "Birim kar tutarini",
-        "Kar marji yuzdesini",
-        "Markup oranini",
+        "Birim kâr tutarını",
+        "Kâr marjı yüzdesini",
+        "Markup oranını",
       ],
-      lockedTitle: "Kilitli yorum katmani",
+      lockedTitle: "Kilitli yorum katmanı",
       lockedItems: [
         "Reklam maliyeti etkisi",
-        "Fiyat esigi yorumu",
-        "Buyume uygunlugu analizi",
+        "Fiyat eşiği yorumu",
+        "Büyüme uygunluğu analizi",
       ],
-      ctaLabel: "E-Ticaret Danismanligi",
-      ctaText: "Marj hesabini urun ve reklam kararina cevirmek icin detayli katman acilabilir.",
+      ctaLabel: "E-Ticaret Danışmanlığı",
+      ctaText: "Marj hesabını ürün ve reklam kararına çevirmek için detaylı katman açılabilir.",
       ctaHref: "index.html#iletisim",
     });
     return;
@@ -1260,17 +1260,17 @@ const analyzeMargin = (result) => {
 
   renderToolResult({
     container: result,
-    summaryLabel: "Marj ozeti",
+    summaryLabel: "Marj özeti",
     summaryValue: state.summaryValue,
     summaryClass: state.summaryClass,
     intro: state.intro,
     metrics: state.metrics,
-    visibleTitle: "Acik sonuclar",
+    visibleTitle: "Açık sonuçlar",
     visibleItems: state.visibleItems,
     lockedTitle: "Kilitli stratejik katman",
     lockedItems: state.lockedItems,
-    ctaLabel: "Lumina Danismanlik",
-    ctaText: "Marj sonucunu fiyatlandirma ve reklam stratejisine birlikte cevirebiliriz.",
+    ctaLabel: "Lumina Danışmanlık",
+    ctaText: "Marj sonucunu fiyatlandırma ve reklam stratejisine birlikte çevirebiliriz.",
     ctaHref: "index.html#iletisim",
   });
 };
@@ -1289,28 +1289,28 @@ const getCommissionState = () => {
   const effectiveRate = saleAmount > 0 ? (commissionAmount / saleAmount) * 100 : 0;
 
   return {
-    summaryValue: netAmount >= 0 ? "Komisyon hesabi hazir" : "Tutar kontrol edilmeli",
+    summaryValue: netAmount >= 0 ? "Komisyon hesabı hazır" : "Tutar kontrol edilmeli",
     summaryClass: netAmount >= 0 ? "is-good" : "is-alert",
-    intro: `${formatTry(saleAmount)} satis uzerinden toplam kesinti ${formatTry(commissionAmount)} ve elde kalan tutar ${formatTry(netAmount)} olarak hesaplandi.`,
+    intro: `${formatTry(saleAmount)} satış üzerinden toplam kesinti ${formatTry(commissionAmount)} ve elde kalan tutar ${formatTry(netAmount)} olarak hesaplandı.`,
     metrics: [
-      { label: "Satis tutari", value: formatTry(saleAmount) },
+      { label: "Satış tutarı", value: formatTry(saleAmount) },
       { label: "Toplam komisyon", value: formatTry(commissionAmount) },
       { label: "Elde kalan", value: formatTry(netAmount) },
       { label: "Efektif oran", value: `%${formatNumber(effectiveRate, 2)}` },
     ],
     visibleItems: [
       fixedFee > 0
-        ? "Sabit kesinti de dahil edilerek efektif komisyon orani hesaplandi."
-        : "Hesap yalnizca yuzdelik komisyon uzerinden yapildi.",
+        ? "Sabit kesinti de dahil edilerek efektif komisyon oranı hesaplandı."
+        : "Hesap yalnızca yüzdelik komisyon üzerinden yapıldı.",
       effectiveRate > rate
-        ? "Sabit kesinti nedeniyle efektif oran liste oranindan yukari cikti."
-        : "Efektif oran komisyon oranina yakin gorunuyor.",
-      "Pazaryeri, odeme altyapisi veya temsilci komisyonu icin dogrudan kullanilabilir.",
+        ? "Sabit kesinti nedeniyle efektif oran liste oranından yukarı çıktı."
+        : "Efektif oran komisyon oranına yakın görünüyor.",
+      "Pazaryeri, ödeme altyapısı veya temsilci komisyonu için doğrudan kullanılabilir.",
     ],
     lockedItems: [
-      "Komisyon sonrasi net marjin yeterli olup olmadigi detayli katmanda acilir.",
-      "Pazaryeri ve site satisi arasindaki farkli senaryo karsilastirmasi ayrica planlanir.",
-      "Kesinti azaltma ve fiyat revizyon stratejisi profesyonel katmanda yorumlanir.",
+      "Komisyon sonrası net marjın yeterli olup olmadığı detaylı katmanda açılır.",
+      "Pazaryeri ve site satışı arasındaki farklı senaryo karşılaştırması ayrıca planlanır.",
+      "Kesinti azaltma ve fiyat revizyon stratejisi profesyonel katmanda yorumlanır.",
     ],
   };
 };
@@ -1324,22 +1324,22 @@ const analyzeCommission = (result) => {
       summaryLabel: "Durum",
       summaryValue: "Veri bekleniyor",
       summaryClass: "is-mid",
-      intro: "Satis tutari ve komisyon oranini girin. Sabit kesinti varsa ekleyin; arac net elinize kalan tutari hesaplar.",
+      intro: "Satış tutarı ve komisyon oranını girin. Sabit kesinti varsa ekleyin; araç net elinize kalan tutarı hesaplar.",
       metrics: [],
       visibleTitle: "Ne hesaplar?",
       visibleItems: [
         "Toplam komisyon kesintisini",
-        "Net elinize kalan tutari",
-        "Efektif komisyon oranini",
+        "Net elinize kalan tutarı",
+        "Efektif komisyon oranını",
       ],
-      lockedTitle: "Kilitli yorum katmani",
+      lockedTitle: "Kilitli yorum katmanı",
       lockedItems: [
         "Net marj yorumu",
-        "Kanal karsilastirmasi",
-        "Fiyat revizyon onerisi",
+        "Kanal karşılaştırması",
+        "Fiyat revizyon önerisi",
       ],
-      ctaLabel: "Lumina Danismanlik",
-      ctaText: "Komisyon yukunu fiyat ve kanal stratejisine cevirmek icin detayli katman acilabilir.",
+      ctaLabel: "Lumina Danışmanlık",
+      ctaText: "Komisyon yükünü fiyat ve kanal stratejisine çevirmek için detaylı katman açılabilir.",
       ctaHref: "index.html#iletisim",
     });
     return;
@@ -1347,17 +1347,17 @@ const analyzeCommission = (result) => {
 
   renderToolResult({
     container: result,
-    summaryLabel: "Kesinti ozeti",
+    summaryLabel: "Kesinti özeti",
     summaryValue: state.summaryValue,
     summaryClass: state.summaryClass,
     intro: state.intro,
     metrics: state.metrics,
-    visibleTitle: "Acik sonuclar",
+    visibleTitle: "Açık sonuçlar",
     visibleItems: state.visibleItems,
     lockedTitle: "Kilitli stratejik katman",
     lockedItems: state.lockedItems,
-    ctaLabel: "Fiyat ve Kanal Danismanligi",
-    ctaText: "Komisyon etkisini fiyatlandirma ve kanal secimine birlikte baglayabiliriz.",
+    ctaLabel: "Fiyat ve Kanal Danışmanlığı",
+    ctaText: "Komisyon etkisini fiyatlandırma ve kanal seçimine birlikte bağlayabiliriz.",
     ctaHref: "index.html#iletisim",
   });
 };
@@ -1367,7 +1367,9 @@ attachToolAction("seoAnalyzeBtn", "seoResult", "Teknik SEO taraması hazırlanı
 attachToolAction("academyAnalyzeBtn", "academyResult", "Seviye testi yorumlanıyor", analyzeAcademy);
 attachToolAction("cyberAnalyzeBtn", "cyberResult", "Risk sinyalleri taranıyor", analyzeCyber);
 attachToolAction("discountAnalyzeBtn", "discountResult", "İndirim hesabı hazırlanıyor", analyzeDiscount);
-attachToolAction("percentageAnalyzeBtn", "percentageResult", "Yuzde hesabi hazirlaniyor", analyzePercentage);
-attachToolAction("vatAnalyzeBtn", "vatResult", "KDV hesabi hazirlaniyor", analyzeVat);
-attachToolAction("marginAnalyzeBtn", "marginResult", "Kar marji hesabi hazirlaniyor", analyzeMargin);
-attachToolAction("commissionAnalyzeBtn", "commissionResult", "Komisyon hesabi hazirlaniyor", analyzeCommission);
+attachToolAction("percentageAnalyzeBtn", "percentageResult", "Yüzde hesabı hazırlanıyor", analyzePercentage);
+attachToolAction("vatAnalyzeBtn", "vatResult", "KDV hesabı hazırlanıyor", analyzeVat);
+attachToolAction("marginAnalyzeBtn", "marginResult", "Kâr marjı hesabı hazırlanıyor", analyzeMargin);
+attachToolAction("commissionAnalyzeBtn", "commissionResult", "Komisyon hesabı hazırlanıyor", analyzeCommission);
+
+
