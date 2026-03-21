@@ -29,6 +29,167 @@ const shorteners = new Set([
 const isIpAddress = (hostname) => /^(?:\d{1,3}\.){3}\d{1,3}$/.test(hostname);
 const containsSuspiciousChars = (hostname) => /[^a-zA-Z0-9.-]/.test(hostname);
 const loadingLogoPath = "assets/images/brand-mark.svg";
+const formsubmitEndpointConfig = window.LUMINA_FORMSUBMIT_ENDPOINTS || {};
+const defaultToolLeadEndpoint = "https://formsubmit.co/iletisim@luminadigitale.com";
+const toolLeadUnlockStorageKey = "lumina_tool_lead_unlock_v1";
+const toolResultRenderCache = new WeakMap();
+
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
+const getToolLeadUnlockState = () => {
+  try {
+    const rawState = window.sessionStorage.getItem(toolLeadUnlockStorageKey);
+    if (!rawState) {
+      return {};
+    }
+
+    const parsed = JSON.parse(rawState);
+    if (!parsed || typeof parsed !== "object") {
+      return {};
+    }
+
+    return parsed;
+  } catch (_error) {
+    return {};
+  }
+};
+
+let toolLeadUnlockState = getToolLeadUnlockState();
+
+const persistToolLeadUnlockState = () => {
+  try {
+    window.sessionStorage.setItem(toolLeadUnlockStorageKey, JSON.stringify(toolLeadUnlockState));
+  } catch (_error) {
+    // Intentionally no-op for private mode or disabled storage.
+  }
+};
+
+const getToolId = (container) => {
+  if (!container) {
+    return window.location.pathname || "tool-result";
+  }
+
+  return container.id || window.location.pathname || "tool-result";
+};
+
+const hasToolLeadAccess = (toolId) => {
+  return Boolean(toolLeadUnlockState[toolId]);
+};
+
+const unlockToolLead = (toolId) => {
+  toolLeadUnlockState = {
+    ...toolLeadUnlockState,
+    [toolId]: true,
+  };
+
+  persistToolLeadUnlockState();
+};
+
+const resolveEndpointByKeys = (keys = []) => {
+  for (const key of keys) {
+    const value = formsubmitEndpointConfig[key];
+    if (typeof value === "string" && value.trim()) {
+      return value.trim();
+    }
+  }
+
+  return defaultToolLeadEndpoint;
+};
+
+const resolveToolLeadEndpoint = () => {
+  return resolveEndpointByKeys(["araclar", "tools", "toolLead"]);
+};
+
+const resolveEtsyAnalysisEndpoint = () => {
+  return resolveEndpointByKeys(["etsy_analiz", "araclar", "tools", "toolLead"]);
+};
+
+const resolveFormsubmitAjaxEndpoint = (endpoint) => {
+  if (/formsubmit\.co\/ajax\//i.test(endpoint)) {
+    return endpoint;
+  }
+
+  if (/formsubmit\.co\//i.test(endpoint)) {
+    return endpoint.replace(/formsubmit\.co\//i, "formsubmit.co/ajax/");
+  }
+
+  return endpoint;
+};
+
+const submitToolLead = async ({ email, phone, toolId, summaryLabel, summaryValue }) => {
+  const endpoint = resolveToolLeadEndpoint();
+
+  if (/formsubmit\.co/i.test(endpoint)) {
+    const formData = new FormData();
+    formData.append("eposta", email);
+    formData.append("telefon", phone || "Belirtilmedi");
+    formData.append("arac", toolId);
+    formData.append("ozet_etiketi", summaryLabel);
+    formData.append("ozet_degeri", summaryValue);
+    formData.append("sayfa", window.location.href);
+    formData.append("_subject", `Lumina Lab | Ücretsiz Araç Sonuç Talebi (${toolId})`);
+    formData.append("_template", "table");
+    formData.append("_captcha", "true");
+    formData.append("_honey", "");
+
+    const response = await fetch(resolveFormsubmitAjaxEndpoint(endpoint), {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Lead form submission failed.");
+    }
+
+    const rawBody = await response.text();
+    if (!rawBody) {
+      return;
+    }
+
+    let payload = {};
+    try {
+      payload = JSON.parse(rawBody);
+    } catch (_error) {
+      payload = {};
+    }
+
+    if (payload.success === false || payload.success === "false") {
+      throw new Error("Lead form submission rejected.");
+    }
+
+    return;
+  }
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      phone,
+      toolId,
+      summaryLabel,
+      summaryValue,
+      page: window.location.href,
+      source: "lumina-lab-tool",
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Lead form submission failed.");
+  }
+};
 
 const renderToolLoading = (container, loadingText) => {
   if (!container) {
@@ -109,6 +270,123 @@ const normalizeSecondaryTitle = (title = "") => {
   return title;
 };
 
+const getSafeToolFieldId = (toolId) => toolId.replace(/[^a-z0-9_-]/gi, "-");
+
+const createToolLeadFormMarkup = (toolId) => {
+  const safeToolId = escapeHtml(toolId);
+  const fieldIdBase = getSafeToolFieldId(toolId);
+
+  return `
+    <div class="tool-lead-gate" data-tool-lead-gate>
+      <p class="tool-result-gate-note">Detaylı sonucu açmak için e-posta zorunlu, telefon opsiyonel.</p>
+      <form class="tool-lead-form" data-tool-lead-form>
+        <input type="hidden" name="toolId" value="${safeToolId}" />
+        <div class="tool-lead-grid">
+          <label for="toolLeadEmail-${fieldIdBase}">E-posta</label>
+          <input id="toolLeadEmail-${fieldIdBase}" type="email" name="eposta" placeholder="ornek@eposta.com" required />
+          <label for="toolLeadPhone-${fieldIdBase}">Telefon (Opsiyonel)</label>
+          <input id="toolLeadPhone-${fieldIdBase}" type="tel" name="telefon" placeholder="05xx xxx xx xx" inputmode="tel" />
+          <label class="tool-lead-honey" for="toolLeadWebsite-${fieldIdBase}">Website</label>
+          <input class="tool-lead-honey" id="toolLeadWebsite-${fieldIdBase}" type="text" name="_honey" tabindex="-1" autocomplete="off" />
+        </div>
+        <button class="btn btn-primary" type="submit">Detaylı Sonucu Aç</button>
+        <p class="tool-lead-status" data-tool-lead-status aria-live="polite"></p>
+      </form>
+    </div>
+  `;
+};
+
+const bindToolLeadForm = ({ container, toolId, summaryLabel, summaryValue }) => {
+  const leadForm = container.querySelector("[data-tool-lead-form]");
+  if (!leadForm) {
+    return;
+  }
+
+  const emailInput = leadForm.querySelector('input[name="eposta"]');
+  const phoneInput = leadForm.querySelector('input[name="telefon"]');
+  const honeyInput = leadForm.querySelector('input[name="_honey"]');
+  const statusNode = leadForm.querySelector("[data-tool-lead-status]");
+  const submitButton = leadForm.querySelector('button[type="submit"]');
+
+  leadForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (leadForm.dataset.submitting === "true") {
+      return;
+    }
+
+    const emailValue = emailInput?.value?.trim() || "";
+    const phoneValue = phoneInput?.value?.trim() || "";
+    const honeyValue = honeyInput?.value?.trim() || "";
+
+    if (!emailValue) {
+      statusNode.textContent = "Lütfen geçerli bir e-posta girin.";
+      statusNode.classList.remove("is-success");
+      statusNode.classList.add("is-error");
+      emailInput?.focus();
+      return;
+    }
+
+    if (phoneValue && !/^[0-9+\s().-]{7,20}$/.test(phoneValue)) {
+      statusNode.textContent = "Telefon alanını boş bırakabilir veya geçerli bir formatta girebilirsiniz.";
+      statusNode.classList.remove("is-success");
+      statusNode.classList.add("is-error");
+      phoneInput?.focus();
+      return;
+    }
+
+    if (honeyValue) {
+      return;
+    }
+
+    leadForm.dataset.submitting = "true";
+    submitButton?.setAttribute("disabled", "disabled");
+    submitButton?.setAttribute("aria-busy", "true");
+    statusNode.textContent = "Veri güvenli bağlantı ile aktarılıyor...";
+    statusNode.classList.remove("is-error");
+    statusNode.classList.remove("is-success");
+
+    let isSuccess = false;
+
+    try {
+      await submitToolLead({
+        email: emailValue,
+        phone: phoneValue,
+        toolId,
+        summaryLabel,
+        summaryValue,
+      });
+
+      isSuccess = true;
+      unlockToolLead(toolId);
+    } catch (_error) {
+      statusNode.textContent = "Gönderim sırasında bir sorun oluştu. Lütfen tekrar deneyin.";
+      statusNode.classList.remove("is-success");
+      statusNode.classList.add("is-error");
+    } finally {
+      leadForm.dataset.submitting = "false";
+
+      if (!isSuccess) {
+        submitButton?.removeAttribute("disabled");
+        submitButton?.removeAttribute("aria-busy");
+      }
+    }
+
+    if (!isSuccess) {
+      return;
+    }
+
+    statusNode.textContent = "Başarılı. Detaylı sonuç açılıyor...";
+    statusNode.classList.remove("is-error");
+    statusNode.classList.add("is-success");
+
+    const lastRenderState = toolResultRenderCache.get(container);
+    if (lastRenderState) {
+      renderToolResult(lastRenderState);
+    }
+  });
+};
+
 const renderToolResult = ({
   container,
   summaryLabel,
@@ -131,6 +409,26 @@ const renderToolResult = ({
     return;
   }
 
+  const toolId = getToolId(container);
+  toolResultRenderCache.set(container, {
+    container,
+    summaryLabel,
+    summaryValue,
+    summaryClass,
+    intro,
+    metrics,
+    visibleTitle,
+    visibleItems,
+    lockedTitle,
+    lockedItems,
+    ctaLabel,
+    ctaText,
+    ctaHref,
+    extraCtaText,
+    extraCtaHref,
+    extraCtaButtonText,
+  });
+
   const safeVisibleItems = visibleItems.length ? visibleItems : ["Bu katmanda ek bir sinyal bulunmuyor."];
   const showCalculatorAppCta = calculatorResultIds.has(container.id);
   const resolvedExtraCtaHref = extraCtaHref || (showCalculatorAppCta ? calculatorAppCta.extraCtaHref : "");
@@ -138,57 +436,81 @@ const renderToolResult = ({
   const resolvedExtraCtaButtonText = extraCtaButtonText || calculatorAppCta.extraCtaButtonText;
   const normalizedLockedTitle = normalizeSecondaryTitle(lockedTitle);
   const safeLockedItems = [...new Set(lockedItems.filter(Boolean))];
+  const hasLockedInsights = safeLockedItems.length > 0;
+
+  const isUnlocked = !hasLockedInsights || hasToolLeadAccess(toolId);
 
   const metricsHtml = metrics
     .map(
       (metric) => `
         <article class="tool-metric">
-          <small>${metric.label}</small>
-          <strong>${metric.value}</strong>
+          <small>${escapeHtml(metric.label)}</small>
+          <strong>${escapeHtml(metric.value)}</strong>
         </article>
       `
     )
     .join("");
 
-  const visibleHtml = safeVisibleItems.map((item) => `<li>${item}</li>`).join("");
-  const lockedHtml = safeLockedItems.length
-    ? `<ul class="tool-result-list">${safeLockedItems.map((item) => `<li>${item}</li>`).join("")}</ul>`
-    : "";
+  const visibleHtml = safeVisibleItems.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  const revealedLockedItems = isUnlocked ? safeLockedItems : [];
+  const lockedHtml = revealedLockedItems.length
+    ? `<ul class="tool-result-list">${revealedLockedItems.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
+    : `<p class="tool-result-panel-note">Detaylı katman gizli. E-posta girdikten sonra otomatik açılır.</p>`;
+  const gateHtml = hasLockedInsights && !isUnlocked ? createToolLeadFormMarkup(toolId) : "";
+  const lockedPanelStateClass = isUnlocked ? "is-unlocked" : "is-locked";
+  const maskHtml = isUnlocked
+    ? ""
+    : `
+      <div class="tool-result-mask" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    `;
+
+  const safeSummaryClass = ["is-good", "is-mid", "is-alert"].includes(summaryClass) ? summaryClass : "is-mid";
+  const safeCtaHref = escapeHtml(ctaHref || "#");
 
   container.classList.remove("hidden");
   container.innerHTML = `
-    <div class="tool-result-summary ${summaryClass}">
-      <span>${summaryLabel}</span>
-      <strong>${summaryValue}</strong>
+    <div class="tool-result-summary ${safeSummaryClass}">
+      <span>${escapeHtml(summaryLabel)}</span>
+      <strong>${escapeHtml(summaryValue)}</strong>
     </div>
-    <p class="tool-result-intro">${intro}</p>
+    <p class="tool-result-intro">${escapeHtml(intro)}</p>
     <div class="tool-result-metrics">${metricsHtml}</div>
     <div class="tool-result-columns">
       <section class="tool-result-panel">
-        <h3>${visibleTitle}</h3>
+        <h3>${escapeHtml(visibleTitle)}</h3>
         <ul class="tool-result-list">${visibleHtml}</ul>
       </section>
-      <section class="tool-result-panel tool-result-panel-locked">
+      <section class="tool-result-panel tool-result-panel-locked ${lockedPanelStateClass}">
         <div class="tool-result-blur">
-          <div class="tool-result-mask" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          ${maskHtml}
           <div class="tool-result-panel-copy">
-            <h3>${normalizedLockedTitle}</h3>
+            <h3>${escapeHtml(normalizedLockedTitle)}</h3>
             ${lockedHtml}
           </div>
         </div>
         <div class="tool-result-cta tool-result-cta-inline">
-          <p class="tool-result-cta-label">${ctaLabel}</p>
-          <p>${ctaText}</p>
-          <a class="btn btn-primary" href="${ctaHref}">Inceleme Talebi Olustur</a>
+          ${gateHtml}
+          <p class="tool-result-cta-label">${escapeHtml(ctaLabel)}</p>
+          <p>${escapeHtml(ctaText)}</p>
+          <a class="btn btn-primary" href="${safeCtaHref}">Inceleme Talebi Olustur</a>
         </div>
       </section>
     </div>
   `;
+
+  if (!isUnlocked && hasLockedInsights) {
+    bindToolLeadForm({
+      container,
+      toolId,
+      summaryLabel,
+      summaryValue,
+    });
+  }
 
   if (resolvedExtraCtaHref) {
     const cta = container.querySelector(".tool-result-cta");
@@ -1362,6 +1684,171 @@ const analyzeCommission = (result) => {
     ctaHref: "index.html#iletisim",
   });
 };
+
+const submitEtsyAnalysisRequest = async (payload) => {
+  const endpoint = resolveEtsyAnalysisEndpoint();
+
+  if (/formsubmit\.co/i.test(endpoint)) {
+    const formData = new FormData();
+    Object.entries(payload).forEach(([key, value]) => {
+      formData.append(key, value || "Belirtilmedi");
+    });
+
+    formData.append("_subject", "Lumina Lab | Etsy Mağaza Analiz Talebi");
+    formData.append("_template", "table");
+    formData.append("_captcha", "true");
+    formData.append("_honey", "");
+    formData.append("sayfa", window.location.href);
+
+    const response = await fetch(resolveFormsubmitAjaxEndpoint(endpoint), {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Etsy analysis form submission failed.");
+    }
+
+    const rawBody = await response.text();
+    if (!rawBody) {
+      return;
+    }
+
+    let body = {};
+    try {
+      body = JSON.parse(rawBody);
+    } catch (_error) {
+      body = {};
+    }
+
+    if (body.success === false || body.success === "false") {
+      throw new Error("Etsy analysis form rejected.");
+    }
+
+    return;
+  }
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      ...payload,
+      source: "etsy-magaza-analiz-formu",
+      page: window.location.href,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Etsy analysis form submission failed.");
+  }
+};
+
+const attachEtsyManualForm = () => {
+  const form = document.getElementById("etsyManualForm");
+  const result = document.getElementById("etsyManualResult");
+
+  if (!form || !result) {
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (form.dataset.submitting === "true") {
+      return;
+    }
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+    const payload = {
+      ad_soyad: String(formData.get("ad_soyad") || "").trim(),
+      eposta: String(formData.get("eposta") || "").trim(),
+      telefon: String(formData.get("telefon") || "").trim(),
+      magaza_adi: String(formData.get("magaza_adi") || "").trim(),
+      magaza_linki: String(formData.get("magaza_linki") || "").trim(),
+      ana_kategori: String(formData.get("ana_kategori") || "").trim(),
+      aylik_siparis_adedi: String(formData.get("aylik_siparis_adedi") || "").trim(),
+      ortalama_sepet_tutari: String(formData.get("ortalama_sepet_tutari") || "").trim(),
+      hedef_ulke: String(formData.get("hedef_ulke") || "").trim(),
+      analiz_hedefi: String(formData.get("analiz_hedefi") || "").trim(),
+      ek_notlar: String(formData.get("ek_notlar") || "").trim(),
+    };
+
+    form.dataset.submitting = "true";
+    submitButton?.setAttribute("disabled", "disabled");
+    submitButton?.setAttribute("aria-busy", "true");
+
+    renderToolLoading(result, "Etsy mağaza analiz talebi gönderiliyor");
+
+    try {
+      await submitEtsyAnalysisRequest(payload);
+
+      const submittedAt = new Intl.DateTimeFormat("tr-TR", {
+        dateStyle: "long",
+        timeStyle: "short",
+      }).format(new Date());
+
+      result.classList.remove("hidden");
+      result.innerHTML = `
+        <div class="tool-result-summary is-good">
+          <span>Talep Durumu</span>
+          <strong>Talep Alındı</strong>
+        </div>
+        <p class="tool-result-intro">Etsy mağaza analiz formunuz başarıyla ulaştı. Analizin sonucu mail ile iletilecektir.</p>
+        <div class="tool-result-metrics">
+          <article class="tool-metric">
+            <small>İletişim e-postası</small>
+            <strong>${escapeHtml(payload.eposta)}</strong>
+          </article>
+          <article class="tool-metric">
+            <small>Mağaza adı</small>
+            <strong>${escapeHtml(payload.magaza_adi || "Belirtilmedi")}</strong>
+          </article>
+          <article class="tool-metric">
+            <small>Talep zamanı</small>
+            <strong>${escapeHtml(submittedAt)}</strong>
+          </article>
+        </div>
+        <section class="tool-result-panel">
+          <h3>Sonraki Adım</h3>
+          <ul class="tool-result-list">
+            <li>Talebiniz ekip tarafından manuel olarak değerlendirilecektir.</li>
+            <li>Öncelikli aksiyonlar ve mağaza notları e-posta ile paylaşılacaktır.</li>
+            <li>Gerekirse ek veri için sizinle yine e-posta üzerinden iletişime geçilecektir.</li>
+          </ul>
+        </section>
+      `;
+
+      form.reset();
+    } catch (_error) {
+      result.classList.remove("hidden");
+      result.innerHTML = `
+        <div class="tool-result-summary is-alert">
+          <span>Talep Durumu</span>
+          <strong>Gönderim Başarısız</strong>
+        </div>
+        <p class="tool-result-intro">Form gönderimi sırasında bir sorun oluştu. Lütfen tekrar deneyin.</p>
+      `;
+    } finally {
+      form.dataset.submitting = "false";
+      submitButton?.removeAttribute("disabled");
+      submitButton?.removeAttribute("aria-busy");
+    }
+  });
+};
+
+attachEtsyManualForm();
 
 attachToolAction("roasAnalyzeBtn", "roasResult", "Karlılık analizi hazırlanıyor", analyzeRoas);
 attachToolAction("seoAnalyzeBtn", "seoResult", "Teknik SEO taraması hazırlanıyor", analyzeSeo);

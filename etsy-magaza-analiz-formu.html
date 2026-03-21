@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ücretsiz Etsy Mağaza Analiz Formu | Lumina Lab</title>
+  <meta
+    name="description"
+    content="Ücretsiz Etsy mağaza analiz formu ile mağazanızı uzman ekibe iletin. Analiz sonucu manuel değerlendirme sonrası e-posta ile paylaşılır."
+  />
+  <meta
+    name="keywords"
+    content="ücretsiz etsy mağaza analizi, etsy mağaza analiz formu, etsy mağaza danışmanlığı, etsy mağaza değerlendirme, etsy satış analizi"
+  />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/etsy-magaza-analiz-formu.html" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ücretsiz Etsy Mağaza Analiz Formu | Lumina Lab" />
+  <meta property="og:description" content="Etsy mağazanız için manuel analiz talebi oluşturun, sonuçları e-posta ile alın." />
+  <meta property="og:url" content="https://luminadigitale.com/etsy-magaza-analiz-formu.html" />
+  <meta property="og:site_name" content="Lumina Lab" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/images/brand-mark.svg" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Ücretsiz Etsy Mağaza Analiz Formu | Lumina Lab" />
+  <meta name="twitter:description" content="Etsy mağaza analiz talebinizi bırakın, manuel değerlendirme sonucu e-posta ile iletilsin." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/images/brand-mark.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/brand-mark.svg" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="tools-page">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="araclar.html" aria-label="Lumina Lab ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina Lab logo" width="48" height="48" /></span>
+        <span class="brand-copy"><strong>Lumina</strong><span>Lab</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="araclar.html#eticaret">Araç Kategorileri</a>
+        <a href="roas-hesaplayici.html">ROAS Hesaplayıcı</a>
+        <a href="index.html#iletisim" class="nav-btn">Danışmanlığa Geç</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="section page-hero">
+      <div class="container page-shell">
+        <div class="page-intro">
+          <p class="section-kicker">Ücretsiz E-Ticaret Aracı</p>
+          <h1 class="page-title">Ücretsiz Etsy Mağaza Analiz Formu</h1>
+          <p>Bu form otomatik skor üretmez. Verileriniz uzman ekip tarafından manuel değerlendirilir ve sonuç size e-posta ile iletilir.</p>
+        </div>
+        <aside class="page-side-card">
+          <p class="section-kicker">Ne Sağlar</p>
+          <h3>Mağazanız için net başlangıç analizi</h3>
+          <p>Müşteri bilgisi, mağaza linki ve hedeflerinize göre bireysel inceleme yapılır. Sonuçlar pazarlama ve hizmet planına dönüştürülür.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="conversion-tool-shell reveal is-visible">
+          <form id="etsyManualForm" class="conversion-tool-form">
+            <div class="conversion-tool-badge">Etsy mağaza manuel değerlendirme formu</div>
+
+            <label for="etsyFullName">Ad Soyad</label>
+            <input id="etsyFullName" type="text" name="ad_soyad" placeholder="Ad Soyad" required />
+
+            <label for="etsyEmail">E-posta</label>
+            <input id="etsyEmail" type="email" name="eposta" placeholder="ornek@eposta.com" required />
+
+            <label for="etsyPhone">Telefon (Opsiyonel)</label>
+            <input id="etsyPhone" type="tel" name="telefon" placeholder="05xx xxx xx xx" />
+
+            <label for="etsyStoreName">Etsy mağaza adı</label>
+            <input id="etsyStoreName" type="text" name="magaza_adi" placeholder="Örn: LuminaDesignStudio" required />
+
+            <label for="etsyStoreUrl">Etsy mağaza linki</label>
+            <input id="etsyStoreUrl" type="url" name="magaza_linki" placeholder="https://www.etsy.com/shop/..." required />
+
+            <label for="etsyCategory">Ana ürün kategorisi</label>
+            <select id="etsyCategory" name="ana_kategori" required>
+              <option value="">Kategori seçin</option>
+              <option value="Takı ve aksesuar">Takı ve aksesuar</option>
+              <option value="Dijital ürün">Dijital ürün</option>
+              <option value="Ev ve dekorasyon">Ev ve dekorasyon</option>
+              <option value="Giyim ve moda">Giyim ve moda</option>
+              <option value="Diğer">Diğer</option>
+            </select>
+
+            <label for="etsyMonthlyOrders">Aylık sipariş adedi (Opsiyonel)</label>
+            <input id="etsyMonthlyOrders" type="number" min="0" name="aylik_siparis_adedi" placeholder="Örn: 45" />
+
+            <label for="etsyAverageBasket">Ortalama sepet tutarı (Opsiyonel)</label>
+            <input id="etsyAverageBasket" type="number" min="0" step="0.01" name="ortalama_sepet_tutari" placeholder="Örn: 28.5" />
+
+            <label for="etsyTargetCountry">Hedef ülke / pazar</label>
+            <input id="etsyTargetCountry" type="text" name="hedef_ulke" placeholder="Örn: ABD, Almanya, İngiltere" required />
+
+            <label for="etsyGoal">Analizden beklentiniz</label>
+            <select id="etsyGoal" name="analiz_hedefi" required>
+              <option value="">Hedef seçin</option>
+              <option value="Satış artırma">Satış artırma</option>
+              <option value="Dönüşüm artırma">Dönüşüm artırma</option>
+              <option value="Reklam optimizasyonu">Reklam optimizasyonu</option>
+              <option value="Mağaza düzeni">Mağaza düzeni</option>
+            </select>
+
+            <label for="etsyNotes">Ek notlar</label>
+            <input id="etsyNotes" type="text" name="ek_notlar" placeholder="Kısa hedef, sorun ve beklenti notu" />
+
+            <button class="btn btn-primary" type="submit">Analiz Talebini Gönder</button>
+          </form>
+          <div class="conversion-tool-result hidden" id="etsyManualResult"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Lumina Lab</h3>
+        <p>Etsy mağaza analiz formu, manuel değerlendirme sürecine açılan ücretsiz bir ön talep katmanıdır.</p>
+      </div>
+      <div>
+        <h4>Sayfalar</h4>
+        <ul>
+          <li><a href="araclar.html#eticaret">E-Ticaret Araçları</a></li>
+          <li><a href="roas-hesaplayici.html">ROAS Hesaplayıcı</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Geçiş</h4>
+        <p><a href="index.html#iletisim">Danışmanlık formu</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom"><span>Lumina Lab</span><span>luminadigitale.com</span></div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="formsubmit-endpoints.js" defer></script>
+  <script src="tools.js" defer></script>
+</body>
+</html>
