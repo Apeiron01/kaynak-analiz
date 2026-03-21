@@ -4458,6 +4458,26 @@ main > .section + .section {
     0 12px 22px rgba(50, 120, 206, 0.38);
 }
 
+.services-page .insight-chart-fill-27 {
+  width: 27%;
+}
+
+.services-page .insight-chart-fill-48 {
+  width: 48%;
+}
+
+.services-page .insight-chart-fill-66 {
+  width: 66%;
+}
+
+.services-page .insight-chart-fill-81 {
+  width: 81%;
+}
+
+.services-page .insight-chart-fill-92 {
+  width: 92%;
+}
+
 .services-page .insight-chart-fill::after {
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(10, 26, 52, 0.7);
