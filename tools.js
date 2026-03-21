@@ -1694,7 +1694,7 @@ const submitEtsyAnalysisRequest = async (payload) => {
       formData.append(key, value || "Belirtilmedi");
     });
 
-    formData.append("_subject", "Lumina Lab | Etsy Ürün Analiz Talebi");
+    formData.append("_subject", "Lumina Lab | Etsy Ürün ve Mağaza Analiz Talebi");
     formData.append("_template", "table");
     formData.append("_captcha", "true");
     formData.append("_honey", "");
@@ -1789,7 +1789,7 @@ const attachEtsyManualForm = () => {
     submitButton?.setAttribute("disabled", "disabled");
     submitButton?.setAttribute("aria-busy", "true");
 
-    renderToolLoading(result, "Etsy ürün analiz talebi gönderiliyor");
+    renderToolLoading(result, "Etsy ürün ve mağaza analiz talebi gönderiliyor");
 
     try {
       await submitEtsyAnalysisRequest(payload);
@@ -1805,7 +1805,7 @@ const attachEtsyManualForm = () => {
           <span>Talep Durumu</span>
           <strong>Talep Alındı</strong>
         </div>
-        <p class="tool-result-intro">Etsy ürün analizi talebiniz başarıyla ulaştı. Analizin sonucu mail ile iletilecektir.</p>
+        <p class="tool-result-intro">Etsy ürün ve mağaza analizi talebiniz başarıyla ulaştı. Analizin sonucu mail ile iletilecektir.</p>
         <div class="tool-result-metrics">
           <article class="tool-metric">
             <small>İletişim e-postası</small>
