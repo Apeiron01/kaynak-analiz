@@ -1694,7 +1694,7 @@ const submitEtsyAnalysisRequest = async (payload) => {
       formData.append(key, value || "Belirtilmedi");
     });
 
-    formData.append("_subject", "Lumina Lab | Etsy Mağaza Analiz Talebi");
+    formData.append("_subject", "Lumina Lab | Etsy Ürün Analiz Talebi");
     formData.append("_template", "table");
     formData.append("_captcha", "true");
     formData.append("_honey", "");
@@ -1739,7 +1739,7 @@ const submitEtsyAnalysisRequest = async (payload) => {
     },
     body: JSON.stringify({
       ...payload,
-      source: "etsy-magaza-analiz-formu",
+      source: "etsy-urun-analizi",
       page: window.location.href,
     }),
   });
@@ -1789,7 +1789,7 @@ const attachEtsyManualForm = () => {
     submitButton?.setAttribute("disabled", "disabled");
     submitButton?.setAttribute("aria-busy", "true");
 
-    renderToolLoading(result, "Etsy mağaza analiz talebi gönderiliyor");
+    renderToolLoading(result, "Etsy ürün analiz talebi gönderiliyor");
 
     try {
       await submitEtsyAnalysisRequest(payload);
@@ -1805,15 +1805,15 @@ const attachEtsyManualForm = () => {
           <span>Talep Durumu</span>
           <strong>Talep Alındı</strong>
         </div>
-        <p class="tool-result-intro">Etsy mağaza analiz formunuz başarıyla ulaştı. Analizin sonucu mail ile iletilecektir.</p>
+        <p class="tool-result-intro">Etsy ürün analizi talebiniz başarıyla ulaştı. Analizin sonucu mail ile iletilecektir.</p>
         <div class="tool-result-metrics">
           <article class="tool-metric">
             <small>İletişim e-postası</small>
             <strong>${escapeHtml(payload.eposta)}</strong>
           </article>
           <article class="tool-metric">
-            <small>Mağaza adı</small>
-            <strong>${escapeHtml(payload.magaza_adi || "Belirtilmedi")}</strong>
+            <small>Ürün / mağaza bilgisi</small>
+            <strong>${escapeHtml(payload.magaza_adi || payload.magaza_linki || "Belirtilmedi")}</strong>
           </article>
           <article class="tool-metric">
             <small>Talep zamanı</small>
@@ -1824,7 +1824,7 @@ const attachEtsyManualForm = () => {
           <h3>Sonraki Adım</h3>
           <ul class="tool-result-list">
             <li>Talebiniz ekip tarafından manuel olarak değerlendirilecektir.</li>
-            <li>Öncelikli aksiyonlar ve mağaza notları e-posta ile paylaşılacaktır.</li>
+            <li>Öncelikli aksiyonlar ve ürün notları e-posta ile paylaşılacaktır.</li>
             <li>Gerekirse ek veri için sizinle yine e-posta üzerinden iletişime geçilecektir.</li>
           </ul>
         </section>
