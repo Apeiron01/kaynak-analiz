@@ -1,3 +1,38 @@
+(() => {
+  const initQuickWhatsappIcon = () => {
+    if (!document.body || document.querySelector("[data-lumina-whatsapp-widget]")) {
+      return;
+    }
+
+    const defaultWhatsappNumber = "905376431123";
+    const whatsappNumber = String(window.LUMINA_WHATSAPP_NUMBER || defaultWhatsappNumber).replace(/\D/g, "");
+    const messageText = encodeURIComponent(
+      ["Merhaba Lumina ekibi,", "Bilgi almak istiyorum.", `Sayfa: ${window.location.href}`].join("\n")
+    );
+
+    const href = whatsappNumber
+      ? `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${messageText}`
+      : `https://api.whatsapp.com/send?text=${messageText}`;
+
+    const link = document.createElement("a");
+    link.className = "lumina-wa-quick";
+    link.dataset.luminaWhatsappWidget = "true";
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute("aria-label", "WhatsApp ile iletisime gec");
+    link.innerHTML = `<img src="assets/icons/whatsapp.svg" alt="" width="34" height="34" loading="eager" decoding="async" />`;
+
+    document.body.appendChild(link);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initQuickWhatsappIcon, { once: true });
+  } else {
+    initQuickWhatsappIcon();
+  }
+})();
+
 const body = document.body;
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
@@ -1440,3 +1475,262 @@ const initSocialProofWidget = () => {
 };
 
 initSocialProofWidget();
+
+(() => {
+  if (!document.body || document.querySelector("[data-lumina-whatsapp-widget]")) {
+    return;
+  }
+
+  const whatsappFlow = {
+    question: "Hangi hizmeti almak istersiniz?",
+    categories: {
+      siber: {
+        label: "Siber",
+        followUp: "Siber tarafta hangi hizmetle ilgileniyorsunuz?",
+        services: [
+          "Supheli Link ve QR Analizi",
+          "Dolandirici Mesaj Analizi",
+          "Dolandiricilik Vaka Analizi",
+          "Dark Web Maruziyet Izleme",
+          "Marka ve Alan Adi Guvenligi",
+          "Subdomain ve DNS Analizi",
+        ],
+      },
+      akademi: {
+        label: "Akademi",
+        followUp: "Akademi tarafinda hangi egitimle ilgileniyorsunuz?",
+        services: [
+          "Etsy Egitim Programi",
+          "Shopify Egitim Programi",
+          "Meta Ads ve Google Ads Egitimi",
+        ],
+      },
+      danismanlik: {
+        label: "Danismanlik",
+        followUp: "Danismanlik tarafinda hangi hizmetle ilgileniyorsunuz?",
+        services: [
+          "E-Ticaret Sitesi Kurulumu ve Panel Yonetimi",
+          "Etsy Danismanligi",
+          "Kurumsal ve Tek Sayfa Web Sitesi Kurulumu",
+          "Sosyal Medya Yonetimi ve Yayin Plani",
+          "Reklam Yonetimi ve Mentor Destegi",
+        ],
+      },
+    },
+  };
+
+  const defaultWhatsappNumber = "905376431123";
+  const whatsappNumber = String(window.LUMINA_WHATSAPP_NUMBER || defaultWhatsappNumber).replace(/\D/g, "");
+  const widget = document.createElement("section");
+  widget.className = "lumina-wa-widget";
+  widget.dataset.luminaWhatsappWidget = "true";
+  widget.innerHTML = `
+    <button class="lumina-wa-fab" type="button" aria-label="WhatsApp destek panelini ac" aria-expanded="false" aria-controls="luminaWaPanel">
+      <span class="lumina-wa-fab-icon" aria-hidden="true">
+        <img src="assets/icons/whatsapp.svg" alt="" width="34" height="34" loading="eager" decoding="async" />
+      </span>
+      <span class="lumina-wa-fab-text">WhatsApp</span>
+    </button>
+    <aside class="lumina-wa-panel" id="luminaWaPanel" hidden>
+      <header class="lumina-wa-header">
+        <strong>WhatsApp Business</strong>
+        <button class="lumina-wa-close" type="button" aria-label="WhatsApp panelini kapat">x</button>
+      </header>
+      <div class="lumina-wa-messages" data-wa-messages></div>
+      <div class="lumina-wa-options" data-wa-options></div>
+      <div class="lumina-wa-actions">
+        <button class="lumina-wa-back" type="button" hidden>Geri</button>
+        <a class="lumina-wa-send is-disabled" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">WhatsApp'ta Devam Et</a>
+      </div>
+    </aside>
+  `;
+
+  document.body.appendChild(widget);
+
+  const fabButton = widget.querySelector(".lumina-wa-fab");
+  const panel = widget.querySelector(".lumina-wa-panel");
+  const closeButton = widget.querySelector(".lumina-wa-close");
+  const messageArea = widget.querySelector("[data-wa-messages]");
+  const optionArea = widget.querySelector("[data-wa-options]");
+  const backButton = widget.querySelector(".lumina-wa-back");
+  const sendButton = widget.querySelector(".lumina-wa-send");
+
+  const state = {
+    step: "category",
+    categoryKey: "",
+    categoryLabel: "",
+    serviceLabel: "",
+  };
+
+  const pushMessage = (text, role = "bot") => {
+    if (!messageArea) {
+      return;
+    }
+
+    const item = document.createElement("p");
+    item.className = `lumina-wa-message ${role === "user" ? "is-user" : "is-bot"}`;
+    item.textContent = text;
+    messageArea.appendChild(item);
+    messageArea.scrollTop = messageArea.scrollHeight;
+  };
+
+  const createOptionButtons = (items, onSelect) => {
+    if (!optionArea) {
+      return;
+    }
+
+    optionArea.innerHTML = "";
+    items.forEach((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "lumina-wa-option";
+      button.textContent = item.label;
+      button.addEventListener("click", () => onSelect(item));
+      optionArea.appendChild(button);
+    });
+  };
+
+  const setSendButtonState = (enabled) => {
+    if (!sendButton) {
+      return;
+    }
+
+    sendButton.classList.toggle("is-disabled", !enabled);
+    sendButton.setAttribute("aria-disabled", String(!enabled));
+    sendButton.tabIndex = enabled ? 0 : -1;
+  };
+
+  const buildWhatsAppLink = () => {
+    const messageLines = [
+      "Merhaba Lumina ekibi,",
+      "Hizmet alimi icin bilgi almak istiyorum.",
+      `Ana baslik: ${state.categoryLabel || "Belirtilmedi"}`,
+      `Alt hizmet: ${state.serviceLabel || "Belirtilmedi"}`,
+      `Sayfa: ${window.location.href}`,
+    ];
+    const encodedMessage = encodeURIComponent(messageLines.join("\n"));
+    if (whatsappNumber) {
+      return `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+    }
+
+    return `https://api.whatsapp.com/send?text=${encodedMessage}`;
+  };
+
+  const updateSendButtonLink = () => {
+    if (!sendButton) {
+      return;
+    }
+
+    sendButton.href = buildWhatsAppLink();
+    setSendButtonState(Boolean(state.categoryLabel && state.serviceLabel));
+  };
+
+  const showCategoryQuestion = () => {
+    state.step = "category";
+    state.categoryKey = "";
+    state.categoryLabel = "";
+    state.serviceLabel = "";
+
+    if (messageArea) {
+      messageArea.innerHTML = "";
+    }
+
+    pushMessage(whatsappFlow.question, "bot");
+    createOptionButtons(
+      Object.entries(whatsappFlow.categories).map(([key, value]) => ({ key, label: value.label })),
+      ({ key, label }) => {
+        const selectedCategory = whatsappFlow.categories[key];
+        if (!selectedCategory) {
+          return;
+        }
+
+        state.step = "service";
+        state.categoryKey = key;
+        state.categoryLabel = label;
+        state.serviceLabel = "";
+
+        pushMessage(label, "user");
+        pushMessage(selectedCategory.followUp, "bot");
+
+        createOptionButtons(
+          selectedCategory.services.map((service) => ({ label: service })),
+          ({ label: serviceLabel }) => {
+            state.serviceLabel = serviceLabel;
+            pushMessage(serviceLabel, "user");
+            pushMessage("Hazir mesaj olusturuldu. WhatsApp'ta devam edebilirsiniz.", "bot");
+            updateSendButtonLink();
+          }
+        );
+
+        if (backButton) {
+          backButton.hidden = false;
+        }
+
+        updateSendButtonLink();
+      }
+    );
+
+    if (backButton) {
+      backButton.hidden = true;
+    }
+
+    updateSendButtonLink();
+  };
+
+  const openPanel = () => {
+    if (!panel || !fabButton) {
+      return;
+    }
+
+    panel.hidden = false;
+    widget.classList.add("is-open");
+    fabButton.setAttribute("aria-expanded", "true");
+  };
+
+  const closePanel = () => {
+    if (!panel || !fabButton) {
+      return;
+    }
+
+    widget.classList.remove("is-open");
+    fabButton.setAttribute("aria-expanded", "false");
+    panel.hidden = true;
+  };
+
+  fabButton?.addEventListener("click", () => {
+    if (widget.classList.contains("is-open")) {
+      closePanel();
+      return;
+    }
+
+    openPanel();
+  });
+
+  closeButton?.addEventListener("click", closePanel);
+
+  backButton?.addEventListener("click", showCategoryQuestion);
+
+  sendButton?.addEventListener("click", (event) => {
+    if (sendButton.classList.contains("is-disabled")) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!widget.classList.contains("is-open")) {
+      return;
+    }
+
+    if (!widget.contains(event.target)) {
+      closePanel();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && widget.classList.contains("is-open")) {
+      closePanel();
+    }
+  });
+
+  showCategoryQuestion();
+})();

@@ -2861,6 +2861,14 @@ body.is-leaving {
   background: transparent;
 }
 
+.consulting-listing-page .section-kicker {
+  color: #b87445;
+}
+
+.consulting-listing-page .page-side-card .section-kicker {
+  color: #8f5c40;
+}
+
 .academy-listing-page {
   background: #efe1d2;
 }
@@ -5624,6 +5632,58 @@ main > .section + .section {
   animation-delay: 0.32s;
 }
 
+.lumina-wa-quick {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 260;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #11a44c, #0a7f39);
+  box-shadow: 0 16px 36px rgba(9, 63, 35, 0.34);
+}
+
+.lumina-wa-quick img {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+.lumina-wa-quick:hover,
+.lumina-wa-quick:focus-visible {
+  filter: brightness(1.06);
+  outline: none;
+}
+
+.lumina-wa-static {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 280;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #11a44c, #0a7f39);
+  box-shadow: 0 16px 36px rgba(9, 63, 35, 0.34);
+}
+
+.lumina-wa-static img {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+.lumina-wa-static:hover,
+.lumina-wa-static:focus-visible {
+  filter: brightness(1.06);
+  outline: none;
+}
+
 .lumina-proof-widget {
   position: fixed;
   left: 18px;
@@ -5715,6 +5775,227 @@ main > .section + .section {
 .lumina-proof-close:focus-visible {
   background: rgba(11, 31, 59, 0.18);
   outline: none;
+}
+
+.lumina-wa-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 220;
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.lumina-wa-widget > * {
+  pointer-events: auto;
+}
+
+.lumina-wa-fab {
+  border: 0;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #11a44c, #0a7f39);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  min-height: 0;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 16px 36px rgba(9, 63, 35, 0.34);
+}
+
+.lumina-wa-fab:hover,
+.lumina-wa-fab:focus-visible {
+  filter: brightness(1.06);
+  outline: none;
+}
+
+.lumina-wa-fab-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+}
+
+.lumina-wa-fab-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.lumina-wa-fab-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.lumina-wa-fab-text {
+  display: none;
+}
+
+.lumina-wa-panel {
+  width: min(390px, calc(100vw - 24px));
+  border-radius: 18px;
+  border: 1px solid rgba(11, 31, 59, 0.14);
+  background: rgba(255, 255, 255, 0.99);
+  box-shadow: 0 24px 48px rgba(11, 31, 59, 0.24);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 260ms ease, transform 260ms ease;
+  pointer-events: none;
+}
+
+.lumina-wa-widget.is-open .lumina-wa-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.lumina-wa-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(11, 31, 59, 0.1);
+  background: linear-gradient(145deg, #eef8f2, #ffffff);
+}
+
+.lumina-wa-header strong {
+  color: #10311e;
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.lumina-wa-close {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(11, 31, 59, 0.1);
+  color: #12302d;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lumina-wa-close:hover,
+.lumina-wa-close:focus-visible {
+  background: rgba(11, 31, 59, 0.18);
+  outline: none;
+}
+
+.lumina-wa-messages {
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+  max-height: 210px;
+  overflow-y: auto;
+  background: #f7faf8;
+}
+
+.lumina-wa-message {
+  margin: 0;
+  font-size: 0.89rem;
+  line-height: 1.4;
+  padding: 9px 11px;
+  border-radius: 12px;
+  max-width: 90%;
+}
+
+.lumina-wa-message.is-bot {
+  justify-self: start;
+  color: #143428;
+  background: #e6f5ea;
+}
+
+.lumina-wa-message.is-user {
+  justify-self: end;
+  color: #1d2d45;
+  background: #e8efff;
+}
+
+.lumina-wa-options {
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lumina-wa-option {
+  border: 1px solid rgba(17, 115, 52, 0.28);
+  background: #fff;
+  color: #13512f;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.83rem;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 8px 11px;
+  cursor: pointer;
+}
+
+.lumina-wa-option:hover,
+.lumina-wa-option:focus-visible {
+  background: #eaf8ef;
+  outline: none;
+}
+
+.lumina-wa-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 12px;
+}
+
+.lumina-wa-back,
+.lumina-wa-send {
+  border-radius: 999px;
+  min-height: 38px;
+  border: 0;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 9px 14px;
+}
+
+.lumina-wa-back {
+  cursor: pointer;
+  color: #173357;
+  background: rgba(19, 73, 131, 0.12);
+}
+
+.lumina-wa-send {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(145deg, #11a44c, #0a7f39);
+  box-shadow: 0 14px 28px rgba(9, 63, 35, 0.22);
+}
+
+.lumina-wa-back:hover,
+.lumina-wa-back:focus-visible {
+  background: rgba(19, 73, 131, 0.2);
+  outline: none;
+}
+
+.lumina-wa-send:hover,
+.lumina-wa-send:focus-visible {
+  filter: brightness(1.06);
+  outline: none;
+}
+
+.lumina-wa-send.is-disabled {
+  pointer-events: none;
+  box-shadow: none;
+  background: #9cb3a6;
 }
 
 @keyframes luminaPulse {
@@ -5832,5 +6113,33 @@ main > .section + .section {
     right: 12px;
     bottom: 12px;
     width: auto;
+  }
+
+  .lumina-wa-quick {
+    right: 14px;
+    bottom: 14px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .lumina-wa-static {
+    right: 14px;
+    bottom: 14px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .lumina-wa-widget {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  .lumina-wa-fab {
+    width: 58px;
+    height: 58px;
+  }
+
+  .lumina-wa-panel {
+    width: min(360px, calc(100vw - 24px));
   }
 }
