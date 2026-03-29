@@ -1,0 +1,34 @@
+# Lumina Digitale
+> Lumina Digitale is a Turkish digital consultancy focused on e-commerce growth, cybersecurity checks, training, and practical free tools.
+
+## Main Pages
+- [Homepage](https://luminadigitale.com/)
+- [Services Overview](https://luminadigitale.com/danismanlik-hizmetleri.html)
+- [Cyber Hub](https://luminadigitale.com/siber.html)
+- [Academy Hub](https://luminadigitale.com/akademi.html)
+- [Blog Hub](https://luminadigitale.com/blog.html)
+- [Contact](https://luminadigitale.com/iletisim.html)
+
+## Services
+- [Shopify Consulting](https://luminadigitale.com/shopify-danismanligi.html)
+- [Etsy Consulting](https://luminadigitale.com/etsy-danismanligi.html)
+- [Website Setup](https://luminadigitale.com/web-sitesi-kurulumu.html)
+- [Social Media Management](https://luminadigitale.com/sosyal-medya-yonetimi.html)
+- [Ads Mentorship](https://luminadigitale.com/reklam-yonetimi-mentor-destegi.html)
+
+## Free Tools
+- [SEO Technical Analysis Tool](https://luminadigitale.com/seo-teknik-analiz.html)
+- [Site Risk Analysis Tool](https://luminadigitale.com/site-risk-analizi.html)
+- [Link Safety Check](https://luminadigitale.com/link-kontrolu.html)
+- [Security Checkup](https://luminadigitale.com/guvenlik-checkup.html)
+- [Marketing Level Test](https://luminadigitale.com/dijital-pazarlama-seviye-testi.html)
+
+## Resources
+- [Cyber Security Pillar](https://luminadigitale.com/blog-pillar-siber-risk-omurgasi.html)
+- [E-commerce Setup Pillar](https://luminadigitale.com/blog-pillar-eticaret-kurulum-omurgasi.html)
+- [Ads Training Pillar](https://luminadigitale.com/blog-pillar-reklam-egitim-omurgasi.html)
+
+## Contact
+- Website: https://luminadigitale.com
+- Email: iletisim@luminadigitale.com
+- Instagram: https://www.instagram.com/luminadigitale

@@ -1623,7 +1623,8 @@ body.is-leaving {
   text-transform: uppercase;
 }
 
-.hero-copy h1 {
+.hero-copy h1,
+.hero-copy h2 {
   max-width: 8.8ch;
   margin-bottom: 18px;
   font-size: clamp(2.5rem, 5.2vw, 4.8rem);
@@ -2150,7 +2151,8 @@ body.is-leaving {
     border-bottom: 1px solid rgba(11, 31, 59, 0.08);
   }
 
-  .hero-copy h1 {
+  .hero-copy h1,
+  .hero-copy h2 {
     max-width: 10ch;
   }
 
@@ -2211,7 +2213,8 @@ body.is-leaving {
     padding: 28px 22px 30px;
   }
 
-  .hero-copy h1 {
+  .hero-copy h1,
+  .hero-copy h2 {
     max-width: 9ch;
     font-size: clamp(2.35rem, 12vw, 4rem);
   }

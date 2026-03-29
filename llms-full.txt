@@ -1,0 +1,64 @@
+# Lumina Digitale
+> Full AI-readable map of Lumina Digitale pages, services, tools, and educational resources.
+
+## Brand Structure
+- [Lumina Danismanlik](https://luminadigitale.com/): Main consulting landing page.
+- [Lumina Siber](https://luminadigitale.com/siber.html): Cyber risk and digital trust branch.
+- [Lumina Akademi](https://luminadigitale.com/akademi.html): Education branch for Etsy, Shopify, and ad platforms.
+
+## Core Company Pages
+- [Services](https://luminadigitale.com/hizmetler.html): Service categories and engagement models.
+- [Consulting Services](https://luminadigitale.com/danismanlik-hizmetleri.html): Detailed consulting offerings.
+- [Policies](https://luminadigitale.com/politikalar.html): Policy and legal information.
+- [Contact](https://luminadigitale.com/iletisim.html): Main contact and intake.
+
+## Consulting and Training Services
+- [Shopify Consulting](https://luminadigitale.com/shopify-danismanligi.html): Shopify setup and growth consulting.
+- [Etsy Consulting](https://luminadigitale.com/etsy-danismanligi.html): Etsy listing and store optimization support.
+- [Website Setup](https://luminadigitale.com/web-sitesi-kurulumu.html): Website setup and conversion-focused structure.
+- [Social Media Management](https://luminadigitale.com/sosyal-medya-yonetimi.html): Content and social channel management.
+- [Ads Mentorship](https://luminadigitale.com/reklam-yonetimi-mentor-destegi.html): Campaign mentoring and management.
+- [Etsy Training](https://luminadigitale.com/etsy-egitimi.html): Training page for Etsy workflows.
+- [Shopify Training](https://luminadigitale.com/shopify-egitimi.html): Training page for Shopify operations.
+- [Meta and Google Ads Training](https://luminadigitale.com/meta-google-ads-egitimi.html): Paid media learning path.
+- [Academy Programs](https://luminadigitale.com/akademi-egitimleri.html): Education listing hub.
+
+## Free Tools and Checkups
+- [Tools Hub](https://luminadigitale.com/araclar.html): All free tools directory.
+- [SEO Technical Analysis](https://luminadigitale.com/seo-teknik-analiz.html): Technical SEO risk scoring.
+- [Site Risk Analysis](https://luminadigitale.com/site-risk-analizi.html): Risk scan for suspicious patterns.
+- [Link Check](https://luminadigitale.com/link-kontrolu.html): URL safety check utility.
+- [Security Checkup](https://luminadigitale.com/guvenlik-checkup.html): Quick security health checks.
+- [Password Tools](https://luminadigitale.com/parola-araclari.html): Password-related utilities.
+- [ROAS Calculator](https://luminadigitale.com/roas-hesaplayici.html): Paid media profitability calculation.
+- [Discount Calculator](https://luminadigitale.com/indirim-hesaplayici.html): Discount and reverse-price calculations.
+- [Marketing Level Test](https://luminadigitale.com/dijital-pazarlama-seviye-testi.html): Self-assessment quiz for marketing maturity.
+- [Etsy Product Analysis](https://luminadigitale.com/etsy-urun-analizi.html): Product-level analysis support.
+- [Percentage Calculator](https://luminadigitale.com/yuzde-hesaplayici.html): Percent change and ratio calculator.
+- [VAT Calculator](https://luminadigitale.com/kdv-hesaplayici.html): VAT math utility.
+- [Margin Calculator](https://luminadigitale.com/kar-marji-hesaplayici.html): Margin and profitability utility.
+- [Commission Calculator](https://luminadigitale.com/komisyon-hesaplayici.html): Marketplace commission utility.
+
+## Content and Blog
+- [Blog Hub](https://luminadigitale.com/blog.html): Editorial hub for security, e-commerce, and growth.
+- [Cyber Risk Pillar](https://luminadigitale.com/blog-pillar-siber-risk-omurgasi.html): Pillar article for cyber-risk content.
+- [E-commerce Setup Pillar](https://luminadigitale.com/blog-pillar-eticaret-kurulum-omurgasi.html): Pillar article for setup workflows.
+- [Ads Learning Pillar](https://luminadigitale.com/blog-pillar-reklam-egitim-omurgasi.html): Pillar article for ads education.
+- [Trusted Site Checklist](https://luminadigitale.com/blog-guvenilir-site-10-pratik-kontrol.html): Practical trust checks before transactions.
+- [Scam Site Detection](https://luminadigitale.com/blog-dolandirici-site-nasil-anlasilir.html): Scam detection guide.
+- [Safe Link Guide](https://luminadigitale.com/blog-link-guvenli-mi-nasil-anlarim.html): Link safety guide.
+- [Etsy Store Setup Guide](https://luminadigitale.com/blog-etsy-magazasi-nasil-acilir.html): Etsy launch guide.
+- [Shopify Store Setup Guide](https://luminadigitale.com/blog-shopify-magazasi-nasil-acilir.html): Shopify launch guide.
+- [Shopify vs Etsy Guide](https://luminadigitale.com/blog-shopify-mi-etsy-mi.html): Platform comparison.
+- [Meta Ads vs Google Ads Learning Path](https://luminadigitale.com/blog-meta-ads-google-ads-nasil-ogrenebilirim.html): Learning roadmap.
+
+## Crawl and Index References
+- [XML Sitemap](https://luminadigitale.com/sitemap.xml)
+- [Robots Policy](https://luminadigitale.com/robots.txt)
+- [llms.txt](https://luminadigitale.com/llms.txt)
+- [llms-full.txt](https://luminadigitale.com/llms-full.txt)
+
+## Contact and Social
+- Website: https://luminadigitale.com
+- Email: iletisim@luminadigitale.com
+- Instagram: https://www.instagram.com/luminadigitale
