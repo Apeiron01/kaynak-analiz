@@ -4209,6 +4209,50 @@ main > .section + .section {
   color: var(--ink-soft);
 }
 
+.services-page #hizli-yanit .bullet-list-light li {
+  color: var(--ink-soft);
+}
+
+.services-page #hizli-yanit .bullet-list-light a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: rgba(11, 31, 59, 0.3);
+  text-underline-offset: 3px;
+}
+
+.services-page #hizli-yanit .bullet-list-light a:hover,
+.services-page #hizli-yanit .bullet-list-light a:focus-visible {
+  color: var(--trust);
+}
+
+.services-page #sss.services-category-shell {
+  background: #102947;
+  border-color: rgba(11, 31, 59, 0.2);
+}
+
+.services-page #sss .services-category-head h2,
+.services-page #sss .services-category-head p {
+  color: var(--white);
+}
+
+.services-page #sss .faq-item {
+  background: var(--navy);
+  border-color: var(--navy-line);
+  box-shadow: none;
+}
+
+.services-page #sss .faq-question {
+  color: var(--white);
+}
+
+.services-page #sss .faq-answer p {
+  color: rgba(247, 249, 252, 0.82);
+}
+
+.services-page #sss .faq-icon {
+  color: var(--accent);
+}
+
 .services-cards-large {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
