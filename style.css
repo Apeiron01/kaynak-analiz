@@ -84,6 +84,42 @@ code {
   background: var(--canvas-soft);
 }
 
+.quick-answer-block {
+  background: transparent;
+  border-top: 1px solid var(--light-line);
+}
+
+.quick-answer-block h2 {
+  color: var(--ink);
+}
+
+.quick-answer-block p,
+.quick-answer-block li {
+  color: var(--ink-soft);
+}
+
+.quick-answer-block ul {
+  margin-top: 18px;
+}
+
+.consulting-page .quick-answer-block {
+  background: var(--consulting-cream);
+  border-top-color: rgba(78, 62, 54, 0.2);
+}
+
+.consulting-page .quick-answer-block h2 {
+  color: var(--consulting-brown);
+}
+
+.consulting-page .quick-answer-block p,
+.consulting-page .quick-answer-block li {
+  color: var(--consulting-brown-soft);
+}
+
+.consulting-page .quick-answer-block .section-kicker {
+  color: var(--consulting-orange);
+}
+
 .section-contrast {
   background: var(--navy);
 }
