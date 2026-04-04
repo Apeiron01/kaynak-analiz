@@ -1,7 +1,8 @@
 const body = document.body;
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+const nativeFormSubmit = HTMLFormElement.prototype.submit;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const sharedShell = window.LuminaSharedShell?.init() || {};
+const closeNavigation = sharedShell.closeNavigation || (() => {});
 let activeScrollAnimationFrame = null;
 
 document.querySelectorAll('link[data-async-stylesheet]').forEach((link) => {
@@ -19,186 +20,6 @@ document.querySelectorAll('link[data-async-stylesheet]').forEach((link) => {
 });
 
 body.classList.add("is-ready");
-document.documentElement.style.scrollBehavior = "smooth";
-
-const closeNavigation = () => {
-  if (!menuToggle || !navLinks) {
-    return;
-  }
-
-  navLinks.classList.remove("active");
-  menuToggle.setAttribute("aria-expanded", "false");
-};
-
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = navLinks.classList.toggle("active");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeNavigation);
-  });
-}
-
-document.querySelectorAll("[data-site-switcher]").forEach((switcher) => {
-  const toggle = switcher.querySelector(".site-switcher-toggle");
-  if (!toggle) {
-    return;
-  }
-
-  toggle.addEventListener("click", (event) => {
-    event.stopPropagation();
-    const isOpen = switcher.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  switcher.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      switcher.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
-  });
-});
-
-const getLanguageFromPathname = () => (/\-en\.html$/i.test(window.location.pathname) ? "en" : "tr");
-
-const toLanguagePath = (targetLanguage) => {
-  const currentPathname = window.location.pathname || "/";
-  const normalizedPathname = currentPathname === "/" ? "/index.html" : currentPathname;
-  const isEnglishPath = /\-en\.html$/i.test(normalizedPathname);
-  let targetPathname = normalizedPathname;
-
-  if (targetLanguage === "en" && !isEnglishPath) {
-    targetPathname = normalizedPathname.replace(/\.html$/i, "-en.html");
-  }
-
-  if (targetLanguage === "tr" && isEnglishPath) {
-    targetPathname = normalizedPathname.replace(/\-en\.html$/i, ".html");
-  }
-
-  if (targetPathname === "/index.html") {
-    targetPathname = "/";
-  }
-
-  return `${targetPathname}${window.location.search}${window.location.hash}`;
-};
-
-const closeLanguageSwitcher = () => {
-  document.querySelectorAll("[data-lang-switcher].is-open").forEach((switcher) => {
-    switcher.classList.remove("is-open");
-    switcher.querySelector(".lang-switcher-toggle")?.setAttribute("aria-expanded", "false");
-  });
-};
-
-const updateLanguageSwitcherState = () => {
-  const activeLanguage = getLanguageFromPathname();
-
-  document.querySelectorAll("[data-lang-switcher]").forEach((switcher) => {
-    const currentLabel = switcher.querySelector("[data-lang-current]");
-    if (currentLabel) {
-      currentLabel.textContent = activeLanguage === "en" ? "EN" : "TR";
-    }
-
-    switcher.querySelectorAll("[data-lang-option]").forEach((option) => {
-      const optionLanguage = option.getAttribute("data-lang-option");
-      const isActive = optionLanguage === activeLanguage;
-      option.classList.toggle("is-active", isActive);
-      option.setAttribute("aria-current", isActive ? "true" : "false");
-      option.setAttribute("href", toLanguagePath(optionLanguage));
-    });
-  });
-};
-
-const injectLanguageSwitchers = () => {
-  document.querySelectorAll(".site-header .nav").forEach((nav) => {
-    if (nav.querySelector("[data-lang-switcher]")) {
-      return;
-    }
-
-    const switcher = document.createElement("div");
-    switcher.className = "lang-switcher";
-    switcher.dataset.langSwitcher = "true";
-    switcher.innerHTML = [
-      '<button class="lang-switcher-toggle" type="button" aria-label="Dil seçimi" aria-expanded="false">',
-      '<span class="lang-switcher-current" data-lang-current>TR</span>',
-      "</button>",
-      '<div class="lang-switcher-menu" role="menu">',
-      '<a class="lang-switcher-link" href="#" data-lang-option="tr" role="menuitem">Türkçe</a>',
-      '<a class="lang-switcher-link" href="#" data-lang-option="en" role="menuitem">English</a>',
-      "</div>",
-    ].join("");
-
-    const siteSwitcher = nav.querySelector("[data-site-switcher]");
-    if (siteSwitcher && siteSwitcher.parentNode === nav) {
-      nav.insertBefore(switcher, siteSwitcher);
-    } else {
-      nav.append(switcher);
-    }
-  });
-
-  document.querySelectorAll("[data-lang-switcher]").forEach((switcher) => {
-    if (switcher.dataset.langBound === "true") {
-      return;
-    }
-
-    switcher.dataset.langBound = "true";
-    const toggle = switcher.querySelector(".lang-switcher-toggle");
-    if (!toggle) {
-      return;
-    }
-
-    toggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const isOpen = switcher.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    switcher.querySelectorAll("[data-lang-option]").forEach((option) => {
-      option.addEventListener("click", (event) => {
-        event.preventDefault();
-        const targetLanguage = option.getAttribute("data-lang-option");
-        if (targetLanguage) {
-          window.location.href = toLanguagePath(targetLanguage);
-        }
-      });
-    });
-  });
-
-  updateLanguageSwitcherState();
-};
-
-injectLanguageSwitchers();
-
-document.addEventListener("click", (event) => {
-  document.querySelectorAll("[data-site-switcher].is-open").forEach((switcher) => {
-    if (!switcher.contains(event.target)) {
-      switcher.classList.remove("is-open");
-      switcher.querySelector(".site-switcher-toggle")?.setAttribute("aria-expanded", "false");
-    }
-  });
-
-  document.querySelectorAll("[data-lang-switcher].is-open").forEach((switcher) => {
-    if (!switcher.contains(event.target)) {
-      switcher.classList.remove("is-open");
-      switcher.querySelector(".lang-switcher-toggle")?.setAttribute("aria-expanded", "false");
-    }
-  });
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key !== "Escape") {
-    return;
-  }
-
-  closeNavigation();
-  closeLanguageSwitcher();
-
-  document.querySelectorAll("[data-site-switcher].is-open").forEach((switcher) => {
-    switcher.classList.remove("is-open");
-    switcher.querySelector(".site-switcher-toggle")?.setAttribute("aria-expanded", "false");
-  });
-});
 
 const getScrollOffset = () => {
   const header = document.querySelector(".site-header");
@@ -350,6 +171,98 @@ window.addEventListener("load", () => {
 
 window.addEventListener("hashchange", () => {
   scrollToHashTarget(window.location.hash, { updateHistory: false });
+});
+
+const getHomepageThanksRedirectUrl = (form) => {
+  const nextInput = form.querySelector('input[name="_next"]');
+  if (nextInput?.value) {
+    return nextInput.value;
+  }
+
+  return new URL("tesekkurler.html", window.location.href).toString();
+};
+
+const initHomepageForms = () => {
+  document.querySelectorAll('form[data-formsubmit-ajax="true"]').forEach((form) => {
+    if (form.dataset.ajaxBound === "true") {
+      return;
+    }
+
+    form.dataset.ajaxBound = "true";
+
+    form.addEventListener("submit", async (event) => {
+      if (form.dataset.submitting === "true") {
+        event.preventDefault();
+        return;
+      }
+
+      const action = (form.getAttribute("action") || "").trim();
+      const submitButton = event.submitter instanceof HTMLElement ? event.submitter : form.querySelector('[type="submit"]');
+
+      form.dataset.submitting = "true";
+      submitButton?.setAttribute("disabled", "disabled");
+      submitButton?.setAttribute("aria-busy", "true");
+
+      if (!action) {
+        return;
+      }
+
+      event.preventDefault();
+
+      try {
+        const response = await fetch(action.replace("https://formsubmit.co/", "https://formsubmit.co/ajax/"), {
+          method: (form.getAttribute("method") || "POST").toUpperCase(),
+          headers: {
+            Accept: "application/json",
+          },
+          body: new FormData(form),
+        });
+
+        const rawBody = await response.text();
+        let payload = {};
+
+        if (rawBody) {
+          try {
+            payload = JSON.parse(rawBody);
+          } catch (_error) {
+            payload = {};
+          }
+        }
+
+        const isSuccess =
+          response.ok &&
+          (payload.success === undefined || payload.success === true || payload.success === "true");
+
+        if (!isSuccess) {
+          throw new Error("Homepage FormSubmit AJAX request failed.");
+        }
+
+        window.location.href = getHomepageThanksRedirectUrl(form);
+      } catch (_error) {
+        nativeFormSubmit.call(form);
+      } finally {
+        form.dataset.submitting = "false";
+        submitButton?.removeAttribute("disabled");
+        submitButton?.removeAttribute("aria-busy");
+      }
+    });
+  });
+};
+
+if ("requestIdleCallback" in window) {
+  window.requestIdleCallback(initHomepageForms, { timeout: 1800 });
+} else {
+  window.setTimeout(initHomepageForms, 500);
+}
+
+window.addEventListener("pageshow", () => {
+  document.querySelectorAll('form[data-formsubmit-ajax="true"]').forEach((form) => {
+    form.dataset.submitting = "false";
+    form.querySelectorAll('[type="submit"]').forEach((button) => {
+      button.removeAttribute("disabled");
+      button.removeAttribute("aria-busy");
+    });
+  });
 });
 
 const revealItems = document.querySelectorAll("[data-reveal]");
