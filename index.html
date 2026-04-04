@@ -12,7 +12,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href="https://luminadigitale.com/" />
-  <link rel="preload" as="image" href="assets/images/ld-hero-01.webp?v=20260310-04" type="image/webp" />
+  <link rel="preload" as="image" href="assets/images/ld-hero-01-960.webp?v=20260404-01" type="image/webp" imagesrcset="assets/images/ld-hero-01-480.webp?v=20260404-01 480w, assets/images/ld-hero-01-960.webp?v=20260404-01 960w, assets/images/ld-hero-01.webp?v=20260310-04 1600w" imagesizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1100px) 100vw, 58vw" />
   <meta property="og:title" content="Lumina Danışmanlık | E-Ticaret, Web ve Büyüme Danışmanlığı" />
   <meta property="og:description" content="Shopify, Etsy, web sitesi kurulumu, reklam yönetimi ve birebir mentor desteği." />
   <meta property="og:type" content="website" />
@@ -26,7 +26,11 @@
   <link rel="icon" type="image/svg+xml" href="assets/images/site-danismanlik.svg?v=20260310-02" />
   <link rel="apple-touch-icon" href="assets/images/site-danismanlik.svg?v=20260310-02" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="home-critical.css?v=20260404-01" />
+  <link rel="preload" href="style.css?v=20260404-01" as="style" />
+  <link rel="stylesheet" href="style.css?v=20260404-01" media="print" data-async-stylesheet />
+  <noscript><link rel="stylesheet" href="style.css?v=20260404-01" /></noscript>
+  <script src="head.js?v=20260404-01"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -206,7 +210,7 @@
   <main class="page-main">
     <section class="section consulting-stage">
       <div class="container">
-        <nav class="consulting-anchor-bar reveal" data-reveal aria-label="Danışmanlık iç menü">
+        <nav class="consulting-anchor-bar" aria-label="Danışmanlık iç menü">
           <a href="#biz">Biz Kimiz?</a>
           <a href="#yaklasim">Felsefemiz</a>
           <a href="#iletisim">İletişime Geçin</a>
@@ -214,23 +218,23 @@
           <a href="blog.html">Bloglarımız</a>
         </nav>
 
-        <section class="consulting-showcase reveal" data-reveal data-consulting-carousel>
+        <section class="consulting-showcase" data-consulting-carousel>
           <div class="consulting-showcase-visual">
             <article class="consulting-showcase-slide is-active" data-consulting-slide="0">
               <div class="consulting-showcase-asset consulting-showcase-asset-hero-01">
-                <img class="consulting-showcase-media" src="assets/images/ld-hero-01.webp?v=20260310-04" alt="Lumina Danışmanlık öne çıkan görsel" width="1600" height="1200" fetchpriority="high" decoding="async" />
+                <img class="consulting-showcase-media" src="assets/images/ld-hero-01-960.webp?v=20260404-01" srcset="assets/images/ld-hero-01-480.webp?v=20260404-01 480w, assets/images/ld-hero-01-960.webp?v=20260404-01 960w, assets/images/ld-hero-01.webp?v=20260310-04 1600w" sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1100px) 100vw, 58vw" alt="Lumina Danışmanlık öne çıkan görsel" width="1600" height="1200" fetchpriority="high" decoding="async" />
               </div>
             </article>
 
             <article class="consulting-showcase-slide" data-consulting-slide="1" aria-hidden="true">
               <div class="consulting-showcase-asset consulting-showcase-asset-hero-02">
-                <img class="consulting-showcase-media" src="assets/images/ld-hero-02.webp?v=20260310-04" alt="Lumina Danışmanlık kreatif görsel" width="1600" height="1200" loading="lazy" fetchpriority="low" decoding="async" />
+                <img class="consulting-showcase-media" src="assets/images/ld-hero-02-960.webp?v=20260404-01" srcset="assets/images/ld-hero-02-480.webp?v=20260404-01 480w, assets/images/ld-hero-02-960.webp?v=20260404-01 960w, assets/images/ld-hero-02.webp?v=20260310-04 1600w" sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1100px) 100vw, 58vw" alt="Lumina Danışmanlık kreatif görsel" width="1600" height="1200" loading="lazy" fetchpriority="low" decoding="async" />
               </div>
             </article>
 
             <article class="consulting-showcase-slide" data-consulting-slide="2" aria-hidden="true">
               <div class="consulting-showcase-asset consulting-showcase-asset-hero-03">
-                <img class="consulting-showcase-media" src="assets/images/ld-hero-03.webp?v=20260310-04" alt="Lumina Danışmanlık dönüşüm görseli" width="1600" height="1200" loading="lazy" fetchpriority="low" decoding="async" />
+                <img class="consulting-showcase-media" src="assets/images/ld-hero-03-960.webp?v=20260404-01" srcset="assets/images/ld-hero-03-480.webp?v=20260404-01 480w, assets/images/ld-hero-03-960.webp?v=20260404-01 960w, assets/images/ld-hero-03.webp?v=20260310-04 1600w" sizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1100px) 100vw, 58vw" alt="Lumina Danışmanlık dönüşüm görseli" width="1600" height="1200" loading="lazy" fetchpriority="low" decoding="async" />
               </div>
             </article>
           </div>
@@ -249,7 +253,7 @@
           </aside>
         </section>
 
-        <div class="consulting-quote-strip reveal" data-reveal>
+        <div class="consulting-quote-strip">
           <p>"İşletmenizin yalnızca yayına değil, düzenli büyüyen bir sisteme ihtiyacı varsa her adımda yanınızdayız."</p>
           <a href="https://www.instagram.com/luminadigitale" target="_blank" rel="noreferrer">[ Instagram ]</a>
         </div>

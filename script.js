@@ -813,8 +813,16 @@ if (consultingCarousel) {
 const tickerStrips = document.querySelectorAll(".ticker-strip");
 if (tickerStrips.length) {
   const tickerMeasures = [];
+  let tickerRefreshFrame = null;
   const refreshAllTickers = () => {
-    tickerMeasures.forEach((measure) => measure());
+    if (tickerRefreshFrame) {
+      window.cancelAnimationFrame(tickerRefreshFrame);
+    }
+
+    tickerRefreshFrame = window.requestAnimationFrame(() => {
+      tickerMeasures.forEach((measure) => measure());
+      tickerRefreshFrame = null;
+    });
   };
 
   tickerStrips.forEach((strip) => {
@@ -833,23 +841,27 @@ if (tickerStrips.length) {
       }
     };
 
-    const ensureTickerLoop = () => {
+    const readBaseWidth = () => Math.max(1, Math.ceil(firstRow.getBoundingClientRect().width));
+
+    const ensureTickerLoop = (visibleWidth, baseWidth) => {
       resetTickerLoop();
-      const visibleWidth = strip.clientWidth;
-      const baseWidth = Math.max(1, firstRow.getBoundingClientRect().width);
       const targetRows = Math.max(2, Math.ceil((visibleWidth * 3) / baseWidth));
       const clonesNeeded = Math.max(0, targetRows - baseRowCount);
+      const fragment = document.createDocumentFragment();
 
       for (let index = 0; index < clonesNeeded; index += 1) {
         const clone = firstRow.cloneNode(true);
         clone.setAttribute("aria-hidden", "true");
-        track.appendChild(clone);
+        fragment.appendChild(clone);
       }
+
+      track.appendChild(fragment);
     };
 
     const measureTicker = () => {
-      ensureTickerLoop();
-      const distance = Math.ceil(firstRow.getBoundingClientRect().width);
+      const visibleWidth = Math.max(1, Math.ceil(strip.getBoundingClientRect().width));
+      const distance = readBaseWidth();
+      ensureTickerLoop(visibleWidth, distance);
       const duration = Math.max(14, distance / 140);
 
       track.style.setProperty("--ticker-distance", `${distance}px`);
