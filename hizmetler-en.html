@@ -208,6 +208,133 @@
 </article>
 </div>
 </section>
+<section class="section ai-bot-services" id="chatbot-services">
+<div class="container">
+<section class="services-category-shell reveal" data-reveal="">
+<div class="services-category-head">
+<p class="section-kicker">AI bot services</p>
+<h2>We clone chatbot, agent and automation projects from one core system and customize them per client.</h2>
+<p>Our goal is not to rebuild every project from scratch. We keep one core structure and adapt channels, APIs, CRM fields, document sets and workflow rules to each client for faster deployment.</p>
+<div class="services-category-pills">
+<span>Website</span>
+<span>WhatsApp</span>
+<span>Instagram DM</span>
+<span>Telegram</span>
+<span>CRM and ERP</span>
+</div>
+</div>
+<div class="services-cards-large bot-services-grid">
+<article class="services-card services-card-strong">
+<h3>Customer Service Bot</h3>
+<p>Runs on the website, WhatsApp, Instagram DM or Telegram; answers common questions, shares order status, books appointments and opens support requests.</p>
+<ul class="bullet-list bullet-list-light">
+<li>FAQ, shipping, return and basic support flows</li>
+<li>Form, appointment and ticket collection</li>
+<li>Reply patterns adapted to the brand tone</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>Sales and Lead Collection Bot</h3>
+<p>Talks to prospects, asks qualifying questions, gets forms completed, collects quote requests and pushes data into the CRM. It removes repetitive pre-sales work from the sales team.</p>
+<ul class="bullet-list bullet-list-light">
+<li>Lead qualification and pre-quote intake</li>
+<li>CRM, email and webhook delivery</li>
+<li>Campaign, source and channel-based segmentation</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>Internal Operations Bot</h3>
+<p>Automates internal company processes. It reduces operational load in document generation, invoice checks, stock lookup, leave requests and onboarding flows.</p>
+<ul class="bullet-list bullet-list-light">
+<li>HR, accounting and operations workflows</li>
+<li>Approvals, notifications and task routing</li>
+<li>Internal tool and panel integrations</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>RPA Bots</h3>
+<p>Acts like a human on the screen; opens Excel, enters data into SAP or ERP, pulls reports from panels and moves data between systems. It is especially effective in companies running legacy systems.</p>
+<ul class="bullet-list bullet-list-light">
+<li>Screen-level task automation</li>
+<li>Excel, ERP, portal and reporting flows</li>
+<li>Bridging processes for legacy systems</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>AI Agent and LLM Bot</h3>
+<p>Works like ChatGPT but is connected to company data; reads PDFs, contracts, internal documents, product catalogs and technical documentation to answer questions. In advanced scenarios it does not only answer, it also takes action.</p>
+<ul class="bullet-list bullet-list-light">
+<li>RAG, document search and internal knowledge base</li>
+<li>Permission-controlled action workflows</li>
+<li>Department or client-based data separation</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>E-commerce Bot</h3>
+<p>Handles order, return, shipping, product recommendation, campaign messaging and review analysis flows. Commonly used across Shopify, Trendyol, Hepsiburada and WooCommerce operations.</p>
+<ul class="bullet-list bullet-list-light">
+<li>Post-order support and recommendation flows</li>
+<li>Marketplace and store integrations</li>
+<li>Review, satisfaction and campaign analysis</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>Marketing Bot</h3>
+<p>Monitors ad performance, produces reports, suggests content, creates customer segments and classifies comments or inbound messages. It becomes a packageable service for agencies and growth teams.</p>
+<ul class="bullet-list bullet-list-light">
+<li>Channel-based performance summaries</li>
+<li>Content and segment suggestions</li>
+<li>Comment, DM and lead classification</li>
+</ul>
+</article>
+<article class="services-card services-card-strong">
+<h3>Finance and Reporting Bot</h3>
+<p>Speeds up finance teams in daily sales reporting, collection tracking, reconciliation, expense classification and dashboard updates.</p>
+<ul class="bullet-list bullet-list-light">
+<li>Report generation and data consolidation</li>
+<li>Collections, reconciliation and expense flows</li>
+<li>Dashboard and management summary updates</li>
+</ul>
+</article>
+</div>
+</section>
+<section class="services-category-shell reveal" data-reveal="">
+<div class="services-category-head">
+<p class="section-kicker">Delivery model</p>
+<h2>One project, client-based cloning, separate API and data layers</h2>
+<p>The core codebase stays the same for every client. Prompting, channels, integrations, knowledge base and access permissions are configured separately per client so delivery is faster and maintenance stays centralized.</p>
+</div>
+<div class="services-policy-grid bot-delivery-grid">
+<article class="services-policy-card">
+<h3>How does it work?</h3>
+<p>We clone the base project, define the client's API keys, connect the required channels, load the corporate document set and adjust the bot behavior to the brand tone.</p>
+</article>
+<article class="services-policy-card">
+<h3>What changes per client?</h3>
+<p>The prompt, integration map, CRM fields, report format, department permissions, escalation rules and knowledge base are isolated for each client.</p>
+</article>
+</div>
+<article class="bot-prompt-card">
+<p class="section-kicker">Master prompt</p>
+<h3>Reusable main prompt template for onboarding each new client</h3>
+<p>This text can be used internally for rapid setup. Replace the bracketed fields with client data and duplicate the same project for a new account.</p>
+<pre class="prompt-block"><code>You are a [BOT_TYPE] bot working for [CLIENT_NAME].
+Brand tone: [TONE]
+Channels: [WEB], [WHATSAPP], [INSTAGRAM_DM], [TELEGRAM]
+Goals: [GOAL_1], [GOAL_2], [GOAL_3]
+Data sources: [PDFS], [CONTRACTS], [PRODUCT_CATALOG], [FAQ], [CRM]
+Integrations: [CRM], [ERP], [ECOMMERCE], [EMAIL], [WEBHOOK]
+Rules:
+1. Respond only according to the defined knowledge base and integration permissions.
+2. If you are not certain, do not guess; ask for precise information or escalate to a human team.
+3. Classify each conversation as support, sales, operations, finance or reporting.
+4. When appropriate, complete a form, create a lead, open a ticket or send a record to the related system.
+5. Answer in [LANGUAGE], with a [TONE] voice, and keep replies short, clear and action-oriented.
+6. Require a verification step for sensitive data, payments and permission-based actions.</code></pre>
+</article>
+</section>
+</div>
+</section>
 <section class="services-category-shell insight-graph-shell reveal" data-reveal="" id="guven-skoru">
 <div class="services-category-head">
 <p class="section-kicker">Success Graph</p>
