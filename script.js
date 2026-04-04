@@ -1,3 +1,17 @@
+document.querySelectorAll('link[data-async-stylesheet]').forEach((link) => {
+  const activate = () => {
+    link.media = 'all';
+  };
+
+  if (link.sheet) {
+    activate();
+    return;
+  }
+
+  link.addEventListener('load', activate, { once: true });
+  window.setTimeout(activate, 3000);
+});
+
 (() => {
   const initQuickWhatsappIcon = () => {
     if (!document.body || document.querySelector("[data-lumina-whatsapp-widget]")) {
@@ -683,6 +697,31 @@ if (consultingCarousel) {
       activeIndex = 0;
     }
 
+    const hydrateSlideAssets = (slide) => {
+      slide?.querySelectorAll("img[data-src]").forEach((image) => {
+        const nextSrc = image.dataset.src;
+        const nextSrcset = image.dataset.srcset;
+
+        if (nextSrc) {
+          image.src = nextSrc;
+          delete image.dataset.src;
+        }
+
+        if (nextSrcset) {
+          image.srcset = nextSrcset;
+          delete image.dataset.srcset;
+        }
+      });
+    };
+
+    const hydrateRemainingSlides = () => {
+      slides.forEach((slide, index) => {
+        if (index !== activeIndex) {
+          hydrateSlideAssets(slide);
+        }
+      });
+    };
+
     const clearConsultingStates = (slide) => {
       slide.classList.remove(
         "is-active",
@@ -701,6 +740,8 @@ if (consultingCarousel) {
     if (!nextSlide) {
       return;
     }
+
+    hydrateSlideAssets(nextSlide);
 
     activeIndex = index;
 
@@ -804,6 +845,16 @@ if (consultingCarousel) {
     consultingCarousel.addEventListener("mouseleave", restartConsultingAutoplay);
     consultingCarousel.addEventListener("focusin", stopConsultingAutoplay);
     consultingCarousel.addEventListener("focusout", restartConsultingAutoplay);
+
+    hydrateSlideAssets(slides[activeIndex]);
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(hydrateRemainingSlides, { timeout: 2500 });
+    } else {
+      window.addEventListener("load", () => {
+        window.setTimeout(hydrateRemainingSlides, 1200);
+      }, { once: true });
+    }
 
     syncConsultingCarousel(activeIndex);
     restartConsultingAutoplay();
