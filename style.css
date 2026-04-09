@@ -3468,6 +3468,10 @@ body.is-leaving {
   margin-top: 14px;
   min-height: 88px;
   padding: 0 26px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  column-gap: 18px;
   background: var(--consulting-brown);
   border: 1px solid rgba(226, 125, 114, 0.28);
   border-radius: 28px;
@@ -3487,6 +3491,22 @@ body.is-leaving {
 .consulting-page .brand-copy span,
 .consulting-page .nav-links a {
   color: rgba(253, 235, 220, 0.82);
+}
+
+.consulting-page .nav-links {
+  min-width: 0;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: clamp(14px, 1.2vw, 24px);
+}
+
+.consulting-page .nav-links a {
+  white-space: nowrap;
+}
+
+.consulting-page .lang-switcher,
+.consulting-page .site-switcher {
+  justify-self: end;
 }
 
 .consulting-page .nav-links a:hover,
