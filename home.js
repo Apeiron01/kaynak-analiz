@@ -5,6 +5,33 @@ const sharedShell = window.LuminaSharedShell?.init() || {};
 const closeNavigation = sharedShell.closeNavigation || (() => {});
 let activeScrollAnimationFrame = null;
 
+const initQuickWhatsappIcon = () => {
+  if (!document.body || document.querySelector("[data-lumina-whatsapp-widget]")) {
+    return;
+  }
+
+  const defaultWhatsappNumber = "905376431123";
+  const whatsappNumber = String(window.LUMINA_WHATSAPP_NUMBER || defaultWhatsappNumber).replace(/\D/g, "");
+  const messageText = encodeURIComponent(
+    ["Merhaba Lumina ekibi,", "Bilgi almak istiyorum.", `Sayfa: ${window.location.href}`].join("\n")
+  );
+
+  const href = whatsappNumber
+    ? `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${messageText}`
+    : `https://api.whatsapp.com/send?text=${messageText}`;
+
+  const link = document.createElement("a");
+  link.className = "lumina-wa-quick";
+  link.dataset.luminaWhatsappWidget = "true";
+  link.href = href;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.setAttribute("aria-label", "WhatsApp ile iletisime gec");
+  link.innerHTML = `<img src="assets/icons/whatsapp.svg" alt="" width="34" height="34" loading="eager" decoding="async" />`;
+
+  document.body.appendChild(link);
+};
+
 document.querySelectorAll('link[data-async-stylesheet]').forEach((link) => {
   const activate = () => {
     link.media = "all";
@@ -20,6 +47,12 @@ document.querySelectorAll('link[data-async-stylesheet]').forEach((link) => {
 });
 
 body.classList.add("is-ready");
+
+if (document.readyState === "complete") {
+  window.setTimeout(initQuickWhatsappIcon, 1200);
+} else {
+  window.addEventListener("load", () => window.setTimeout(initQuickWhatsappIcon, 1200), { once: true });
+}
 
 const getScrollOffset = () => {
   const header = document.querySelector(".site-header");

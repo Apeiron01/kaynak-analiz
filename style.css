@@ -1360,6 +1360,18 @@ textarea::placeholder {
     display: flex;
   }
 
+  .site-switcher,
+  .lang-switcher {
+    display: none !important;
+  }
+
+  .mobile-shell-panel {
+    display: grid;
+    gap: 14px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
   .hero-main-panel,
   .hero-side-copy,
   .hero-shape-slot,
@@ -2549,6 +2561,49 @@ body.is-leaving {
 .lang-switcher-link.is-active {
   border-color: rgba(198, 167, 92, 0.45);
   background: rgba(255, 255, 255, 0.06);
+}
+
+.mobile-shell-panel {
+  display: none;
+}
+
+.mobile-shell-group {
+  display: grid;
+  gap: 10px;
+}
+
+.mobile-shell-label {
+  margin: 0;
+  color: rgba(248, 247, 244, 0.62);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mobile-shell-links {
+  display: grid;
+  gap: 10px;
+}
+
+.mobile-shell-link {
+  min-height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(6, 18, 38, 0.12);
+}
+
+.mobile-shell-link:hover,
+.mobile-shell-link:focus-visible,
+.mobile-shell-link.is-active {
+  border-color: rgba(198, 167, 92, 0.45);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .academy-page .lang-switcher-toggle {

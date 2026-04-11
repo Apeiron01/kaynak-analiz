@@ -29,6 +29,72 @@
     });
   };
 
+  const syncMobileShellPanels = () => {
+    document.querySelectorAll(".site-header .nav").forEach((nav) => {
+      const navLinks = nav.querySelector(".nav-links");
+      if (!navLinks) {
+        return;
+      }
+
+      let panel = navLinks.querySelector("[data-mobile-shell-panel]");
+      if (!panel) {
+        panel = document.createElement("div");
+        panel.className = "mobile-shell-panel";
+        panel.dataset.mobileShellPanel = "true";
+        navLinks.append(panel);
+      }
+
+      const currentLanguage = getLanguageFromPathname();
+      const languageItems = [
+        {
+          href: toLanguagePath("tr"),
+          label: "Türkçe",
+          active: currentLanguage === "tr",
+        },
+        {
+          href: toLanguagePath("en"),
+          label: "English",
+          active: currentLanguage === "en",
+        },
+      ];
+
+      const siteItems = Array.from(nav.querySelectorAll("[data-site-switcher] .site-switcher-link")).map((link) => ({
+        href: link.getAttribute("href") || "#",
+        label: link.textContent.trim(),
+        active: link.classList.contains("is-active"),
+      }));
+
+      const renderGroup = (title, items) => {
+        if (!items.length) {
+          return "";
+        }
+
+        const links = items
+          .map(
+            (item) =>
+              `<a class="mobile-shell-link${item.active ? " is-active" : ""}" href="${item.href}"${
+                item.active ? ' aria-current="page"' : ""
+              }>${item.label}</a>`
+          )
+          .join("");
+
+        return [
+          '<section class="mobile-shell-group">',
+          `<p class="mobile-shell-label">${title}</p>`,
+          '<div class="mobile-shell-links">',
+          links,
+          "</div>",
+          "</section>",
+        ].join("");
+      };
+
+      panel.innerHTML = [
+        renderGroup("Dil", languageItems),
+        renderGroup("Site", siteItems),
+      ].join("");
+    });
+  };
+
   const ensureLanguageSwitchers = () => {
     document.querySelectorAll(".site-header .nav").forEach((nav) => {
       if (nav.querySelector("[data-lang-switcher]")) {
@@ -133,8 +199,10 @@
         menuToggle.setAttribute("aria-expanded", String(isOpen));
       });
 
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", closeNavigation);
+      navLinks.addEventListener("click", (event) => {
+        if (event.target instanceof Element && event.target.closest("a")) {
+          closeNavigation();
+        }
       });
     }
 
@@ -160,6 +228,7 @@
     });
 
     ensureLanguageSwitchers();
+    syncMobileShellPanels();
 
     if (document.documentElement.dataset.shellUiGlobalEvents !== "true") {
       document.documentElement.dataset.shellUiGlobalEvents = "true";
