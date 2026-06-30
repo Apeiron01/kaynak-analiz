@@ -9,10 +9,10 @@
     content="Lumina Danışmanlık olarak web sitesi yapımı, Shopify kurulumu, Etsy danışmanlığı, reklam yönetimi ve birebir mentor desteğini tek sayfada sunuyoruz."
   />
   <meta name="theme-color" content="#0B1F3B" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://connect.facebook.net; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co https://connect.facebook.net https://www.facebook.com; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://connect.facebook.net; script-src-attr 'none'; style-src 'self'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co https://connect.facebook.net https://www.facebook.com https://*.run.app https://*.on.aws; object-src 'none'; base-uri 'self'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="canonical" href="https://luminadigitale.com/" />
-  <link rel="preload" as="image" href="assets/images/ld-hero-01-960.webp?v=20260404-01" type="image/webp" imagesrcset="assets/images/ld-hero-01-480.webp?v=20260404-01 480w, assets/images/ld-hero-01-960.webp?v=20260404-01 960w, assets/images/ld-hero-01.webp?v=20260310-04 1600w" imagesizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1100px) 100vw, 58vw" />
+  <link rel="preload" as="image" href="assets/images/ld-hero-01-960.webp?v=20260404-01" type="image/webp" imagesrcset="assets/images/ld-hero-01-480.webp?v=20260404-01 480w, assets/images/ld-hero-01-960.webp?v=20260404-01 960w, assets/images/ld-hero-01.webp?v=20260310-04 1600w" imagesizes="(max-width: 760px) calc(100vw - 24px), (max-width: 1100px) 100vw, 58vw" fetchpriority="high" />
   <meta property="og:title" content="Lumina Danışmanlık | E-Ticaret, Web ve Büyüme Danışmanlığı" />
   <meta property="og:description" content="Shopify, Etsy, web sitesi kurulumu, reklam yönetimi ve birebir mentor desteği." />
   <meta property="og:type" content="website" />
@@ -26,7 +26,407 @@
   <link rel="icon" type="image/svg+xml" href="assets/images/site-danismanlik.svg?v=20260310-02" />
   <link rel="apple-touch-icon" href="assets/images/site-danismanlik.svg?v=20260310-02" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="home-critical.css?v=20260411-01" />
+  <style>
+    :root {
+      --canvas: #f7f9fc;
+      --ink: #0b1f3b;
+      --ink-soft: #6b778c;
+      --navy: #0b1f3b;
+      --white: #f7f9fc;
+      --accent: #c6a75c;
+      --radius-xl: 18px;
+      --transition: 180ms ease;
+      --container: 1240px;
+      --consulting-brown: #4e3e36;
+      --consulting-brown-soft: #6b5750;
+      --consulting-orange: #e27d72;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f6eadc 0%, #f4eee7 42%, #f7f9fc 100%);
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: transparent;
+    }
+
+    .consulting-page .nav {
+      margin-top: 14px;
+      min-height: 88px;
+      padding: 0 26px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto auto;
+      align-items: center;
+      column-gap: 18px;
+      background: var(--consulting-brown);
+      border: 1px solid rgba(226, 125, 114, 0.28);
+      border-radius: 28px;
+      box-shadow: 0 10px 28px rgba(78, 62, 54, 0.18);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .consulting-page .brand-mark {
+      background: #fdebdc;
+      border: 1px solid rgba(226, 125, 114, 0.52);
+      box-shadow: 0 0 0 2px rgba(226, 125, 114, 0.16);
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 3px;
+    }
+
+    .consulting-page .brand-copy strong {
+      color: #fdebdc;
+      font-weight: 700;
+    }
+
+    .consulting-page .brand-copy span {
+      font-size: 0.78rem;
+      color: rgba(253, 235, 220, 0.82);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .consulting-page .nav-links a {
+      color: rgba(253, 235, 220, 0.82);
+      font-weight: 600;
+    }
+
+    .nav-btn {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-weight: 700;
+    }
+
+    .consulting-page .nav-btn {
+      background: transparent;
+      border-color: rgba(226, 125, 114, 0.66);
+      color: #fdebdc;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    .consulting-stage {
+      padding: 16px 0 48px;
+    }
+
+    .consulting-anchor-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 20px;
+    }
+
+    .consulting-anchor-bar a {
+      min-height: 44px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(78, 62, 54, 0.1);
+      color: #4e3e36;
+    }
+
+    .consulting-showcase {
+      margin-top: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.5fr) 84px;
+      min-height: 700px;
+      border: 1px solid rgba(78, 62, 54, 0.2);
+      background: #fdebdc;
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(78, 62, 54, 0.1);
+    }
+
+    .consulting-showcase-visual {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      isolation: isolate;
+    }
+
+    .consulting-showcase-slide {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate3d(10%, 0, 0);
+      transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1), transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .consulting-showcase-slide.is-active {
+      z-index: 3;
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+
+    .consulting-showcase-asset {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .consulting-showcase-media {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .consulting-showcase-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 42px;
+      border-left: 1px solid rgba(78, 62, 54, 0.2);
+      background: #fdebdc;
+    }
+
+    .consulting-showcase-copy h1 {
+      margin: 0 0 10px;
+      font-size: clamp(4rem, 7vw, 5.6rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+      color: var(--consulting-brown);
+    }
+
+    .consulting-showcase-copy p {
+      margin: 0;
+      font-size: 1.28rem;
+      font-weight: 600;
+      color: var(--consulting-brown-soft);
+      line-height: 1.45;
+    }
+
+    .consulting-showcase-rail {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 56px 0 22px;
+      background: #050505;
+    }
+
+    .consulting-showcase-rail a,
+    .consulting-showcase-rail span {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      color: var(--white);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .consulting-showcase-next {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #e27d72;
+      color: #fdebdc;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(5, 5, 5, 0.3);
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .consulting-quote-strip {
+      margin-top: 18px;
+      padding: 18px 22px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(78, 62, 54, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .consulting-quote-strip p,
+    .consulting-quote-strip a {
+      margin: 0;
+      color: #4e3e36;
+    }
+
+    @media (max-width: 1180px) {
+      .consulting-page .nav {
+        padding: 16px 20px;
+        grid-template-columns: auto 1fr auto auto;
+        grid-template-rows: auto auto;
+        row-gap: 12px;
+        min-height: auto;
+      }
+      .consulting-page .brand {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .consulting-page .lang-switcher {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end;
+      }
+      .consulting-page .site-switcher {
+        grid-column: 4;
+        grid-row: 1;
+        justify-self: end;
+      }
+      .consulting-page .nav-links {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+        border-top: 1px solid rgba(226, 125, 114, 0.16);
+        padding-top: 12px;
+      }
+      .consulting-showcase {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+      .consulting-showcase-visual {
+        min-height: 420px;
+      }
+      .consulting-showcase-slide {
+        position: absolute;
+        inset: 0;
+      }
+      .consulting-showcase-rail {
+        min-height: 84px;
+        flex-direction: row;
+        padding: 0 24px;
+      }
+      .consulting-showcase-rail a,
+      .consulting-showcase-rail span {
+        writing-mode: initial;
+        transform: none;
+      }
+      .consulting-quote-strip {
+        grid-template-columns: 1fr;
+      }
+      .consulting-quote-strip a {
+        border-left: 0;
+        border-top: 1px solid rgba(78, 62, 54, 0.2);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .nav {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 12px;
+      }
+      .consulting-page .nav {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-rows: none;
+        row-gap: 0;
+        min-height: 76px;
+        padding: 12px 16px 14px;
+      }
+      .consulting-page .brand,
+      .consulting-page .nav-links {
+        grid-column: auto;
+        grid-row: auto;
+        justify-self: auto;
+        width: auto;
+        margin-top: 0;
+        border-top: 0;
+        padding-top: 0;
+      }
+      .academy-page .nav {
+        min-height: 76px;
+        padding: 12px 16px 14px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-toggle {
+        display: inline-flex;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(var(--container), calc(100% - 24px));
+      }
+      .consulting-anchor-bar {
+        display: none;
+      }
+      .consulting-showcase-visual {
+        min-height: 340px;
+      }
+      .consulting-showcase-copy {
+        padding: 22px;
+      }
+    }
+  </style>
   <link rel="preload" href="style.css?v=20260411-01" as="style" />
   <link rel="stylesheet" href="style.css?v=20260411-01" media="print" data-async-stylesheet />
   <noscript><link rel="stylesheet" href="style.css?v=20260411-01" /></noscript>

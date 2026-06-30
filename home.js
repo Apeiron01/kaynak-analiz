@@ -378,14 +378,14 @@ const initConsultingCarousel = (() => {
 
     const hydrateSlideAssets = (slide) => {
       slide?.querySelectorAll("img[data-src]").forEach((image) => {
-        if (image.dataset.src) {
-          image.src = image.dataset.src;
-          delete image.dataset.src;
-        }
-
         if (image.dataset.srcset) {
           image.srcset = image.dataset.srcset;
           delete image.dataset.srcset;
+        }
+
+        if (image.dataset.src) {
+          image.src = image.dataset.src;
+          delete image.dataset.src;
         }
       });
     };
