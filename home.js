@@ -32,19 +32,7 @@ const initQuickWhatsappIcon = () => {
   document.body.appendChild(link);
 };
 
-document.querySelectorAll('link[data-async-stylesheet]').forEach((link) => {
-  const activate = () => {
-    link.media = "all";
-  };
 
-  if (link.sheet) {
-    activate();
-    return;
-  }
-
-  link.addEventListener("load", activate, { once: true });
-  window.setTimeout(activate, 3000);
-});
 
 body.classList.add("is-ready");
 
