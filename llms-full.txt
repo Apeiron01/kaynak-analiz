@@ -67,6 +67,9 @@
 - [Custom software development](https://luminadigitale.com/yazilim-gelistirme.html)
 - [Workflow automation and research bots](https://luminadigitale.com/otomasyon-bot-gelistirme.html)
 - [Technical SEO and AI search consulting](https://luminadigitale.com/seo-geo-danismanligi.html)
+- [Website and Shopify store monitoring service](https://luminadigitale.com/site-magaza-nobeti.html)
 - [Lumina Digitale products, mobile apps and client development references](https://luminadigitale.com/referanslar.html)
 
 Lumina Digitale was founded by Taha Bayar in 2024. Kionel, GamersPilot, CarQR and Skater are Lumina Digitale products. Namera Academy is client development work; the client owns its brand and product. Mori and Mergeverse are in development/testing, not publicly released. Crypto-related research is currently backtesting and paper trading; live execution is not implemented.
+
+Site and store watch is Lumina Digitale's monitoring service for websites and Shopify stores. It reads public pages only (no login or API key), checks every 10 minutes by default, and alerts after a problem appears in two consecutive checks: downtime, slow response, an SSL certificate within 14 days of expiry, a home page set to noindex, sold-out products, price changes and a sudden drop in the number of live products. Plans: Watch at 750 TRY or 29 USD per month (monitoring, alerts, monthly report) and Watch + Fix at 2,500 TRY or 99 USD per month (includes fix time). Etsy shops are not covered by public-page monitoring; they need Etsy's official API and the shop owner's approval.

@@ -36,6 +36,7 @@
 ## Software, automation and development references
 - [Custom software development](https://luminadigitale.com/yazilim-gelistirme.html)
 - [Workflow automation and research bots](https://luminadigitale.com/otomasyon-bot-gelistirme.html)
+- [Website and Shopify store monitoring service](https://luminadigitale.com/site-magaza-nobeti.html)
 - [Technical SEO and AI search consulting](https://luminadigitale.com/seo-geo-danismanligi.html)
 - [Lumina Digitale products, mobile apps and client development references](https://luminadigitale.com/referanslar.html)
 

@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://luminadigitale.com/'
-NEW = ('referanslar', 'yazilim-gelistirme', 'otomasyon-bot-gelistirme', 'seo-geo-danismanligi')
+NEW = ('referanslar', 'yazilim-gelistirme', 'otomasyon-bot-gelistirme', 'seo-geo-danismanligi', 'site-magaza-nobeti')
 errors, notes = [], set()
 pages = {}
 for path in ROOT.glob('*.html'):
