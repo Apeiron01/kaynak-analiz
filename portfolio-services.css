@@ -4,12 +4,12 @@
 .ld-card h3 { margin:12px 0; font-size:1.4rem; line-height:1.3; }
 .ld-card p { line-height:1.75; }
 .ld-card a { text-decoration:underline; text-underline-offset:4px; }
-.ld-brand { display:flex; align-items:center; justify-content:center; width:96px; height:96px; padding:12px; margin-bottom:18px; background:#fff; border:1px solid #e9dfd6; border-radius:20px; }
-.ld-brand img { display:block; width:72px; height:72px; object-fit:contain; }
+.ld-brand { display:flex; align-items:center; justify-content:center; width:88px; height:88px; padding:0; margin-bottom:18px; background:transparent; border:0; border-radius:18px; overflow:hidden; }
+.ld-brand img { display:block; width:100%; height:100%; object-fit:contain; }
 .ld-brand:focus-visible, .ld-logo-link:focus-visible { outline:3px solid #6c482e; outline-offset:4px; }
 .ld-logo-strip { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; margin:28px 0; }
-.ld-logo-link { display:flex; flex-direction:column; align-items:center; gap:12px; padding:20px 12px; color:inherit; text-align:center; text-decoration:none; border:1px solid #e9dfd6; border-radius:18px; background:#fff; }
-.ld-logo-link img { width:72px; height:72px; object-fit:contain; }
+.ld-logo-link { display:flex; flex-direction:column; align-items:center; gap:12px; padding:20px 12px; color:inherit; text-align:center; text-decoration:none; border:1px solid rgba(172,128,78,.25); border-radius:18px; background:transparent; }
+.ld-logo-link img { display:block; width:80px; height:80px; object-fit:contain; border-radius:16px; }
 .ld-logo-link small { font-size:.75rem; line-height:1.4; color:#64554a; }
 .ld-tag { display:inline-block; padding:6px 10px; border:1px solid currentColor; border-radius:100px; font-size:.78rem; letter-spacing:.03em; }
 .ld-card dl { margin:18px 0; }
