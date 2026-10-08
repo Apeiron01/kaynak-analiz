@@ -47,5 +47,101 @@
     "bytes": 71328,
     "sha256": "a9ceccf4dca85ad93468aef882be2cd9f2b53dbb69ec8cf62f66b51c5564806a",
     "note": "Original brand asset; downloaded without alteration for the authorised reference page."
+  },
+  {
+    "asset": "scam-finder.jpg",
+    "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/02/1e/c2/021ec274-1f41-56d2-8bcc-27c4758a23b1/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg",
+    "store": "https://apps.apple.com/tr/app/scam-finder/id6806439428",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 23561,
+    "sha256": "59d0f1d6885ea08d5515aa369699f1b0bd74a76694849c77179123a3d0959e13",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "marjory.jpg",
+    "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/f9/a4/bb/f9a4bb15-fd25-52be-8db7-636d286faefd/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
+    "store": "https://apps.apple.com/tr/app/marjory/id6796778197",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 19293,
+    "sha256": "08e71118f9e0e02d19fbf4bafdf789dcdc7f700c589b6d8a1220f7ad74414515",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "hida.jpg",
+    "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7c/05/de/7c05debe-8a27-095a-d631-9926084cdeb7/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
+    "store": "https://apps.apple.com/tr/app/hida-muslim-app/id6787553560",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 55138,
+    "sha256": "3664308619e10c2771aa37f5a8459a2a9f42e5bcd284f177598955481d527385",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "fluxcore.jpg",
+    "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/cb/8b/6a/cb8b6aa5-db1a-499c-c73e-99a971fb7b0f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    "store": "https://apps.apple.com/tr/app/fluxcore/id6787444573",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 64208,
+    "sha256": "271762213c3b6c913cf87592d5bd7283310b8787688486ee6eccebd2c3a16dde",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "under-the-bed.jpg",
+    "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ee/14/f9/ee14f916-ce1f-465d-68e2-4f395e995e15/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    "store": "https://apps.apple.com/tr/app/under-the-bed-teddy-defense/id6787531629",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 82965,
+    "sha256": "64caff722a13f0ebf29fe985a2de5a528dda057c11ea87685b7436dec5b1d06c",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "my-baby.jpg",
+    "source": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c3/db/03/c3db0348-b7c7-70c3-fe30-85b8709e6ac1/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg",
+    "store": "https://apps.apple.com/tr/app/my-baby-care-tracker/id6787539325",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 18366,
+    "sha256": "49cf2bc20d33c1bcd3876bacec0d9de60d5db4f8df0e38c467ce1027431caff0",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "nemorix.png",
+    "source": "https://play-lh.googleusercontent.com/cb1-d7Rf2c67Kb-xerfjNL6RchqHsuASFYfLJsHI_YsaPLaj8rCgZBHnwxdfctZvgoSYy7wSQl95n3mOZAN7Lw=s0-br30",
+    "store": "https://play.google.com/store/apps/details?id=com.nemorix.game",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 22684,
+    "sha256": "c3e8d79b895a87d02fa281e79b42be96263621a2019e33dabfe74fc2c04eccf0",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
+  },
+  {
+    "asset": "calm-sense.png",
+    "source": "https://play-lh.googleusercontent.com/gtt3nNGAyY0PVzIK8zTfG_dbpPceQ3kz3LCSji_wthIMTrT4uaO-gGSLboXzSIAn0o8n_9hVz387BvEO-DId=s0-br30",
+    "store": "https://play.google.com/store/apps/details?id=app.calmsense.studio",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 38654,
+    "sha256": "76b051dcc6de45ed8bc7de3c4f92105e65575bc83445efd8dfa5ba11ab3fc2a6",
+    "note": "Original store icon, downloaded without alteration for the authorised Lumina product catalogue."
   }
 ]
