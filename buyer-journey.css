@@ -1,0 +1,9 @@
+/* Direct service navigation, within Lumina's existing visual system. */
+.ld-buyer-section .ld-card a { display:inline-block; margin-top:8px; font-weight:650; }
+.ld-hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+.ld-hero-actions .btn { font-size:.9rem; padding:12px 18px; min-height:44px; }
+.ld-hero-actions .btn-secondary { background:#faeadb; color:#51392a; border-color:#faeadb; }
+.ld-buyer-section .ld-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.ld-buyer-section .ld-card h3 { font-size:1.2rem; }
+@media(max-width:1100px) { .ld-buyer-section .ld-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:620px) { .ld-buyer-section .ld-grid { grid-template-columns:1fr; } .ld-hero-actions .btn { width:auto; } }
