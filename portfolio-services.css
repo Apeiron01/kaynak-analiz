@@ -1,0 +1,29 @@
+/* Service and reference sections; scoped to avoid changing existing tools. */
+.ld-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:28px; }
+.ld-card { padding:28px; border:1px solid rgba(172,128,78,.25); border-radius:20px; background:rgba(255,255,255,.04); min-width:0; }
+.ld-card h3 { margin:12px 0; font-size:1.4rem; line-height:1.3; }
+.ld-card p { line-height:1.75; }
+.ld-card a { text-decoration:underline; text-underline-offset:4px; }
+.ld-brand { display:flex; align-items:center; justify-content:center; width:96px; height:96px; padding:12px; margin-bottom:18px; background:#fff; border:1px solid #e9dfd6; border-radius:20px; }
+.ld-brand img { display:block; width:72px; height:72px; object-fit:contain; }
+.ld-brand:focus-visible, .ld-logo-link:focus-visible { outline:3px solid #6c482e; outline-offset:4px; }
+.ld-logo-strip { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; margin:28px 0; }
+.ld-logo-link { display:flex; flex-direction:column; align-items:center; gap:12px; padding:20px 12px; color:inherit; text-align:center; text-decoration:none; border:1px solid #e9dfd6; border-radius:18px; background:#fff; }
+.ld-logo-link img { width:72px; height:72px; object-fit:contain; }
+.ld-logo-link small { font-size:.75rem; line-height:1.4; color:#64554a; }
+.ld-tag { display:inline-block; padding:6px 10px; border:1px solid currentColor; border-radius:100px; font-size:.78rem; letter-spacing:.03em; }
+.ld-card dl { margin:18px 0; }
+.ld-card dt { margin-top:14px; font-weight:700; }
+.ld-card dd { margin:5px 0 0; line-height:1.7; }
+.ld-card ul, .ld-list { padding-left:22px; line-height:1.8; }
+.ld-card li, .ld-list li { margin:8px 0; }
+.ld-links { display:flex; flex-wrap:wrap; gap:16px; margin-top:20px; }
+.ld-links a { text-decoration:underline; text-underline-offset:4px; }
+.ld-intro { max-width:780px; line-height:1.8; }
+.ld-faq details { padding:20px 0; border-bottom:1px solid rgba(172,128,78,.25); }
+.ld-faq summary { cursor:pointer; font-size:1.15rem; font-weight:700; }
+.ld-faq p { line-height:1.8; }
+.ld-home .consulting-showcase-copy h1 { font-size:clamp(1.6rem,4vw,3.7rem); line-height:1.08; max-width:20ch; letter-spacing:-.035em; }
+.ld-home .consulting-showcase-copy p { max-width:45ch; font-size:clamp(.9rem,1.6vw,1.15rem); line-height:1.5; }
+@media(max-width:980px) { .ld-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:620px) { .ld-grid { grid-template-columns:1fr; gap:16px; } .ld-card { padding:22px; } .ld-home .consulting-showcase-copy h1 { max-width:21ch; } .ld-logo-strip { grid-template-columns:repeat(2,minmax(0,1fr)); } }

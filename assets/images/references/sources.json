@@ -1,0 +1,51 @@
+[
+  {
+    "asset": "kionel.svg",
+    "source": "https://kionel.com/favicon.svg",
+    "dimensions": "0 0 32 32",
+    "bytes": 998,
+    "sha256": "c8bedc137ce663d782bd73cbc2ed4ece4ee4f5f7874ba76a5377d1a0b998c92e",
+    "note": "Original brand asset; downloaded without alteration for the authorised reference page."
+  },
+  {
+    "asset": "gamerspilot.svg",
+    "source": "https://gamerspilot.com/icon.svg",
+    "dimensions": "0 0 128 128",
+    "bytes": 1426,
+    "sha256": "e0da6212e5f6a2209c6adfbfcc730bfc26d48be450092a91d6d2dbb82ec8b968",
+    "note": "Original brand asset; downloaded without alteration for the authorised reference page."
+  },
+  {
+    "asset": "carqr.png",
+    "source": "https://carqrapp.com/logo.png",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 187365,
+    "sha256": "43e84ac86fecf6b4624a256b42a3365adab309c9701d31e39d99007653cadf1b",
+    "note": "Original brand asset; downloaded without alteration for the authorised reference page."
+  },
+  {
+    "asset": "skater.png",
+    "source": "https://skaterjob.com/logo.png",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 72655,
+    "sha256": "ac5565e9d2845831a7515fac037e31a3dfbfc3d49234bf09e6fee57475830189",
+    "note": "Original brand asset; downloaded without alteration for the authorised reference page."
+  },
+  {
+    "asset": "namera.png",
+    "source": "https://academy.nam-era.com/pwa-512x512.png",
+    "dimensions": [
+      512,
+      512
+    ],
+    "bytes": 71328,
+    "sha256": "a9ceccf4dca85ad93468aef882be2cd9f2b53dbb69ec8cf62f66b51c5564806a",
+    "note": "Original brand asset; downloaded without alteration for the authorised reference page."
+  }
+]

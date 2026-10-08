@@ -1,5 +1,5 @@
 # Lumina Digitale
-> Lumina Digitale is a Turkish digital consultancy focused on e-commerce growth, cybersecurity checks, training, and practical free tools.
+> Lumina Digitale is a software and digital services studio offering web and mobile development, workflow automation, e-commerce consulting, SEO, security checks and practical training.
 
 ## Main Pages
 - [Homepage](https://luminadigitale.com/)
@@ -32,3 +32,11 @@
 - Website: https://luminadigitale.com
 - Email: iletisim@luminadigitale.com
 - Instagram: https://www.instagram.com/luminadigitale
+
+## Software, automation and development references
+- [Custom software development](https://luminadigitale.com/yazilim-gelistirme.html)
+- [Workflow automation and research bots](https://luminadigitale.com/otomasyon-bot-gelistirme.html)
+- [Technical SEO and AI search consulting](https://luminadigitale.com/seo-geo-danismanligi.html)
+- [Owned products and client development references](https://luminadigitale.com/referanslar.html)
+
+Lumina Digitale was founded by Taha Bayar in 2024. Kionel, GamersPilot, CarQR and Skater are founder-owned products. Namera Academy is client development work; the client owns its brand and product. Mori and Mergeverse are in development/testing, not publicly released. Crypto-related research is currently backtesting and paper trading; live execution is not implemented.
