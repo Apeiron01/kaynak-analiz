@@ -79,16 +79,17 @@
 
     .consulting-page .nav {
       margin-top: 14px;
-      min-height: 88px;
-      padding: 0 26px;
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto auto;
+      min-height: 84px;
+      padding: 0 24px;
+      display: flex;
       align-items: center;
-      column-gap: 18px;
+      justify-content: space-between;
+      gap: 16px;
       background: var(--consulting-brown);
       border: 1px solid rgba(226, 125, 114, 0.28);
       border-radius: 28px;
       box-shadow: 0 10px 28px rgba(78, 62, 54, 0.18);
+      position: relative;
     }
 
     .brand {
@@ -130,7 +131,18 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: clamp(10px, 1.2vw, 18px);
+      flex-shrink: 1;
+    }
+
+    .consulting-page .nav-links a {
+      white-space: nowrap;
+      font-size: 0.92rem;
+    }
+
+    .consulting-page .lang-switcher,
+    .consulting-page .site-switcher {
+      flex-shrink: 0;
     }
 
     .consulting-page .nav-links a {
@@ -309,13 +321,7 @@
     }
 
     @media (max-width: 1180px) {
-      .consulting-page .nav {
-        padding: 16px 20px;
-        grid-template-columns: auto 1fr auto auto;
-        grid-template-rows: auto auto;
-        row-gap: 12px;
-        min-height: auto;
-      }
+      /* 1180 nav handled by flexbox */
       .consulting-page .brand {
         grid-column: 1;
         grid-row: 1;
@@ -424,8 +430,238 @@
         padding: 22px;
       }
     }
+  
+    .consulting-page .btn-primary {
+      background: var(--consulting-brown);
+      border-color: var(--consulting-brown);
+      color: #fff8f2;
+    }
+
+    .consulting-page .btn-primary:hover,
+    .consulting-page .btn-primary:focus-visible {
+      background: #382c25;
+      border-color: #382c25;
+      color: #ffffff;
+    }
+
+    .consulting-page .cta-box {
+      background: #f4e0d0;
+      border: 1px solid rgba(78, 62, 54, 0.22);
+      box-shadow: 0 16px 36px rgba(78, 62, 54, 0.08);
+    }
+
+    .consulting-page .cta-box h2 {
+      color: var(--consulting-brown);
+    }
+
+    .consulting-page .cta-box p {
+      color: var(--consulting-brown-soft);
+    }
+
+    .consulting-page .cta-box .btn-primary {
+      background: var(--consulting-brown);
+      border-color: var(--consulting-brown);
+      color: #fff8f2;
+    }
+
+    .consulting-footer {
+      background: #362a24;
+      border-top: 1px solid rgba(226, 125, 114, 0.2);
+      color: #fff8f2;
+    }
+
+    .consulting-footer h3,
+    .consulting-footer h4 {
+      color: #fdebdc;
+    }
+
+    .consulting-footer p,
+    .consulting-footer li,
+    .consulting-footer a {
+      color: rgba(253, 235, 220, 0.82);
+    }
+
+    .consulting-footer a:hover {
+      color: #e27d72;
+    }
+      /* Responsive Breakpoint 1240 */
+
+    @media (max-width: 1240px) {
+      .menu-toggle,
+      .consulting-page .menu-toggle {
+        display: inline-flex !important;
+      }
+      .nav-links,
+      .consulting-page .nav-links {
+        display: none !important;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        width: 100%;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 24px 20px;
+        gap: 12px;
+        border-radius: 24px;
+        background: rgba(78, 62, 54, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(226, 125, 114, 0.32);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+        z-index: 1000;
+      }
+      .nav-links.active,
+      .consulting-page .nav-links.active {
+        display: flex !important;
+      }
+      .nav-links a,
+      .consulting-page .nav-links a {
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 1rem;
+      }
+      .nav-links .nav-btn,
+      .consulting-page .nav-links .nav-btn {
+        width: 100%;
+        margin-top: 6px;
+        text-align: center;
+        justify-content: center;
+      }
+      .mobile-shell-panel {
+        display: grid !important;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(226, 125, 114, 0.2);
+        gap: 12px;
+      }
+    }
+      /* Inline 4-Column Footer */
+
+    .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1.3fr 1.25fr 0.9fr 0.9fr !important;
+      gap: 36px !important;
+      align-items: start !important;
+    }
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 28px !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+    }
+  
+    
+    /* Header Controls Side-by-Side on Right */
+    .nav,
+    .consulting-page .nav {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 10px !important;
+    }
+    .brand,
+    .consulting-page .brand {
+      margin-right: auto !important;
+      margin-left: 0 !important;
+      flex-shrink: 0 !important;
+      order: 1 !important;
+    }
+    .lang-switcher,
+    .consulting-page .lang-switcher {
+      margin: 0 !important;
+      flex-shrink: 0 !important;
+      order: 10 !important;
+    }
+    .site-switcher,
+    .consulting-page .site-switcher {
+      margin: 0 !important;
+      flex-shrink: 0 !important;
+      order: 20 !important;
+    }
+    .menu-toggle,
+    .consulting-page .menu-toggle {
+      margin: 0 !important;
+      flex-shrink: 0 !important;
+      order: 30 !important;
+    }
+
+    @media (max-width: 1240px) {
+      .nav,
+      .consulting-page .nav {
+        display: flex !important;
+        grid-template-columns: none !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 10px !important;
+      }
+      .brand,
+      .consulting-page .brand {
+        margin-right: auto !important;
+        margin-left: 0 !important;
+        flex-shrink: 0 !important;
+        order: 1 !important;
+      }
+      .lang-switcher,
+      .consulting-page .lang-switcher {
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+        order: 10 !important;
+      }
+      .site-switcher,
+      .consulting-page .site-switcher {
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+        order: 20 !important;
+      }
+      .menu-toggle,
+      .consulting-page .menu-toggle {
+        margin: 0 !important;
+        flex-shrink: 0 !important;
+        order: 30 !important;
+        display: inline-flex !important;
+      }
+    }
+
+    /* CTA Box & Primary Action Buttons */
+    .cta-box,
+    .consulting-page .cta-box {
+      background: #fdf5ec !important;
+      border: 1px solid rgba(78, 62, 54, 0.16) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 16px 36px rgba(78, 62, 54, 0.08) !important;
+    }
+    .cta-box .btn,
+    .cta-box .btn-primary,
+    .consulting-page .cta-box .btn-primary,
+    .consulting-page .btn-primary {
+      background: #4e3e36 !important;
+      border: 1px solid #4e3e36 !important;
+      color: #fff8f2 !important;
+      box-shadow: 0 10px 20px rgba(78, 62, 54, 0.18) !important;
+    }
+    .cta-box .btn:hover,
+    .cta-box .btn:focus-visible,
+    .cta-box .btn-primary:hover,
+    .cta-box .btn-primary:focus-visible,
+    .consulting-page .cta-box .btn-primary:hover,
+    .consulting-page .cta-box .btn-primary:focus-visible,
+    .consulting-page .btn-primary:hover,
+    .consulting-page .btn-primary:focus-visible {
+      background: #382c25 !important;
+      border-color: #382c25 !important;
+      color: #ffffff !important;
+    }
+
   </style>
-<link href="style.css?v=20260411-01" rel="stylesheet"/>
+<link href="style.css?v=20261009-05" rel="stylesheet"/>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -555,7 +791,7 @@
   ]
 }</script>
 <script defer="" src="meta-pixel.js"></script>
-<link href="portfolio-services.css" rel="stylesheet"/>
+<link href="portfolio-services.css?v=20260411-03" rel="stylesheet"/>
 <script defer="" src="lead-source.js"></script>
 <link href="https://luminadigitale.com/" hreflang="tr" rel="alternate"/>
 <link href="https://luminadigitale.com/index-en.html" hreflang="en" rel="alternate"/>
@@ -680,7 +916,7 @@
 <h2>From idea to software, from store to operations</h2><p>Lumina Digitale was founded by Taha Bayar in 2024. We bring software development, workflow automation, e-commerce consulting and practical training together. Our own products include Kionel, GamersPilot, CarQR and Skater; Namera Academy is a client development reference.</p>
 </div>
 </section>
-<section class="section" id="referanslar"><div class="container"><h2>Built products and client work</h2><p class="ld-intro"></p><div class="ld-logo-strip"><a class="ld-logo-link" href="https://kionel.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/kionel.svg" width="72"/><strong>Kionel</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://gamerspilot.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/gamerspilot.svg" width="72"/><strong>GamersPilot</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://carqrapp.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/carqr.png" width="72"/><strong>CarQR</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://skaterjob.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/skater.png" width="72"/><strong>Skater</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://academy.nam-era.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/namera.png" width="72"/><strong>Namera Academy</strong><small>Client development</small></a></div><div class="ld-grid"><article class="ld-card"><h3>Kionel · GamersPilot · CarQR · Skater</h3><p>Products developed under the Lumina Digitale brand.</p><a href="referanslar-en.html#kendi-urunlerimiz">Explore products</a></article><article class="ld-card"><h3>Mobile apps and games</h3><p>Explore our released apps, games and upcoming products.</p><a href="referanslar-en.html#mobil-uygulamalar">Explore apps</a></article><article class="ld-card"><h3>Namera Academy</h3><p>Client development reference: a German learning platform.</p><a href="referanslar-en.html">Explore references</a></article><article class="ld-card"><h3>Etsy training</h3><p>Practical shop planning, listing preparation and profitability exercises.</p><a href="etsy-egitimi-en.html">View curriculum</a></article></div></div></section>
+<section class="section" id="referanslar"><div class="container"><h2>Built products and client work</h2><p class="ld-intro"></p><div class="ld-logo-strip"><a class="ld-logo-link" href="https://kionel.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/kionel.svg" width="72"/><strong>Kionel</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://gamerspilot.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/gamerspilot.svg" width="72"/><strong>GamersPilot</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://carqrapp.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/carqr.png" width="72"/><strong>CarQR</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://skaterjob.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/skater.png" width="72"/><strong>Skater</strong><small>Lumina product</small></a><a class="ld-logo-link" href="https://academy.nam-era.com/" rel="noopener noreferrer" target="_blank"><img alt="" decoding="async" height="72" loading="lazy" src="assets/images/references/namera.png?v=20261009-05" width="72"/><strong>Namera Academy</strong><small>Client development</small></a></div><div class="ld-grid"><article class="ld-card"><h3>Kionel · GamersPilot · CarQR · Skater</h3><p>Products developed under the Lumina Digitale brand.</p><a href="referanslar-en.html#kendi-urunlerimiz">Explore products</a></article><article class="ld-card"><h3>Mobile apps and games</h3><p>Explore our released apps, games and upcoming products.</p><a href="referanslar-en.html#mobil-uygulamalar">Explore apps</a></article><article class="ld-card"><h3>Namera Academy</h3><p>Client development reference: a German learning platform.</p><a href="referanslar-en.html">Explore references</a></article><article class="ld-card"><h3>Etsy training</h3><p>Practical shop planning, listing preparation and profitability exercises.</p><a href="etsy-egitimi-en.html">View curriculum</a></article></div></div></section>
 <section class="section consulting-marquee-section">
 <div class="container">
 <div aria-hidden="true" class="consulting-marquee ticker-strip reveal" data-reveal="">
@@ -885,24 +1121,34 @@
 <div class="container footer-grid">
 <div>
 <h3>Lumina Consulting</h3>
-<p>We combine web, e-commerce, advertising and mentor support under a single editorial roof. We Provide Consultancy All Over the World.</p>
+<p>Websites, iOS/Android apps, business automation, Shopify and Etsy consulting. Digital consultancy worldwide.</p>
 </div>
 <div>
-<h4>Quick Access</h4>
+<h4>Lumina Ecosystem</h4>
 <ul>
-<li><a href="#biz">Who Are We?</a></li>
-<li><a href="danismanlik-hizmetleri-en.html">Our services</a></li>
-<li><a href="blog-en.html">Blog Center</a></li>
-<li><a href="#iletisim">Communication</a></li>
-<li><a href="https://www.instagram.com/luminadigitale" rel="noreferrer" target="_blank">Instagram</a></li>
+<li><a href="index-en.html"><strong>Lumina Consulting</strong> — Web &amp; E-Commerce</a></li>
+<li><a href="siber-en.html"><strong>Lumina Cyber</strong> — Fraud &amp; Risk Analysis</a></li>
+<li><a href="akademi-en.html"><strong>Lumina Academy</strong> — Practical Training</a></li>
+<li><a href="referanslar-en.html">Our Work &amp; Portfolio</a></li>
+<li><a href="araclar-en.html">Free Digital Tools</a></li>
 </ul>
 </div>
 <div>
-<h4>Communication</h4>
-<p><a href="#iletisim">Consultation form</a></p>
-<p><a href="iletisim-en.html">General contact center</a></p>
-<p><a href="politikalar-en.html">Legal and compliance</a></p>
-<p><a href="https://www.instagram.com/luminadigitale" rel="noreferrer" target="_blank">@luminadigitale</a></p>
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#biz">About Us</a></li>
+<li><a href="danismanlik-hizmetleri-en.html">Services</a></li>
+<li><a href="referanslar-en.html">Our Work</a></li>
+<li><a href="blog-en.html">Blog Hub</a></li>
+<li><a href="#iletisim">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4>Contact</h4>
+<p><a href="#iletisim">Consulting intake</a></p>
+<p><a href="iletisim-en.html">General contact</a></p>
+<p><a href="politikalar-en.html">Policies &amp; Legal</a></p>
+<p><a href="https://www.instagram.com/luminadigitale" rel="noreferrer" target="_blank">Instagram</a></p>
 </div>
 </div>
 <div class="container footer-bottom">

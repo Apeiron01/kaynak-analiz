@@ -30,3 +30,188 @@
 @media(max-width:620px) { .ld-grid { grid-template-columns:1fr; gap:16px; } .ld-card { padding:22px; } .ld-home .consulting-showcase-copy h1 { max-width:21ch; } .ld-logo-strip { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
 .ld-app-icon { display:block; width:88px; height:88px; object-fit:contain; border-radius:18px; margin-bottom:18px; }
+
+/* Consulting Brand Reference Card Colors - No Cyber Navy Bleed */
+.consulting-page .ld-card {
+  background: #fdf5ec;
+  border: 1px solid rgba(78, 62, 54, 0.18);
+  box-shadow: 0 10px 24px rgba(78, 62, 54, 0.05);
+  color: #4e3e36;
+}
+
+.consulting-page .ld-card h3 {
+  color: #4e3e36;
+}
+
+.consulting-page .ld-card p {
+  color: #6b5750;
+}
+
+.consulting-page .ld-card dt {
+  color: #4e3e36;
+}
+
+.consulting-page .ld-card dd {
+  color: #6b5750;
+}
+
+.consulting-page .ld-tag {
+  background: rgba(226, 125, 114, 0.12);
+  border-color: rgba(226, 125, 114, 0.36);
+  color: #b85d52;
+  font-weight: 600;
+}
+
+.consulting-page .ld-card a {
+  color: #b87445;
+  text-decoration-color: rgba(184, 116, 69, 0.4);
+}
+
+.consulting-page .ld-card a:hover,
+.consulting-page .ld-card a:focus-visible {
+  color: #8f5c40;
+  text-decoration-color: #8f5c40;
+}
+
+.consulting-page .ld-links a {
+  color: #b87445;
+  text-decoration-color: rgba(184, 116, 69, 0.4);
+}
+
+.consulting-page .ld-links a:hover,
+.consulting-page .ld-links a:focus-visible {
+  color: #8f5c40;
+  text-decoration-color: #8f5c40;
+}
+
+.consulting-page .ld-intro {
+  color: #6b5750;
+}
+
+/* ========================================================
+   CONSULTING BRAND WARM PALETTE (NO ICE BLUE / NO STARK WHITE)
+   ======================================================== */
+
+/* 1. Hero Page Shell & Intro Containers */
+.consulting-page .page-shell {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.consulting-page .page-intro {
+  background: #fdf5ec !important;
+  border: 1px solid rgba(78, 62, 54, 0.18) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: 0 10px 24px rgba(78, 62, 54, 0.05) !important;
+  color: #4e3e36 !important;
+}
+
+.consulting-page .page-intro .section-kicker {
+  color: #b87445 !important;
+}
+
+.consulting-page .page-intro h1,
+.consulting-page .page-intro .page-title {
+  color: #4e3e36 !important;
+}
+
+.consulting-page .page-intro p {
+  color: #6b5750 !important;
+}
+
+.consulting-page .page-side-card {
+  background: #fdf5ec !important;
+  border: 1px solid rgba(78, 62, 54, 0.18) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: 0 10px 24px rgba(78, 62, 54, 0.05) !important;
+  color: #4e3e36 !important;
+}
+
+.consulting-page .page-side-card h2,
+.consulting-page .page-side-card h3 {
+  color: #4e3e36 !important;
+}
+
+.consulting-page .page-side-card p {
+  color: #6b5750 !important;
+}
+
+.consulting-page .page-side-card a {
+  color: #b87445 !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(184, 116, 69, 0.4) !important;
+}
+
+.consulting-page .page-side-card a:hover,
+.consulting-page .page-side-card a:focus-visible {
+  color: #8f5c40 !important;
+  text-decoration-color: #8f5c40 !important;
+}
+
+/* 2. FAQ Section Background & Content */
+.consulting-page .section-soft {
+  background: #f4e0d0 !important;
+  border-top: 1px solid rgba(78, 62, 54, 0.12) !important;
+  border-bottom: 1px solid rgba(78, 62, 54, 0.12) !important;
+}
+
+.consulting-page .ld-faq h2 {
+  color: #4e3e36 !important;
+}
+
+.consulting-page .ld-faq details {
+  border-bottom: 1px solid rgba(78, 62, 54, 0.18) !important;
+}
+
+.consulting-page .ld-faq summary {
+  color: #4e3e36 !important;
+}
+
+.consulting-page .ld-faq p {
+  color: #6b5750 !important;
+}
+
+/* 3. CTA Box (Ne geliştirmek istediğinizi anlatın) */
+.cta-box,
+.consulting-page .cta-box {
+  background: #fdf5ec !important;
+  border: 1px solid rgba(78, 62, 54, 0.18) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 14px 30px rgba(78, 62, 54, 0.06) !important;
+}
+
+.cta-box h2,
+.consulting-page .cta-box h2 {
+  color: #4e3e36 !important;
+}
+
+.cta-box p,
+.consulting-page .cta-box p {
+  color: #6b5750 !important;
+}
+
+.cta-box .btn,
+.cta-box .btn-primary,
+.consulting-page .cta-box .btn-primary,
+.consulting-page .btn-primary {
+  background: #4e3e36 !important;
+  border: 1px solid #4e3e36 !important;
+  color: #fff8f2 !important;
+  box-shadow: 0 10px 20px rgba(78, 62, 54, 0.18) !important;
+}
+
+.cta-box .btn:hover,
+.cta-box .btn:focus-visible,
+.cta-box .btn-primary:hover,
+.cta-box .btn-primary:focus-visible,
+.consulting-page .cta-box .btn-primary:hover,
+.consulting-page .cta-box .btn-primary:focus-visible,
+.consulting-page .btn-primary:hover,
+.consulting-page .btn-primary:focus-visible {
+  background: #382c25 !important;
+  border-color: #382c25 !important;
+  color: #ffffff !important;
+  box-shadow: 0 12px 26px rgba(78, 62, 54, 0.28) !important;
+}
