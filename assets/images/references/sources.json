@@ -27,17 +27,6 @@
     "note": "Original brand asset; downloaded without alteration for the authorised reference page."
   },
   {
-    "asset": "skater.png",
-    "source": "https://skaterjob.com/logo.png",
-    "dimensions": [
-      512,
-      512
-    ],
-    "bytes": 72655,
-    "sha256": "ac5565e9d2845831a7515fac037e31a3dfbfc3d49234bf09e6fee57475830189",
-    "note": "Original brand asset; downloaded without alteration for the authorised reference page."
-  },
-  {
     "asset": "namera.png",
     "source": "https://academy.nam-era.com/pwa-512x512.png",
     "dimensions": [

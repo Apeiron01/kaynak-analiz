@@ -40,4 +40,4 @@
 - [Technical SEO and AI search consulting](https://luminadigitale.com/seo-geo-danismanligi.html)
 - [Lumina Digitale products, mobile apps and client development references](https://luminadigitale.com/referanslar.html)
 
-Lumina Digitale was founded by Taha Bayar in 2024. Kionel, GamersPilot, CarQR and Skater are Lumina Digitale products. Namera Academy is client development work; the client owns its brand and product. Mori and Mergeverse are in development/testing, not publicly released. Crypto-related research is currently backtesting and paper trading; live execution is not implemented.
+Lumina Digitale was founded by Taha Bayar in 2024. Kionel, GamersPilot and CarQR are Lumina Digitale products. Namera Academy is client development work; the client owns its brand and product. Mori and Mergeverse are in development/testing, not publicly released. Crypto-related research is currently backtesting and paper trading; live execution is not implemented.
