@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Play Closed Testing: The 12 Testers, 14 Days Rule and Production Access</title>
+  <meta name="description" content="The closed-test requirement for new personal Google Play developer accounts: at least 12 testers, 14 consecutive days, the production access application and what to watch for." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta content="default-src 'self'; script-src 'self' https://connect.facebook.net https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co https://connect.facebook.net https://www.facebook.com https://*.run.app https://*.on.aws https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" http-equiv="Content-Security-Policy"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun-en.html" />
+  <meta property="og:title" content="Google Play Closed Testing: The 12 Testers, 14 Days Rule and Production Access" />
+  <meta property="og:description" content="The closed-test requirement for new personal Google Play developer accounts: at least 12 testers, 14 consecutive days, the production access application and what to watch for." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun-en.html" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Google Play Closed Testing: The 12 Testers, 14 Days Rule and Production Access" />
+  <meta name="twitter:description" content="The closed-test requirement for new personal Google Play developer accounts: at least 12 testers, 14 consecutive days, the production access application and what to watch for." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="apple-touch-icon" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link href="style.css?v=20261009-05" rel="stylesheet"/>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://luminadigitale.com/#organization",
+      "name": "Lumina Digitale",
+      "url": "https://luminadigitale.com/",
+      "sameAs": [
+        "https://www.instagram.com/luminadigitale"
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun-en.html#article",
+      "mainEntityOfPage": "https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun-en.html",
+      "headline": "Google Play Closed Testing: The 12 Testers, 14 Days Rule and Production Access",
+      "description": "The closed-test requirement for new personal Google Play developer accounts: at least 12 testers, 14 consecutive days, the production access application and what to watch for.",
+      "inLanguage": "en",
+      "datePublished": "2026-11-11",
+      "dateModified": "2026-11-11",
+      "author": {
+        "@id": "https://luminadigitale.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://luminadigitale.com/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun-en.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can my 12 testers be family and friends?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google does not restrict who they are; what matters is that they stay opted in for 14 days and actually use the app. The form asks how you recruited them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a tester leaves?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Their 14 days reset; if they rejoin, their count starts again. Starting with more than 12 people is the safe option."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the application take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Google says it typically reviews applications within 7 days, though it can take longer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does an organization account avoid the rule?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The rule is for personal accounts. An organization account needs extra verification, such as a D-U-N-S number."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <script src="meta-pixel.js" defer></script>
+  <link rel="alternate" hreflang="tr" href="https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun.html" />
+  <link rel="alternate" hreflang="en" href="https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://luminadigitale.com/blog-google-play-kapali-test-12-kisi-14-gun.html" />
+</head>
+<body class="blog-article-page">
+<noscript><img height="1" src="https://www.facebook.com/tr?id=2945635578979261&amp;ev=PageView&amp;noscript=1" style="display:none" width="1"/></noscript>
+<header class="site-header">
+<div class="container nav">
+<a aria-label="Lumina Blog home page" class="brand" href="blog-en.html">
+<span class="brand-mark"><img alt="Lumina Blog logo" height="48" src="assets/images/brand-mark.svg" width="48"/></span>
+<span class="brand-copy"><strong>Lumina</strong><span>Blog</span></span>
+</a>
+<button aria-controls="navLinks" aria-expanded="false" aria-label="open menu" class="menu-toggle" id="menuToggle">
+<span></span><span></span><span></span>
+</button>
+<nav class="nav-links" id="navLinks">
+<a href="blog-en.html">Blog Center</a>
+<a href="blog-pillar-eticaret-kurulum-omurgasi-en.html">E-Commerce Guide</a>
+<a href="blog-pillar-reklam-egitim-omurgasi-en.html">Advertising and Education Guide</a>
+<a class="nav-btn" href="iletisim-en.html">Contact Us</a>
+</nav>
+</div>
+</header>
+<main class="page-main">
+    <section class="section page-hero">
+      <div class="container">
+        <article class="article-hero reveal" data-reveal>
+          <p class="section-kicker">Lumina Digitale / Mobile Apps</p>
+          <h1>Google Play Closed Testing: The 12 Testers, 14 Days Rule and Production Access</h1>
+          <p>If your personal Google Play developer account was created after 13 November 2023, you cannot publish straight to production; you have to complete a closed test first. This guide covers the rule, the steps and what we learned shipping our own apps.</p>
+          <div class="article-meta"><span>11 November 2026</span><span>Google Play</span><span>Android</span><span>Closed testing</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section quick-answer-block" id="quick-answer">
+      <div class="container narrow reveal" data-reveal>
+        <p class="section-kicker">Quick Answer</p>
+        <p>Personal developer accounts created after 13 November 2023 must run a closed test with at least 12 testers who stay opted in for at least 14 consecutive days. Once that is met, you apply for production access from &quot;Apply for production&quot; on the Play Console Dashboard; Google typically reviews applications within 7 days. A tester who opts out and rejoins starts their 14 days again.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container article-shell">
+        <div class="article-main">
+          <article class="article-prose reveal" data-reveal id="who">
+            <h2>Who does the rule apply to?</h2>
+            <p>According to Play Console Help, the requirement applies to <strong>personal developer accounts created after 13 November 2023</strong>. Organization accounts are not covered by it.</p>
+            <p>Source: <a href="https://support.google.com/googleplay/android-developer/answer/14151465" target="_blank" rel="noopener noreferrer">App testing requirements for new personal developer accounts</a>.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="rule">
+            <h2>What exactly is required?</h2>
+            <p>A <strong>closed testing</strong> track with <strong>at least 12 testers</strong> who stay opted in for <strong>at least 14 consecutive days</strong>. A tester who leaves and rejoins resets their count; the 14 days must be consecutive.</p>
+            <p>Once met, "Apply for production" opens on the Play Console <strong>Dashboard</strong>. The form has three sections: your closed test, your app and your production readiness. It asks how you recruited testers, the feedback you received, your audience, expected first-year installs and what you changed after testing.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="steps">
+            <h2>Closed testing step by step</h2>
+            <p><strong>1.</strong> Create the app in Play Console and complete the required sections such as the store listing and content rating.</p>
+            <p><strong>2.</strong> Open a track under Test → Closed testing and upload your AAB.</p>
+            <p><strong>3.</strong> Add testers by email list or a Google Group; a group makes adding and removing people easier.</p>
+            <p><strong>4.</strong> Share the opt-in link. Testers must opt in through the link and install the app from the Play Store; being on the list is not enough.</p>
+            <p><strong>5.</strong> Keep an eye on who stays opted in over the 14 days and collect feedback.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="tips">
+            <h2>Tips for getting production access</h2>
+            <p><strong>Start with 15–20 people, not 12.</strong> Someone leaving resets their count; a buffer reduces the risk of restarting the 14 days.</p>
+            <p><strong>Ship builds during the test.</strong> In FluxCore's Google Play closed test we released five builds between March and July 2026; changes made from feedback can then be described concretely in the form.</p>
+            <p><strong>Keep a record of feedback.</strong> Answer "what did you change after testing" with specific changes, not general sentences.</p>
+            <p>Google may ask you to keep testing if fewer than 12 testers remain opted in or tester engagement is too low.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <h3>Can my 12 testers be family and friends?</h3>
+            <p>Google does not restrict who they are; what matters is that they stay opted in for 14 days and actually use the app. The form asks how you recruited them.</p>
+            <h3>What happens if a tester leaves?</h3>
+            <p>Their 14 days reset; if they rejoin, their count starts again. Starting with more than 12 people is the safe option.</p>
+            <h3>How long does the application take?</h3>
+            <p>Google says it typically reviews applications within 7 days, though it can take longer.</p>
+            <h3>Does an organization account avoid the rule?</h3>
+            <p>The rule is for personal accounts. An organization account needs extra verification, such as a D-U-N-S number.</p>
+          </article>
+
+          <div class="article-cta reveal" data-reveal>
+            <div>
+              <p class="section-kicker">Next step</p>
+              <p>If you are stuck at one of these steps while shipping to the App Store or Google Play, we can run the store release with you. <a href="referanslar-en.html">Apps we have published</a>.</p>
+            </div>
+            <div class="article-actions">
+              <a class="btn btn-primary" href="index-en.html?hizmet=mobil#iletisim">Request a Quote</a>
+              <a class="btn btn-secondary" href="mobil-uygulama-gelistirme-en.html">Mobile App Service</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="article-sidebar">
+          <article class="article-sidebar-card reveal" data-reveal>
+            <h3>Contents</h3>
+            <ul>
+              <li><a href="#who">Who does the rule apply to?</a></li>
+              <li><a href="#rule">What exactly is required?</a></li>
+              <li><a href="#steps">Closed testing step by step</a></li>
+              <li><a href="#tips">Tips for getting production access</a></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+            </ul>
+          </article>
+          <article class="article-sidebar-card reveal" data-reveal>
+            <h3>Related Pages</h3>
+            <ul>
+              <li><a href="blog-app-store-4-3-reddi-nasil-asilir-en.html">App Store 4.3 rejection</a></li>
+              <li><a href="blog-ios-abonelik-kurulumu-adim-adim-en.html">iOS subscriptions</a></li>
+              <li><a href="mobil-uygulama-gelistirme-en.html">Mobile app development</a></li>
+              <li><a href="referanslar-en.html">Our references</a></li>
+            </ul>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+<footer class="site-footer consulting-footer">
+<div class="container footer-grid">
+<div>
+<h3>Lumina Digitale</h3>
+<p>Software, automation, e-commerce and training. Delivering measurable digital value since 2024.</p>
+</div>
+<div>
+<h4>Lumina Ecosystem</h4>
+<ul>
+<li><a href="index-en.html"><strong>Lumina Consulting</strong> — Web, Mobile &amp; E-Commerce</a></li>
+<li><a href="siber-en.html"><strong>Lumina Cyber</strong> — Fraud &amp; Risk Checks</a></li>
+<li><a href="akademi-en.html"><strong>Lumina Academy</strong> — Practical Training</a></li>
+<li><a href="danismanlik-hizmetleri-en.html">Consulting Services</a></li>
+<li><a href="araclar-en.html">Free Digital Tools</a></li>
+</ul>
+</div>
+<div>
+<h4>Explore</h4>
+<ul>
+<li><a href="index-en.html">Home</a></li>
+<li><a href="danismanlik-hizmetleri-en.html">Services</a></li>
+<li><a href="referanslar-en.html">Our Work</a></li>
+<li><a href="blog-en.html">Blog Hub</a></li>
+<li><a href="index-en.html#iletisim">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4>Contact</h4>
+<p><a href="mailto:iletisim@luminadigitale.com">iletisim@luminadigitale.com</a></p>
+<p><a href="index-en.html#iletisim">Discuss Your Project</a></p>
+<p><a href="politikalar-en.html">Legal &amp; Compliance</a></p>
+<p><a href="https://www.instagram.com/luminadigitale" rel="noreferrer" target="_blank">Instagram @luminadigitale</a></p>
+</div>
+</div>
+<div class="container footer-bottom">
+<span>Lumina Digitale</span>
+<span>luminadigitale.com</span>
+</div>
+</footer>
+<script defer="" src="ui-shell.js"></script>
+<script defer="" src="script.js"></script>
+<a aria-label="Contact via WhatsApp" class="lumina-wa-static" data-lumina-whatsapp-widget="true" href="https://api.whatsapp.com/send?phone=905376431123&amp;text=Merhaba%20Lumina%20ekibi%2C%20bilgi%20almak%20istiyorum." rel="noopener noreferrer" target="_blank">
+<img alt="" decoding="async" height="34" loading="eager" src="assets/icons/whatsapp.svg" width="34"/>
+</a>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "127062961d2d49aa8a5b7f8f620be47c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

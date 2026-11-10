@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iOS Abonelik Kurulumu Adım Adım: App Store Connect, StoreKit ve İnceleme</title>
+  <meta name="description" content="iOS uygulamanıza otomatik yenilenen abonelik eklemek için App Store Connect anlaşmaları, abonelik grubu, fiyatlar, StoreKit testi, satın alımları geri yükleme ve App Review&#x27;da dikkat edilecekler." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://connect.facebook.net https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co https://connect.facebook.net https://www.facebook.com https://*.run.app https://*.on.aws https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html" />
+  <meta property="og:title" content="iOS Abonelik Kurulumu Adım Adım: App Store Connect, StoreKit ve İnceleme" />
+  <meta property="og:description" content="iOS uygulamanıza otomatik yenilenen abonelik eklemek için App Store Connect anlaşmaları, abonelik grubu, fiyatlar, StoreKit testi, satın alımları geri yükleme ve App Review&#x27;da dikkat edilecekler." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:url" content="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="iOS Abonelik Kurulumu Adım Adım: App Store Connect, StoreKit ve İnceleme" />
+  <meta name="twitter:description" content="iOS uygulamanıza otomatik yenilenen abonelik eklemek için App Store Connect anlaşmaları, abonelik grubu, fiyatlar, StoreKit testi, satın alımları geri yükleme ve App Review&#x27;da dikkat edilecekler." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="apple-touch-icon" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="stylesheet" href="style.css?v=20261009-05" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://luminadigitale.com/#organization",
+      "name": "Lumina Digitale",
+      "url": "https://luminadigitale.com/",
+      "sameAs": [
+        "https://www.instagram.com/luminadigitale"
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html#article",
+      "mainEntityOfPage": "https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html",
+      "headline": "iOS Abonelik Kurulumu Adım Adım: App Store Connect, StoreKit ve İnceleme",
+      "description": "iOS uygulamanıza otomatik yenilenen abonelik eklemek için App Store Connect anlaşmaları, abonelik grubu, fiyatlar, StoreKit testi, satın alımları geri yükleme ve App Review'da dikkat edilecekler.",
+      "inLanguage": "tr-TR",
+      "datePublished": "2026-11-11",
+      "dateModified": "2026-11-11",
+      "author": {
+        "@id": "https://luminadigitale.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://luminadigitale.com/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Abonelik süresi en az ne kadar olabilir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apple'ın kurallarına göre otomatik yenilenen aboneliğin süresi en az yedi gün olmalıdır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Fiyatı uygulamaya sabit yazabilir miyim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Önerilmez; ülkeye göre değişir. StoreKit'in döndürdüğü yerelleştirilmiş fiyatı gösterin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Geri yükleme düğmesi zorunlu mu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apple geri yüklenebilir satın alımlar için bir geri yükleme mekanizması ister; bunu görünür bir düğmeyle sağlamak inceleme sürecini kolaylaştırır."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Android'deki abonelik iOS'ta geçerli olur mu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mağazalar bunu kendiliğinden yapmaz; iki mağazadaki satın alımları kendi sunucunuzda doğrulayıp aynı hesaba bağlamanız gerekir."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <script src="meta-pixel.js" defer></script>
+  <link rel="alternate" hreflang="tr" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html" />
+  <link rel="alternate" hreflang="en" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html" />
+</head>
+<body class="blog-article-page">
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2945635578979261&ev=PageView&noscript=1" /></noscript>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="blog.html" aria-label="Lumina Blog ana sayfa">
+        <span class="brand-mark"><img src="assets/images/brand-mark.svg" alt="Lumina Blog logo" width="48" height="48" /></span>
+        <span class="brand-copy"><strong>Lumina</strong><span>Blog</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="blog.html">Blog Merkezi</a>
+        <a href="blog-pillar-eticaret-kurulum-omurgasi.html">E-Ticaret Rehberi</a>
+        <a href="blog-pillar-reklam-egitim-omurgasi.html">Reklam ve Eğitim Rehberi</a>
+        <a href="iletisim.html" class="nav-btn">İletişime Geç</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="section page-hero">
+      <div class="container">
+        <article class="article-hero reveal" data-reveal>
+          <p class="section-kicker">Lumina Digitale / Mobil Uygulama</p>
+          <h1>iOS Abonelik Kurulumu Adım Adım: App Store Connect, StoreKit ve İnceleme</h1>
+          <p>Otomatik yenilenen abonelik, App Store&#x27;da en çok reddedilen satın alma türlerinden biri. Bu rehber, CarQR&#x27;ın iOS aboneliklerini kurarken izlediğimiz sırayı ve Apple&#x27;ın kurallarında aboneliğe dair en kritik maddeleri anlatıyor.</p>
+          <div class="article-meta"><span>11 Kasım 2026</span><span>iOS</span><span>StoreKit</span><span>Abonelik</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section quick-answer-block" id="hizli-cevap">
+      <div class="container narrow reveal" data-reveal>
+        <p class="section-kicker">Hızlı Cevap</p>
+        <p>Önce App Store Connect&#x27;te Ücretli Uygulamalar Anlaşması&#x27;nı, banka ve vergi bilgilerini tamamlayın. Sonra bir abonelik grubu ve içinde süreleri farklı abonelikleri oluşturun; her biri için fiyat, açıklama, inceleme ekran görüntüsü ve notu girin. StoreKit ile satın alma, yenileme ve geri yüklemeyi yerelde ve sandbox&#x27;ta test edin. Satın alma ekranında kullanıcının fiyatı, süreyi ve ne aldığını açıkça görmesini sağlayın; ilk aboneliği yeni bir uygulama sürümüyle birlikte incelemeye gönderin.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container article-shell">
+        <div class="article-main">
+          <article class="article-prose reveal" data-reveal id="on-kosul">
+            <h2>1) Anlaşmalar, banka ve vergi</h2>
+            <p>App Store Connect'te <strong>Business</strong> (eski adıyla Agreements, Tax, and Banking) bölümünden Ücretli Uygulamalar Anlaşması'nı kabul edin, banka hesabınızı ve vergi formlarını tamamlayın. Bu bölüm etkin olmadan uygulama içi satın almalar sandbox dışında çalışmaz.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="grup">
+            <h2>2) Abonelik grubu ve ürünler</h2>
+            <p>Abonelikleri bir <strong>abonelik grubu</strong> içinde oluşturun. Kullanıcı aynı grupta aynı anda tek bir aboneliğe sahip olur; yükseltme ve düşürme grup içinde yönetilir. Apple, kullanıcının aynı şeyin birden fazla çeşidine yanlışlıkla abone olamaması gerektiğini yazar (3.1.2(b)).</p>
+            <p>Her abonelik için kalıcı bir ürün kimliği (ör. <code>com.uygulama.premium.monthly</code>), süre ve fiyat seçin. Abonelik süresi en az yedi gün olmalıdır (3.1.2(a)). CarQR'da aylık, 6 aylık ve yıllık seçenekleri aynı grupta tutuyoruz.</p>
+            <p>Her ürün için görünen ad ve açıklama yazın, App Review için bir ekran görüntüsü ve kısa bir not ekleyin.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="fiyat">
+            <h2>3) Fiyatları mağaza fiyat noktalarına göre belirleyin</h2>
+            <p>Apple fiyatları ülke başına sabit fiyat noktalarından seçtirir. Uygulama içinde veya web sitenizde gösterdiğiniz fiyatlar bu noktalarla birebir uyuşmazsa kullanıcı farklı bir tutarla karşılaşır. CarQR'ın Türkiye fiyatlarını App Store Türkiye fiyat noktalarına (,99 ile biten tutarlar) eşitledik.</p>
+            <p>Uygulamada fiyatı sabit yazmak yerine StoreKit'in döndürdüğü yerelleştirilmiş fiyatı gösterin.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="test">
+            <h2>4) StoreKit ile yerelde ve sandbox&#x27;ta test</h2>
+            <p>Xcode'da bir <strong>StoreKit Configuration</strong> dosyası ile ürünleri App Store Connect'e bağlanmadan yerelde test edebilirsiniz; yenileme hızını ve iptal senaryolarını da buradan denersiniz.</p>
+            <p>Ardından App Store Connect'te sandbox test kullanıcıları oluşturup gerçek cihazda satın alma, yenileme, iptal ve geri yükleme akışlarını deneyin.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="ekran">
+            <h2>5) Satın alma ekranı ve geri yükleme</h2>
+            <p>Apple, abone olmadan önce kullanıcının fiyat karşılığında ne alacağını açıkça görmesini ister (3.1.2(c)). Fiyat, süre, otomatik yenileme ve içeriğin ne olduğu aynı ekranda net olmalı; Kullanım Koşulları ve Gizlilik Politikası bağlantıları hem uygulamada hem mağaza bilgilerinde bulunmalı.</p>
+            <p>"Satın Alımları Geri Yükle" düğmesi koyun. Apple, geri yüklenebilir satın alımlar için bir geri yükleme mekanizması olmasını ister (3.1.1).</p>
+            <p>Aynı abonelik Android'de veya web'de de satılıyorsa hak tanımayı sunucunuzda yönetin; App Store'un sunucu bildirimleri ve App Store Server API, yenileme ve iadeleri takip etmenizi sağlar.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="gonderim">
+            <h2>6) İncelemeye gönderim</h2>
+            <p>İlk abonelik ürünlerini yeni bir uygulama sürümüyle birlikte incelemeye gönderin; sürüm sayfasında ilgili satın alımları seçin. İnceleme notunda abonelik ekranına nasıl ulaşılacağını ve gerekiyorsa test hesabını yazın.</p>
+            <p>Kaynak: <a href="https://developer.apple.com/app-store/review/guidelines/#subscriptions" target="_blank" rel="noopener noreferrer">App Review Guidelines 3.1.2 Subscriptions</a>.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="faq">
+            <h2>Sık Sorulan Sorular</h2>
+            <h3>Abonelik süresi en az ne kadar olabilir?</h3>
+            <p>Apple&#x27;ın kurallarına göre otomatik yenilenen aboneliğin süresi en az yedi gün olmalıdır.</p>
+            <h3>Fiyatı uygulamaya sabit yazabilir miyim?</h3>
+            <p>Önerilmez; ülkeye göre değişir. StoreKit&#x27;in döndürdüğü yerelleştirilmiş fiyatı gösterin.</p>
+            <h3>Geri yükleme düğmesi zorunlu mu?</h3>
+            <p>Apple geri yüklenebilir satın alımlar için bir geri yükleme mekanizması ister; bunu görünür bir düğmeyle sağlamak inceleme sürecini kolaylaştırır.</p>
+            <h3>Android&#x27;deki abonelik iOS&#x27;ta geçerli olur mu?</h3>
+            <p>Mağazalar bunu kendiliğinden yapmaz; iki mağazadaki satın alımları kendi sunucunuzda doğrulayıp aynı hesaba bağlamanız gerekir.</p>
+          </article>
+
+          <div class="article-cta reveal" data-reveal>
+            <div>
+              <p class="section-kicker">Sonraki adım</p>
+              <p>Uygulamanızı App Store ve Google Play&#x27;e çıkarırken bu adımlarda takıldıysanız, mağaza yayın sürecini birlikte yürütebiliriz. <a href="referanslar.html">Yayınladığımız uygulamalar</a>.</p>
+            </div>
+            <div class="article-actions">
+              <a class="btn btn-primary" href="index.html?hizmet=mobil#iletisim">Teklif İste</a>
+              <a class="btn btn-secondary" href="mobil-uygulama-gelistirme.html">Mobil Uygulama Hizmeti</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="article-sidebar">
+          <article class="article-sidebar-card reveal" data-reveal>
+            <h3>İçindekiler</h3>
+            <ul>
+              <li><a href="#on-kosul">Anlaşmalar, banka ve vergi</a></li>
+              <li><a href="#grup">Abonelik grubu ve ürünler</a></li>
+              <li><a href="#fiyat">Fiyatları mağaza fiyat noktalarına göre belirleyin</a></li>
+              <li><a href="#test">StoreKit ile yerelde ve sandbox&#x27;ta test</a></li>
+              <li><a href="#ekran">Satın alma ekranı ve geri yükleme</a></li>
+              <li><a href="#gonderim">İncelemeye gönderim</a></li>
+              <li><a href="#faq">Sık Sorulan Sorular</a></li>
+            </ul>
+          </article>
+          <article class="article-sidebar-card reveal" data-reveal>
+            <h3>İlgili Sayfalar</h3>
+            <ul>
+              <li><a href="blog-app-store-4-3-reddi-nasil-asilir.html">App Store 4.3 reddi</a></li>
+              <li><a href="blog-google-play-kapali-test-12-kisi-14-gun.html">Google Play kapalı test</a></li>
+              <li><a href="mobil-uygulama-gelistirme.html">Mobil uygulama geliştirme</a></li>
+              <li><a href="referanslar.html">Referanslarımız</a></li>
+            </ul>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer consulting-footer">
+<div class="container footer-grid">
+<div>
+<h3>Lumina Digitale</h3>
+<p>Yazılım, otomasyon, e-ticaret ve eğitim. 2024’ten beri işletmelere değer katan dijital çözümler.</p>
+</div>
+<div>
+<h4>Lumina Ekosistemi</h4>
+<ul>
+<li><a href="index.html"><strong>Lumina Danışmanlık</strong> — Web, Mobil &amp; E-Ticaret</a></li>
+<li><a href="siber.html"><strong>Lumina Siber</strong> — Şüpheli Site &amp; Risk Analizi</a></li>
+<li><a href="akademi.html"><strong>Lumina Akademi</strong> — Uygulamalı Eğitim &amp; Reklam</a></li>
+<li><a href="danismanlik-hizmetleri.html">Danışmanlık Hizmetlerimiz</a></li>
+<li><a href="araclar.html">Ücretsiz Araçlar</a></li>
+</ul>
+</div>
+<div>
+<h4>Keşfedin</h4>
+<ul>
+<li><a href="index.html">Ana Sayfa</a></li>
+<li><a href="danismanlik-hizmetleri.html">Hizmetler</a></li>
+<li><a href="referanslar.html">Referanslar</a></li>
+<li><a href="blog.html">Blog Merkezi</a></li>
+<li><a href="index.html#iletisim">İletişime Geç</a></li>
+</ul>
+</div>
+<div>
+<h4>İletişim</h4>
+<p><a href="mailto:iletisim@luminadigitale.com">iletisim@luminadigitale.com</a></p>
+<p><a href="index.html#iletisim">Projenizi Konuşalım</a></p>
+<p><a href="politikalar.html">Yasal ve Uyum</a></p>
+<p><a href="https://www.instagram.com/luminadigitale" rel="noreferrer" target="_blank">Instagram @luminadigitale</a></p>
+</div>
+</div>
+<div class="container footer-bottom">
+<span>Lumina Digitale</span>
+<span>luminadigitale.com</span>
+</div>
+</footer>
+
+  <script src="ui-shell.js" defer></script>
+  <script src="script.js" defer></script>
+  <a class="lumina-wa-static" data-lumina-whatsapp-widget="true" href="https://api.whatsapp.com/send?phone=905376431123&text=Merhaba%20Lumina%20ekibi%2C%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile iletisime gec">
+    <img src="assets/icons/whatsapp.svg" alt="" width="34" height="34" loading="eager" decoding="async" />
+  </a>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "127062961d2d49aa8a5b7f8f620be47c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

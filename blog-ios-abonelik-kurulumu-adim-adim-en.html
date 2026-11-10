@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iOS Subscriptions Step by Step: App Store Connect, StoreKit and Review</title>
+  <meta name="description" content="Adding auto-renewable subscriptions to an iOS app: App Store Connect agreements, subscription groups, pricing, StoreKit testing, restoring purchases and what App Review checks." />
+  <meta name="theme-color" content="#0B1F3B" />
+  <meta content="default-src 'self'; script-src 'self' https://connect.facebook.net https://static.cloudflareinsights.com; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co https://connect.facebook.net https://www.facebook.com https://*.run.app https://*.on.aws https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'none'; manifest-src 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests;" http-equiv="Content-Security-Policy"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html" />
+  <meta property="og:title" content="iOS Subscriptions Step by Step: App Store Connect, StoreKit and Review" />
+  <meta property="og:description" content="Adding auto-renewable subscriptions to an iOS app: App Store Connect agreements, subscription groups, pricing, StoreKit testing, restoring purchases and what App Review checks." />
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html" />
+  <meta property="og:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="iOS Subscriptions Step by Step: App Store Connect, StoreKit and Review" />
+  <meta name="twitter:description" content="Adding auto-renewable subscriptions to an iOS app: App Store Connect agreements, subscription groups, pricing, StoreKit testing, restoring purchases and what App Review checks." />
+  <meta name="twitter:image" content="https://luminadigitale.com/assets/icons/social-preview.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="apple-touch-icon" href="assets/images/site-danismanlik.svg?v=20260310-02" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link href="style.css?v=20261009-05" rel="stylesheet"/>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://luminadigitale.com/#organization",
+      "name": "Lumina Digitale",
+      "url": "https://luminadigitale.com/",
+      "sameAs": [
+        "https://www.instagram.com/luminadigitale"
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html#article",
+      "mainEntityOfPage": "https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html",
+      "headline": "iOS Subscriptions Step by Step: App Store Connect, StoreKit and Review",
+      "description": "Adding auto-renewable subscriptions to an iOS app: App Store Connect agreements, subscription groups, pricing, StoreKit testing, restoring purchases and what App Review checks.",
+      "inLanguage": "en",
+      "datePublished": "2026-11-11",
+      "dateModified": "2026-11-11",
+      "author": {
+        "@id": "https://luminadigitale.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://luminadigitale.com/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the shortest allowed subscription period?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apple's guidelines require auto-renewable subscriptions to last at least seven days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I hard-code the price in the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not recommended; it varies by country. Show the localized price StoreKit returns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a restore button required?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apple expects a restore mechanism for restorable purchases; a visible button makes review smoother."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does an Android subscription carry over to iOS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not by itself; you need to verify purchases from both stores on your own server and attach them to the same account."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+  <script src="meta-pixel.js" defer></script>
+  <link rel="alternate" hreflang="tr" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html" />
+  <link rel="alternate" hreflang="en" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim-en.html" />
+  <link rel="alternate" hreflang="x-default" href="https://luminadigitale.com/blog-ios-abonelik-kurulumu-adim-adim.html" />
+</head>
+<body class="blog-article-page">
+<noscript><img height="1" src="https://www.facebook.com/tr?id=2945635578979261&amp;ev=PageView&amp;noscript=1" style="display:none" width="1"/></noscript>
+<header class="site-header">
+<div class="container nav">
+<a aria-label="Lumina Blog home page" class="brand" href="blog-en.html">
+<span class="brand-mark"><img alt="Lumina Blog logo" height="48" src="assets/images/brand-mark.svg" width="48"/></span>
+<span class="brand-copy"><strong>Lumina</strong><span>Blog</span></span>
+</a>
+<button aria-controls="navLinks" aria-expanded="false" aria-label="open menu" class="menu-toggle" id="menuToggle">
+<span></span><span></span><span></span>
+</button>
+<nav class="nav-links" id="navLinks">
+<a href="blog-en.html">Blog Center</a>
+<a href="blog-pillar-eticaret-kurulum-omurgasi-en.html">E-Commerce Guide</a>
+<a href="blog-pillar-reklam-egitim-omurgasi-en.html">Advertising and Education Guide</a>
+<a class="nav-btn" href="iletisim-en.html">Contact Us</a>
+</nav>
+</div>
+</header>
+<main class="page-main">
+    <section class="section page-hero">
+      <div class="container">
+        <article class="article-hero reveal" data-reveal>
+          <p class="section-kicker">Lumina Digitale / Mobile Apps</p>
+          <h1>iOS Subscriptions Step by Step: App Store Connect, StoreKit and Review</h1>
+          <p>Auto-renewable subscriptions are among the most frequently rejected purchase types on the App Store. This guide follows the order we used to set up CarQR&#x27;s iOS subscriptions and the subscription rules in Apple&#x27;s guidelines that matter most.</p>
+          <div class="article-meta"><span>11 November 2026</span><span>iOS</span><span>StoreKit</span><span>Subscriptions</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section quick-answer-block" id="quick-answer">
+      <div class="container narrow reveal" data-reveal>
+        <p class="section-kicker">Quick Answer</p>
+        <p>First complete the Paid Apps agreement, banking and tax in App Store Connect. Then create a subscription group with subscriptions of different durations, and enter a price, description, review screenshot and note for each. Test purchase, renewal and restore with StoreKit locally and in the sandbox. Make the price, period and what the user gets clear on the purchase screen, and submit the first subscriptions together with a new app version.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container article-shell">
+        <div class="article-main">
+          <article class="article-prose reveal" data-reveal id="prerequisites">
+            <h2>1) Agreements, banking and tax</h2>
+            <p>In App Store Connect's <strong>Business</strong> section (formerly Agreements, Tax, and Banking), accept the Paid Apps agreement and complete your bank account and tax forms. Without it, in-app purchases do not work outside the sandbox.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="group">
+            <h2>2) Subscription group and products</h2>
+            <p>Create subscriptions inside a <strong>subscription group</strong>. A user holds one subscription per group at a time, and upgrades and downgrades happen within the group. Apple states that users should not be able to inadvertently subscribe to multiple variations of the same thing (3.1.2(b)).</p>
+            <p>Give each subscription a permanent product ID (e.g. <code>com.app.premium.monthly</code>), a duration and a price. The period must be at least seven days (3.1.2(a)). In CarQR we keep monthly, 6-month and yearly options in the same group.</p>
+            <p>Write a display name and description for each product, and add a screenshot and a short note for App Review.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="pricing">
+            <h2>3) Price against the store&#x27;s price points</h2>
+            <p>Apple has you pick prices from fixed per-country price points. If the prices you show in the app or on your website do not match those points, users meet a different amount at checkout. We aligned CarQR's Turkish prices with App Store Turkey price points (amounts ending in ,99).</p>
+            <p>Rather than hard-coding prices, show the localized price StoreKit returns.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="testing">
+            <h2>4) Test with StoreKit locally and in the sandbox</h2>
+            <p>An Xcode <strong>StoreKit Configuration</strong> file lets you test products locally without App Store Connect, including accelerated renewals and cancellations.</p>
+            <p>Then create sandbox testers in App Store Connect and try purchase, renewal, cancellation and restore on a real device.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="paywall">
+            <h2>5) Purchase screen and restore</h2>
+            <p>Apple asks that, before subscribing, users clearly see what they get for the price (3.1.2(c)). Price, period, auto-renewal and what is included should be clear on the same screen, with Terms of Use and Privacy Policy links in the app and in the store metadata.</p>
+            <p>Add a "Restore Purchases" button. Apple expects a restore mechanism for restorable purchases (3.1.1).</p>
+            <p>If the same subscription is sold on Android or the web, manage entitlements on your server; App Store Server Notifications and the App Store Server API let you track renewals and refunds.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="submission">
+            <h2>6) Submitting for review</h2>
+            <p>Submit your first subscription products together with a new app version, selecting them on the version page. In the review notes, say how to reach the subscription screen and include a test account if one is needed.</p>
+            <p>Source: <a href="https://developer.apple.com/app-store/review/guidelines/#subscriptions" target="_blank" rel="noopener noreferrer">App Review Guidelines 3.1.2 Subscriptions</a>.</p>
+          </article>
+          <article class="article-prose reveal" data-reveal id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <h3>What is the shortest allowed subscription period?</h3>
+            <p>Apple&#x27;s guidelines require auto-renewable subscriptions to last at least seven days.</p>
+            <h3>Can I hard-code the price in the app?</h3>
+            <p>Not recommended; it varies by country. Show the localized price StoreKit returns.</p>
+            <h3>Is a restore button required?</h3>
+            <p>Apple expects a restore mechanism for restorable purchases; a visible button makes review smoother.</p>
+            <h3>Does an Android subscription carry over to iOS?</h3>
+            <p>Not by itself; you need to verify purchases from both stores on your own server and attach them to the same account.</p>
+          </article>
+
+          <div class="article-cta reveal" data-reveal>
+            <div>
+              <p class="section-kicker">Next step</p>
+              <p>If you are stuck at one of these steps while shipping to the App Store or Google Play, we can run the store release with you. <a href="referanslar-en.html">Apps we have published</a>.</p>
+            </div>
+            <div class="article-actions">
+              <a class="btn btn-primary" href="index-en.html?hizmet=mobil#iletisim">Request a Quote</a>
+              <a class="btn btn-secondary" href="mobil-uygulama-gelistirme-en.html">Mobile App Service</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="article-sidebar">
+          <article class="article-sidebar-card reveal" data-reveal>
+            <h3>Contents</h3>
+            <ul>
+              <li><a href="#prerequisites">Agreements, banking and tax</a></li>
+              <li><a href="#group">Subscription group and products</a></li>
+              <li><a href="#pricing">Price against the store&#x27;s price points</a></li>
+              <li><a href="#testing">Test with StoreKit locally and in the sandbox</a></li>
+              <li><a href="#paywall">Purchase screen and restore</a></li>
+              <li><a href="#submission">Submitting for review</a></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+            </ul>
+          </article>
+          <article class="article-sidebar-card reveal" data-reveal>
+            <h3>Related Pages</h3>
+            <ul>
+              <li><a href="blog-app-store-4-3-reddi-nasil-asilir-en.html">App Store 4.3 rejection</a></li>
+              <li><a href="blog-google-play-kapali-test-12-kisi-14-gun-en.html">Google Play closed testing</a></li>
+              <li><a href="mobil-uygulama-gelistirme-en.html">Mobile app development</a></li>
+              <li><a href="referanslar-en.html">Our references</a></li>
+            </ul>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+<footer class="site-footer consulting-footer">
+<div class="container footer-grid">
+<div>
+<h3>Lumina Digitale</h3>
+<p>Software, automation, e-commerce and training. Delivering measurable digital value since 2024.</p>
+</div>
+<div>
+<h4>Lumina Ecosystem</h4>
+<ul>
+<li><a href="index-en.html"><strong>Lumina Consulting</strong> — Web, Mobile &amp; E-Commerce</a></li>
+<li><a href="siber-en.html"><strong>Lumina Cyber</strong> — Fraud &amp; Risk Checks</a></li>
+<li><a href="akademi-en.html"><strong>Lumina Academy</strong> — Practical Training</a></li>
+<li><a href="danismanlik-hizmetleri-en.html">Consulting Services</a></li>
+<li><a href="araclar-en.html">Free Digital Tools</a></li>
+</ul>
+</div>
+<div>
+<h4>Explore</h4>
+<ul>
+<li><a href="index-en.html">Home</a></li>
+<li><a href="danismanlik-hizmetleri-en.html">Services</a></li>
+<li><a href="referanslar-en.html">Our Work</a></li>
+<li><a href="blog-en.html">Blog Hub</a></li>
+<li><a href="index-en.html#iletisim">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4>Contact</h4>
+<p><a href="mailto:iletisim@luminadigitale.com">iletisim@luminadigitale.com</a></p>
+<p><a href="index-en.html#iletisim">Discuss Your Project</a></p>
+<p><a href="politikalar-en.html">Legal &amp; Compliance</a></p>
+<p><a href="https://www.instagram.com/luminadigitale" rel="noreferrer" target="_blank">Instagram @luminadigitale</a></p>
+</div>
+</div>
+<div class="container footer-bottom">
+<span>Lumina Digitale</span>
+<span>luminadigitale.com</span>
+</div>
+</footer>
+<script defer="" src="ui-shell.js"></script>
+<script defer="" src="script.js"></script>
+<a aria-label="Contact via WhatsApp" class="lumina-wa-static" data-lumina-whatsapp-widget="true" href="https://api.whatsapp.com/send?phone=905376431123&amp;text=Merhaba%20Lumina%20ekibi%2C%20bilgi%20almak%20istiyorum." rel="noopener noreferrer" target="_blank">
+<img alt="" decoding="async" height="34" loading="eager" src="assets/icons/whatsapp.svg" width="34"/>
+</a>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "127062961d2d49aa8a5b7f8f620be47c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
